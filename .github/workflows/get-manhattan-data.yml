@@ -1,0 +1,45 @@
+name: Daily Sales Update
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at 00:00 every day
+
+jobs:
+
+  update_sales:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+        version: '1.9'
+        
+    - name: Install dependencies
+      run: |
+        julia -e 'using Pkg; Pkg.add("XLSX")'
+        julia -e 'using Pkg; Pkg.add("DataFrames")'
+        julia -e 'using Pkg; Pkg.add("CSV")'
+        
+    - name: Download new data
+      env:
+        MANHATTAN_URL: "https://www.nyc.gov/assets/finance/downloads/pdf/rolling_sales/rollingsales_manhattan.xlsx"  
+      run: |
+        julia nyc_data.jl
+        
+    - name: Update CSV
+      env:
+        BOROUGH: manhattan
+      run: |
+        julia update_csv.jl
+        
+    - name: Commit changes
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add manhattan.csv
+        git commit -m "Daily update to manhattan.csv"
+        git push
