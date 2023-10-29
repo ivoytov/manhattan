@@ -1,9 +1,9 @@
 # %%
 using XLSX, DataFrames, CSV
-manhattan_url = "https://www.nyc.gov/assets/finance/downloads/pdf/rolling_sales/rollingsales_manhattan.xlsx"
+prefix_url = "https://www.nyc.gov/assets/finance/downloads/pdf/rolling_sales/rollingsales_.xlsx"
 borough = "manhattan"
-download(manhattan_url, "$borough.xlsx")
-new_df = XLSX.openxlsx("$borough.xlsx") do xf
+filename = download(manhattan_url)
+new_df = XLSX.openxlsx(filename) do xf
     sheet_name = XLSX.sheetnames(xf)[1]
     DataFrame(XLSX.gettable(xf[sheet_name]; first_row=5, infer_eltypes=true))
 end

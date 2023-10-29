@@ -18,23 +18,12 @@ jobs:
       with:
         version: '1.9'
         
-    - name: Install dependencies
-      run: |
-        julia -e 'using Pkg; Pkg.add("XLSX")'
-        julia -e 'using Pkg; Pkg.add("DataFrames")'
-        julia -e 'using Pkg; Pkg.add("CSV")'
+    - name: Install Dependencies
+      run: julia -e 'import Pkg; Pkg.instantiate()'
         
-    - name: Download new data
-      env:
-        MANHATTAN_URL: "https://www.nyc.gov/assets/finance/downloads/pdf/rolling_sales/rollingsales_manhattan.xlsx"  
+    - name: Download new data and update CSVs
       run: |
         julia nyc_data.jl
-        
-    - name: Update CSV
-      env:
-        BOROUGH: manhattan
-      run: |
-        julia update_csv.jl
         
     - name: Commit changes
       run: |
