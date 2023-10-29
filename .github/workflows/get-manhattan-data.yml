@@ -19,8 +19,11 @@ jobs:
       with:
         version: '1.9'
         
-    - name: Install Dependencies
-      run: julia -e 'import Pkg; Pkg.instantiate()'
+    - name: Install dependencies
+      run: |
+        julia -e 'using Pkg; Pkg.add("XLSX")'
+        julia -e 'using Pkg; Pkg.add("DataFrames")'
+        julia -e 'using Pkg; Pkg.add("CSV")'
         
     - name: Download new data and update CSVs
       run: |
