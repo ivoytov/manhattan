@@ -1,3 +1,11 @@
+Papa.parse("transactions/bronx.csv", {
+	download: true,
+	complete: function(results) {
+		console.log(results);
+	}
+});
+
+
 const columnDefs = [
     { field: "make" },
     { field: "model" },
