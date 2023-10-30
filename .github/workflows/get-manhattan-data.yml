@@ -21,9 +21,7 @@ jobs:
         
     - name: Install dependencies
       run: |
-        julia -e 'using Pkg; Pkg.add("XLSX")'
-        julia -e 'using Pkg; Pkg.add("DataFrames")'
-        julia -e 'using Pkg; Pkg.add("CSV")'
+        julia -e 'import Pkg; Pkg.activate("."); Pkg.instantiate()'
         
     - name: Download new data and update CSVs
       run: |
