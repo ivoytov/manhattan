@@ -1,4 +1,4 @@
-Papa.parse("transactions/bronx.csv", {
+Papa.parse("repo/transactions/bronx.csv", {
 	download: true,
 	complete: function(results) {
 		console.log(results);
