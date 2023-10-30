@@ -9,7 +9,7 @@ function process_borough(borough)
         DataFrame(XLSX.gettable(xf[sheet_name]; first_row=5, infer_eltypes=true))
     end
 
-    df = CSV.File("$borough.csv") |> DataFrame
+    df = CSV.File("transactions/$borough.csv") |> DataFrame
 
     # Get list of existing sale dates
     existing_dates = Set(df[!, "SALE DATE"])
@@ -19,7 +19,7 @@ function process_borough(borough)
 
     # If there are new rows, append them to the CSV
     if length(new_rows) > 0
-        CSV.write("$borough.csv", new_rows; append=true) 
+        CSV.write("transactions/$borough.csv", new_rows; append=true) 
     end
 end
 
