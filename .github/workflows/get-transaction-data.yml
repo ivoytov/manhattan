@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
@@ -28,16 +28,13 @@ jobs:
     - name: Download new data and update CSVs
       run: |
         julia nyc_data.jl
-
-    - name: Check for changes
+        
+    - name: Commit changes
       run: |
         if ! git diff --exit-code; then
           echo "No changes to commit"
           exit 0
         fi
-        
-    - name: Commit changes
-      run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
