@@ -1,4 +1,6 @@
-Papa.parse("repo/transactions/bronx.csv", {
+const bronxUrl = "https://github.com/ivoytov/manhattan/raw/master/transactions/bronx.csv"
+
+Papa.parse(bronxUrl, {
 	download: true,
 	complete: function(results) {
 		console.log(results);
