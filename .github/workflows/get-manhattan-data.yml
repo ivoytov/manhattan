@@ -21,7 +21,9 @@ jobs:
         
     - name: Install dependencies
       run: |
-        julia -e 'import Pkg; Pkg.activate("."); Pkg.instantiate()'
+        julia -e 'using Pkg; Pkg.add("XLSX")'
+        julia -e 'using Pkg; Pkg.add("DataFrames")'
+        julia -e 'using Pkg; Pkg.add("CSV")'
         
     - name: Download new data and update CSVs
       run: |
@@ -38,6 +40,6 @@ jobs:
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
-        git add manhattan.csv
-        git commit -m "Daily update to manhattan.csv"
+        git add .
+        git commit -m "Daily update to CSVs"
         git push
