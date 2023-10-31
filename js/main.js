@@ -1,12 +1,3 @@
-const bronxUrl = "transactions/bronx.csv"
-
-Papa.parse(bronxUrl, {
-  download: true,
-  complete: function (results) {
-    console.log(results);
-  }
-});
-
 // Function to load CSV file using PapaParse
 function loadCSV(url) {
   return new Promise((resolve, reject) => {
