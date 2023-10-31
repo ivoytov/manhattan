@@ -2,7 +2,7 @@ name: Daily Sales Update
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs at 00:00 every day
+    - cron: '0 2 * * 1'  # Run every Monday at 2 AM
   workflow_dispatch:
 
 jobs:
