@@ -36,20 +36,13 @@ const csvUrls = [
   'bronx.csv',
   'brooklyn.csv',
   'queens.csv',
-  'statenisland.csv'
+  'statenisland.csv',
+  'nyc_2018-2022.csv'
 ];
 
 // Array to store promises for each CSV file
 const csvPromises = csvUrls.map(url => loadCSV(`transactions/${url}`));
 
-const defaultColDef = {
-  flex: 1,
-  minWidth: 150,
-  filter: 'agTextColumnFilter',
-  menuTabs: ['filterMenuTab'],
-  autoHeaderHeight: true,
-  wrapHeaderText: true
-}
 
 // Use Promise.all to wait for all promises to resolve
 Promise.all(csvPromises)
@@ -70,6 +63,16 @@ Promise.all(csvPromises)
 
     columnDefs[columnDefs.length - 1].valueFormatter = (params) => formattedCurrency.format(params.value)
     columnDefs[columnDefs.length - 1].filter = 'agNumberColumnFilter'
+
+    const defaultColDef = {
+      flex: 1,
+      minWidth: 150,
+      filter: 'agTextColumnFilter',
+      menuTabs: ['filterMenuTab'],
+      autoHeaderHeight: true,
+      wrapHeaderText: true,
+      sortable: true
+    }
 
     // Initialize AG Grid
     const gridOptions = {
