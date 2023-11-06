@@ -1,0 +1,12 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Set the AG Grid container to fill the entire viewport */
+#myGrid {
+    width: 100%;
+    height: 100%;
+}
