@@ -101,6 +101,7 @@ function calc_index(df)
     wrs_model = lm(formula, x, wts=w)
 
     idx = DataFrame(period = rng, home_price_index = 100 * ℯ .^ coef(wrs_model))
+    idx.home_price_index = 100 * idx.home_price_index ./ idx.home_price_index[1]
     idx[:, Not(:period)] = round.(idx[:, Not(:period)], digits=2)
     idx
 end

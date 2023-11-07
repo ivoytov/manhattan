@@ -52,11 +52,16 @@ Promise.all(csvPromises)
     // Combine the results from all CSV files
     const combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
 
-    const columnDefs = [{ headerName: "Sale Date", field: "SALE DATE" },
-    { headerName: "Borough", 
+    const columnDefs = [{
+      headerName: "Sale Date", field: "SALE DATE",
+      suppressSizeToFit: true,
+      minWidth: 120,
+    },
+    {
+      headerName: "Borough",
       field: "BOROUGH",
       valueGetter: (params) => {
-        switch(params.data.BOROUGH ) {
+        switch (params.data.BOROUGH) {
           case 1: return "Manhattan"
           case 2: return "Bronx"
           case 3: return "Brooklyn"
@@ -123,7 +128,8 @@ Promise.all(csvPromises)
       menuTabs: ['filterMenuTab'],
       autoHeaderHeight: true,
       wrapHeaderText: true,
-      sortable: true
+      sortable: true,
+      resizable: true
     }
 
     // Initialize AG Grid
@@ -136,47 +142,75 @@ Promise.all(csvPromises)
     // Create AG Grid
     const gridDiv = document.querySelector('#myGrid');
     new agGrid.Grid(gridDiv, gridOptions);
+    gridOptions.api.sizeColumnsToFit()
   })
   .catch(error => {
     console.error('Error loading CSV files:', error);
   });
 
-loadCSV("home_price_index.csv").then(idx => {
-  // Specify the configuration items and data for the chart
-  const option = {
-    title: {
-      text: 'NYC Repeat Sales Home Price Index'
-    },
-    dataset: {
-      dimensions: [{name: 'period', type: 'time'}, 'home_price_index'],
-      source: idx
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    legend: {
-      data: ['NYC']
-    },
-    xAxis: {
-      type: 'time'
-    },
-    yAxis: {},
-    series: [
-      {
-        name: 'NYC',
-        type: 'line',
-        symbol: 'none',
-        encode: {
-          x: 'period',
-          y: 'home_price_index'
-        }
-      }
-    ]
-  };
+Promise.all([
+  loadCSV("home_price_index.csv"),
+  loadCSV("home_price_subindex.csv")
+])
+  .then(([idx, idxb]) => {
 
-  // Display the chart using the configuration items and data just specified.
-  myChart.setOption(option);
-})
+    const manhattanCondo = idxb.filter(({ borough, house_class }) => borough == "Manhattan" & house_class == "Condo")
+      .map(({ period, home_price_index }) => [period, home_price_index])
+
+    const brooklynSFH = idxb.filter(({ borough, house_class }) => borough == "Brooklyn" & house_class == "SFH")
+      .map(({ period, home_price_index }) => [period, home_price_index])
+    // Specify the configuration items and data for the chart
+    const option = {
+      title: {
+        text: 'NYC Repeat Sales Home Price Index'
+      },
+      dataset: [
+        {
+          dimensions: [{ name: 'period', type: 'time' }, 'home_price_index'],
+          source: idx,
+        },
+      ],
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['NYC', 'Manhattan Condo', 'Brooklyn SFH']
+      },
+      xAxis: {
+        type: 'time'
+      },
+      yAxis: {
+        min: 50,
+      },
+      series: [
+        {
+          name: 'NYC',
+          type: 'line',
+          symbol: 'none',
+          datasetIndex: 0,
+          encode: {
+            x: 'period',
+            y: 'home_price_index'
+          }
+        },
+        {
+          name: 'Manhattan Condo',
+          type: 'line',
+          symbol: 'none',
+          data: manhattanCondo
+        },
+        {
+          name: 'Brooklyn SFH',
+          type: 'line',
+          symbol: 'none',
+          data: brooklynSFH
+        }
+      ]
+    };
+
+    // Display the chart using the configuration items and data just specified.
+    myChart.setOption(option);
+  })
 
 // Initialize the echarts instance based on the prepared dom
 var myChart = echarts.init(document.getElementById('main'));
