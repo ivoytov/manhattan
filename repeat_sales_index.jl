@@ -97,4 +97,5 @@ w[isinf.(w)] .= 1
 wrs_model = lm(formula, x, wts=w)
 
 idx = DataFrame(period = rng, home_price_index = 100 * ℯ .^ coef(wrs_model))
+idx[:, Not(:period)] = round.(idx[:, Not(:period)], digits=2)
 CSV.write("home_price_index.csv", idx)
