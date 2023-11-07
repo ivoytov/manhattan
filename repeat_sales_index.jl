@@ -40,7 +40,7 @@ df = df[setdiff(1:end,rows_to_remove), :]
 
 df = rename(df, "BOROUGH" => :borough, "SALE DATE" => :sale_date, "SALE PRICE" => :sale_price)
 
-cols = [:borough, :sale_date, :uid, :sale_price]
+cols = [:borough, :sale_date, :uid, :sale_price, :house_class]
 archive = CSV.read("transactions/nyc_real_estate_211231.csv", DataFrame)[!, cols]
 archive = dropmissing(archive, [:uid])
 archive = archive[archive.sale_date .< Date(2018,1,1), :]
@@ -57,45 +57,60 @@ df = dropmissing(df, [:period, :uid])
 df =  df[df.sale_price .> 1.0e5, :] |> df -> sort(df, [:uid, :sale_date])
 grouped = groupby(df, ["borough", "uid"])
 grouped = grouped[combine(grouped, nrow).nrow .> 1]
+df = combine(grouped, names(df)...)
 
-rng = sort(unique(df.period))
+function calc_index(df)
+    grouped = groupby(df, [:borough, :uid])
 
-n = sum(combine(grouped, gp -> nrow(gp) - 1).x1)
-p = size(rng, 1)  # degrees of freedom aka num of periods
-X = zeros(Int64, (n, p))   # first column of X will become Y vector
-Y = zeros(Float64, (n, 1))
-Δ = zeros(Int64, (n , 1))
-row = 1
+    rng = sort(unique(df.period))
 
-for group in grouped
-    for i in 1:size(group,1)-1
-        buy = group[i, :]
-        sell = group[i+1, :]
-        q₁ = findfirst(rng .== buy.period)
-        q₂ = findfirst(rng .== sell.period)
-        X[row, q₁] = -1
-        X[row, q₂] = 1
-        Y[row] = log(sell.sale_price) - log(buy.sale_price) 
-        Δ[row] = q₂ - q₁
-        global row += 1
+    n = sum(combine(grouped, gp -> nrow(gp) - 1).x1)
+    p = size(rng, 1)  # degrees of freedom aka num of periods
+    X = zeros(Int64, (n, p))   # first column of X will become Y vector
+    Y = zeros(Float64, (n, 1))
+    Δ = zeros(Int64, (n , 1))
+    row = 1
+
+    for group in grouped
+        for i in 1:size(group,1)-1
+            buy = group[i, :]
+            sell = group[i+1, :]
+            q₁ = findfirst(rng .== buy.period)
+            q₂ = findfirst(rng .== sell.period)
+            X[row, q₁] = -1
+            X[row, q₂] = 1
+            Y[row] = log(sell.sale_price) - log(buy.sale_price) 
+            Δ[row] = q₂ - q₁
+            row += 1
+        end
     end
+
+    x = DataFrame(X, Symbol.(rng))
+    x[!, :Y] = Y[:]
+    formula = term(:Y) ~ term(0) + sum(term.(Symbol.(rng)))
+
+    lm_model = lm(formula, x)
+    e = residuals(lm_model)
+
+    R = DataFrame(hcat(Δ, e), [:Δ, :e])
+    w_model = lm(@formula(e^2 ~ 0 + Δ), R)
+
+    w = 1 ./ sqrt.(predict(w_model))
+
+    w[isinf.(w)] .= 1
+    wrs_model = lm(formula, x, wts=w)
+
+    idx = DataFrame(period = rng, home_price_index = 100 * ℯ .^ coef(wrs_model))
+    idx[:, Not(:period)] = round.(idx[:, Not(:period)], digits=2)
+    idx
 end
 
-x = DataFrame(X, Symbol.(rng))
-x[!, :Y] = Y[:]
-formula = term(:Y) ~ term(0) + sum(term.(Symbol.(rng)))
-
-lm_model = lm(formula, x)
-e = residuals(lm_model)
-
-R = DataFrame(hcat(Δ, e), [:Δ, :e])
-w_model = lm(@formula(e^2 ~ 0 + Δ), R)
-
-w = 1 ./ sqrt.(predict(w_model))
-
-w[isinf.(w)] .= 1
-wrs_model = lm(formula, x, wts=w)
-
-idx = DataFrame(period = rng, home_price_index = 100 * ℯ .^ coef(wrs_model))
-idx[:, Not(:period)] = round.(idx[:, Not(:period)], digits=2)
+idx = calc_index(df)
 CSV.write("home_price_index.csv", idx)
+
+gdf = groupby(df, [:borough, :house_class])
+idxb = combine(gdf) do sdf
+    calc_index(sdf)
+end
+
+CSV.write("home_price_subindex.csv", idxb)

@@ -8,16 +8,18 @@ function loadCSV(url) {
       dynamicTyping: true,
       complete: results => {
         // Convert "SALE DATE" property to JavaScript Date objects
-          results.data = results.data.map(obj => {
+        results.data = results.data.map(obj => {
+          const dateKey = "SALE DATE" in obj ? "SALE DATE" : "period"
+
           // Use destructuring to get other properties if needed
-          const { "SALE DATE": saleDate, ...rest } = obj;
+          const { [dateKey]: saleDate, ...rest } = obj;
 
           // Convert string to Date, set to midnight (otherwise date filter doesn't work)
           const saleDateObj = new Date(saleDate);
-          saleDateObj.setHours(0,0,0,0)
+          saleDateObj.setHours(0, 0, 0, 0)
 
           // Add other properties back if needed
-          return { "SALE DATE": saleDateObj, ...rest };
+          return { [dateKey]: saleDateObj, ...rest };
         });
 
 
@@ -50,8 +52,58 @@ Promise.all(csvPromises)
     // Combine the results from all CSV files
     const combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
 
-    const columnDefs = Object.keys(combinedData[0]).map(key => ({ headerName: key, field: key }))
-    
+    const columnDefs = [{ headerName: "Sale Date", field: "SALE DATE" },
+    { headerName: "Borough", 
+      field: "BOROUGH",
+      valueGetter: (params) => {
+        switch(params.data.BOROUGH ) {
+          case 1: return "Manhattan"
+          case 2: return "Bronx"
+          case 3: return "Brooklyn"
+          case 4: return "Queens"
+          case 5: return "Staten Island"
+          default: return params.data.BOROUGH
+        }
+      }
+    },
+    {
+      headerName: "Neighborhood", field: "NEIGHBORHOOD"
+    },
+    {
+      headerName: "Category", field: "BUILDING CLASS CATEGORY"
+    },
+    {
+      headerName: "Block", field: "BLOCK"
+    },
+    {
+      headerName: "Lot", field: "LOT",
+    },
+    {
+      headerName: "Address", field: "ADDRESS",
+    },
+    {
+      headerName: "Apt #", field: "APARTMENT NUMBER"
+    },
+    {
+      headerName: "Zipcode", field: "ZIPCODE"
+    },
+    {
+      headerName: "Total Units", field: "TOTAL UNITS"
+    },
+    {
+      headerName: "Land Sqft", field: "LAND SQUARE FEET"
+    },
+    {
+      headerName: "Gross Sqft", field: "GROSS SQUARE FEET"
+    },
+    {
+      headerName: "Year Built", field: "YEAR BUILT"
+    },
+    {
+      headerName: "Sale Price", field: "SALE PRICE"
+    }
+    ]
+
     columnDefs[0].filter = 'agDateColumnFilter'
 
     const formattedCurrency = new Intl.NumberFormat('en-US', {
@@ -66,7 +118,7 @@ Promise.all(csvPromises)
 
     const defaultColDef = {
       flex: 1,
-      minWidth: 150,
+      minWidth: 100,
       filter: 'agTextColumnFilter',
       menuTabs: ['filterMenuTab'],
       autoHeaderHeight: true,
@@ -88,3 +140,44 @@ Promise.all(csvPromises)
   .catch(error => {
     console.error('Error loading CSV files:', error);
   });
+
+loadCSV("home_price_index.csv").then(idx => {
+  // Specify the configuration items and data for the chart
+  const option = {
+    title: {
+      text: 'NYC Repeat Sales Home Price Index'
+    },
+    dataset: {
+      dimensions: [{name: 'period', type: 'time'}, 'home_price_index'],
+      source: idx
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      data: ['NYC']
+    },
+    xAxis: {
+      type: 'time'
+    },
+    yAxis: {},
+    series: [
+      {
+        name: 'NYC',
+        type: 'line',
+        symbol: 'none',
+        encode: {
+          x: 'period',
+          y: 'home_price_index'
+        }
+      }
+    ]
+  };
+
+  // Display the chart using the configuration items and data just specified.
+  myChart.setOption(option);
+})
+
+// Initialize the echarts instance based on the prepared dom
+var myChart = echarts.init(document.getElementById('main'));
+
