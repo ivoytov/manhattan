@@ -1,5 +1,4 @@
-using DataFrames, CategoricalArrays
-using XLSX, ExcelReaders, Dates
+using DataFrames, XLSX
 
 # Define URL prefixes
 url_prefix = "https://www.nyc.gov/assets/finance/downloads/pdf/rolling_sales"
@@ -7,7 +6,7 @@ url_prefix = "https://www.nyc.gov/assets/finance/downloads/pdf/rolling_sales"
 # Define years, boroughs, and columns
 boroughs = ["manhattan", "brooklyn", "queens", "bronx", "statenisland"]
 cols = ["BOROUGH", "NEIGHBORHOOD", "BUILDING CLASS CATEGORY",
-       "TAX CLASS AT PRESENT", "BLOCK", "LOT", "EASE-MENT",
+       "TAX CLASS AT PRESENT", "BLOCK", "LOT", "EASEMENT",
        "BUILDING CLASS AT PRESENT", "ADDRESS", "APARTMENT NUMBER", "ZIP CODE",
        "RESIDENTIAL UNITS", "COMMERCIAL UNITS", "TOTAL UNITS",
        "LAND SQUARE FEET", "GROSS SQUARE FEET", "YEAR BUILT",
@@ -43,6 +42,6 @@ end
 
 # Concatenate DataFrames
 new_years = vcat([get_file(borough, year) for borough in boroughs, year in 2018:2022]...)
-CSV.write("transactions/transactions_2018-2022.csv", new_years)
+CSV.write("transactions/nyc_2018-2022.csv", new_years)
 
 

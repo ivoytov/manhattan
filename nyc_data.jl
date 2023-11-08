@@ -1,6 +1,7 @@
-using XLSX, DataFrames, CSV
+using XLSX, DataFrames, CSV, Dates
 prefix_url(borough) = "https://www.nyc.gov/assets/finance/downloads/pdf/rolling_sales/rollingsales_$borough.xlsx"
 boroughs = ["manhattan", "bronx", "brooklyn", "queens", "statenisland"]
+earliest_date = Date(2022,12,31)
 
 function process_borough(borough)
     filename = download(prefix_url(borough))
@@ -8,6 +9,9 @@ function process_borough(borough)
         sheet_name = XLSX.sheetnames(xf)[1]
         DataFrame(XLSX.gettable(xf[sheet_name]; first_row=5, infer_eltypes=true))
     end
+
+    # remove transactions before the last year
+    new_df = new_df[new_df[!, "SALE DATE"] .> earliest_date, :] |> df -> sort(df, ["SALE DATE", "BLOCK", "LOT", "ADDRESS"])
 
     df = CSV.File("transactions/$borough.csv") |> DataFrame
 
