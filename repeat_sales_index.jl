@@ -38,9 +38,9 @@ df[coops_filter, :uid] .= string.(df[coops_filter, :BLOCK]) .* '_' .* apartment
 rows_to_remove = findall(coops_filter)[missing_apartment]
 df = df[setdiff(1:end,rows_to_remove), :]
 
-df = rename(df, "BOROUGH" => :borough, "SALE DATE" => :sale_date, "SALE PRICE" => :sale_price)
+df = rename(df, "BOROUGH" => :borough, "SALE DATE" => :sale_date, "SALE PRICE" => :sale_price, "NEIGHBORHOOD" => :neighborhood)
 
-cols = [:borough, :sale_date, :uid, :sale_price, :house_class]
+cols = [:borough, :sale_date, :uid, :sale_price, :house_class, :neighborhood]
 archive = CSV.read("transactions/nyc_real_estate_211231.csv", DataFrame)[!, cols]
 archive = dropmissing(archive, [:uid])
 archive = archive[archive.sale_date .< Date(2018,1,1), :]
@@ -115,3 +115,11 @@ idxb = combine(gdf) do sdf
 end
 
 CSV.write("home_price_subindex.csv", idxb)
+
+# gdf = groupby(df, [:borough, :neighborhood])
+# idx_neigh = combine(gdf) do sdf
+#     @show sdf
+#     calc_index(sdf)
+# end
+
+# CSV.write("home_price_neighborhoods.csv", idx_neigh)
