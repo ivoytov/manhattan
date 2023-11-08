@@ -150,15 +150,23 @@ Promise.all(csvPromises)
 
 Promise.all([
   loadCSV("home_price_index.csv"),
-  loadCSV("home_price_subindex.csv")
+  loadCSV("home_price_subindex.csv"),
+  loadCSV("home_price_neighborhoods.csv")
 ])
-  .then(([idx, idxb]) => {
+  .then(([idx, idxb, idxn]) => {
 
     const manhattanCondo = idxb.filter(({ borough, house_class }) => borough == "Manhattan" & house_class == "Condo")
       .map(({ period, home_price_index }) => [period, home_price_index])
 
     const brooklynSFH = idxb.filter(({ borough, house_class }) => borough == "Brooklyn" & house_class == "SFH")
       .map(({ period, home_price_index }) => [period, home_price_index])
+
+    const uws = idxn.filter(({ borough, neighborhood }) => borough == "Manhattan" & neighborhood == 'UPPER WEST SIDE (59-79)')
+      .map(({ period, home_price_index }) => [period, home_price_index])
+
+    const gramercy = idxn.filter(({ borough, neighborhood }) => borough == "Manhattan" & neighborhood == 'GRAMERCY')
+      .map(({ period, home_price_index }) => [period, home_price_index])
+
     // Specify the configuration items and data for the chart
     const option = {
       title: {
@@ -174,13 +182,20 @@ Promise.all([
         trigger: 'axis'
       },
       legend: {
-        data: ['NYC', 'Manhattan Condo', 'Brooklyn SFH']
+        data: ['NYC', 'Manhattan Condo', 'Brooklyn SFH', 'Upper West Side (59-79)', 'Gramercy'],
+        selected: {
+          'NYC': true,
+          'Manhattan Condo': true,
+          'Brooklyn SFH': true,
+          'Upper West Side (59-79)': false, 
+          'Gramercy': false,
+        }
       },
       xAxis: {
         type: 'time'
       },
       yAxis: {
-        min: 50,
+        min: 'dataMin',
       },
       series: [
         {
@@ -204,6 +219,18 @@ Promise.all([
           type: 'line',
           symbol: 'none',
           data: brooklynSFH
+        },
+        {
+          name: 'Upper West Side (59-79)',
+          type: 'line',
+          symbol: 'none',
+          data: uws
+        },
+        {
+          name: 'Gramercy',
+          type: 'line',
+          symbol: 'none',
+          data: gramercy
         }
       ]
     };
