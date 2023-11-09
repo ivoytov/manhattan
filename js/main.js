@@ -32,6 +32,106 @@ function loadCSV(url) {
   });
 }
 
+// Filter model
+const defaultFilter = {
+  "CATEGORY": {
+    filterType: 'text',
+    type: 'startsWith',
+    filter: '12'
+  },
+  "SALE PRICE": {
+    filterType: 'number',
+    type: 'greaterThan',
+    filter: 100000
+  }
+}
+
+const columnDefs = [{
+  headerName: "Sale Date", field: "SALE DATE",
+  suppressSizeToFit: true,
+  minWidth: 120,
+},
+{
+  headerName: "Borough",
+  field: "BOROUGH",
+  valueGetter: (params) => {
+    switch (params.data.BOROUGH) {
+      case 1: return "Manhattan"
+      case 2: return "Bronx"
+      case 3: return "Brooklyn"
+      case 4: return "Queens"
+      case 5: return "Staten Island"
+      default: return params.data.BOROUGH
+    }
+  }
+},
+{
+  headerName: "Neighborhood", field: "NEIGHBORHOOD"
+},
+{
+  headerName: "Category", field: "BUILDING CLASS CATEGORY"
+},
+{
+  headerName: "Block", field: "BLOCK"
+},
+{
+  headerName: "Lot", field: "LOT",
+},
+{
+  headerName: "Address", field: "ADDRESS",
+},
+{
+  headerName: "Apt #", field: "APARTMENT NUMBER"
+},
+{
+  headerName: "Zipcode", field: "ZIPCODE"
+},
+{
+  headerName: "Total Units", field: "TOTAL UNITS"
+},
+{
+  headerName: "Land Sqft", field: "LAND SQUARE FEET"
+},
+{
+  headerName: "Gross Sqft", field: "GROSS SQUARE FEET"
+},
+{
+  headerName: "Year Built", field: "YEAR BUILT"
+},
+{
+  headerName: "Sale Price", field: "SALE PRICE"
+}
+]
+
+columnDefs[0].filter = 'agDateColumnFilter'
+
+const formattedCurrency = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
+});
+
+columnDefs[columnDefs.length - 1].valueFormatter = (params) => formattedCurrency.format(params.value)
+columnDefs[columnDefs.length - 1].filter = 'agNumberColumnFilter'
+
+const defaultColDef = {
+  flex: 1,
+  minWidth: 100,
+  filter: 'agTextColumnFilter',
+  menuTabs: ['filterMenuTab'],
+  autoHeaderHeight: true,
+  wrapHeaderText: true,
+  sortable: true,
+  resizable: true
+}
+
+// Initialize AG Grid
+const gridOptions = {
+  columnDefs: columnDefs,
+  defaultColDef: defaultColDef,
+};
+
 // URLs of the CSV files you want to load
 const csvUrls = [
   'manhattan.csv',
@@ -52,97 +152,13 @@ Promise.all(csvPromises)
     // Combine the results from all CSV files
     const combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
 
-    const columnDefs = [{
-      headerName: "Sale Date", field: "SALE DATE",
-      suppressSizeToFit: true,
-      minWidth: 120,
-    },
-    {
-      headerName: "Borough",
-      field: "BOROUGH",
-      valueGetter: (params) => {
-        switch (params.data.BOROUGH) {
-          case 1: return "Manhattan"
-          case 2: return "Bronx"
-          case 3: return "Brooklyn"
-          case 4: return "Queens"
-          case 5: return "Staten Island"
-          default: return params.data.BOROUGH
-        }
-      }
-    },
-    {
-      headerName: "Neighborhood", field: "NEIGHBORHOOD"
-    },
-    {
-      headerName: "Category", field: "BUILDING CLASS CATEGORY"
-    },
-    {
-      headerName: "Block", field: "BLOCK"
-    },
-    {
-      headerName: "Lot", field: "LOT",
-    },
-    {
-      headerName: "Address", field: "ADDRESS",
-    },
-    {
-      headerName: "Apt #", field: "APARTMENT NUMBER"
-    },
-    {
-      headerName: "Zipcode", field: "ZIPCODE"
-    },
-    {
-      headerName: "Total Units", field: "TOTAL UNITS"
-    },
-    {
-      headerName: "Land Sqft", field: "LAND SQUARE FEET"
-    },
-    {
-      headerName: "Gross Sqft", field: "GROSS SQUARE FEET"
-    },
-    {
-      headerName: "Year Built", field: "YEAR BUILT"
-    },
-    {
-      headerName: "Sale Price", field: "SALE PRICE"
-    }
-    ]
-
-    columnDefs[0].filter = 'agDateColumnFilter'
-
-    const formattedCurrency = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-
-    columnDefs[columnDefs.length - 1].valueFormatter = (params) => formattedCurrency.format(params.value)
-    columnDefs[columnDefs.length - 1].filter = 'agNumberColumnFilter'
-
-    const defaultColDef = {
-      flex: 1,
-      minWidth: 100,
-      filter: 'agTextColumnFilter',
-      menuTabs: ['filterMenuTab'],
-      autoHeaderHeight: true,
-      wrapHeaderText: true,
-      sortable: true,
-      resizable: true
-    }
-
-    // Initialize AG Grid
-    const gridOptions = {
-      columnDefs: columnDefs,
-      rowData: combinedData,
-      defaultColDef: defaultColDef,
-    };
+    gridOptions.rowData = combinedData
 
     // Create AG Grid
     const gridDiv = document.querySelector('#myGrid');
     new agGrid.Grid(gridDiv, gridOptions);
     gridOptions.api.sizeColumnsToFit()
+    gridOptions.api.setFilterModel(defaultFilter);
   })
   .catch(error => {
     console.error('Error loading CSV files:', error);
@@ -187,7 +203,7 @@ Promise.all([
           'NYC': true,
           'Manhattan Condo': true,
           'Brooklyn SFH': true,
-          'Upper West Side (59-79)': false, 
+          'Upper West Side (59-79)': false,
           'Gramercy': false,
         }
       },

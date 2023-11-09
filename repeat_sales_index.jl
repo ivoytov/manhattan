@@ -1,49 +1,53 @@
 using DataFrames, Dates, CSV, GLM
 
-df = CSV.File("transactions/nyc_2018-2022.csv") |> DataFrame
+df = CSV.read("transactions/nyc_2018-2022.csv", DataFrame)
 boroughs = ["manhattan", "bronx", "brooklyn", "queens", "statenisland"]
 rolling_sales = vcat([CSV.read("transactions/$borough.csv", DataFrame) for borough in boroughs]...)
-rolling_sales = rolling_sales[rolling_sales[!, "SALE DATE"].>Date(2022, 12, 31), :]
+
+# Filter for sales after Dec 31 2022
+rolling_sales = filter(row -> row["SALE DATE"] > Date(2022, 12, 31), rolling_sales)
+
+# merge annuals and rolling
 df = vcat(df, rolling_sales)
 
 borough_dict = Dict(1 => "Manhattan", 2 => "Bronx", 3 => "Brooklyn", 4 => "Queens", 5 => "Staten Island")
 df[!, "BOROUGH"] = map(borough_id -> borough_dict[borough_id], df[!, "BOROUGH"])
 
-df = df[df[!, "SALE PRICE"].>100000, :]
+df = filter(row -> row["SALE PRICE"] >100000, df)
 
 SFH_CATEGORIES = r"01"
 COOP_CATEGORIES = r"09|[^-]10|17"
 CONDO_CATEGORIES = r"12|13"
 
-sfh = occursin.(SFH_CATEGORIES, df[!, "BUILDING CLASS CATEGORY"])
-coops = occursin.(COOP_CATEGORIES, df[!, "BUILDING CLASS CATEGORY"])
-condos = occursin.(CONDO_CATEGORIES, df[!, "BUILDING CLASS CATEGORY"])
+df.house_class = map(row -> 
+    occursin(SFH_CATEGORIES, row["BUILDING CLASS CATEGORY"]) ? "SFH" 
+    : occursin(COOP_CATEGORIES, row["BUILDING CLASS CATEGORY"]) ? "Coop"
+    : "Condo", 
+    eachrow(df))
 
-df[!, :house_class] .= "Condo"
-df[coops, :house_class] .= "Coop"
-df[sfh, :house_class] .= "SFH"
+# filter for only house classes
+df = filter(row -> row.house_class in ["Coop", "Condo", "SFH"], df)
 
-df = df[coops.|condos.|sfh, :]
+# Create uid for condos and sfh based on block and lot numbers
+condo_sfh_filter = filter(row -> row.house_class in ["Condo", "SFH"], df)
+condo_sfh_filter.uid = string.(condo_sfh_filter.BLOCK,'_', condo_sfh_filter.LOT)
 
-# Create uid for condos and sfh
-condo_sfh_filter = condos .| sfh
-df[!, :uid] .= string.(df[!, :BLOCK]) .* '_' .* string.(df[!, :LOT])
+# Create uid for coops based on block and apartment number
+coops_filter = filter(row -> row.house_class == "Coop", df)
+replace.(lowercase.(get.(split.(coops_filter.ADDRESS, ", ", limit=2), 2, "")), r"(?:UNIT)?(?:APT)?[^a-z0-9\n]" => "")
+coops_filter.apartment = replace.(lowercase.(get.(split.(coops_filter.ADDRESS, ", ", limit=2), 2, "")), r"(?:unit)?(?:apt)?[^A-Z0-9\n]" => "")
 
-# Create uid for coops
-coops_filter = df[!, :house_class] .== "Coop"
-apartment = split.(df[coops_filter, "ADDRESS"], ", "; limit=2) .|> x -> get(x, 2, "") .|> lowercase .|> x -> replace(x, r"(?:UNIT)?(?:APT)?[^A-Z0-9\n]" => "")
-missing_apartment = map(x -> x == "", apartment)
+coops_filter.uid = string.(coops_filter.BLOCK, '_', coops_filter.apartment)
+coops_filter = filter(row -> row.apartment != "", coops_filter)
 
-df[coops_filter, :uid] .= string.(df[coops_filter, :BLOCK]) .* '_' .* apartment
-rows_to_remove = findall(coops_filter)[missing_apartment]
-df = df[setdiff(1:end, rows_to_remove), :]
+df = vcat(coops_filter[!, Not(:apartment)], condo_sfh_filter)
 
 df = rename(df, "BOROUGH" => :borough, "SALE DATE" => :sale_date, "SALE PRICE" => :sale_price, "NEIGHBORHOOD" => :neighborhood)
 
 cols = [:borough, :sale_date, :uid, :sale_price, :house_class, :neighborhood]
 archive = CSV.read("transactions/nyc_real_estate_211231.csv", DataFrame)[!, cols]
-archive = dropmissing(archive, [:uid])
-archive = archive[archive.sale_date.<Date(2018, 1, 1), :]
+dropmissing!(archive, [:uid])
+archive = filter(row -> row.sale_date < Date(2018, 1, 1), archive)
 
 df = vcat(df[:, cols], archive[:, cols])
 
