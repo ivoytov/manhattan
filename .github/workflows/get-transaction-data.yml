@@ -2,7 +2,7 @@ name: Daily Sales Update
 
 on:
   schedule:
-    - cron: '0 2 * * 1'  # Run every Monday at 2 AM
+    - cron: '0 2 * * *'  # Run every Monday at 2 AM
   workflow_dispatch:
 
 jobs:
@@ -32,7 +32,12 @@ jobs:
     - name: Download new data and update CSVs
       run: |
         julia nyc_data.jl
-        julia repeat_sales_index.jl
+
+        # Check if new files are created
+        NEW_FILES=$(git ls-files --exclude-standard --others)
+        if [ -n "$NEW_FILES" ]; then
+          julia repeat_sales_index.jl
+        fi
 
     - name: Commit changes
       run: |
