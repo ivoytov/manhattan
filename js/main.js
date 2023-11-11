@@ -32,9 +32,11 @@ function loadCSV(url) {
   });
 }
 
+let combinedData
+
 // Filter model
 const defaultFilter = {
-  "CATEGORY": {
+  "BUILDING CLASS CATEGORY": {
     filterType: 'text',
     type: 'startsWith',
     filter: '12'
@@ -46,64 +48,75 @@ const defaultFilter = {
   }
 }
 
-const columnDefs = [{
-  headerName: "Sale Date", field: "SALE DATE",
-  suppressSizeToFit: true,
-  minWidth: 120,
-},
-{
-  headerName: "Borough",
-  field: "BOROUGH",
-  valueGetter: (params) => {
-    switch (params.data.BOROUGH) {
-      case 1: return "Manhattan"
-      case 2: return "Bronx"
-      case 3: return "Brooklyn"
-      case 4: return "Queens"
-      case 5: return "Staten Island"
-      default: return params.data.BOROUGH
+// grid columns
+const columnDefs = [
+  {
+    headerName: "Address", field: "ADDRESS", sort: "asc", sortIndex: 1,
+    cellRenderer: 'agGroupCellRenderer',
+    minWidth: 200,
+  },
+  {
+    headerName: "Sale Date", field: "SALE DATE",
+    suppressSizeToFit: true,
+    minWidth: 120,
+    filter: 'agDateColumnFilter',
+    sort: "desc",
+    sortIndex: 0
+  },
+  {
+    headerName: "Borough",
+    field: "BOROUGH",
+    valueGetter: (params) => {
+      switch (params.data.BOROUGH) {
+        case 1: return "Manhattan"
+        case 2: return "Bronx"
+        case 3: return "Brooklyn"
+        case 4: return "Queens"
+        case 5: return "Staten Island"
+        default: return params.data.BOROUGH
+      }
     }
+  },
+  {
+    headerName: "Neighborhood", field: "NEIGHBORHOOD"
+  },
+  {
+    headerName: "Category", field: "BUILDING CLASS CATEGORY"
+  },
+  {
+    headerName: "Block", field: "BLOCK",
+    filter: 'agNumberColumnFilter',
+  },
+  {
+    headerName: "Lot", field: "LOT",
+    filter: 'agNumberColumnFilter',
+  },
+  {
+    headerName: "Apt #", field: "APARTMENT NUMBER"
+  },
+  {
+    headerName: "Total Units", field: "TOTAL UNITS",
+    filter: 'agNumberColumnFilter',
+  },
+  {
+    headerName: "Land Sqft", field: "LAND SQUARE FEET",
+    filter: 'agNumberColumnFilter',
+  },
+  {
+    headerName: "Gross Sqft", field: "GROSS SQUARE FEET",
+    filter: 'agNumberColumnFilter',
+  },
+  {
+    headerName: "Year Built", field: "YEAR BUILT",
+    filter: 'agNumberColumnFilter',
+  },
+  {
+    headerName: "Sale Price",
+    field: "SALE PRICE",
+    filter: 'agNumberColumnFilter',
+    valueFormatter: (params) => formattedCurrency.format(params.value)
   }
-},
-{
-  headerName: "Neighborhood", field: "NEIGHBORHOOD"
-},
-{
-  headerName: "Category", field: "BUILDING CLASS CATEGORY"
-},
-{
-  headerName: "Block", field: "BLOCK"
-},
-{
-  headerName: "Lot", field: "LOT",
-},
-{
-  headerName: "Address", field: "ADDRESS",
-},
-{
-  headerName: "Apt #", field: "APARTMENT NUMBER"
-},
-{
-  headerName: "Zipcode", field: "ZIPCODE"
-},
-{
-  headerName: "Total Units", field: "TOTAL UNITS"
-},
-{
-  headerName: "Land Sqft", field: "LAND SQUARE FEET"
-},
-{
-  headerName: "Gross Sqft", field: "GROSS SQUARE FEET"
-},
-{
-  headerName: "Year Built", field: "YEAR BUILT"
-},
-{
-  headerName: "Sale Price", field: "SALE PRICE"
-}
 ]
-
-columnDefs[0].filter = 'agDateColumnFilter'
 
 const formattedCurrency = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -112,8 +125,17 @@ const formattedCurrency = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 0,
 });
 
-columnDefs[columnDefs.length - 1].valueFormatter = (params) => formattedCurrency.format(params.value)
-columnDefs[columnDefs.length - 1].filter = 'agNumberColumnFilter'
+const coopsFilter = (row) =>
+  row['BUILDING CLASS CATEGORY'].startsWith('09')
+  || row['BUILDING CLASS CATEGORY'].startsWith('10')
+  || row['BUILDING CLASS CATEGORY'].startsWith('17')
+
+const formattedPercent = new Intl.NumberFormat('en-US', {
+  style: 'percent',
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1
+})
+
 
 const defaultColDef = {
   flex: 1,
@@ -130,7 +152,78 @@ const defaultColDef = {
 const gridOptions = {
   columnDefs: columnDefs,
   defaultColDef: defaultColDef,
+  masterDetail: true,
+  //detailRowHeight: 200,
+  detailRowAutoHeight: true,
+
+  detailCellRendererParams: {
+    detailGridOptions: {
+      columnDefs: [
+        {
+          field: 'SALE DATE',
+          headerName: 'Sale Date',
+          filter: 'agDateColumnFilter',
+          sort: "asc",
+          sortIndex: 0,
+          sortable: true
+        },
+        {
+          headerName: 'Sale Price',
+          field: "SALE PRICE",
+          valueFormatter: (params) => formattedCurrency.format(params.value),
+        },
+        {
+          headerName: 'Change, $',
+          field: "priceChange",
+          filter: 'agNumberColumnFilter',
+          valueFormatter: (params) => params.value != null ? formattedCurrency.format(params.value) : "N/A",
+        },
+        {
+          headerName: 'Change, %',
+          field: "priceChangePct",
+          filter: 'agNumberColumnFilter',
+          valueFormatter: (params) => params.value != null ? formattedPercent.format(params.value) : "N/A",
+        },
+
+      ],
+      defaultColDef: {
+        flex: 1,
+        sortable: true,
+        filter: 'agNumberColumnFilter',
+      },
+    },
+    getDetailRowData: (params) => {
+      // find all transactions for this address
+      let repeats = coopsFilter(params.data) ? combinedData.filter(({ ADDRESS }) => ADDRESS == params.data.ADDRESS)
+        : combinedData.filter(({ BLOCK, LOT }) => BLOCK == params.data.BLOCK && LOT == params.data.LOT)
+      repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"])
+
+      // remove erroneous transactions
+      repeats = repeats.filter((transaction) => transaction["SALE PRICE"] >= 100000)
+
+      // add % price change
+      repeats = repeats.map((transaction, index, arr) => {
+        // For the first row, priceChange is null
+        if (index === 0) {
+          return { ...transaction, priceChange: null };
+        }
+
+        // For subsequent rows, priceChange is the difference in price over the immediately preceding sale
+        const priceChange = transaction["SALE PRICE"] - arr[index - 1]["SALE PRICE"];
+        const priceChangePct = transaction["SALE PRICE"] / arr[index - 1]["SALE PRICE"] - 1;
+        return { ...transaction, priceChange, priceChangePct };
+      });
+
+      params.successCallback(repeats);
+    },
+  },
 };
+
+// Create AG Grid
+const gridDiv = document.querySelector('#myGrid');
+new agGrid.Grid(gridDiv, gridOptions);
+
+gridOptions.api.setFilterModel(defaultFilter);
 
 // URLs of the CSV files you want to load
 const csvUrls = [
@@ -145,20 +238,13 @@ const csvUrls = [
 // Array to store promises for each CSV file
 const csvPromises = csvUrls.map(url => loadCSV(`transactions/${url}`));
 
-
 // Use Promise.all to wait for all promises to resolve
 Promise.all(csvPromises)
   .then(resultsArray => {
     // Combine the results from all CSV files
-    const combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
-
-    gridOptions.rowData = combinedData
-
-    // Create AG Grid
-    const gridDiv = document.querySelector('#myGrid');
-    new agGrid.Grid(gridDiv, gridOptions);
+    combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
+    gridOptions.api.setRowData(combinedData)
     gridOptions.api.sizeColumnsToFit()
-    gridOptions.api.setFilterModel(defaultFilter);
   })
   .catch(error => {
     console.error('Error loading CSV files:', error);
