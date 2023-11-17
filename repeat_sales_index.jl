@@ -9,60 +9,48 @@ rolling_sales = filter(row -> row["SALE DATE"] > Date(2022, 12, 31), rolling_sal
 
 # merge annuals and rolling
 df = vcat(df, rolling_sales)
+df = rename(df, "ADDRESS" => :address, "BOROUGH" => :borough, "SALE DATE" => :sale_date, "SALE PRICE" => :sale_price, "NEIGHBORHOOD" => :neighborhood, "BUILDING CLASS CATEGORY" => :house_class, "BLOCK" => :block, "LOT" => :lot)
 
 borough_dict = Dict(1 => "Manhattan", 2 => "Bronx", 3 => "Brooklyn", 4 => "Queens", 5 => "Staten Island")
-df[!, "BOROUGH"] = map(borough_id -> borough_dict[borough_id], df[!, "BOROUGH"])
+df.borough = map(borough_id -> borough_dict[borough_id], df.borough)
 
-df = filter(row -> row["SALE PRICE"] >100000, df)
-
-SFH_CATEGORIES = r"01"
-COOP_CATEGORIES = r"09|[^-]10|17"
-CONDO_CATEGORIES = r"12|13"
-
-df.house_class = map(row -> 
-    occursin(SFH_CATEGORIES, row["BUILDING CLASS CATEGORY"]) ? "SFH" 
-    : occursin(COOP_CATEGORIES, row["BUILDING CLASS CATEGORY"]) ? "Coop"
-    : "Condo", 
-    eachrow(df))
+df.house_class = map(house_class -> occursin(r"01", house_class) ? "SFH" : occursin(r"12|13", house_class) ? "Condo" : occursin(r"09|[^-]10|17", house_class) ? "Coop" : "Other", df.house_class)
 
 # filter for only house classes
 df = filter(row -> row.house_class in ["Coop", "Condo", "SFH"], df)
 
-# Create uid for condos and sfh based on block and lot numbers
-condo_sfh_filter = filter(row -> row.house_class in ["Condo", "SFH"], df)
-condo_sfh_filter.uid = string.(condo_sfh_filter.BLOCK,'_', condo_sfh_filter.LOT)
-
-# Create uid for coops based on block and apartment number
-coops_filter = filter(row -> row.house_class == "Coop", df)
-replace.(lowercase.(get.(split.(coops_filter.ADDRESS, ", ", limit=2), 2, "")), r"(?:UNIT)?(?:APT)?[^a-z0-9\n]" => "")
-coops_filter.apartment = replace.(lowercase.(get.(split.(coops_filter.ADDRESS, ", ", limit=2), 2, "")), r"(?:unit)?(?:apt)?[^A-Z0-9\n]" => "")
-
-coops_filter.uid = string.(coops_filter.BLOCK, '_', coops_filter.apartment)
-coops_filter = filter(row -> row.apartment != "", coops_filter)
-
-df = vcat(coops_filter[!, Not(:apartment)], condo_sfh_filter)
-
-df = rename(df, "BOROUGH" => :borough, "SALE DATE" => :sale_date, "SALE PRICE" => :sale_price, "NEIGHBORHOOD" => :neighborhood)
-
-cols = [:borough, :sale_date, :uid, :sale_price, :house_class, :neighborhood]
+cols = [:borough, :sale_date, :sale_price, :house_class, :neighborhood, :address, :block, :lot]
 archive = CSV.read("transactions/nyc_real_estate_211231.csv", DataFrame)[!, cols]
-dropmissing!(archive, [:uid])
 archive = filter(row -> row.sale_date < Date(2018, 1, 1), archive)
 
 df = vcat(df[:, cols], archive[:, cols])
+
+df.uid = map(eachrow(df)) do row
+    # for homes and condos, uid is like 123_890 for block 123, lot 890
+    if row.house_class in ["Condo", "SFH"]
+        return string(row.block, '_', row.lot)
+    end
+
+    # for coops, uid is like 123_3a for block 123, apartment 123_3A
+    apartment = replace(lowercase(get(split(row.address, ", ", limit=2), 2, "")), r"(?:unit)?(?:apt)?[^A-Z0-9\n]" => "")
+    apartment == "" && return missing
+    string(row.block, '_', row.lot, '_', apartment)
+end
+dropmissing!(df, [:uid])
 
 # the city shifts to uppercase in 2018, so we must uppercase all neighborhood names
 df.neighborhood = uppercase.(df.neighborhood)
 
 # Convert 'sale_date' to PeriodIndex with frequency
-df[!, :period] = Dates.lastdayofmonth.(df.sale_date)
+df.period = Dates.lastdayofmonth.(df.sale_date)
 
 # Drop duplicates based on 'period' and 'uid', keeping the last one
-dropmissing!(df, [:period, :uid])
 unique!(df, [:period, :uid])
 
-df = df[df.sale_price.>1.0e5, :] |> df -> sort(df, [:uid, :sale_date])
-grouped = groupby(df, ["borough", "uid"])
+filter!(row -> 1.0e5 < row.sale_price < 1.5e7, df)
+sort!(df, [:sale_date])
+
+grouped = groupby(df, [:borough, :uid])
 grouped = grouped[combine(grouped, nrow).nrow.>1]
 df = combine(grouped, names(df)...)
 

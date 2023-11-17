@@ -66,6 +66,7 @@ const columnDefs = [
   {
     headerName: "Borough",
     field: "BOROUGH",
+    filter: 'agSetColumnFilter',
     valueGetter: (params) => {
       switch (params.data.BOROUGH) {
         case 1: return "Manhattan"
@@ -78,7 +79,8 @@ const columnDefs = [
     }
   },
   {
-    headerName: "Neighborhood", field: "NEIGHBORHOOD"
+    headerName: "Neighborhood", field: "NEIGHBORHOOD",
+    filter: 'agSetColumnFilter'
   },
   {
     headerName: "Category", field: "BUILDING CLASS CATEGORY"
