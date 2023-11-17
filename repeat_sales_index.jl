@@ -17,11 +17,11 @@ df.borough = map(borough_id -> borough_dict[borough_id], df.borough)
 df.house_class = map(house_class -> occursin(r"01", house_class) ? "SFH" : occursin(r"12|13", house_class) ? "Condo" : occursin(r"09|[^-]10|17", house_class) ? "Coop" : "Other", df.house_class)
 
 # filter for only house classes
-df = filter(row -> row.house_class in ["Coop", "Condo", "SFH"], df)
+filter!(:house_class => in(["Coop", "Condo", "SFH"]), df)
 
 cols = [:borough, :sale_date, :sale_price, :house_class, :neighborhood, :address, :block, :lot]
 archive = CSV.read("transactions/nyc_real_estate_211231.csv", DataFrame)[!, cols]
-archive = filter(row -> row.sale_date < Date(2018, 1, 1), archive)
+filter!(:sale_date => <(Date(2018, 1, 1)), archive)
 
 df = vcat(df[:, cols], archive[:, cols])
 
@@ -31,14 +31,14 @@ df.uid = map(eachrow(df)) do row
         return string(row.block, '_', row.lot)
     end
 
-    # for coops, uid is like 123_3a for block 123, apartment 123_3A
-    apartment = replace(lowercase(get(split(row.address, ", ", limit=2), 2, "")), r"(?:unit)?(?:apt)?[^A-Z0-9\n]" => "")
+    # for coops, uid is like 123_890_3a for block 123, lot 890, apartment 3A
+    apartment = replace(lowercase(get(split(row.address, ", ", limit=2), 2, "")), r"(?:unit)?(?:apt)?[^a-z0-9\n]" => "")
     apartment == "" && return missing
     string(row.block, '_', row.lot, '_', apartment)
 end
 dropmissing!(df, [:uid])
 
-# the city shifts to uppercase in 2018, so we must uppercase all neighborhood names
+# the city shifts to uppercase neighborhood names in 2018, so we must uppercase all neighborhood names
 df.neighborhood = uppercase.(df.neighborhood)
 
 # Convert 'sale_date' to PeriodIndex with frequency
@@ -47,12 +47,16 @@ df.period = Dates.lastdayofmonth.(df.sale_date)
 # Drop duplicates based on 'period' and 'uid', keeping the last one
 unique!(df, [:period, :uid])
 
-filter!(row -> 1.0e5 < row.sale_price < 1.5e7, df)
+# filter transactions to only betweeen $250k and $15MM
+filter!(row -> 2.5e5 < row.sale_price < 1.5e7, df)
 sort!(df, [:sale_date])
 
 grouped = groupby(df, [:borough, :uid])
-grouped = grouped[combine(grouped, nrow).nrow.>1]
-df = combine(grouped, names(df)...)
+# filter homes that sold between 2 and 9 times (>9 is likely bad data...)
+grouped = grouped[ 1 .< combine(grouped, nrow).nrow .< 10]
+outliers = filter(row -> row.pct_change > 1, combine(grouped, :sale_price => (sale_price -> abs.(log.(sale_price[2:end]) .- log.(sale_price[1:end-1])) ) => :pct_change))
+df = df[.!( (df.borough .=> df.uid) .|> in(Set(outliers.borough .=> outliers.uid)) ), :]
+df = combine(groupby(df, [:borough, :uid]), names(df)...)
 
 function calc_index(df)
     grouped = groupby(df, [:borough, :uid])

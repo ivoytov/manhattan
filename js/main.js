@@ -16,7 +16,7 @@ function loadCSV(url) {
 
           // Convert string to Date, set to midnight (otherwise date filter doesn't work)
           const saleDateObj = new Date(saleDate);
-          saleDateObj.setHours(0, 0, 0, 0)
+          saleDateObj.setHours(24, 0, 0, 0)
 
           // Add other properties back if needed
           return { [dateKey]: saleDateObj, ...rest };
@@ -38,8 +38,7 @@ let combinedData
 const defaultFilter = {
   "BUILDING CLASS CATEGORY": {
     filterType: 'text',
-    type: 'startsWith',
-    filter: '12'
+    type: 'condo',
   },
   "SALE PRICE": {
     filterType: 'number',
@@ -47,6 +46,43 @@ const defaultFilter = {
     filter: 100000
   }
 }
+
+// custom filter for BUILDING CLASS CATEGORY for SFH, Coops, Condos, Other
+const houseClassFilterParams = {
+  filterOptions: [
+    'contains',
+    {
+      displayKey: 'condo',
+      displayName: 'Condo',
+      predicate: (_, cellValue) =>
+        cellValue.slice(0, 2) == "12" || cellValue.slice(0, 2) == "13",
+      numberOfInputs: 0,
+    },
+    {
+      displayKey: 'Coop',
+      displayName: 'Coop',
+      predicate: (_, cellValue) =>
+        cellValue.slice(0, 2) == "09" || cellValue.slice(0, 2) == "17",
+      numberOfInputs: 0,
+    },
+    {
+      displayKey: 'sfh',
+      displayName: 'Single Family Home',
+      predicate: (_, cellValue) =>
+        cellValue.slice(0, 2) == "01",
+      numberOfInputs: 0,
+    },
+    {
+      displayKey: 'other',
+      displayName: 'All Others',
+      predicate: (_, cellValue) => {
+        const code = cellValue.slice(0, 2)
+        return !["01", "09", "10", "12", "13", "17"].includes(code)
+      },
+      numberOfInputs: 0,
+    },
+  ],
+};
 
 // grid columns
 const columnDefs = [
@@ -83,7 +119,8 @@ const columnDefs = [
     filter: 'agSetColumnFilter'
   },
   {
-    headerName: "Category", field: "BUILDING CLASS CATEGORY"
+    headerName: "Category", field: "BUILDING CLASS CATEGORY",
+    filterParams: houseClassFilterParams,
   },
   {
     headerName: "Block", field: "BLOCK",
@@ -197,7 +234,7 @@ const gridOptions = {
     getDetailRowData: (params) => {
       // find all transactions for this address
       let repeats = coopsFilter(params.data) ? combinedData.filter(({ ADDRESS }) => ADDRESS == params.data.ADDRESS)
-        : combinedData.filter(({ BLOCK, LOT }) => BLOCK == params.data.BLOCK && LOT == params.data.LOT)
+        : combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == params.data.BOROUGH && BLOCK == params.data.BLOCK && LOT == params.data.LOT)
       repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"])
 
       // remove erroneous transactions
