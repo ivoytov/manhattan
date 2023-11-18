@@ -87,6 +87,13 @@ const houseClassFilterParams = {
 // grid columns
 const columnDefs = [
   {
+    headerName: "Is Included?",
+    field: "outlier",
+    cellDataType: 'boolean',
+    filter: 'agSetColumnFilter',
+
+  },
+  {
     headerName: "Address", field: "ADDRESS", sort: "asc", sortIndex: 1,
     cellRenderer: 'agGroupCellRenderer',
     minWidth: 200,
@@ -266,22 +273,36 @@ gridOptions.api.setFilterModel(defaultFilter);
 
 // URLs of the CSV files you want to load
 const csvUrls = [
+  'outliers.csv',
   'manhattan.csv',
   'bronx.csv',
   'brooklyn.csv',
   'queens.csv',
   'statenisland.csv',
-  'nyc_2018-2022.csv'
+  'nyc_2018-2022.csv',
 ];
 
 // Array to store promises for each CSV file
 const csvPromises = csvUrls.map(url => loadCSV(`transactions/${url}`));
 
+
+
 // Use Promise.all to wait for all promises to resolve
 Promise.all(csvPromises)
-  .then(resultsArray => {
+  .then(([outliers, ...resultsArray]) => {
     // Combine the results from all CSV files
     combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
+
+    // add outliers column to the data
+    const is_outlier = (obj) => { 
+      return { 
+        ...obj,
+        outlier: !outliers.some(outlier => outlier.lot === obj.LOT && outlier.block === obj.BLOCK && outlier["SALE DATE"].getTime() === obj["SALE DATE"].getTime() && outlier.sale_price === obj["SALE PRICE"])
+      }
+    }
+    combinedData = combinedData.map(is_outlier)
+      
+
     gridOptions.api.setRowData(combinedData)
     gridOptions.api.sizeColumnsToFit()
   })

@@ -1,5 +1,6 @@
 using DataFrames, Dates, CSV, GLM
 
+
 df = CSV.read("transactions/nyc_2018-2022.csv", DataFrame)
 boroughs = ["manhattan", "bronx", "brooklyn", "queens", "statenisland"]
 rolling_sales = vcat([CSV.read("transactions/$borough.csv", DataFrame) for borough in boroughs]...)
@@ -59,10 +60,15 @@ grouped = grouped[1 .< combine(grouped, nrow).nrow .< 10]
 func_max_pct_change = [:sale_price, :sale_date] => ((price, date) ->
     maximum(
         abs.(log.(price[2:end]) .- log.(price[1:end-1])) ./ max.(1, Dates.value.(date[2:end] .- date[1:end-1]) ./ 365.25)
-    )) => :pct_change
+    )) => :pct_change_per_year
+
+# record outliers to display on the web
+outliers = combine(grouped[combine(grouped, func_max_pct_change).pct_change_per_year .>= 0.3], :block, :lot, :sale_date => "SALE DATE", :sale_price)
+filter!(["SALE DATE"] => >=(Date(2018, 1, 1)), outliers)
+CSV.write("transactions/outliers.csv", outliers)
 
 # filter out any homes that had lost or gained value at over 30% per annum
-grouped = grouped[combine(grouped, func_max_pct_change).pct_change.<0.3]
+grouped = grouped[combine(grouped, func_max_pct_change).pct_change_per_year .< 0.3]
 df = combine(groupby(df, [:borough, :uid]), names(df)...)
 
 function calc_index(df)
