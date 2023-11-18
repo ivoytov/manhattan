@@ -53,9 +53,16 @@ sort!(df, [:sale_date])
 
 grouped = groupby(df, [:borough, :uid])
 # filter homes that sold between 2 and 9 times (>9 is likely bad data...)
-grouped = grouped[ 1 .< combine(grouped, nrow).nrow .< 10]
-outliers = filter(row -> row.pct_change > 1, combine(grouped, :sale_price => (sale_price -> abs.(log.(sale_price[2:end]) .- log.(sale_price[1:end-1])) ) => :pct_change))
-df = df[.!( (df.borough .=> df.uid) .|> in(Set(outliers.borough .=> outliers.uid)) ), :]
+grouped = grouped[1 .< combine(grouped, nrow).nrow .< 10]
+
+# Calculate percentage change per year of ownership. don't annualize returns under 1 year in duration
+func_max_pct_change = [:sale_price, :sale_date] => ((price, date) ->
+    maximum(
+        abs.(log.(price[2:end]) .- log.(price[1:end-1])) ./ max.(1, Dates.value.(date[2:end] .- date[1:end-1]) ./ 365.25)
+    )) => :pct_change
+
+# filter out any homes that had lost or gained value at over 30% per annum
+grouped = grouped[combine(grouped, func_max_pct_change).pct_change.<0.3]
 df = combine(groupby(df, [:borough, :uid]), names(df)...)
 
 function calc_index(df)
