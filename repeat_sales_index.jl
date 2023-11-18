@@ -1,76 +1,5 @@
 using DataFrames, Dates, CSV, GLM
 
-
-df = CSV.read("transactions/nyc_2018-2022.csv", DataFrame)
-boroughs = ["manhattan", "bronx", "brooklyn", "queens", "statenisland"]
-rolling_sales = vcat([CSV.read("transactions/$borough.csv", DataFrame) for borough in boroughs]...)
-
-# Filter for sales after Dec 31 2022
-rolling_sales = filter(row -> row["SALE DATE"] > Date(2022, 12, 31), rolling_sales)
-
-# merge annuals and rolling
-df = vcat(df, rolling_sales)
-df = rename(df, "ADDRESS" => :address, "BOROUGH" => :borough, "SALE DATE" => :sale_date, "SALE PRICE" => :sale_price, "NEIGHBORHOOD" => :neighborhood, "BUILDING CLASS CATEGORY" => :house_class, "BLOCK" => :block, "LOT" => :lot)
-
-borough_dict = Dict(1 => "Manhattan", 2 => "Bronx", 3 => "Brooklyn", 4 => "Queens", 5 => "Staten Island")
-df.borough = map(borough_id -> borough_dict[borough_id], df.borough)
-
-df.house_class = map(house_class -> occursin(r"01", house_class) ? "SFH" : occursin(r"12|13", house_class) ? "Condo" : occursin(r"09|[^-]10|17", house_class) ? "Coop" : "Other", df.house_class)
-
-# filter for only house classes
-filter!(:house_class => in(["Coop", "Condo", "SFH"]), df)
-
-cols = [:borough, :sale_date, :sale_price, :house_class, :neighborhood, :address, :block, :lot]
-archive = CSV.read("transactions/nyc_real_estate_211231.csv", DataFrame)[!, cols]
-filter!(:sale_date => <(Date(2018, 1, 1)), archive)
-
-df = vcat(df[:, cols], archive[:, cols])
-
-df.uid = map(eachrow(df)) do row
-    # for homes and condos, uid is like 123_890 for block 123, lot 890
-    if row.house_class in ["Condo", "SFH"]
-        return string(row.block, '_', row.lot)
-    end
-
-    # for coops, uid is like 123_890_3a for block 123, lot 890, apartment 3A
-    apartment = replace(lowercase(get(split(row.address, ", ", limit=2), 2, "")), r"(?:unit)?(?:apt)?[^a-z0-9\n]" => "")
-    apartment == "" && return missing
-    string(row.block, '_', row.lot, '_', apartment)
-end
-dropmissing!(df, [:uid])
-
-# the city shifts to uppercase neighborhood names in 2018, so we must uppercase all neighborhood names
-df.neighborhood = uppercase.(df.neighborhood)
-
-# Convert 'sale_date' to PeriodIndex with frequency
-df.period = Dates.lastdayofmonth.(df.sale_date)
-
-# Drop duplicates based on 'period' and 'uid', keeping the last one
-unique!(df, [:period, :uid])
-
-# filter transactions to only betweeen $250k and $15MM
-filter!(row -> 2.5e5 < row.sale_price < 1.5e7, df)
-sort!(df, [:sale_date])
-
-grouped = groupby(df, [:borough, :uid])
-# filter homes that sold between 2 and 9 times (>9 is likely bad data...)
-grouped = grouped[1 .< combine(grouped, nrow).nrow .< 10]
-
-# Calculate percentage change per year of ownership. don't annualize returns under 1 year in duration
-func_max_pct_change = [:sale_price, :sale_date] => ((price, date) ->
-    maximum(
-        abs.(log.(price[2:end]) .- log.(price[1:end-1])) ./ max.(1, Dates.value.(date[2:end] .- date[1:end-1]) ./ 365.25)
-    )) => :pct_change_per_year
-
-# record outliers to display on the web
-outliers = combine(grouped[combine(grouped, func_max_pct_change).pct_change_per_year .>= 0.3], :block, :lot, :sale_date => "SALE DATE", :sale_price)
-filter!(["SALE DATE"] => >=(Date(2018, 1, 1)), outliers)
-CSV.write("transactions/outliers.csv", outliers)
-
-# filter out any homes that had lost or gained value at over 30% per annum
-grouped = grouped[combine(grouped, func_max_pct_change).pct_change_per_year .< 0.3]
-df = combine(groupby(df, [:borough, :uid]), names(df)...)
-
 function calc_index(df)
     grouped = groupby(df, [:borough, :uid])
 
@@ -124,19 +53,119 @@ function calc_index(df)
     idx
 end
 
-idx = calc_index(df)
-CSV.write("home_price_index.csv", idx)
+# Function to read CSV file into DataFrame
+read_csv = file -> CSV.read(file, DataFrame)
 
-gdf = groupby(df, [:borough, :house_class])
-idxb = combine(gdf) do sdf
+# Read the base annual transaction data
+df = read_csv("transactions/nyc_2018-2022.csv")
+
+# Consolidate rolling sales data for each borough and filter for sales after the specified date
+boroughs = ["manhattan", "bronx", "brooklyn", "queens", "statenisland"]
+rolling_sales = reduce(vcat, [read_csv("transactions/$borough.csv") for borough in boroughs])
+rolling_sales = filter(row -> row["SALE DATE"] > Date(2022, 12, 31), rolling_sales)
+
+# Combine annuals and rolling data sets
+df = vcat(df, rolling_sales)
+
+# Rename columns for consistency
+rename_cols = Dict(
+    "ADDRESS" => :address,
+    "BOROUGH" => :borough,
+    "SALE DATE" => :sale_date,
+    "SALE PRICE" => :sale_price,
+    "NEIGHBORHOOD" => :neighborhood,
+    "BUILDING CLASS CATEGORY" => :house_class,
+    "BLOCK" => :block,
+    "LOT" => :lot
+)
+df = rename(df, rename_cols)
+
+# Mapping for borough names
+borough_dict = Dict(1 => "Manhattan", 2 => "Bronx", 3 => "Brooklyn", 4 => "Queens", 5 => "Staten Island")
+df.borough = [borough_dict[id] for id in df.borough]
+
+# Simplify building class names using regex
+house_class_map = house_class -> begin
+    if occursin(r"01", house_class) "SFH"
+    elseif occursin(r"12|13", house_class) "Condo"
+    elseif occursin(r"09|[^-]10|17", house_class) "Coop"
+    else "Other"
+    end
+end
+df.house_class = map(house_class_map, df.house_class)
+
+# Filter for specific house classes
+filter!(row -> row.house_class ∈ ["Coop", "Condo", "SFH"], df)
+
+# Read the archive and filter
+cols = [:borough, :sale_date, :sale_price, :house_class, :neighborhood, :address, :block, :lot]
+archive = read_csv("transactions/nyc_real_estate_211231.csv")[!, cols]
+filter!(row -> row.sale_date < Date(2018, 1, 1), archive)
+
+# Concatenate df and archive keeping only the selected columns
+df = vcat(df[:, cols], archive)
+
+# Function to generate unique identifiers for properties
+function generate_uid(row)
+    base_uid = string(row.block, '_', row.lot)
+    if row.house_class ∈ ["Condo", "SFH"]
+        return base_uid
+    else
+        apartment = replace(lowercase(get(split(row.address, ", ", limit=2), 2, "")), r"(?:unit)?(?:apt)?[^a-z0-9\n]" => "")
+        return apartment == "" ? missing : "$(base_uid)_$apartment"
+    end
+end
+
+df.uid = map(generate_uid, eachrow(df))
+dropmissing!(df, [:uid])
+
+# Standardize neighborhood names and calculate periods
+df.neighborhood = uppercase.(df.neighborhood)
+df.period = Dates.lastdayofmonth.(df.sale_date)
+
+# Remove duplicates and filter based on sale price
+unique!(df, [:period, :uid])
+filter!(row -> 2.5e5 < row.sale_price < 1.5e7, df)
+sort!(df, [:sale_date])
+
+# Filter for reasonable transaction frequencies
+grouped_df = groupby(df, [:borough, :uid])
+transaction_limits = (x -> 1 < x < 10)
+grouped_df = filter(gp -> transaction_limits(nrow(gp)), grouped_df)
+
+# Function to calculate the maximum percentage change per year of ownership
+pct_change_per_year = (prices, dates) -> begin
+    diffs = abs.(diff(log.(prices)))
+    periods = max.(1, Dates.value.(diff(dates)) / 365.25)
+    maximum(diffs ./ periods; init=0)
+end
+
+# Identify outliers and write to CSV
+is_outlier = gp -> pct_change_per_year(gp.sale_price, gp.sale_date) ≥ 0.3
+outliers = (grouped_df
+                |> gp -> filter(is_outlier, gp)
+                |> gp -> combine(gp, :block, :lot, :sale_date, :sale_price)
+                |> df -> filter(:sale_date => date -> date ≥ Date(2018, 1, 1), df)
+                |> df -> rename(df, :sale_date => "SALE DATE")
+)
+CSV.write("transactions/outliers.csv", outliers)
+
+# Remove outliers from the main dataframe
+df = filter(gp -> !is_outlier(gp), grouped_df) |> gdf -> combine(gdf, names(df)...)
+
+# Calculating and exporting home price indices
+home_price_index = calc_index(df)
+home_price_subindex = combine(groupby(df, [:borough, :house_class])) do sdf
+    calc_index(sdf)
+end
+home_price_neighborhoods = combine(groupby(df, [:borough, :neighborhood])) do sdf
     calc_index(sdf)
 end
 
-CSV.write("home_price_subindex.csv", idxb)
+CSV.write("home_price_index.csv", home_price_index)
+CSV.write("home_price_subindex.csv", home_price_subindex)
+CSV.write("home_price_neighborhoods.csv", home_price_neighborhoods)
 
-gdf = groupby(df, [:borough, :neighborhood])
-idx_neigh = combine(gdf) do sdf
-    calc_index(sdf)
-end
 
-CSV.write("home_price_neighborhoods.csv", idx_neigh)
+
+
