@@ -143,7 +143,7 @@ df.uid = map(generate_uid, eachrow(df))
 dropmissing!(df, [:uid])
 
 # Standardize neighborhood names and calculate periods
-df.neighborhood = uppercase.(df.neighborhood)
+df.neighborhood = titlecase.(lowercase.(df.neighborhood))
 df.period = Dates.lastdayofmonth.(df.sale_date)
 
 # Remove duplicates and filter based on sale price

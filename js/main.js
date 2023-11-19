@@ -279,7 +279,7 @@ const csvUrls = [
   'brooklyn.csv',
   'queens.csv',
   'statenisland.csv',
-  'nyc_2018-2022.csv',
+  // 'nyc_2018-2022.csv',
 ];
 
 // Array to store promises for each CSV file
@@ -294,14 +294,14 @@ Promise.all(csvPromises)
     combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
 
     // add outliers column to the data
-    const is_outlier = (obj) => { 
-      return { 
+    const is_outlier = (obj) => {
+      return {
         ...obj,
         outlier: !outliers.some(outlier => outlier.lot === obj.LOT && outlier.block === obj.BLOCK && outlier["SALE DATE"].getTime() === obj["SALE DATE"].getTime() && outlier.sale_price === obj["SALE PRICE"])
       }
     }
     combinedData = combinedData.map(is_outlier)
-      
+
 
     gridOptions.api.setRowData(combinedData)
     gridOptions.api.sizeColumnsToFit()
@@ -317,17 +317,52 @@ Promise.all([
 ])
   .then(([idx, idxb, idxn]) => {
 
-    const manhattanCondo = idxb.filter(({ borough, house_class }) => borough == "Manhattan" & house_class == "Condo")
-      .map(({ period, home_price_index }) => [period, home_price_index])
+    const boroughs = new Set(idxb.map(({ borough }) => borough))
+    const houseClasses = new Set(idxb.map(({ house_class }) => house_class))
+    const neighborhoods = new Set(idxn.map(({ neighborhood }) => neighborhood))
 
-    const brooklynSFH = idxb.filter(({ borough, house_class }) => borough == "Brooklyn" & house_class == "SFH")
-      .map(({ period, home_price_index }) => [period, home_price_index])
+    const seriesNames = []
+    const series = []
+    const makeSeries = (data, name) => {
+      return {
+        name: name,
+        type: 'line',
+        symbol: 'none',
+        data: data
+      }
+    }
+    for (const borough of boroughs) {
+      for (const cls of houseClasses) {
+        const data = idxb.filter(({ borough: b, house_class: c }) => borough == b & cls == c)
+          .map(({ period, home_price_index }) => [period, home_price_index])
+        const name = `${borough} ${cls}`
+        series.push(makeSeries(data,name))
+        seriesNames.push(name)
+      }
+    }
 
-    const uws = idxn.filter(({ borough, neighborhood }) => borough == "Manhattan" & neighborhood == 'UPPER WEST SIDE (59-79)')
-      .map(({ period, home_price_index }) => [period, home_price_index])
+    for (const borough of boroughs) {
+      for (const neighborhood of neighborhoods) {
+        const data = idxn.filter(({ borough: b, neighborhood: n }) => borough == b & neighborhood == n)
+          .map(({ period, home_price_index }) => [period, home_price_index])
+        const name = `${borough} ${neighborhood}`
 
-    const gramercy = idxn.filter(({ borough, neighborhood }) => borough == "Manhattan" & neighborhood == 'GRAMERCY')
-      .map(({ period, home_price_index }) => [period, home_price_index])
+        // since not every neighborhood is in every borough, eliminate the empty ones
+        if (!data.length) {
+          continue
+        }
+        series.push(makeSeries(data,name))
+        seriesNames.push(name)
+      }
+    }
+
+    const isSelected = seriesNames.reduce((accumulator, current) => {
+      accumulator[current] = false;
+      return accumulator;
+    }, {})
+
+    isSelected["Manhattan Condo"] = true
+    isSelected["Brooklyn SFH"] = true
 
     // Specify the configuration items and data for the chart
     const option = {
@@ -344,14 +379,21 @@ Promise.all([
         trigger: 'axis'
       },
       legend: {
-        data: ['NYC', 'Manhattan Condo', 'Brooklyn SFH', 'Upper West Side (59-79)', 'Gramercy'],
-        selected: {
-          'NYC': true,
-          'Manhattan Condo': true,
-          'Brooklyn SFH': true,
-          'Upper West Side (59-79)': false,
-          'Gramercy': false,
+        selected: isSelected,
+        type: 'scroll',
+        orient: 'horizontal',
+        data: seriesNames,
+        top: 20,
+        left: 20,
+        right: 20,
+        textStyle: {
+          width: 75,
+          overflow: 'break'
+
         }
+      },
+      grid: {
+        top: 100
       },
       xAxis: {
         type: 'time'
@@ -370,30 +412,7 @@ Promise.all([
             y: 'home_price_index'
           }
         },
-        {
-          name: 'Manhattan Condo',
-          type: 'line',
-          symbol: 'none',
-          data: manhattanCondo
-        },
-        {
-          name: 'Brooklyn SFH',
-          type: 'line',
-          symbol: 'none',
-          data: brooklynSFH
-        },
-        {
-          name: 'Upper West Side (59-79)',
-          type: 'line',
-          symbol: 'none',
-          data: uws
-        },
-        {
-          name: 'Gramercy',
-          type: 'line',
-          symbol: 'none',
-          data: gramercy
-        }
+        ...series
       ]
     };
 
