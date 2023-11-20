@@ -198,6 +198,6 @@ home_price_neighborhoods = combine(groupby(df, [:borough, :neighborhood])) do sd
 end
 
 CSV.write("home_price_index.csv", home_price_index)
-CSV.write("home_price_subindex.csv", home_price_subindex)
-CSV.write("home_price_neighborhoods.csv", home_price_neighborhoods)
+CSV.write("home_price_subindex.csv", sort(home_price_subindex, [:borough, :house_class, :period]))
+CSV.write("home_price_neighborhoods.csv", sort(home_price_neighborhoods, [:borough, :neighborhood, :period]))
 CSV.write("transactions/outliers.csv", outliers)
