@@ -121,7 +121,7 @@ df.house_class = map(house_class_map, df.house_class)
 filter!(:house_class => ∈(["Coop", "Condo", "SFH"]), df)
 
 # Read the archive and filter
-cols = [:borough, :sale_date, :sale_price, :house_class, :neighborhood, :address, :block, :lot]
+cols = collect(values(rename_cols))
 archive = read_csv("transactions/nyc_real_estate_211231.csv")[!, cols]
 filter!(:sale_date => <(Date(2018, 1, 1)), archive)
 
@@ -151,30 +151,42 @@ unique!(df, [:period, :uid])
 filter!(:sale_price => price -> 2.5e5 < price < 1.5e7, df)
 sort!(df, [:sale_date])
 
+# Define the outlier flagging function for individual transactions
+function is_outlier_transaction(buy_price, buy_date, sell_price, sell_date; max_change=0.3)
+    if ismissing(buy_price) || ismissing(buy_date)
+        return false
+    end
+    
+    diff = abs(log(sell_price) - log(buy_price))
+    period = max(1, Dates.value(sell_date - buy_date) / 365.25)
+    return diff / period > max_change 
+end
+
+grouped_df = groupby(df, [:borough, :uid])
+
+# Add columns for the previous sale price and date
+df_prev_info = grouped_df |>
+    x -> transform(x, :sale_price => lag => :prev_sale_price, 
+                      :sale_date => lag => :prev_sale_date)
+
+# Flag transactions as outliers
+df_prev_info = transform(df_prev_info, [:prev_sale_price, :prev_sale_date, :sale_price, :sale_date] => ByRow(is_outlier_transaction) => :is_outlier)
+
+# Identify outliers for display purposes
+outliers = (
+    df_prev_info[df_prev_info.is_outlier, :]
+    |> df -> select(df, :block, :lot, :sale_date, :sale_price)
+    |> df -> filter(:sale_date => ≥(Date(2018, 1, 1)), df)
+    |> df -> rename(df, :sale_date => "SALE DATE")
+)
+
+# Filter out the outlier transactions
+df = filter(:is_outlier => !, df_prev_info)
+
 # Filter for reasonable transaction frequencies
 grouped_df = groupby(df, [:borough, :uid])
 transaction_limits = (x -> 1 < x < 10)
 grouped_df = filter(gp -> transaction_limits(nrow(gp)), grouped_df)
-
-# Function to calculate the maximum percentage change per year of ownership
-pct_change_per_year = (prices, dates) -> begin
-    diffs = abs.(diff(log.(prices)))
-    periods = max.(1, Dates.value.(diff(dates)) / 365.25)
-    maximum(diffs ./ periods; init=0)
-end
-
-# Identify outliers and write to CSV
-is_outlier = gp -> pct_change_per_year(gp.sale_price, gp.sale_date) ≥ 0.3
-outliers = (grouped_df
-                |> gp -> filter(is_outlier, gp)
-                |> gp -> combine(gp, :block, :lot, :sale_date, :sale_price)
-                |> df -> filter(:sale_date => date -> date ≥ Date(2018, 1, 1), df)
-                |> df -> rename(df, :sale_date => "SALE DATE")
-)
-CSV.write("transactions/outliers.csv", outliers)
-
-# Remove outliers from the main dataframe
-df = filter(!is_outlier, grouped_df) |> gdf -> combine(gdf, names(df)...)
 
 # Calculating and exporting home price indices
 home_price_index = calculate_home_price_index(df)
@@ -188,3 +200,4 @@ end
 CSV.write("home_price_index.csv", home_price_index)
 CSV.write("home_price_subindex.csv", home_price_subindex)
 CSV.write("home_price_neighborhoods.csv", home_price_neighborhoods)
+CSV.write("transactions/outliers.csv", outliers)
