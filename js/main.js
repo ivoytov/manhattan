@@ -279,7 +279,7 @@ const csvUrls = [
   'brooklyn.csv',
   'queens.csv',
   'statenisland.csv',
-  // 'nyc_2018-2022.csv',
+  'nyc_2018-2022.csv',
 ];
 
 // Array to store promises for each CSV file
