@@ -34,9 +34,11 @@ jobs:
         julia nyc_data.jl
 
         # Check if new files are created
-        NEW_FILES=$(git ls-files --exclude-standard --others)
-        if [ -n "$NEW_FILES" ]; then
+        if [[ -n "$(git status --porcelain)" ]]; then
+          git status
           julia repeat_sales_index.jl
+        else
+          echo "No new files created"
         fi
 
     - name: Commit changes
