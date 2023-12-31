@@ -32,7 +32,6 @@ jobs:
     - name: Download new data and update CSVs
       run: |
         julia nyc_data.jl
-        echo "test" > test.log
 
         # Check if new files are created
         if [[ `git status --porcelain` ]]; then
