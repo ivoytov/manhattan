@@ -198,7 +198,7 @@ Bronx,Bathgate,2022-11-30,155.0,1
 Bronx,Bathgate,2023-08-31,155.0,1
 Bronx,Baychester,2018-01-31,100.0,1
 Bronx,Baychester,2018-02-28,113.0,1
-Bronx,Baychester,2018-03-31,63.0,1
+Bronx,Baychester,2018-03-31,104.0,1
 Bronx,Baychester,2018-04-30,113.0,1
 Bronx,Baychester,2018-05-31,103.0,1
 Bronx,Baychester,2018-06-30,142.0,1
@@ -206,7 +206,7 @@ Bronx,Baychester,2018-07-31,113.0,1
 Bronx,Baychester,2018-08-31,113.0,1
 Bronx,Baychester,2018-09-30,81.0,1
 Bronx,Baychester,2018-10-31,88.0,1
-Bronx,Baychester,2018-11-30,74.0,1
+Bronx,Baychester,2018-11-30,120.0,1
 Bronx,Baychester,2018-12-31,113.0,1
 Bronx,Baychester,2019-01-31,113.0,1
 Bronx,Baychester,2019-02-28,90.0,1
@@ -214,34 +214,34 @@ Bronx,Baychester,2019-03-31,151.0,1
 Bronx,Baychester,2019-04-30,113.0,1
 Bronx,Baychester,2019-05-31,84.0,1
 Bronx,Baychester,2019-06-30,113.0,1
-Bronx,Baychester,2019-07-31,74.0,1
+Bronx,Baychester,2019-07-31,121.0,1
 Bronx,Baychester,2019-08-31,113.0,1
 Bronx,Baychester,2019-09-30,231.0,1
 Bronx,Baychester,2019-10-31,113.0,1
 Bronx,Baychester,2019-11-30,113.0,1
-Bronx,Baychester,2019-12-31,69.0,1
-Bronx,Baychester,2020-01-31,97.0,1
+Bronx,Baychester,2019-12-31,113.0,1
+Bronx,Baychester,2020-01-31,158.0,1
 Bronx,Baychester,2020-02-29,64.0,1
 Bronx,Baychester,2020-03-31,101.0,1
 Bronx,Baychester,2020-04-30,113.0,1
 Bronx,Baychester,2020-05-31,113.0,1
-Bronx,Baychester,2020-06-30,113.0,1
-Bronx,Baychester,2020-07-31,71.0,1
+Bronx,Baychester,2020-06-30,185.0,1
+Bronx,Baychester,2020-07-31,116.0,1
 Bronx,Baychester,2020-08-31,100.0,1
 Bronx,Baychester,2020-09-30,92.0,1
 Bronx,Baychester,2020-10-31,211.0,1
-Bronx,Baychester,2020-11-30,113.0,1
+Bronx,Baychester,2020-11-30,185.0,1
 Bronx,Baychester,2020-12-31,113.0,1
 Bronx,Baychester,2021-01-31,113.0,1
 Bronx,Baychester,2021-02-28,113.0,1
-Bronx,Baychester,2021-03-31,65.0,1
-Bronx,Baychester,2021-04-30,99.0,1
+Bronx,Baychester,2021-03-31,107.0,1
+Bronx,Baychester,2021-04-30,162.0,1
 Bronx,Baychester,2021-05-31,113.0,1
 Bronx,Baychester,2021-06-30,113.0,1
 Bronx,Baychester,2021-07-31,132.0,1
 Bronx,Baychester,2021-08-31,189.0,1
 Bronx,Baychester,2021-09-30,108.0,1
-Bronx,Baychester,2021-10-31,75.0,1
+Bronx,Baychester,2021-10-31,123.0,1
 Bronx,Baychester,2021-11-30,147.0,1
 Bronx,Baychester,2021-12-31,113.0,1
 Bronx,Baychester,2022-01-31,113.0,1
@@ -255,7 +255,7 @@ Bronx,Baychester,2022-08-31,113.0,1
 Bronx,Baychester,2022-09-30,113.0,1
 Bronx,Baychester,2022-10-31,113.0,1
 Bronx,Baychester,2022-11-30,133.0,1
-Bronx,Baychester,2022-12-31,83.0,1
+Bronx,Baychester,2022-12-31,136.0,1
 Bronx,Baychester,2023-01-31,113.0,1
 Bronx,Baychester,2023-02-28,113.0,1
 Bronx,Baychester,2023-03-31,113.0,1
@@ -2750,7 +2750,7 @@ Brooklyn,Bay Ridge,2012-12-31,137.0,1
 Brooklyn,Bay Ridge,2013-01-31,159.0,1
 Brooklyn,Bay Ridge,2013-02-28,174.0,1
 Brooklyn,Bay Ridge,2013-03-31,165.0,1
-Brooklyn,Bay Ridge,2013-04-30,135.0,1
+Brooklyn,Bay Ridge,2013-04-30,177.0,1
 Brooklyn,Bay Ridge,2013-05-31,173.0,1
 Brooklyn,Bay Ridge,2013-06-30,169.0,1
 Brooklyn,Bay Ridge,2013-07-31,186.0,1
@@ -2773,7 +2773,7 @@ Brooklyn,Bay Ridge,2014-11-30,185.0,1
 Brooklyn,Bay Ridge,2014-12-31,205.0,1
 Brooklyn,Bay Ridge,2015-01-31,225.0,1
 Brooklyn,Bay Ridge,2015-02-28,185.0,1
-Brooklyn,Bay Ridge,2015-03-31,135.0,1
+Brooklyn,Bay Ridge,2015-03-31,177.0,1
 Brooklyn,Bay Ridge,2015-04-30,200.0,1
 Brooklyn,Bay Ridge,2015-05-31,170.0,1
 Brooklyn,Bay Ridge,2015-06-30,205.0,1
@@ -2877,7 +2877,7 @@ Brooklyn,Bay Ridge,2023-07-31,282.0,1
 Brooklyn,Bay Ridge,2023-08-31,267.0,1
 Brooklyn,Bay Ridge,2023-09-30,264.0,1
 Brooklyn,Bay Ridge,2023-10-31,299.0,1
-Brooklyn,Bay Ridge,2023-11-30,135.0,1
+Brooklyn,Bay Ridge,2023-11-30,177.0,1
 Brooklyn,Bedford Stuyvesant,2018-01-31,100.0,1
 Brooklyn,Bedford Stuyvesant,2018-02-28,89.0,1
 Brooklyn,Bedford Stuyvesant,2018-03-31,98.0,1
@@ -3459,7 +3459,7 @@ Brooklyn,Bushwick,2019-07-31,100.0,1
 Brooklyn,Bushwick,2019-08-31,100.0,1
 Brooklyn,Bushwick,2019-09-30,100.0,1
 Brooklyn,Bushwick,2019-10-31,232.0,1
-Brooklyn,Bushwick,2019-11-30,88.0,1
+Brooklyn,Bushwick,2019-11-30,87.0,1
 Brooklyn,Bushwick,2019-12-31,100.0,1
 Brooklyn,Bushwick,2020-01-31,99.0,1
 Brooklyn,Bushwick,2020-02-29,100.0,1
@@ -4288,13 +4288,13 @@ Brooklyn,Downtown-Fulton Ferry,2023-10-31,263.0,1
 Brooklyn,Downtown-Fulton Ferry,2023-11-30,285.0,1
 Brooklyn,Downtown-Fulton Mall,2018-01-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2018-02-28,80.0,1
-Brooklyn,Downtown-Fulton Mall,2018-03-31,92.0,1
+Brooklyn,Downtown-Fulton Mall,2018-03-31,98.0,1
 Brooklyn,Downtown-Fulton Mall,2018-04-30,104.0,1
 Brooklyn,Downtown-Fulton Mall,2018-05-31,88.0,1
 Brooklyn,Downtown-Fulton Mall,2018-06-30,98.0,1
 Brooklyn,Downtown-Fulton Mall,2018-07-31,93.0,1
 Brooklyn,Downtown-Fulton Mall,2018-08-31,100.0,1
-Brooklyn,Downtown-Fulton Mall,2018-09-30,93.0,1
+Brooklyn,Downtown-Fulton Mall,2018-09-30,100.0,1
 Brooklyn,Downtown-Fulton Mall,2018-10-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2018-11-30,100.0,1
 Brooklyn,Downtown-Fulton Mall,2018-12-31,100.0,1
@@ -4302,13 +4302,13 @@ Brooklyn,Downtown-Fulton Mall,2019-01-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2019-02-28,100.0,1
 Brooklyn,Downtown-Fulton Mall,2019-03-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2019-04-30,100.0,1
-Brooklyn,Downtown-Fulton Mall,2019-05-31,88.0,1
+Brooklyn,Downtown-Fulton Mall,2019-05-31,94.0,1
 Brooklyn,Downtown-Fulton Mall,2019-06-30,100.0,1
-Brooklyn,Downtown-Fulton Mall,2019-07-31,91.0,1
+Brooklyn,Downtown-Fulton Mall,2019-07-31,98.0,1
 Brooklyn,Downtown-Fulton Mall,2019-08-31,100.0,1
-Brooklyn,Downtown-Fulton Mall,2019-09-30,88.0,1
+Brooklyn,Downtown-Fulton Mall,2019-09-30,95.0,1
 Brooklyn,Downtown-Fulton Mall,2019-10-31,98.0,1
-Brooklyn,Downtown-Fulton Mall,2019-11-30,89.0,1
+Brooklyn,Downtown-Fulton Mall,2019-11-30,95.0,1
 Brooklyn,Downtown-Fulton Mall,2019-12-31,103.0,1
 Brooklyn,Downtown-Fulton Mall,2020-01-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2020-02-29,100.0,1
@@ -4320,40 +4320,40 @@ Brooklyn,Downtown-Fulton Mall,2020-07-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2020-08-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2020-09-30,100.0,1
 Brooklyn,Downtown-Fulton Mall,2020-10-31,100.0,1
-Brooklyn,Downtown-Fulton Mall,2020-11-30,96.0,1
-Brooklyn,Downtown-Fulton Mall,2020-12-31,100.0,1
+Brooklyn,Downtown-Fulton Mall,2020-11-30,103.0,1
+Brooklyn,Downtown-Fulton Mall,2020-12-31,107.0,1
 Brooklyn,Downtown-Fulton Mall,2021-01-31,100.0,1
-Brooklyn,Downtown-Fulton Mall,2021-02-28,80.0,1
+Brooklyn,Downtown-Fulton Mall,2021-02-28,85.0,1
 Brooklyn,Downtown-Fulton Mall,2021-03-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2021-04-30,76.0,1
 Brooklyn,Downtown-Fulton Mall,2021-05-31,100.0,1
-Brooklyn,Downtown-Fulton Mall,2021-06-30,98.0,1
-Brooklyn,Downtown-Fulton Mall,2021-07-31,96.0,1
-Brooklyn,Downtown-Fulton Mall,2021-08-31,84.0,1
+Brooklyn,Downtown-Fulton Mall,2021-06-30,105.0,1
+Brooklyn,Downtown-Fulton Mall,2021-07-31,103.0,1
+Brooklyn,Downtown-Fulton Mall,2021-08-31,90.0,1
 Brooklyn,Downtown-Fulton Mall,2021-09-30,77.0,1
 Brooklyn,Downtown-Fulton Mall,2021-10-31,89.0,1
 Brooklyn,Downtown-Fulton Mall,2021-11-30,100.0,1
 Brooklyn,Downtown-Fulton Mall,2021-12-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2022-01-31,81.0,1
-Brooklyn,Downtown-Fulton Mall,2022-02-28,100.0,1
+Brooklyn,Downtown-Fulton Mall,2022-02-28,107.0,1
 Brooklyn,Downtown-Fulton Mall,2022-03-31,99.0,1
 Brooklyn,Downtown-Fulton Mall,2022-04-30,88.0,1
 Brooklyn,Downtown-Fulton Mall,2022-05-31,73.0,1
-Brooklyn,Downtown-Fulton Mall,2022-06-30,95.0,1
-Brooklyn,Downtown-Fulton Mall,2022-07-31,91.0,1
+Brooklyn,Downtown-Fulton Mall,2022-06-30,102.0,1
+Brooklyn,Downtown-Fulton Mall,2022-07-31,97.0,1
 Brooklyn,Downtown-Fulton Mall,2022-08-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2022-09-30,100.0,1
 Brooklyn,Downtown-Fulton Mall,2022-10-31,100.0,1
 Brooklyn,Downtown-Fulton Mall,2022-11-30,100.0,1
-Brooklyn,Downtown-Fulton Mall,2022-12-31,88.0,1
-Brooklyn,Downtown-Fulton Mall,2023-01-31,77.0,1
+Brooklyn,Downtown-Fulton Mall,2022-12-31,94.0,1
+Brooklyn,Downtown-Fulton Mall,2023-01-31,83.0,1
 Brooklyn,Downtown-Fulton Mall,2023-02-28,100.0,1
 Brooklyn,Downtown-Fulton Mall,2023-03-31,100.0,1
-Brooklyn,Downtown-Fulton Mall,2023-04-30,85.0,1
+Brooklyn,Downtown-Fulton Mall,2023-04-30,91.0,1
 Brooklyn,Downtown-Fulton Mall,2023-05-31,80.0,1
 Brooklyn,Downtown-Fulton Mall,2023-06-30,100.0,1
-Brooklyn,Downtown-Fulton Mall,2023-07-31,110.0,1
-Brooklyn,Downtown-Fulton Mall,2023-08-31,87.0,1
+Brooklyn,Downtown-Fulton Mall,2023-07-31,118.0,1
+Brooklyn,Downtown-Fulton Mall,2023-08-31,94.0,1
 Brooklyn,Downtown-Fulton Mall,2023-09-30,100.0,1
 Brooklyn,Downtown-Fulton Mall,2023-10-31,95.0,1
 Brooklyn,Downtown-Fulton Mall,2023-11-30,100.0,1
@@ -5272,12 +5272,12 @@ Brooklyn,Fort Greene,2018-01-31,100.0,1
 Brooklyn,Fort Greene,2018-02-28,106.0,1
 Brooklyn,Fort Greene,2018-03-31,100.0,1
 Brooklyn,Fort Greene,2018-04-30,100.0,1
-Brooklyn,Fort Greene,2018-05-31,73.0,1
+Brooklyn,Fort Greene,2018-05-31,93.0,1
 Brooklyn,Fort Greene,2018-06-30,91.0,1
 Brooklyn,Fort Greene,2018-07-31,106.0,1
 Brooklyn,Fort Greene,2018-08-31,100.0,1
 Brooklyn,Fort Greene,2018-09-30,100.0,1
-Brooklyn,Fort Greene,2018-10-31,87.0,1
+Brooklyn,Fort Greene,2018-10-31,111.0,1
 Brooklyn,Fort Greene,2018-11-30,100.0,1
 Brooklyn,Fort Greene,2018-12-31,100.0,1
 Brooklyn,Fort Greene,2019-01-31,100.0,1
@@ -5302,15 +5302,15 @@ Brooklyn,Fort Greene,2020-07-31,100.0,1
 Brooklyn,Fort Greene,2020-08-31,100.0,1
 Brooklyn,Fort Greene,2020-09-30,100.0,1
 Brooklyn,Fort Greene,2020-10-31,114.0,1
-Brooklyn,Fort Greene,2020-11-30,114.0,1
+Brooklyn,Fort Greene,2020-11-30,146.0,1
 Brooklyn,Fort Greene,2020-12-31,100.0,1
-Brooklyn,Fort Greene,2021-01-31,81.0,1
+Brooklyn,Fort Greene,2021-01-31,104.0,1
 Brooklyn,Fort Greene,2021-02-28,100.0,1
 Brooklyn,Fort Greene,2021-03-31,100.0,1
 Brooklyn,Fort Greene,2021-04-30,100.0,1
 Brooklyn,Fort Greene,2021-05-31,100.0,1
 Brooklyn,Fort Greene,2021-06-30,100.0,1
-Brooklyn,Fort Greene,2021-07-31,100.0,1
+Brooklyn,Fort Greene,2021-07-31,128.0,1
 Brooklyn,Fort Greene,2021-08-31,100.0,1
 Brooklyn,Fort Greene,2021-09-30,100.0,1
 Brooklyn,Fort Greene,2021-10-31,100.0,1
@@ -5331,7 +5331,7 @@ Brooklyn,Fort Greene,2022-12-31,100.0,1
 Brooklyn,Fort Greene,2023-01-31,100.0,1
 Brooklyn,Fort Greene,2023-02-28,100.0,1
 Brooklyn,Fort Greene,2023-03-31,100.0,1
-Brooklyn,Fort Greene,2023-04-30,78.0,1
+Brooklyn,Fort Greene,2023-04-30,100.0,1
 Brooklyn,Fort Greene,2023-05-31,109.0,1
 Brooklyn,Fort Greene,2023-06-30,100.0,1
 Brooklyn,Fort Greene,2023-07-31,100.0,1
@@ -7378,18 +7378,18 @@ Brooklyn,Red Hook,2018-02-28,100.0,1
 Brooklyn,Red Hook,2018-05-31,100.0,1
 Brooklyn,Red Hook,2018-07-31,100.0,1
 Brooklyn,Red Hook,2018-11-30,100.0,1
-Brooklyn,Red Hook,2019-04-30,130.0,1
+Brooklyn,Red Hook,2019-04-30,100.0,1
 Brooklyn,Red Hook,2019-05-31,100.0,1
 Brooklyn,Red Hook,2019-06-30,100.0,1
 Brooklyn,Red Hook,2019-08-31,100.0,1
 Brooklyn,Red Hook,2019-09-30,100.0,1
 Brooklyn,Red Hook,2019-10-31,100.0,1
-Brooklyn,Red Hook,2019-11-30,100.0,1
+Brooklyn,Red Hook,2019-11-30,77.0,1
 Brooklyn,Red Hook,2020-01-31,100.0,1
 Brooklyn,Red Hook,2020-02-29,144.0,1
-Brooklyn,Red Hook,2020-03-31,98.0,1
+Brooklyn,Red Hook,2020-03-31,76.0,1
 Brooklyn,Red Hook,2020-06-30,100.0,1
-Brooklyn,Red Hook,2020-08-31,92.0,1
+Brooklyn,Red Hook,2020-08-31,71.0,1
 Brooklyn,Red Hook,2020-09-30,111.0,1
 Brooklyn,Red Hook,2020-10-31,100.0,1
 Brooklyn,Red Hook,2020-12-31,100.0,1
@@ -7397,17 +7397,17 @@ Brooklyn,Red Hook,2021-01-31,100.0,1
 Brooklyn,Red Hook,2021-02-28,74.0,1
 Brooklyn,Red Hook,2021-03-31,158.0,1
 Brooklyn,Red Hook,2021-04-30,100.0,1
-Brooklyn,Red Hook,2021-05-31,126.0,1
+Brooklyn,Red Hook,2021-05-31,97.0,1
 Brooklyn,Red Hook,2021-06-30,100.0,1
 Brooklyn,Red Hook,2021-07-31,100.0,1
 Brooklyn,Red Hook,2021-08-31,100.0,1
 Brooklyn,Red Hook,2021-09-30,100.0,1
 Brooklyn,Red Hook,2021-10-31,132.0,1
-Brooklyn,Red Hook,2021-11-30,130.0,1
+Brooklyn,Red Hook,2021-11-30,100.0,1
 Brooklyn,Red Hook,2021-12-31,115.0,1
-Brooklyn,Red Hook,2022-01-31,147.0,1
+Brooklyn,Red Hook,2022-01-31,113.0,1
 Brooklyn,Red Hook,2022-02-28,152.0,1
-Brooklyn,Red Hook,2022-04-30,147.0,1
+Brooklyn,Red Hook,2022-04-30,113.0,1
 Brooklyn,Red Hook,2022-05-31,100.0,1
 Brooklyn,Red Hook,2022-06-30,100.0,1
 Brooklyn,Red Hook,2022-07-31,100.0,1
@@ -9256,72 +9256,72 @@ Manhattan,East Village,2018-01-31,100.0,1
 Manhattan,East Village,2018-02-28,117.0,1
 Manhattan,East Village,2018-03-31,107.0,1
 Manhattan,East Village,2018-04-30,111.0,1
-Manhattan,East Village,2018-05-31,137.0,1
+Manhattan,East Village,2018-05-31,114.0,1
 Manhattan,East Village,2018-06-30,130.0,1
-Manhattan,East Village,2018-07-31,142.0,1
-Manhattan,East Village,2018-08-31,145.0,1
+Manhattan,East Village,2018-07-31,119.0,1
+Manhattan,East Village,2018-08-31,121.0,1
 Manhattan,East Village,2018-09-30,112.0,1
 Manhattan,East Village,2018-10-31,122.0,1
-Manhattan,East Village,2018-11-30,122.0,1
-Manhattan,East Village,2018-12-31,122.0,1
-Manhattan,East Village,2019-01-31,134.0,1
+Manhattan,East Village,2018-11-30,102.0,1
+Manhattan,East Village,2018-12-31,102.0,1
+Manhattan,East Village,2019-01-31,112.0,1
 Manhattan,East Village,2019-02-28,113.0,1
-Manhattan,East Village,2019-03-31,122.0,1
+Manhattan,East Village,2019-03-31,102.0,1
 Manhattan,East Village,2019-04-30,147.0,1
 Manhattan,East Village,2019-05-31,129.0,1
 Manhattan,East Village,2019-06-30,112.0,1
-Manhattan,East Village,2019-07-31,122.0,1
-Manhattan,East Village,2019-08-31,122.0,1
+Manhattan,East Village,2019-07-31,102.0,1
+Manhattan,East Village,2019-08-31,102.0,1
 Manhattan,East Village,2019-09-30,112.0,1
-Manhattan,East Village,2019-10-31,122.0,1
-Manhattan,East Village,2019-11-30,120.0,1
-Manhattan,East Village,2019-12-31,122.0,1
-Manhattan,East Village,2020-01-31,122.0,1
+Manhattan,East Village,2019-10-31,102.0,1
+Manhattan,East Village,2019-11-30,101.0,1
+Manhattan,East Village,2019-12-31,102.0,1
+Manhattan,East Village,2020-01-31,102.0,1
 Manhattan,East Village,2020-02-29,137.0,1
-Manhattan,East Village,2020-03-31,132.0,1
-Manhattan,East Village,2020-04-30,122.0,1
-Manhattan,East Village,2020-05-31,122.0,1
-Manhattan,East Village,2020-06-30,122.0,1
-Manhattan,East Village,2020-07-31,156.0,1
-Manhattan,East Village,2020-08-31,122.0,1
-Manhattan,East Village,2020-10-31,122.0,1
-Manhattan,East Village,2020-11-30,117.0,1
-Manhattan,East Village,2020-12-31,122.0,1
-Manhattan,East Village,2021-01-31,122.0,1
-Manhattan,East Village,2021-02-28,211.0,1
+Manhattan,East Village,2020-03-31,111.0,1
+Manhattan,East Village,2020-04-30,102.0,1
+Manhattan,East Village,2020-05-31,102.0,1
+Manhattan,East Village,2020-06-30,102.0,1
+Manhattan,East Village,2020-07-31,130.0,1
+Manhattan,East Village,2020-08-31,102.0,1
+Manhattan,East Village,2020-10-31,102.0,1
+Manhattan,East Village,2020-11-30,98.0,1
+Manhattan,East Village,2020-12-31,102.0,1
+Manhattan,East Village,2021-01-31,102.0,1
+Manhattan,East Village,2021-02-28,176.0,1
 Manhattan,East Village,2021-03-31,130.0,1
 Manhattan,East Village,2021-04-30,115.0,1
-Manhattan,East Village,2021-05-31,122.0,1
+Manhattan,East Village,2021-05-31,102.0,1
 Manhattan,East Village,2021-06-30,100.0,1
 Manhattan,East Village,2021-07-31,149.0,1
 Manhattan,East Village,2021-08-31,126.0,1
-Manhattan,East Village,2021-09-30,122.0,1
-Manhattan,East Village,2021-10-31,81.0,1
-Manhattan,East Village,2021-11-30,136.0,1
+Manhattan,East Village,2021-09-30,102.0,1
+Manhattan,East Village,2021-10-31,68.0,1
+Manhattan,East Village,2021-11-30,114.0,1
 Manhattan,East Village,2021-12-31,112.0,1
 Manhattan,East Village,2022-01-31,113.0,1
-Manhattan,East Village,2022-02-28,122.0,1
+Manhattan,East Village,2022-02-28,102.0,1
 Manhattan,East Village,2022-03-31,116.0,1
 Manhattan,East Village,2022-04-30,131.0,1
-Manhattan,East Village,2022-05-31,146.0,1
+Manhattan,East Village,2022-05-31,122.0,1
 Manhattan,East Village,2022-06-30,158.0,1
 Manhattan,East Village,2022-07-31,119.0,1
-Manhattan,East Village,2022-08-31,122.0,1
-Manhattan,East Village,2022-09-30,80.0,1
-Manhattan,East Village,2022-10-31,122.0,1
+Manhattan,East Village,2022-08-31,102.0,1
+Manhattan,East Village,2022-09-30,67.0,1
+Manhattan,East Village,2022-10-31,102.0,1
 Manhattan,East Village,2022-11-30,99.0,1
-Manhattan,East Village,2022-12-31,122.0,1
-Manhattan,East Village,2023-01-31,122.0,1
-Manhattan,East Village,2023-02-28,122.0,1
-Manhattan,East Village,2023-03-31,122.0,1
-Manhattan,East Village,2023-04-30,122.0,1
-Manhattan,East Village,2023-05-31,122.0,1
-Manhattan,East Village,2023-06-30,122.0,1
+Manhattan,East Village,2022-12-31,102.0,1
+Manhattan,East Village,2023-01-31,102.0,1
+Manhattan,East Village,2023-02-28,102.0,1
+Manhattan,East Village,2023-03-31,102.0,1
+Manhattan,East Village,2023-04-30,102.0,1
+Manhattan,East Village,2023-05-31,102.0,1
+Manhattan,East Village,2023-06-30,102.0,1
 Manhattan,East Village,2023-07-31,102.0,1
 Manhattan,East Village,2023-08-31,119.0,1
 Manhattan,East Village,2023-09-30,130.0,1
-Manhattan,East Village,2023-10-31,131.0,1
-Manhattan,East Village,2023-11-30,122.0,1
+Manhattan,East Village,2023-10-31,110.0,1
+Manhattan,East Village,2023-11-30,102.0,1
 Manhattan,Fashion,2018-01-31,100.0,1
 Manhattan,Fashion,2018-02-28,100.0,1
 Manhattan,Fashion,2018-03-31,100.0,1
@@ -9883,65 +9883,65 @@ Manhattan,Flatiron,2023-09-30,288.0,1
 Manhattan,Flatiron,2023-10-31,223.0,1
 Manhattan,Flatiron,2023-11-30,204.0,1
 Manhattan,Gramercy,2018-01-31,100.0,1
-Manhattan,Gramercy,2018-02-28,85.0,1
+Manhattan,Gramercy,2018-02-28,92.0,1
 Manhattan,Gramercy,2018-03-31,180.0,1
-Manhattan,Gramercy,2018-04-30,85.0,1
-Manhattan,Gramercy,2018-05-31,85.0,1
+Manhattan,Gramercy,2018-04-30,92.0,1
+Manhattan,Gramercy,2018-05-31,92.0,1
 Manhattan,Gramercy,2018-06-30,102.0,1
 Manhattan,Gramercy,2018-07-31,91.0,1
 Manhattan,Gramercy,2018-08-31,103.0,1
 Manhattan,Gramercy,2018-09-30,88.0,1
 Manhattan,Gramercy,2018-10-31,79.0,1
 Manhattan,Gramercy,2018-11-30,99.0,1
-Manhattan,Gramercy,2018-12-31,85.0,1
-Manhattan,Gramercy,2019-01-31,85.0,1
+Manhattan,Gramercy,2018-12-31,92.0,1
+Manhattan,Gramercy,2019-01-31,92.0,1
 Manhattan,Gramercy,2019-02-28,100.0,1
 Manhattan,Gramercy,2019-03-31,95.0,1
-Manhattan,Gramercy,2019-04-30,85.0,1
+Manhattan,Gramercy,2019-04-30,92.0,1
 Manhattan,Gramercy,2019-05-31,86.0,1
 Manhattan,Gramercy,2019-06-30,85.0,1
 Manhattan,Gramercy,2019-07-31,105.0,1
 Manhattan,Gramercy,2019-08-31,102.0,1
 Manhattan,Gramercy,2019-09-30,102.0,1
-Manhattan,Gramercy,2019-10-31,85.0,1
-Manhattan,Gramercy,2019-11-30,85.0,1
+Manhattan,Gramercy,2019-10-31,92.0,1
+Manhattan,Gramercy,2019-11-30,92.0,1
 Manhattan,Gramercy,2019-12-31,101.0,1
 Manhattan,Gramercy,2020-01-31,92.0,1
 Manhattan,Gramercy,2020-02-29,88.0,1
 Manhattan,Gramercy,2020-03-31,132.0,1
-Manhattan,Gramercy,2020-04-30,85.0,1
-Manhattan,Gramercy,2020-05-31,85.0,1
-Manhattan,Gramercy,2020-06-30,85.0,1
-Manhattan,Gramercy,2020-07-31,85.0,1
-Manhattan,Gramercy,2020-08-31,85.0,1
+Manhattan,Gramercy,2020-04-30,92.0,1
+Manhattan,Gramercy,2020-05-31,92.0,1
+Manhattan,Gramercy,2020-06-30,92.0,1
+Manhattan,Gramercy,2020-07-31,92.0,1
+Manhattan,Gramercy,2020-08-31,92.0,1
 Manhattan,Gramercy,2020-09-30,95.0,1
 Manhattan,Gramercy,2020-10-31,66.0,1
-Manhattan,Gramercy,2020-11-30,85.0,1
+Manhattan,Gramercy,2020-11-30,92.0,1
 Manhattan,Gramercy,2020-12-31,104.0,1
 Manhattan,Gramercy,2021-01-31,63.0,1
-Manhattan,Gramercy,2021-02-28,85.0,1
-Manhattan,Gramercy,2021-03-31,69.0,1
+Manhattan,Gramercy,2021-02-28,92.0,1
+Manhattan,Gramercy,2021-03-31,74.0,1
 Manhattan,Gramercy,2021-04-30,112.0,1
-Manhattan,Gramercy,2021-05-31,85.0,1
+Manhattan,Gramercy,2021-05-31,92.0,1
 Manhattan,Gramercy,2021-06-30,88.0,1
 Manhattan,Gramercy,2021-07-31,88.0,1
 Manhattan,Gramercy,2021-08-31,95.0,1
 Manhattan,Gramercy,2021-09-30,84.0,1
-Manhattan,Gramercy,2021-10-31,82.0,1
+Manhattan,Gramercy,2021-10-31,88.0,1
 Manhattan,Gramercy,2021-11-30,114.0,1
 Manhattan,Gramercy,2021-12-31,99.0,1
-Manhattan,Gramercy,2022-01-31,85.0,1
+Manhattan,Gramercy,2022-01-31,92.0,1
 Manhattan,Gramercy,2022-02-28,95.0,1
-Manhattan,Gramercy,2022-03-31,85.0,1
+Manhattan,Gramercy,2022-03-31,92.0,1
 Manhattan,Gramercy,2022-04-30,95.0,1
-Manhattan,Gramercy,2022-05-31,85.0,1
+Manhattan,Gramercy,2022-05-31,92.0,1
 Manhattan,Gramercy,2022-06-30,148.0,1
-Manhattan,Gramercy,2022-07-31,85.0,1
+Manhattan,Gramercy,2022-07-31,92.0,1
 Manhattan,Gramercy,2022-08-31,112.0,1
-Manhattan,Gramercy,2022-09-30,85.0,1
+Manhattan,Gramercy,2022-09-30,92.0,1
 Manhattan,Gramercy,2022-10-31,102.0,1
 Manhattan,Gramercy,2022-11-30,106.0,1
-Manhattan,Gramercy,2022-12-31,85.0,1
+Manhattan,Gramercy,2022-12-31,92.0,1
 Manhattan,Gramercy,2023-01-31,92.0,1
 Manhattan,Gramercy,2023-02-28,70.0,1
 Manhattan,Gramercy,2023-03-31,97.0,1
@@ -9952,7 +9952,7 @@ Manhattan,Gramercy,2023-07-31,75.0,1
 Manhattan,Gramercy,2023-08-31,88.0,1
 Manhattan,Gramercy,2023-09-30,111.0,1
 Manhattan,Gramercy,2023-10-31,94.0,1
-Manhattan,Gramercy,2023-11-30,92.0,1
+Manhattan,Gramercy,2023-11-30,98.0,1
 Manhattan,Greenwich Village-Central,2003-01-31,100.0,1
 Manhattan,Greenwich Village-Central,2003-02-28,146.0,1
 Manhattan,Greenwich Village-Central,2003-03-31,132.0,1
@@ -16264,8 +16264,8 @@ Queens,Floral Park,2019-12-31,208.0,1
 Queens,Floral Park,2020-01-31,186.0,1
 Queens,Floral Park,2020-02-29,267.0,1
 Queens,Floral Park,2020-03-31,183.0,1
-Queens,Floral Park,2020-04-30,220.0,1
-Queens,Floral Park,2020-05-31,220.0,1
+Queens,Floral Park,2020-04-30,161.0,1
+Queens,Floral Park,2020-05-31,161.0,1
 Queens,Floral Park,2020-06-30,241.0,1
 Queens,Floral Park,2020-07-31,169.0,1
 Queens,Floral Park,2020-08-31,260.0,1
@@ -21020,11 +21020,11 @@ Queens,South Ozone Park,2023-10-31,156.0,1
 Queens,South Ozone Park,2023-11-30,108.0,1
 Queens,Springfield Gardens,2018-01-31,100.0,1
 Queens,Springfield Gardens,2018-02-28,114.0,1
-Queens,Springfield Gardens,2018-03-31,152.0,1
+Queens,Springfield Gardens,2018-03-31,245.0,1
 Queens,Springfield Gardens,2018-04-30,115.0,1
 Queens,Springfield Gardens,2018-05-31,128.0,1
 Queens,Springfield Gardens,2018-06-30,117.0,1
-Queens,Springfield Gardens,2018-07-31,152.0,1
+Queens,Springfield Gardens,2018-07-31,245.0,1
 Queens,Springfield Gardens,2018-08-31,124.0,1
 Queens,Springfield Gardens,2018-09-30,101.0,1
 Queens,Springfield Gardens,2018-10-31,148.0,1
@@ -21039,24 +21039,24 @@ Queens,Springfield Gardens,2019-06-30,170.0,1
 Queens,Springfield Gardens,2019-07-31,150.0,1
 Queens,Springfield Gardens,2019-08-31,212.0,1
 Queens,Springfield Gardens,2019-09-30,84.0,1
-Queens,Springfield Gardens,2019-10-31,149.0,1
+Queens,Springfield Gardens,2019-10-31,240.0,1
 Queens,Springfield Gardens,2019-11-30,140.0,1
 Queens,Springfield Gardens,2019-12-31,160.0,1
 Queens,Springfield Gardens,2020-01-31,199.0,1
 Queens,Springfield Gardens,2020-02-29,186.0,1
 Queens,Springfield Gardens,2020-03-31,200.0,1
 Queens,Springfield Gardens,2020-04-30,166.0,1
-Queens,Springfield Gardens,2020-05-31,152.0,1
+Queens,Springfield Gardens,2020-05-31,245.0,1
 Queens,Springfield Gardens,2020-06-30,245.0,1
 Queens,Springfield Gardens,2020-07-31,148.0,1
 Queens,Springfield Gardens,2020-08-31,149.0,1
-Queens,Springfield Gardens,2020-09-30,152.0,1
-Queens,Springfield Gardens,2020-10-31,152.0,1
+Queens,Springfield Gardens,2020-09-30,245.0,1
+Queens,Springfield Gardens,2020-10-31,245.0,1
 Queens,Springfield Gardens,2020-11-30,110.0,1
 Queens,Springfield Gardens,2020-12-31,257.0,1
 Queens,Springfield Gardens,2021-01-31,198.0,1
 Queens,Springfield Gardens,2021-02-28,241.0,1
-Queens,Springfield Gardens,2021-03-31,152.0,1
+Queens,Springfield Gardens,2021-03-31,245.0,1
 Queens,Springfield Gardens,2021-04-30,155.0,1
 Queens,Springfield Gardens,2021-05-31,141.0,1
 Queens,Springfield Gardens,2021-06-30,131.0,1
@@ -21065,7 +21065,7 @@ Queens,Springfield Gardens,2021-08-31,192.0,1
 Queens,Springfield Gardens,2021-09-30,223.0,1
 Queens,Springfield Gardens,2021-10-31,225.0,1
 Queens,Springfield Gardens,2021-11-30,233.0,1
-Queens,Springfield Gardens,2021-12-31,133.0,1
+Queens,Springfield Gardens,2021-12-31,215.0,1
 Queens,Springfield Gardens,2022-01-31,269.0,1
 Queens,Springfield Gardens,2022-02-28,162.0,1
 Queens,Springfield Gardens,2022-03-31,232.0,1
@@ -21074,16 +21074,16 @@ Queens,Springfield Gardens,2022-05-31,246.0,1
 Queens,Springfield Gardens,2022-06-30,211.0,1
 Queens,Springfield Gardens,2022-07-31,256.0,1
 Queens,Springfield Gardens,2022-08-31,136.0,1
-Queens,Springfield Gardens,2022-09-30,152.0,1
+Queens,Springfield Gardens,2022-09-30,245.0,1
 Queens,Springfield Gardens,2022-10-31,171.0,1
-Queens,Springfield Gardens,2022-11-30,152.0,1
-Queens,Springfield Gardens,2022-12-31,152.0,1
+Queens,Springfield Gardens,2022-11-30,245.0,1
+Queens,Springfield Gardens,2022-12-31,245.0,1
 Queens,Springfield Gardens,2023-01-31,247.0,1
 Queens,Springfield Gardens,2023-02-28,130.0,1
-Queens,Springfield Gardens,2023-03-31,152.0,1
+Queens,Springfield Gardens,2023-03-31,245.0,1
 Queens,Springfield Gardens,2023-04-30,190.0,1
-Queens,Springfield Gardens,2023-05-31,152.0,1
-Queens,Springfield Gardens,2023-06-30,152.0,1
+Queens,Springfield Gardens,2023-05-31,245.0,1
+Queens,Springfield Gardens,2023-06-30,245.0,1
 Queens,Springfield Gardens,2023-07-31,275.0,1
 Queens,Springfield Gardens,2023-08-31,287.0,1
 Queens,Springfield Gardens,2023-09-30,246.0,1
@@ -21658,7 +21658,7 @@ Queens,Woodhaven,2018-01-31,100.0,1
 Queens,Woodhaven,2018-02-28,100.0,1
 Queens,Woodhaven,2018-03-31,61.0,1
 Queens,Woodhaven,2018-04-30,59.0,1
-Queens,Woodhaven,2018-05-31,63.0,1
+Queens,Woodhaven,2018-05-31,37.0,1
 Queens,Woodhaven,2018-06-30,72.0,1
 Queens,Woodhaven,2018-07-31,55.0,1
 Queens,Woodhaven,2018-08-31,100.0,1
@@ -21666,16 +21666,16 @@ Queens,Woodhaven,2018-09-30,105.0,1
 Queens,Woodhaven,2018-10-31,100.0,1
 Queens,Woodhaven,2018-11-30,73.0,1
 Queens,Woodhaven,2018-12-31,61.0,1
-Queens,Woodhaven,2019-01-31,78.0,1
+Queens,Woodhaven,2019-01-31,45.0,1
 Queens,Woodhaven,2019-02-28,100.0,1
-Queens,Woodhaven,2019-03-31,172.0,1
+Queens,Woodhaven,2019-03-31,100.0,1
 Queens,Woodhaven,2019-04-30,77.0,1
 Queens,Woodhaven,2019-05-31,68.0,1
-Queens,Woodhaven,2019-06-30,100.0,1
+Queens,Woodhaven,2019-06-30,58.0,1
 Queens,Woodhaven,2019-07-31,100.0,1
-Queens,Woodhaven,2019-08-31,103.0,1
+Queens,Woodhaven,2019-08-31,60.0,1
 Queens,Woodhaven,2019-09-30,100.0,1
-Queens,Woodhaven,2019-10-31,95.0,1
+Queens,Woodhaven,2019-10-31,55.0,1
 Queens,Woodhaven,2019-11-30,100.0,1
 Queens,Woodhaven,2019-12-31,100.0,1
 Queens,Woodhaven,2020-01-31,119.0,1
@@ -21691,7 +21691,7 @@ Queens,Woodhaven,2020-10-31,112.0,1
 Queens,Woodhaven,2020-11-30,146.0,1
 Queens,Woodhaven,2020-12-31,100.0,1
 Queens,Woodhaven,2021-01-31,100.0,1
-Queens,Woodhaven,2021-02-28,127.0,1
+Queens,Woodhaven,2021-02-28,74.0,1
 Queens,Woodhaven,2021-03-31,60.0,1
 Queens,Woodhaven,2021-04-30,100.0,1
 Queens,Woodhaven,2021-05-31,88.0,1
@@ -21706,7 +21706,7 @@ Queens,Woodhaven,2022-01-31,100.0,1
 Queens,Woodhaven,2022-02-28,100.0,1
 Queens,Woodhaven,2022-03-31,100.0,1
 Queens,Woodhaven,2022-04-30,82.0,1
-Queens,Woodhaven,2022-05-31,168.0,1
+Queens,Woodhaven,2022-05-31,97.0,1
 Queens,Woodhaven,2022-06-30,70.0,1
 Queens,Woodhaven,2022-07-31,100.0,1
 Queens,Woodhaven,2022-08-31,100.0,1
@@ -21716,7 +21716,7 @@ Queens,Woodhaven,2022-11-30,80.0,1
 Queens,Woodhaven,2022-12-31,100.0,1
 Queens,Woodhaven,2023-01-31,100.0,1
 Queens,Woodhaven,2023-02-28,100.0,1
-Queens,Woodhaven,2023-03-31,103.0,1
+Queens,Woodhaven,2023-03-31,60.0,1
 Queens,Woodhaven,2023-04-30,100.0,1
 Queens,Woodhaven,2023-05-31,53.0,1
 Queens,Woodhaven,2023-06-30,100.0,1
@@ -21737,10 +21737,10 @@ Queens,Woodside,2018-09-30,100.0,1
 Queens,Woodside,2018-10-31,100.0,1
 Queens,Woodside,2018-11-30,95.0,1
 Queens,Woodside,2018-12-31,100.0,1
-Queens,Woodside,2019-01-31,100.0,1
+Queens,Woodside,2019-01-31,98.0,1
 Queens,Woodside,2019-02-28,86.0,1
 Queens,Woodside,2019-03-31,121.0,1
-Queens,Woodside,2019-04-30,102.0,1
+Queens,Woodside,2019-04-30,100.0,1
 Queens,Woodside,2019-05-31,100.0,1
 Queens,Woodside,2019-06-30,100.0,1
 Queens,Woodside,2019-07-31,100.0,1
@@ -21777,7 +21777,7 @@ Queens,Woodside,2022-02-28,92.0,1
 Queens,Woodside,2022-03-31,100.0,1
 Queens,Woodside,2022-04-30,154.0,1
 Queens,Woodside,2022-05-31,100.0,1
-Queens,Woodside,2022-06-30,103.0,1
+Queens,Woodside,2022-06-30,100.0,1
 Queens,Woodside,2022-07-31,100.0,1
 Queens,Woodside,2022-08-31,100.0,1
 Queens,Woodside,2022-09-30,100.0,1
@@ -22116,7 +22116,7 @@ Staten Island,Arden Heights,2023-07-31,219.0,1
 Staten Island,Arden Heights,2023-08-31,223.0,1
 Staten Island,Arden Heights,2023-09-30,170.0,1
 Staten Island,Arden Heights,2023-10-31,227.0,1
-Staten Island,Arden Heights,2023-11-30,102.0,1
+Staten Island,Arden Heights,2023-11-30,135.0,1
 Staten Island,Arrochar,2018-01-31,100.0,1
 Staten Island,Arrochar,2018-04-30,100.0,1
 Staten Island,Arrochar,2018-05-31,100.0,1
@@ -23232,7 +23232,7 @@ Staten Island,Elmhurst,2004-01-31,100.0,1
 Staten Island,Elmhurst,2004-02-29,100.0,1
 Staten Island,Elmhurst,2004-05-31,86.0,1
 Staten Island,Elmhurst,2004-06-30,39.0,1
-Staten Island,Elmhurst,2004-07-31,258.0,1
+Staten Island,Elmhurst,2004-07-31,56.0,1
 Staten Island,Elmhurst,2004-08-31,99.0,1
 Staten Island,Elmhurst,2004-09-30,100.0,1
 Staten Island,Elmhurst,2004-12-31,100.0,1
@@ -23241,7 +23241,7 @@ Staten Island,Elmhurst,2005-02-28,104.0,1
 Staten Island,Elmhurst,2005-03-31,100.0,1
 Staten Island,Elmhurst,2005-05-31,47.0,1
 Staten Island,Elmhurst,2005-06-30,89.0,1
-Staten Island,Elmhurst,2005-07-31,345.0,1
+Staten Island,Elmhurst,2005-07-31,75.0,1
 Staten Island,Elmhurst,2005-08-31,100.0,1
 Staten Island,Elmhurst,2005-09-30,344.0,1
 Staten Island,Elmhurst,2005-10-31,100.0,1
@@ -23273,9 +23273,9 @@ Staten Island,Elmhurst,2008-04-30,93.0,1
 Staten Island,Elmhurst,2008-05-31,100.0,1
 Staten Island,Elmhurst,2008-07-31,100.0,1
 Staten Island,Elmhurst,2008-08-31,100.0,1
-Staten Island,Elmhurst,2008-09-30,414.0,1
+Staten Island,Elmhurst,2008-09-30,90.0,1
 Staten Island,Elmhurst,2008-11-30,92.0,1
-Staten Island,Elmhurst,2009-03-31,100.0,1
+Staten Island,Elmhurst,2009-03-31,22.0,1
 Staten Island,Elmhurst,2009-05-31,99.0,1
 Staten Island,Elmhurst,2009-06-30,122.0,1
 Staten Island,Elmhurst,2009-07-31,40.0,1
@@ -23287,7 +23287,7 @@ Staten Island,Elmhurst,2010-01-31,100.0,1
 Staten Island,Elmhurst,2010-02-28,123.0,1
 Staten Island,Elmhurst,2010-03-31,101.0,1
 Staten Island,Elmhurst,2010-04-30,94.0,1
-Staten Island,Elmhurst,2010-05-31,355.0,1
+Staten Island,Elmhurst,2010-05-31,77.0,1
 Staten Island,Elmhurst,2010-06-30,80.0,1
 Staten Island,Elmhurst,2010-07-31,91.0,1
 Staten Island,Elmhurst,2010-08-31,62.0,1
@@ -23328,17 +23328,17 @@ Staten Island,Elmhurst,2014-05-31,100.0,1
 Staten Island,Elmhurst,2014-07-31,100.0,1
 Staten Island,Elmhurst,2014-09-30,100.0,1
 Staten Island,Elmhurst,2014-10-31,100.0,1
-Staten Island,Elmhurst,2014-11-30,331.0,1
+Staten Island,Elmhurst,2014-11-30,72.0,1
 Staten Island,Elmhurst,2014-12-31,100.0,1
 Staten Island,Elmhurst,2015-01-31,100.0,1
 Staten Island,Elmhurst,2015-03-31,100.0,1
-Staten Island,Elmhurst,2015-04-30,459.0,1
+Staten Island,Elmhurst,2015-04-30,100.0,1
 Staten Island,Elmhurst,2015-05-31,100.0,1
 Staten Island,Elmhurst,2015-07-31,133.0,1
 Staten Island,Elmhurst,2015-08-31,100.0,1
 Staten Island,Elmhurst,2015-09-30,100.0,1
 Staten Island,Elmhurst,2015-10-31,100.0,1
-Staten Island,Elmhurst,2015-11-30,258.0,1
+Staten Island,Elmhurst,2015-11-30,56.0,1
 Staten Island,Elmhurst,2015-12-31,100.0,1
 Staten Island,Elmhurst,2016-01-31,100.0,1
 Staten Island,Elmhurst,2016-03-31,120.0,1
@@ -26638,7 +26638,7 @@ Staten Island,South Beach,2010-08-31,118.0,1
 Staten Island,South Beach,2010-09-30,95.0,1
 Staten Island,South Beach,2010-10-31,147.0,1
 Staten Island,South Beach,2010-11-30,96.0,1
-Staten Island,South Beach,2010-12-31,320.0,1
+Staten Island,South Beach,2010-12-31,208.0,1
 Staten Island,South Beach,2011-01-31,152.0,1
 Staten Island,South Beach,2011-02-28,113.0,1
 Staten Island,South Beach,2011-03-31,136.0,1
@@ -26649,7 +26649,7 @@ Staten Island,South Beach,2011-07-31,118.0,1
 Staten Island,South Beach,2011-08-31,117.0,1
 Staten Island,South Beach,2011-09-30,119.0,1
 Staten Island,South Beach,2011-10-31,108.0,1
-Staten Island,South Beach,2011-11-30,320.0,1
+Staten Island,South Beach,2011-11-30,208.0,1
 Staten Island,South Beach,2011-12-31,114.0,1
 Staten Island,South Beach,2012-01-31,128.0,1
 Staten Island,South Beach,2012-02-29,110.0,1
@@ -26751,7 +26751,7 @@ Staten Island,South Beach,2020-01-31,188.0,1
 Staten Island,South Beach,2020-02-29,213.0,1
 Staten Island,South Beach,2020-03-31,171.0,1
 Staten Island,South Beach,2020-04-30,168.0,1
-Staten Island,South Beach,2020-05-31,320.0,1
+Staten Island,South Beach,2020-05-31,208.0,1
 Staten Island,South Beach,2020-07-31,164.0,1
 Staten Island,South Beach,2020-08-31,180.0,1
 Staten Island,South Beach,2020-09-30,193.0,1
@@ -26791,7 +26791,7 @@ Staten Island,South Beach,2023-06-30,227.0,1
 Staten Island,South Beach,2023-07-31,127.0,1
 Staten Island,South Beach,2023-08-31,231.0,1
 Staten Island,South Beach,2023-09-30,208.0,1
-Staten Island,South Beach,2023-10-31,320.0,1
+Staten Island,South Beach,2023-10-31,208.0,1
 Staten Island,South Beach,2023-11-30,320.0,1
 Staten Island,Stapleton,2018-01-31,100.0,1
 Staten Island,Stapleton,2018-02-28,133.0,1
@@ -27554,7 +27554,7 @@ Staten Island,Westerleigh,2009-01-31,131.0,1
 Staten Island,Westerleigh,2009-02-28,138.0,1
 Staten Island,Westerleigh,2009-03-31,122.0,1
 Staten Island,Westerleigh,2009-04-30,125.0,1
-Staten Island,Westerleigh,2009-05-31,122.0,1
+Staten Island,Westerleigh,2009-05-31,180.0,1
 Staten Island,Westerleigh,2009-06-30,131.0,1
 Staten Island,Westerleigh,2009-07-31,125.0,1
 Staten Island,Westerleigh,2009-08-31,124.0,1
@@ -27565,16 +27565,16 @@ Staten Island,Westerleigh,2009-12-31,113.0,1
 Staten Island,Westerleigh,2010-01-31,125.0,1
 Staten Island,Westerleigh,2010-02-28,105.0,1
 Staten Island,Westerleigh,2010-03-31,140.0,1
-Staten Island,Westerleigh,2010-04-30,122.0,1
+Staten Island,Westerleigh,2010-04-30,180.0,1
 Staten Island,Westerleigh,2010-05-31,115.0,1
 Staten Island,Westerleigh,2010-06-30,123.0,1
-Staten Island,Westerleigh,2010-07-31,122.0,1
+Staten Island,Westerleigh,2010-07-31,180.0,1
 Staten Island,Westerleigh,2010-08-31,130.0,1
 Staten Island,Westerleigh,2010-09-30,120.0,1
-Staten Island,Westerleigh,2010-10-31,122.0,1
+Staten Island,Westerleigh,2010-10-31,180.0,1
 Staten Island,Westerleigh,2010-11-30,125.0,1
 Staten Island,Westerleigh,2010-12-31,123.0,1
-Staten Island,Westerleigh,2011-01-31,122.0,1
+Staten Island,Westerleigh,2011-01-31,180.0,1
 Staten Island,Westerleigh,2011-02-28,118.0,1
 Staten Island,Westerleigh,2011-03-31,116.0,1
 Staten Island,Westerleigh,2011-04-30,103.0,1
@@ -27585,7 +27585,7 @@ Staten Island,Westerleigh,2011-08-31,112.0,1
 Staten Island,Westerleigh,2011-09-30,143.0,1
 Staten Island,Westerleigh,2011-10-31,116.0,1
 Staten Island,Westerleigh,2011-11-30,142.0,1
-Staten Island,Westerleigh,2011-12-31,122.0,1
+Staten Island,Westerleigh,2011-12-31,180.0,1
 Staten Island,Westerleigh,2012-01-31,114.0,1
 Staten Island,Westerleigh,2012-02-29,123.0,1
 Staten Island,Westerleigh,2012-03-31,114.0,1
@@ -27596,7 +27596,7 @@ Staten Island,Westerleigh,2012-07-31,134.0,1
 Staten Island,Westerleigh,2012-08-31,148.0,1
 Staten Island,Westerleigh,2012-09-30,129.0,1
 Staten Island,Westerleigh,2012-10-31,121.0,1
-Staten Island,Westerleigh,2012-11-30,122.0,1
+Staten Island,Westerleigh,2012-11-30,180.0,1
 Staten Island,Westerleigh,2012-12-31,113.0,1
 Staten Island,Westerleigh,2013-01-31,130.0,1
 Staten Island,Westerleigh,2013-02-28,106.0,1
@@ -27687,7 +27687,7 @@ Staten Island,Westerleigh,2020-02-29,146.0,1
 Staten Island,Westerleigh,2020-03-31,193.0,1
 Staten Island,Westerleigh,2020-04-30,175.0,1
 Staten Island,Westerleigh,2020-05-31,202.0,1
-Staten Island,Westerleigh,2020-06-30,122.0,1
+Staten Island,Westerleigh,2020-06-30,180.0,1
 Staten Island,Westerleigh,2020-07-31,163.0,1
 Staten Island,Westerleigh,2020-08-31,188.0,1
 Staten Island,Westerleigh,2020-09-30,169.0,1
@@ -27716,13 +27716,13 @@ Staten Island,Westerleigh,2022-07-31,184.0,1
 Staten Island,Westerleigh,2022-08-31,270.0,1
 Staten Island,Westerleigh,2022-09-30,271.0,1
 Staten Island,Westerleigh,2022-10-31,245.0,1
-Staten Island,Westerleigh,2022-11-30,122.0,1
+Staten Island,Westerleigh,2022-11-30,180.0,1
 Staten Island,Westerleigh,2022-12-31,217.0,1
-Staten Island,Westerleigh,2023-01-31,122.0,1
+Staten Island,Westerleigh,2023-01-31,180.0,1
 Staten Island,Westerleigh,2023-02-28,230.0,1
-Staten Island,Westerleigh,2023-03-31,122.0,1
-Staten Island,Westerleigh,2023-04-30,122.0,1
-Staten Island,Westerleigh,2023-05-31,122.0,1
+Staten Island,Westerleigh,2023-03-31,180.0,1
+Staten Island,Westerleigh,2023-04-30,180.0,1
+Staten Island,Westerleigh,2023-05-31,180.0,1
 Staten Island,Westerleigh,2023-06-30,215.0,1
 Staten Island,Westerleigh,2023-07-31,248.0,1
 Staten Island,Westerleigh,2023-08-31,214.0,1
