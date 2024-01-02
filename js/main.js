@@ -1,3 +1,31 @@
+let outliers
+Papa.parse("transactions/outliers.csv", {
+  download: true,
+  header: true,
+  skipEmptyLines: true,
+  dynamicTyping: true,
+  complete: results => {
+    // Convert "SALE DATE" property to JavaScript Date objects
+    outliers = results.data.map(obj => {
+      const dateKey = "SALE DATE" in obj ? "SALE DATE" : "period"
+
+      // Use destructuring to get other properties if needed
+      const { [dateKey]: saleDate, ...rest } = obj;
+
+      // Convert string to Date, set to midnight (otherwise date filter doesn't work)
+      const saleDateObj = new Date(saleDate);
+      saleDateObj.setHours(24, 0, 0, 0)
+
+      // Add other properties back if needed
+      return { [dateKey]: saleDateObj, ...rest };
+    });
+  },
+  error: error => {
+    console.log(error.message);
+  }
+});
+
+
 // Function to load CSV file using PapaParse
 function loadCSV(url) {
   return new Promise((resolve, reject) => {
@@ -32,7 +60,48 @@ function loadCSV(url) {
   });
 }
 
-let combinedData
+let combinedData = []
+
+const is_outlier = (obj) => !outliers.some(outlier => outlier.lot === obj.LOT && outlier.block === obj.BLOCK && outlier["SALE DATE"].getTime() === obj["SALE DATE"].getTime() && outlier.sale_price === obj["SALE PRICE"])
+
+// Function to load CSV file using PapaParse
+function loadTransactionDataCSV(url) {
+  return new Promise((resolve, reject) => {
+    Papa.parse(url, {
+      header: true,
+      download: true,
+      skipEmptyLines: true,
+      dynamicTyping: true,
+      worker: false,
+      step: row => {
+        const obj = row.data
+        const dateKey = "SALE DATE" in obj ? "SALE DATE" : "period"
+
+        // Use destructuring to get other properties if needed
+        const { [dateKey]: saleDate, ...rest } = obj;
+
+        // Convert string to Date, set to midnight (otherwise date filter doesn't work)
+        const saleDateObj = new Date(saleDate);
+        saleDateObj.setHours(24, 0, 0, 0)
+
+        // Add other properties back if needed
+        const cleanRow = { [dateKey]: saleDateObj, ...rest };
+
+        // add outliers column to the data
+        cleanRow.outlier = is_outlier(cleanRow)
+        combinedData.push(cleanRow)
+      },
+      complete: () => {
+        console.log("All done")
+        resolve(true)
+      },
+      error: error => {
+        reject(error.message);
+      }
+    });
+  });
+}
+
 
 // Filter model
 const defaultFilter = {
@@ -267,13 +336,12 @@ const gridOptions = {
 
 // Create AG Grid
 const gridDiv = document.querySelector('#myGrid');
-new agGrid.Grid(gridDiv, gridOptions);
+const gridApi = agGrid.createGrid(gridDiv, gridOptions)
 
-gridOptions.api.setFilterModel(defaultFilter);
+gridApi.setFilterModel(defaultFilter);
 
 // URLs of the CSV files you want to load
 const csvUrls = [
-  'outliers.csv',
   'manhattan.csv',
   'bronx.csv',
   'brooklyn.csv',
@@ -283,28 +351,16 @@ const csvUrls = [
 ];
 
 // Array to store promises for each CSV file
-const csvPromises = csvUrls.map(url => loadCSV(`transactions/${url}`));
+const csvPromises = csvUrls.map(url => loadTransactionDataCSV(`transactions/${url}`));
 
 
 
 // Use Promise.all to wait for all promises to resolve
 Promise.all(csvPromises)
-  .then(([outliers, ...resultsArray]) => {
-    // Combine the results from all CSV files
-    combinedData = resultsArray.reduce((acc, data) => acc.concat(data), []);
-
-    // add outliers column to the data
-    const is_outlier = (obj) => {
-      return {
-        ...obj,
-        outlier: !outliers.some(outlier => outlier.lot === obj.LOT && outlier.block === obj.BLOCK && outlier["SALE DATE"].getTime() === obj["SALE DATE"].getTime() && outlier.sale_price === obj["SALE PRICE"])
-      }
-    }
-    combinedData = combinedData.map(is_outlier)
-
-
-    gridOptions.api.setRowData(combinedData)
-    gridOptions.api.sizeColumnsToFit()
+  .then((resultsArray) => {
+    // load the full table
+    gridApi.setGridOption('rowData', combinedData)
+    gridApi.sizeColumnsToFit()
   })
   .catch(error => {
     console.error('Error loading CSV files:', error);
@@ -336,7 +392,7 @@ Promise.all([
         const data = idxb.filter(({ borough: b, house_class: c }) => borough == b & cls == c)
           .map(({ period, home_price_index }) => [period, home_price_index])
         const name = `${borough} ${cls}`
-        series.push(makeSeries(data,name))
+        series.push(makeSeries(data, name))
         seriesNames.push(name)
       }
     }
@@ -351,7 +407,7 @@ Promise.all([
         if (!data.length) {
           continue
         }
-        series.push(makeSeries(data,name))
+        series.push(makeSeries(data, name))
         seriesNames.push(name)
       }
     }
