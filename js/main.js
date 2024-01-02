@@ -1,31 +1,3 @@
-let outliers
-Papa.parse("transactions/outliers.csv", {
-  download: true,
-  header: true,
-  skipEmptyLines: true,
-  dynamicTyping: true,
-  complete: results => {
-    // Convert "SALE DATE" property to JavaScript Date objects
-    outliers = results.data.map(obj => {
-      const dateKey = "SALE DATE" in obj ? "SALE DATE" : "period"
-
-      // Use destructuring to get other properties if needed
-      const { [dateKey]: saleDate, ...rest } = obj;
-
-      // Convert string to Date, set to midnight (otherwise date filter doesn't work)
-      const saleDateObj = new Date(saleDate);
-      saleDateObj.setHours(24, 0, 0, 0)
-
-      // Add other properties back if needed
-      return { [dateKey]: saleDateObj, ...rest };
-    });
-  },
-  error: error => {
-    console.log(error.message);
-  }
-});
-
-
 // Function to load CSV file using PapaParse
 function loadCSV(url) {
   return new Promise((resolve, reject) => {
@@ -59,7 +31,7 @@ function loadCSV(url) {
     });
   });
 }
-
+let outliers = []
 let combinedData = []
 
 const is_outlier = (obj) => !outliers.some(outlier => outlier.lot === obj.LOT && outlier.block === obj.BLOCK && outlier["SALE DATE"].getTime() === obj["SALE DATE"].getTime() && outlier.sale_price === obj["SALE PRICE"])
@@ -74,11 +46,10 @@ function loadTransactionDataCSV(url) {
       dynamicTyping: true,
       worker: false,
       step: row => {
-        const obj = row.data
-        const dateKey = "SALE DATE" in obj ? "SALE DATE" : "period"
+        const dateKey = "SALE DATE" 
 
         // Use destructuring to get other properties if needed
-        const { [dateKey]: saleDate, ...rest } = obj;
+        const { [dateKey]: saleDate, ...rest } = row.data;
 
         // Convert string to Date, set to midnight (otherwise date filter doesn't work)
         const saleDateObj = new Date(saleDate);
@@ -356,7 +327,11 @@ const csvPromises = csvUrls.map(url => loadTransactionDataCSV(`transactions/${ur
 
 
 // Use Promise.all to wait for all promises to resolve
-Promise.all(csvPromises)
+loadCSV('transactions/outliers.csv').then((outs) => {
+  outliers = outs
+  return true
+}).then((retValue) => {
+  Promise.all(csvPromises)
   .then((resultsArray) => {
     // load the full table
     gridApi.setGridOption('rowData', combinedData)
@@ -364,7 +339,9 @@ Promise.all(csvPromises)
   })
   .catch(error => {
     console.error('Error loading CSV files:', error);
-  });
+  });  
+})
+
 
 Promise.all([
   loadCSV("home_price_index.csv"),
