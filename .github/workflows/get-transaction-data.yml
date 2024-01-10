@@ -48,4 +48,7 @@ jobs:
         git add .
         git commit -m "Latest transaction data" || echo "No changes to commit"
         git push
+
+  push-static-pages:
+    uses: ./.github/workflows/static.yml
         
