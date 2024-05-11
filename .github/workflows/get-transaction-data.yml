@@ -50,5 +50,6 @@ jobs:
         git push
 
   push-static-pages:
+    needs: update_sales
     uses: ./.github/workflows/static.yml
         
