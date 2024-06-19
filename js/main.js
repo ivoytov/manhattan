@@ -406,7 +406,7 @@ Promise.all([
       },
       dataset: [
         {
-          dimensions: [{ name: 'period', type: 'time' }, 'home_price_index', 'top_decile', 'top_third', 'middle_third', 'bottom_third', 'bottom_decile'],
+          dimensions: [{ name: 'period', type: 'time' }, 'top_decile', 'top_third', 'middle_third', 'bottom_third', 'bottom_decile', 'home_price_index', ],
           source: idx,
         },
       ],
