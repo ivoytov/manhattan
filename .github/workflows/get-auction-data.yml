@@ -1,0 +1,46 @@
+name: Daily Auction Update
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # Run every Monday at 3 AM
+  workflow_dispatch:
+
+jobs:
+
+  update_auctions:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+    
+    - name: Set up Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+        version: '1.9'
+        
+    - name: Install dependencies
+      run: |
+        julia -e 'using Pkg; Pkg.add("PDFIO")'
+        julia -e 'using Pkg; Pkg.add("DataFrames")'
+        julia -e 'using Pkg; Pkg.add("CSV")'
+        julia -e 'using Pkg; Pkg.add("Dates")'
+        
+    - name: Download new data and update CSVs
+      run: |
+        julia scrape_auctions.jl
+
+    - name: Commit changes
+      run: |
+        git config --global user.name github-actions
+        git config --global user.email github-actions@github.com
+        git add .
+        git commit -m "Latest auction schedule" || echo "No changes to commit"
+        git push
+
+  push-static-pages:
+    needs: update_auctions
+    uses: ./.github/workflows/static.yml
+        
