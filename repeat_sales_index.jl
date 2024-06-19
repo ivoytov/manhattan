@@ -83,7 +83,7 @@ read_csv = file -> CSV.read(file, DataFrame)
 df = read_csv("transactions/nyc_2018-2022.csv")
 
 # List comprehension to read all CSV files into a DataFrame array
-dataframes = [CSV.read("transactions/nyc_sales_$(year).csv", DataFrame) for year in 2010:2017]
+dataframes = [CSV.read("transactions/nyc_sales_$(year).csv", DataFrame) for year in 2003:2017]
 
 # Concatenate all DataFrames vertically
 archive = vcat(dataframes...)

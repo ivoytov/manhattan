@@ -38,7 +38,9 @@ println("Case Names: ", case_names)
 # Create data to be written to CSV file
 data = DataFrame(date = repeat([auction_date], length(case_numbers)),
                  case_number = case_numbers,
-                 case_name = case_names)
+                 case_name = case_names,
+                 lot = repeat([""], length(case_numbers)),
+                 block = repeat([""], length(case_numbers)))
 
 # Define the CSV file path (adjust path as needed)
 csv_file_path = "transactions/foreclosure_auctions.csv"
@@ -47,15 +49,15 @@ function csv_has_date(file_path::String, date::Date)::Bool
     return !isfile(file_path) || any(row -> row.date == date, CSV.File(file_path))
 end
 
-# Check if the CSV file has the date
+# # Check if the CSV file has the date
 if csv_has_date(csv_file_path, auction_date)
     println("Data with date ", auction_date, " already exists in ", csv_file_path)
 else
     # Append the new data to the CSV file if the date is not present
     if isfile(csv_file_path)
-        CSV.write(csv_file_path, new_data, append=true)
+        CSV.write(csv_file_path, data, append=true)
     else
-        CSV.write(csv_file_path, new_data)
+        CSV.write(csv_file_path, data)
     end
     println("Data successfully appended to ", csv_file_path)
 end
