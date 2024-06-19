@@ -81,6 +81,8 @@ read_csv = file -> CSV.read(file, DataFrame)
 
 # Read the base annual transaction data
 df = read_csv("transactions/nyc_2018-2022.csv")
+archive = read_csv("transactions/nyc_pre_2018.csv")
+df = vcat(df, archive)
 
 # Consolidate rolling sales data for each borough and filter for sales after the specified date
 boroughs = ["manhattan", "bronx", "brooklyn", "queens", "statenisland"]
@@ -119,14 +121,6 @@ df.house_class = map(house_class_map, df.house_class)
 
 # Filter for specific house classes
 filter!(:house_class => ∈(["Coop", "Condo", "SFH"]), df)
-
-# Read the archive and filter
-cols = collect(values(rename_cols))
-archive = read_csv("transactions/nyc_real_estate_211231.csv")[!, cols]
-filter!(:sale_date => <(Date(2018, 1, 1)), archive)
-
-# Concatenate df and archive keeping only the selected columns
-df = vcat(df[:, cols], archive)
 
 # Function to generate unique identifiers for properties
 function generate_uid(row)
@@ -201,3 +195,4 @@ CSV.write("home_price_index.csv", home_price_index)
 CSV.write("home_price_subindex.csv", sort(home_price_subindex, [:borough, :house_class, :period]))
 CSV.write("home_price_neighborhoods.csv", sort(home_price_neighborhoods, [:borough, :neighborhood, :period]))
 CSV.write("transactions/outliers.csv", outliers)
+print("COMPLETE")

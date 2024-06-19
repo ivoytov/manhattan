@@ -1,2 +1,5 @@
 *.xlsx
 .DS_Store
+.venv
+auctions.pdf
+scrape_auctions.jl
