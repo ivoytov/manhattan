@@ -404,7 +404,7 @@ Promise.all([
       },
       dataset: [
         {
-          dimensions: [{ name: 'period', type: 'time' }, 'home_price_index'],
+          dimensions: [{ name: 'period', type: 'time' }, 'home_price_index', 'top_decile', 'top_third', 'middle_third', 'bottom_third', 'bottom_decile'],
           source: idx,
         },
       ],
@@ -445,6 +445,56 @@ Promise.all([
             y: 'home_price_index'
           }
         },
+        {
+          name: 'NYC - Top 10%',
+          type: 'line',
+          symbol: 'none',
+          datasetIndex: 0,
+          encode: {
+            x: 'period',
+            y: 'top_decile'
+          }
+        },
+        {
+          name: 'NYC - Top 33%',
+          type: 'line',
+          symbol: 'none',
+          datasetIndex: 0,
+          encode: {
+            x: 'period',
+            y: 'top_third'
+          }
+        },
+        {
+          name: 'NYC - Middle 33%',
+          type: 'line',
+          symbol: 'none',
+          datasetIndex: 0,
+          encode: {
+            x: 'period',
+            y: 'middle_third'
+          }
+        },
+        {
+          name: 'NYC - Bottom 33%',
+          type: 'line',
+          symbol: 'none',
+          datasetIndex: 0,
+          encode: {
+            x: 'period',
+            y: 'bottom_third'
+          }
+        },
+        {
+          name: 'NYC - Bottom 10%',
+          type: 'line',
+          symbol: 'none',
+          datasetIndex: 0,
+          encode: {
+            x: 'period',
+            y: 'bottom_decile'
+          }
+        },
         ...series
       ]
     };
@@ -454,5 +504,5 @@ Promise.all([
   })
 
 // Initialize the echarts instance based on the prepared dom
-var myChart = echarts.init(document.getElementById('main'));
+const myChart = echarts.init(document.getElementById('main'));
 
