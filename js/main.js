@@ -354,7 +354,7 @@ Promise.all([
     const houseClasses = new Set(idxb.map(({ house_class }) => house_class))
     const neighborhoods = new Set(idxn.map(({ neighborhood }) => neighborhood))
 
-    const seriesNames = []
+    const seriesNames = ["NYC", "NYC - Top 10%", "NYC - Top 33%", "NYC - Middle 33%", "NYC - Bottom 33%", "NYC - Bottom 10%"]
     const series = []
     const makeSeries = (data, name) => {
       return {
@@ -396,6 +396,8 @@ Promise.all([
 
     isSelected["Manhattan Condo"] = true
     isSelected["Brooklyn SFH"] = true
+    isSelected["NYC"] = true
+    isSelected["NYC - Top 10%"] = true
 
     // Specify the configuration items and data for the chart
     const option = {
