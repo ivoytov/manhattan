@@ -81,8 +81,14 @@ read_csv = file -> CSV.read(file, DataFrame)
 
 # Read the base annual transaction data
 df = read_csv("transactions/nyc_2018-2022.csv")
-archive = read_csv("transactions/nyc_pre_2018.csv")
-df = vcat(df, archive)
+
+# List comprehension to read all CSV files into a DataFrame array
+dataframes = [CSV.read("transactions/nyc_sales_$(year).csv", DataFrame) for year in 2010:2017]
+
+# Concatenate all DataFrames vertically
+archive = vcat(dataframes...)
+
+df = vcat(df, archive, cols=:intersect)
 
 # Consolidate rolling sales data for each borough and filter for sales after the specified date
 boroughs = ["manhattan", "bronx", "brooklyn", "queens", "statenisland"]
@@ -111,7 +117,8 @@ df.borough = [borough_dict[id] for id in df.borough]
 
 # Simplify building class names using regex
 house_class_map = house_class -> begin
-    if occursin(r"01", house_class) "SFH"
+    if ismissing(house_class) "Other"
+    elseif occursin(r"01", house_class) "SFH"
     elseif occursin(r"12|13", house_class) "Condo"
     elseif occursin(r"09|[^-]10|17", house_class) "Coop"
     else "Other"
