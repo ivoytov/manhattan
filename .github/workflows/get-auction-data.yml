@@ -32,6 +32,14 @@ jobs:
       run: |
         julia scrape_auctions.jl
 
+        # Check if new files are created
+        if [[ `git status --porcelain` ]]; then
+          git status
+          julia process_auctions.jl
+        else
+          echo "No new files created"
+        fi
+
     - name: Commit changes
       run: |
         git config --global user.name github-actions
