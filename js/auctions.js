@@ -88,9 +88,13 @@ const defaultFilter = {
 // grid columns
 const columnDefs = [
     {
+        headerName: "Address",
+        field: "address",
+        cellRenderer: 'agGroupCellRenderer' 
+    },
+    {
         headerName: "Case #",
         field: "case_number",
-        cellRenderer: 'agGroupCellRenderer' 
     },
     {
         headerName: "Auction Date",
@@ -206,12 +210,8 @@ const gridOptions = {
         },
         getDetailRowData: (params) => {
             // find all transactions for this address
-            let repeats = 
-                combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == "Manhattan" && BLOCK == params.data.block && LOT == params.data.lot)
-            repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"])
+            let repeats = getTransactions(params.data);
 
-            // remove erroneous transactions
-            repeats = repeats.filter((transaction) => transaction["SALE PRICE"] >= 100000)
 
             // add % price change
             repeats = repeats.map((transaction, index, arr) => {
@@ -243,12 +243,28 @@ const csvPromises = [
 // Use Promise.all to wait for all promises to resolve
 Promise.all(csvPromises).then(([_, auctions]) => {
 
+        // get the address from transaction records
+        for (const auction of auctions) {
+            const transactions = getTransactions(auction)
+            if (transactions.length > 0) {
+                auction.address =  transactions[transactions.length - 1]["ADDRESS"]
+            }
+
+        }
+        
+
         // load the full table
         gridApi.setGridOption('rowData', auctions)
         gridApi.sizeColumnsToFit()
     })
-    .catch(error => {
-        console.error('Error loading CSV files:', error);
-    });
+    // .catch(error => {
+    //     console.error('Error loading CSV files:', error);
+    // });
 
+
+function getTransactions(data) {
+    let repeats = combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == "Manhattan" && BLOCK == data.block && LOT == data.lot);
+    repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"]);
+    return repeats;
+}
 
