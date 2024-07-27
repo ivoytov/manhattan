@@ -1,14 +1,22 @@
 using PDFIO, Downloads, Dates, CSV, DataFrames
 
 headers = Dict(
-        "User-Agent" =>  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15"
+    "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15"
 )
 
+# Download the PDF file
 filename = Downloads.download("https://www.nycourts.gov/legacypdfs/courts/1jd/supctmanh/foreclosures/auctions.pdf", headers=headers)
 doc = PDFIO.pdDocOpen(filename)
-buf = IOBuffer()
-PDFIO.pdPageExtractText(buf, PDFIO.pdDocGetPage(doc, 1))
-txt = String(take!(buf))
+
+# Extract text from all pages
+all_text = ""
+num_pages = PDFIO.pdDocGetPageCount(doc)
+for i in 1:num_pages
+    global all_text
+    buf = IOBuffer()
+    PDFIO.pdPageExtractText(buf, PDFIO.pdDocGetPage(doc, i))
+    all_text *= String(take!(buf)) * "\n"
+end
 
 # Define a function to extract the date, case numbers, and case names
 function parse_court_data(data::String)
@@ -28,7 +36,7 @@ function parse_court_data(data::String)
 end
 
 # Parse the court data
-auction_date, case_numbers, case_names = parse_court_data(txt)
+auction_date, case_numbers, case_names = parse_court_data(all_text)
 
 # Print the results
 println("Auction Date: ", auction_date)
@@ -46,10 +54,10 @@ data = DataFrame(date = repeat([auction_date], length(case_numbers)),
 csv_file_path = "transactions/foreclosure_auctions.csv"
 
 function csv_has_date(file_path::String, date::Date)::Bool
-    return !isfile(file_path) || any(row -> row.date == date, CSV.File(file_path))
+    return isfile(file_path) && any(row -> row.date == date, CSV.File(file_path))
 end
 
-# # Check if the CSV file has the date
+# Check if the CSV file has the date
 if csv_has_date(csv_file_path, auction_date)
     println("Data with date ", auction_date, " already exists in ", csv_file_path)
 else
