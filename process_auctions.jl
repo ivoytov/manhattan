@@ -27,6 +27,7 @@ function main()
     auctions.BOROUGH = fill("Manhattan", nrow(auctions))
 
     # Merge auctions and sales DataFrames
+    auctions = dropmissing(auctions, [:block, :lot])    
     merged_df = innerjoin(sales, auctions, on = [:BOROUGH, :BLOCK => :block, :LOT => :lot])
     # Select only columns from sales DataFrame
     merged_df = select(merged_df, names(sales))
