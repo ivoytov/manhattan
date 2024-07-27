@@ -27,6 +27,9 @@ jobs:
         julia -e 'using Pkg; Pkg.add("DataFrames")'
         julia -e 'using Pkg; Pkg.add("CSV")'
         julia -e 'using Pkg; Pkg.add("Dates")'
+        julia -e 'using Pkg; Pkg.add("GLM")'
+        julia -e 'using Pkg; Pkg.add("Statistics")'
+
         
     - name: Download new data and update CSVs
       run: |
