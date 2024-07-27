@@ -27,6 +27,8 @@ jobs:
         julia -e 'using Pkg; Pkg.add("DataFrames")'
         julia -e 'using Pkg; Pkg.add("CSV")'
         julia -e 'using Pkg; Pkg.add("Dates")'
+        julia -e 'using Pkg; Pkg.add("GLM")'
+
         sudo apt install tesseract-ocr
         sudo apt install libtesseract-dev
         
