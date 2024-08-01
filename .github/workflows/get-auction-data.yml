@@ -28,6 +28,8 @@ jobs:
         julia -e 'using Pkg; Pkg.add("CSV")'
         julia -e 'using Pkg; Pkg.add("Dates")'
         julia -e 'using Pkg; Pkg.add("GLM")'
+        julia -e 'using Pkg; Pkg.add("HTMLForge")'
+        julia -e 'using Pkg; Pkg.add("AbstractTrees")'
 
         sudo apt install tesseract-ocr
         sudo apt install libtesseract-dev
@@ -35,6 +37,7 @@ jobs:
     - name: Download new data and update CSVs
       run: |
         julia scrape_auctions.jl
+        julia scrape_brooklyn_auctions.jl
 
         # Check if new files are created
         if [[ `git status --porcelain` ]]; then
