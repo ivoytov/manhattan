@@ -44,17 +44,19 @@ println("Case Numbers: ", case_numbers)
 println("Case Names: ", case_names)
 
 # Create data to be written to CSV file
-data = DataFrame(date = repeat([auction_date], length(case_numbers)),
+data = DataFrame(borough = repeat(["Manhattan"], length(case_numbers)),
+                 date = repeat([auction_date], length(case_numbers)),
                  case_number = case_numbers,
                  case_name = case_names,
                  lot = repeat([""], length(case_numbers)),
-                 block = repeat([""], length(case_numbers)))
+                 block = repeat([""], length(case_numbers)),
+                 address = repeat([""], length(case_numbers)),)
 
 # Define the CSV file path (adjust path as needed)
 csv_file_path = "transactions/foreclosure_auctions.csv"
 
 function csv_has_date(file_path::String, date::Date)::Bool
-    return isfile(file_path) && any(row -> row.date == date, CSV.File(file_path))
+    return isfile(file_path) && any(row -> row.date == date && row.borough == "Brooklyn", CSV.File(file_path))
 end
 
 # Check if the CSV file has the date

@@ -1,7 +1,10 @@
 [deps]
+AbstractTrees = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 GLM = "38e38edf-8417-5370-95a0-9cbb8c7f171a"
+HTMLForge = "3f2c3872-777a-411d-b946-15b25a70da51"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 PDFIO = "4d0d745f-9d9a-592e-8d18-1ad8a0f42b92"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
