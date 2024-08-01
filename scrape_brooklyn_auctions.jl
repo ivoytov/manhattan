@@ -75,7 +75,7 @@ end
 links = []
 for link in PreOrderDFS(parsed_html.root) 
     if link isa HTMLElement && tag(link) == :a && haskey(attrs(link), "href") && endswith(attrs(link)["href"], ".pdf")
-        push!(links, Dict(:address => convert_to_address(string(text(link))), :url => host * attrs(link)["href"]))
+        push!(links, Dict(:address => convert_to_address(string(text(link))), :short_url => string(text(link)), :url => host * attrs(link)["href"]))
     end
 end
 function extract_text_from_pdf(pdf_path::String, txt_path::String)
@@ -134,7 +134,7 @@ for (i, item) in enumerate(links)
         println("Failed to get block and lot at url $url")
         println(extracted_text)
     end
-    local data = ("Brooklyn", auction_date, url, item[:address], block, lot)
+    local data = ("Brooklyn", auction_date, item[:short_url], item[:address], block, lot)
     
     push!(df, data)
     
