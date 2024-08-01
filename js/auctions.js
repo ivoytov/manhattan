@@ -88,6 +88,10 @@ const defaultFilter = {
 // grid columns
 const columnDefs = [
     {
+        field: "borough",
+        filter: 'agSetColumnFilter',
+    },
+    {
         headerName: "Address",
         field: "address",
         cellRenderer: 'agGroupCellRenderer' 
@@ -263,7 +267,7 @@ Promise.all(csvPromises).then(([_, auctions]) => {
 
 
 function getTransactions(data) {
-    let repeats = combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == "Manhattan" && BLOCK == data.block && LOT == data.lot);
+    let repeats = combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == data.borough && BLOCK == data.block && LOT == data.lot);
     repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"]);
     return repeats;
 }

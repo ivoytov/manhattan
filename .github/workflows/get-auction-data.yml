@@ -29,6 +29,8 @@ jobs:
         sudo apt-get install libtesseract-dev
         
     - name: Download new data and update CSVs
+      env:
+        HTTP_PROXY: ${{ secrets.BRIGHTDATA }}
       run: |
         julia --project=. scrape_auctions.jl
         julia --project=. scrape_brooklyn_auctions.jl

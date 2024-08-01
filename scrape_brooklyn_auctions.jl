@@ -1,22 +1,10 @@
 using Dates, HTTP, HTMLForge, Downloads, AbstractTrees, Base.Filesystem, DataFrames, CSV
 
 csv_file_path = "transactions/foreclosure_auctions.csv"
-headers = Dict(
-    "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Sec-Fetch-Site" => "none",
-    "Cookie" => "_ga_4JB7HZ108P=GS1.1.1722083299.2.0.1722083299.60.0.0; _ga_8N6X9JL16J=GS1.1.1722083299.2.0.1722083299.0.0.0; _ga_NN8NTF1TWL=GS1.1.1722083299.2.0.1722083299.0.0.0; __cf_bm=LKimc2mpbg1c_zBIDWEgLXpsedGAM6gsqnVDBWwMd_8-1722083299-1.0.1.1-A71jXfYp89dtEP22QKbLocJfRBscCRhd88vRG7uX.LliVy91ExjCodHrdMKa4WhTEUPGN.rDW3qdwgeV7pGtLQ; _ga=GA1.1.409090028.1721895402; _hjSessionUser_2983965=eyJpZCI6IjE1YjE4NTQyLWI2YWMtNTNlYi1hNTE2LWNlZGY0ZjYyNTE5MyIsImNyZWF0ZWQiOjE3MjE4OTU0MDI1MzAsImV4aXN0aW5nIjp0cnVlfQ==; monsido=AB11721895405919",
-    "Accept-Encoding" => "gzip, deflate, br",
-    "Sec-Fetch-Mode" => "navigate",
-    "Host" => "www.nycourts.gov",
-    "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15",
-    "Accept-Language" => "en-US,en;q=0.9",
-    "Sec-Fetch-Dest" => "document",
-    "Connection" => "keep-alive"
-)
 
 function get_auction_date()
     url = "https://ww2.nycourts.gov/courts/2jd/kings/civil/foreclosuresales.shtml"
-    response = HTTP.get(url, headers=headers)
+    response = HTTP.get(url)
     html_content = String(response.body)
 
     # Define a regex pattern to match the date
@@ -40,9 +28,14 @@ function get_auction_date()
     return nothing
 end
 
+if !haskey(ENV, "HTTP_PROXY")
+    println("Brightdata proxy env variable HTTP_PROXY not set")
+    exit()
+end
+
 host = "https://www.nycourts.gov" 
 url = "$host/legacyPDFs/courts/2jd/kings/civil/foreclosures/foreclosure%20scans/"
-response = HTTP.get(url, headers=headers)
+response = HTTP.get(url)
 if response.status != 200
     print("Got blocked with response", response)
     return
@@ -123,7 +116,7 @@ for (i, item) in enumerate(links)
     pdf_path = "file_$i.pdf"
     txt_path = "file_$i"
 
-    Downloads.download(url, pdf_path, headers=headers)
+    Downloads.download(url, pdf_path)
 
     extracted_text = extract_text_from_pdf(pdf_path, txt_path)
     result = extract_block_lot(extracted_text)
