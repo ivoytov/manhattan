@@ -23,17 +23,8 @@ jobs:
         
     - name: Install dependencies
       run: |
-        julia -e 'using Pkg; Pkg.add("PDFIO")'
-        julia -e 'using Pkg; Pkg.add("DataFrames")'
-        julia -e 'using Pkg; Pkg.add("CSV")'
-        julia -e 'using Pkg; Pkg.add("Dates")'
-        julia -e 'using Pkg; Pkg.add("GLM")'
-        julia -e 'using Pkg; Pkg.add("Statistics")'
-
-        julia -e 'using Pkg; Pkg.add("GLM")'
-        julia -e 'using Pkg; Pkg.add("HTMLForge")'
-        julia -e 'using Pkg; Pkg.add("AbstractTrees")'
-
+        julia -e 'using Pkg; Pkg.instantiate()'
+        
         sudo apt install tesseract-ocr
         sudo apt install libtesseract-dev
         
