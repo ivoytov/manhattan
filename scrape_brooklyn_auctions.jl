@@ -2,6 +2,23 @@ using Dates, HTTP, HTMLForge, Downloads, AbstractTrees, Base.Filesystem, DataFra
 
 csv_file_path = "transactions/foreclosure_auctions.csv"
 
+function next_wednesday(date::Date)::Date
+    # Get the day of the week for the given date
+    day_of_week = dayofweek(date)
+    
+    # Calculate the number of days until the next Wednesday
+    # In the Dates.DayOfWeek type, Wednesday is represented by 3
+    days_until_wednesday = (3 - day_of_week + 7) % 7
+    
+    # If the given date is already Wednesday, we want the next one
+    if days_until_wednesday == 0
+        days_until_wednesday = 7
+    end
+    
+    # Add the calculated number of days to the given date
+    return date + Day(days_until_wednesday)
+end
+
 function get_auction_date()
     url = "https://ww2.nycourts.gov/courts/2jd/kings/civil/foreclosuresales.shtml"
     response = HTTP.get(url)
@@ -21,6 +38,7 @@ function get_auction_date()
         
         # Convert to Date
         date = Date("$year_str-$month_str-$day_str", dateformat"Y-U-d")
+        date = next_wednesday(date)
         println(date)
         return date
     end
@@ -35,10 +53,16 @@ end
 
 host = "https://www.nycourts.gov" 
 url = "$host/legacyPDFs/courts/2jd/kings/civil/foreclosures/foreclosure%20scans/"
-response = HTTP.get(url)
-if response.status != 200
-    print("Got blocked with response", response)
-    return
+try
+    response = HTTP.get(url)
+catch e
+    if isa(e, HTTP.ExceptionRequest.StatusError)
+        println("HTTP request failed with status: ", e.status)
+        println("Error message: ", e.response)
+        exit()
+    else
+        println("An unexpected error occurred: ", e)
+    end
 end
 
 html_content = String(response.body)
