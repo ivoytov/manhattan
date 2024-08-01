@@ -23,7 +23,7 @@ jobs:
         
     - name: Install dependencies
       run: |
-        julia -e 'using Pkg; Pkg.instantiate()'
+        julia --project=. -e 'using Pkg; Pkg.instantiate()'
         
         sudo apt install tesseract-ocr
         sudo apt install libtesseract-dev
