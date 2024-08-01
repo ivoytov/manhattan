@@ -30,13 +30,13 @@ jobs:
         
     - name: Download new data and update CSVs
       run: |
-        julia scrape_auctions.jl
-        julia scrape_brooklyn_auctions.jl
+        julia --project=. scrape_auctions.jl
+        julia --project=. scrape_brooklyn_auctions.jl
 
         # Check if new files are created
         if [[ `git status --porcelain` ]]; then
           git status
-          julia process_auctions.jl
+          julia --project=. process_auctions.jl
         else
           echo "No new files created"
         fi
