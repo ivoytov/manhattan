@@ -25,8 +25,8 @@ jobs:
       run: |
         julia --project=. -e 'using Pkg; Pkg.instantiate()'
         
-        sudo apt install tesseract-ocr
-        sudo apt install libtesseract-dev
+        sudo apt-get install tesseract-ocr
+        sudo apt-get install libtesseract-dev
         
     - name: Download new data and update CSVs
       run: |
