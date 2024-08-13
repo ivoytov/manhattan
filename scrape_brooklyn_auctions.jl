@@ -46,32 +46,26 @@ function get_auction_date()
     return nothing
 end
 
-if !haskey(ENV, "HTTP_PROXY")
-    println("Brightdata proxy env variable HTTP_PROXY not set")
+if !haskey(ENV, "HTTPS_PROXY")
+    println("Brightdata proxy env variable HTTPS_PROXY not set")
     exit()
 end
 
 host = "https://www.nycourts.gov" 
 url = "$host/legacyPDFs/courts/2jd/kings/civil/foreclosures/foreclosure%20scans/"
-try
-    response = HTTP.get(url)
-catch e
-    if isa(e, HTTP.ExceptionRequest.StatusError)
-        println("HTTP request failed with status: ", e.status)
-        println("Error message: ", e.response)
-        exit()
-    else
-        println("An unexpected error occurred: ", e)
-    end
-end
+
+headers = [
+    "Accept"=> "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language"=> "en-US,en;q=0.9",
+    "User-Agent"=> "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15"
+]
+    
+
+response = HTTP.get(url, headers=headers)
 
 html_content = String(response.body)
 parsed_html = parsehtml(html_content)
 auction_date = Date(match(r"\d{1,2}/\d{1,2}/\d{4}", text(parsed_html.root)).match, dateformat"m/d/Y")
-
-function csv_has_date(file_path::String, date::Date)::Bool
-    return !isfile(file_path) || any(row -> row.date == date, CSV.File(file_path))
-end
 
 # # Check if the CSV file has the date
 if csv_has_date(csv_file_path, auction_date)
@@ -165,4 +159,8 @@ if !isfile(csv_file_path)
     CSV.write(csv_file_path, df, append=false) # Create new file with header
 else
     CSV.write(csv_file_path, df, append=true)  # Append to existing file
+end
+
+function csv_has_date(file_path::String, date::Date)::Bool
+    return !isfile(file_path) || any(row -> row.date == date, CSV.File(file_path))
 end

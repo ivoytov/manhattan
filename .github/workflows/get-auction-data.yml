@@ -33,7 +33,7 @@ jobs:
         HTTP_PROXY: ${{ secrets.BRIGHTDATA }}
       run: |
         julia --project=. scrape_auctions.jl
-        julia --project=. scrape_brooklyn_auctions.jl
+        # julia --project=. scrape_brooklyn_auctions.jl
 
         # Check if new files are created
         if [[ `git status --porcelain` ]]; then
