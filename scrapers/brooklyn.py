@@ -114,7 +114,12 @@ def main():
         # Find all the PDF links on the page and collect their href attributes and link text
         links = driver.find_elements(By.TAG_NAME, 'a')
         pdf_links = [(link.text, link.get_attribute('href')) for link in links if link.get_attribute('href') and link.get_attribute('href').endswith('.pdf')]
-                
+        
+        # Get cookies and headers to use with requests
+        cookies = {cookie['name']: cookie['value'] for cookie in driver.get_cookies()}
+        headers = {
+            "User-Agent": driver.execute_script("return navigator.userAgent;")
+        }
         for link_text, pdf_url in pdf_links:
             # Check if the auction date already exists in the CSV
             if (auction_date, link_text) in existing_auctions:
@@ -122,12 +127,6 @@ def main():
                 continue
 
             print(f'Processing PDF: {pdf_url} (Link text: {link_text})')
-            
-            # Get cookies and headers to use with requests
-            cookies = {cookie['name']: cookie['value'] for cookie in driver.get_cookies()}
-            headers = {
-                "User-Agent": driver.execute_script("return navigator.userAgent;")
-            }
             
             # Download the PDF using requests
             pdf_path = download_pdf_with_requests(pdf_url, cookies, headers, download_dir)
