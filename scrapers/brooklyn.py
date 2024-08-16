@@ -86,7 +86,7 @@ def main():
         reader = csv.DictReader(f)
         for row in reader:
             if row['borough'] == 'Brooklyn':
-                existing_auctions.append(row['date'])
+                existing_auctions.append((row['date'], row['case_number']))
     
     print('Connecting to Scraping Browser...')
     sbr_connection = ChromiumRemoteConnection(SBR_WEBDRIVER, 'goog', 'chrome')
@@ -111,18 +111,16 @@ def main():
         auction_date_str = auction_date_match.group(0)
         auction_date = datetime.strptime(auction_date_str, '%m/%d/%Y').strftime('%Y-%m-%d')
         
-        # Check if the auction date already exists in the CSV
-        if auction_date in existing_auctions:
-            print(f'Auction date {auction_date} already exists. Skipping.')
-            return
-        
         # Find all the PDF links on the page and collect their href attributes and link text
         links = driver.find_elements(By.TAG_NAME, 'a')
         pdf_links = [(link.text, link.get_attribute('href')) for link in links if link.get_attribute('href') and link.get_attribute('href').endswith('.pdf')]
-        
-        extracted_texts = []
-        
+                
         for link_text, pdf_url in pdf_links:
+            # Check if the auction date already exists in the CSV
+            if (auction_date, link_text) in existing_auctions:
+                print(f'Auction {auction_date}, {link_text} already exists. Skipping.')
+                continue
+
             print(f'Processing PDF: {pdf_url} (Link text: {link_text})')
             
             # Get cookies and headers to use with requests
