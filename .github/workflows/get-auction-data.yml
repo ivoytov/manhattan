@@ -2,7 +2,7 @@ name: Daily Auction Update
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Run every Monday at 3 AM
+    - cron: '0 3 * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,26 +15,38 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 2
-    
-    - name: Set up Julia
-      uses: julia-actions/setup-julia@v1
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        version: '1.9'
-        
-    - name: Install dependencies
+        python-version: '3.12'  # Specify the Python version you need
+
+    - name: Install python dependencies
       run: |
-        julia --project=. -e 'using Pkg; Pkg.instantiate()'
-        
         sudo apt-get install tesseract-ocr
         sudo apt-get install libtesseract-dev
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
         
     - name: Download new data and update CSVs
       env:
-        HTTP_PROXY: ${{ secrets.BRIGHTDATA }}
+        BRIGHTDATA_PROXY: ${{ secrets.BRIGHTDATA_PROXY }}
+        BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
-        julia --project=. scrape_auctions.jl
-        # julia --project=. scrape_brooklyn_auctions.jl
+        python scrapers/brooklyn.py
+        python scrapers/manhattan.py
 
+    - name: Set up Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+          version: '1.9'
+          
+    - name: Install julia dependencies
+      run: |
+          julia --project=. -e 'using Pkg; Pkg.instantiate()'
+          
+    - name: Process auctions
+      run: |
         # Check if new files are created
         if [[ `git status --porcelain` ]]; then
           git status

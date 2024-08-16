@@ -46,21 +46,14 @@ function get_auction_date()
     return nothing
 end
 
-if !haskey(ENV, "HTTPS_PROXY")
-    println("Brightdata proxy env variable HTTPS_PROXY not set")
-    exit()
-end
+
 
 host = "https://www.nycourts.gov" 
 url = "$host/legacyPDFs/courts/2jd/kings/civil/foreclosures/foreclosure%20scans/"
 
-headers = [
-    "Accept"=> "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language"=> "en-US,en;q=0.9",
-    "User-Agent"=> "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15"
-]
-    
 
+    
+   
 response = HTTP.get(url, headers=headers)
 
 html_content = String(response.body)
