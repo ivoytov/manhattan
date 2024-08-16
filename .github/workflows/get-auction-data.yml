@@ -33,8 +33,8 @@ jobs:
         BRIGHTDATA_PROXY: ${{ secrets.BRIGHTDATA_PROXY }}
         BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
-        python scrapers/brooklyn.py
-        python scrapers/manhattan.py
+        python -u scrapers/brooklyn.py
+        python -u scrapers/manhattan.py
 
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
