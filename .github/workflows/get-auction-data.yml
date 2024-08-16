@@ -1,8 +1,6 @@
 name: Daily Auction Update
 
 on:
-  schedule:
-    - cron: '0 3 * * *'
   workflow_dispatch:
 
 jobs:
