@@ -2,6 +2,8 @@ import os
 import re
 import tempfile
 import pytesseract
+import subprocess
+from pathlib import Path
 import csv
 from selenium.webdriver import Remote, ChromeOptions
 from selenium.webdriver.chromium.remote_connection import ChromiumRemoteConnection
@@ -29,7 +31,7 @@ SBR_WEBDRIVER = f'https://{AUTH}@brd.superproxy.io:9515'
 def extract_text_from_pdf(pdf_path):
     # Convert the PDF to a PNG image using pdf2image
     images = convert_from_path(pdf_path, fmt='png')
-    image_path = pdf_path.replace(".pdf", ".png")
+    image_path = str(pdf_path).replace(".pdf", ".png")
     
     # Save the first page as PNG (assuming single-page PDF)
     images[0].save(image_path, 'PNG')
@@ -40,20 +42,6 @@ def extract_text_from_pdf(pdf_path):
     print(f"{text}")
 
     return text
-
-def download_pdf_with_requests(pdf_url, cookies, headers, download_dir):
-    """
-    Download a PDF using the requests library, mimicking the Selenium session.
-    """
-    response = requests.get(pdf_url, cookies=cookies, headers=headers, proxies=proxies)
-    if response.status_code == 200:
-        pdf_path = os.path.join(download_dir, os.path.basename(pdf_url))
-        with open(pdf_path, 'wb') as f:
-            f.write(response.content)
-        return pdf_path
-    else:
-        print(f'Failed to download PDF: {response.status_code}')
-        return None
 
 def extract_block_lot(text):
     primary_pattern = r"(?i)Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)Lots?\s*[: ]\s*(\d+)"
@@ -115,11 +103,7 @@ def main():
         links = driver.find_elements(By.TAG_NAME, 'a')
         pdf_links = [(link.text, link.get_attribute('href')) for link in links if link.get_attribute('href') and link.get_attribute('href').endswith('.pdf')]
         
-        # Get cookies and headers to use with requests
-        cookies = {cookie['name']: cookie['value'] for cookie in driver.get_cookies()}
-        headers = {
-            "User-Agent": driver.execute_script("return navigator.userAgent;")
-        }
+        
         for link_text, pdf_url in pdf_links:
             # Check if the auction date already exists in the CSV
             if (auction_date, link_text) in existing_auctions:
@@ -129,9 +113,10 @@ def main():
             print(f'Processing PDF: {pdf_url} (Link text: {link_text})')
             
             # Download the PDF using requests
-            pdf_path = download_pdf_with_requests(pdf_url, cookies, headers, download_dir)
+            subprocess.run(['node', 'scrapers/download_pdf.js', pdf_url])
             
-            if pdf_path:
+            pdf_path = Path(link_text)
+            if pdf_path.exists():
                 print(f'Extracting text from: {pdf_path}')
                 extracted_text = extract_text_from_pdf(pdf_path)
                 

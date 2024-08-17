@@ -17,7 +17,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12'  # Specify the Python version you need
+        python-version: '3.12'  
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'  
 
     - name: Install python dependencies
       run: |
@@ -25,10 +30,13 @@ jobs:
         sudo apt-get install libtesseract-dev
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Install node and dependencies
+      run: |
+        npm install puppeteer-core
         
     - name: Download new data and update CSVs
       env:
-        BRIGHTDATA_PROXY: ${{ secrets.BRIGHTDATA_PROXY }}
         BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
         python -u scrapers/brooklyn.py
