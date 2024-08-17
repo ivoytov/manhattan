@@ -29,7 +29,8 @@ function main()
     merged_df = innerjoin(sales, auctions, on = [:BOROUGH => :borough, :BLOCK => :block, :LOT => :lot])
     # Select only columns from sales DataFrame
     merged_df = select(merged_df, names(sales))
-    
+
+    filter!(row -> row."BUILDING CLASS CATEGORY" != "45  CONDO HOTELS", merged_df)
     CSV.write("transactions/auction_sales.csv", merged_df)
 end
 
