@@ -8,24 +8,14 @@ import csv
 from selenium.webdriver import Remote, ChromeOptions
 from selenium.webdriver.chromium.remote_connection import ChromiumRemoteConnection
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from pdf2image import convert_from_path
-import requests
 from datetime import datetime
 
 # Get the AUTH variable from the environment variable BRIGHTDATA_AUTH
 AUTH = os.getenv('BRIGHTDATA_AUTH')
-PROXY = os.getenv('BRIGHTDATA_PROXY')
 if not AUTH:
     raise ValueError("BRIGHTDATA_AUTH environment variable is not set.")
-if not PROXY:
-    raise ValueError("BRIGHTDATA_PROXY environment variable is not set.")
 
-proxies = {
-    'http': PROXY,
-    'https': PROXY
-}
 SBR_WEBDRIVER = f'https://{AUTH}@brd.superproxy.io:9515'
 
 def extract_text_from_pdf(pdf_path):
