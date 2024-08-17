@@ -56,7 +56,7 @@ def download_pdf_with_requests(pdf_url, cookies, headers, download_dir):
         return None
 
 def extract_block_lot(text):
-    primary_pattern = r"(?i)Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)Lot\s*[: ]\s*(\d+)"
+    primary_pattern = r"(?i)Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)Lots?\s*[: ]\s*(\d+)"
     secondary_pattern = r"(\d{3,4})-(\d{1,2})"
     
     match_primary = re.search(primary_pattern, text)
