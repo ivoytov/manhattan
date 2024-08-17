@@ -26,19 +26,19 @@ jobs:
 
     - name: Install python dependencies
       run: |
-        sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils
+        sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils -y
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     - name: Install node and dependencies
       run: |
-        npm install puppeteer-core
+        npm install
         
     - name: Download new data and update CSVs
       env:
         BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
-        python -u scrapers/brooklyn.py
+        node scrapers/brooklyn.js
         python -u scrapers/manhattan.py
 
     - name: Set up Julia

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "csv-stringify": "^6.5.1",
+    "jsdom": "^24.1.1",
+    "pdf2pic": "^3.1.1",
+    "puppeteer": "^23.1.0",
+    "tesseract.js": "^5.1.0"
+  }
+}
