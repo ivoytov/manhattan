@@ -64,9 +64,10 @@ df = pd.DataFrame(data)
 csv_file_path = "transactions/foreclosure_auctions.csv"
 
 def csv_has_date(file_path, date):
+    date = pd.Timestamp(date)
     if not os.path.isfile(file_path):
         return False
-    df_existing = pd.read_csv(file_path)
+    df_existing = pd.read_csv(file_path, parse_dates=['date'])
     return any((df_existing['date'] == date) & (df_existing['borough'] == "Manhattan"))
 
 # Check if the CSV file has the date
