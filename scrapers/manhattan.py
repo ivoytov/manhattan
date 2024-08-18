@@ -1,3 +1,4 @@
+import subprocess
 import requests
 from io import BytesIO
 from PyPDF2 import PdfReader
@@ -12,8 +13,10 @@ headers = {
 }
 
 # Download the PDF file
-response = requests.get("https://www.nycourts.gov/legacypdfs/courts/1jd/supctmanh/foreclosures/auctions.pdf", headers=headers)
-doc = PdfReader(BytesIO(response.content))
+pdf_url = "https://www.nycourts.gov/legacypdfs/courts/1jd/supctmanh/foreclosures/auctions.pdf"
+subprocess.run(['node', 'scrapers/download_pdf.js', pdf_url])
+
+doc = PdfReader("auctions.pdf")
 
 # Extract text from all pages
 all_text = ""
@@ -64,7 +67,7 @@ def csv_has_date(file_path, date):
     if not os.path.isfile(file_path):
         return False
     df_existing = pd.read_csv(file_path)
-    return any((df_existing['date'] == date) & (df_existing['borough'] == "Brooklyn"))
+    return any((df_existing['date'] == date) & (df_existing['borough'] == "Manhattan"))
 
 # Check if the CSV file has the date
 if csv_has_date(csv_file_path, auction_date):
