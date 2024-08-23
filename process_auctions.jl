@@ -1,9 +1,12 @@
-using DataFrames, Dates, CSV, GLM, Statistics
+using DataFrames, Dates, CSV, GLM, Statistics, GeoJSON, JSON3
+
 
 # Function to read CSV file into DataFrame
 function read_csv(file)
     CSV.read(file, DataFrame)
 end
+
+borough_dict = Dict(1 => "Manhattan", 2 => "Bronx", 3 => "Brooklyn", 4 => "Queens", 5 => "Staten Island")
 
 # Initialize and preprocess datasets
 function initialize_data()
@@ -13,7 +16,6 @@ function initialize_data()
     rolling_sales = filter(["SALE DATE"] => >(Date(2022, 12, 31)), rolling_sales)
 
     df = vcat(base_df, vcat(archives...), rolling_sales, cols=:intersect)
-    borough_dict = Dict(1 => "Manhattan", 2 => "Bronx", 3 => "Brooklyn", 4 => "Queens", 5 => "Staten Island")
     df.BOROUGH = [borough_dict[id] for id in df.BOROUGH]
     df
 end
@@ -28,10 +30,20 @@ function main()
     dropmissing!(auctions, [:block, :lot])    
     merged_df = innerjoin(sales, auctions, on = [:BOROUGH => :borough, :BLOCK => :block, :LOT => :lot])
     # Select only columns from sales DataFrame
-    merged_df = select(merged_df, names(sales))
+    select!(merged_df, names(sales))
 
     filter!(row -> row."BUILDING CLASS CATEGORY" != "45  CONDO HOTELS", merged_df)
     CSV.write("transactions/auction_sales.csv", merged_df)
+
+    fc = GeoJSON.read("lotblock.geojson")
+    lb = DataFrame(fc)
+    dropmissing!(lb, [:BORO, :BLOCK])
+    lb.BORO = [borough_dict[parse(Int, id)] for id in lb.BORO]
+    merged_json = innerjoin(lb, auctions, on = [:BORO => :borough, :BLOCK => :block])
+    select!(merged_json, [:OBJECTID, :BORO, :BLOCK, :geometry])
+    features = [feature for feature in fc if feature.OBJECTID in merged_json.OBJECTID]
+    GeoJSON.write("transactions/auctions.geojson",GeoJSON.FeatureCollection(features=features))
+
 end
 
 main()

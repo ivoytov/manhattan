@@ -272,3 +272,65 @@ function getTransactions(data) {
     return repeats;
 }
 
+let map = L.map('map').setView([40.7143, -74.0060], 13);
+
+// Style URL format in XYZ PNG format; see our documentation for more options
+L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
+}).addTo(map);
+
+// Function to calculate the centroid of a GeoJSON geometry
+function getCentroid(geometry) {
+    let latlng = [];
+    
+    switch (geometry.type) {
+        case 'Polygon':
+            latlng = L.polygon(geometry.coordinates).getBounds().getCenter();
+            break;
+        case 'MultiPolygon':
+            latlng = L.polygon(geometry.coordinates[0]).getBounds().getCenter();
+            break;
+        case 'Point':
+            latlng = L.latLng(geometry.coordinates[1], geometry.coordinates[0]);
+            break;
+        default:
+            console.error('Unsupported geometry type:', geometry.type);
+            break;
+    }
+    return latlng;
+}
+
+const borough_dict = {
+        "1": "Manhattan",
+        "2": "Bronx",
+        "3": "Brooklyn",
+        "4": "Queens",
+        "5": "Staten Island",
+}
+
+// Load the GeoJSON file
+fetch('transactions/auctions.geojson')
+    .then(response => response.json())
+    .then(geojsonFeature => {
+        L.geoJSON(geojsonFeature, {
+            onEachFeature: function (feature, layer) {
+                
+                layer.on('click', function () {
+                    let block = feature.properties.BLOCK;
+                    let borough = borough_dict[feature.properties.BORO];
+
+                    // Highlight the row in AG Grid
+                    gridApi.forEachNode(function (node) {
+                        if (node.data.block === block && node.data.borough === borough) {
+                            node.setSelected(true, true); // Select the row
+
+                            // Ensure the selected row is visible by scrolling to it
+                            gridApi.ensureIndexVisible(node.rowIndex, 'middle');
+                        }
+                    });
+                });
+            }
+        }).addTo(map);
+    })
+    .catch(error => console.error('Error loading GeoJSON:', error));

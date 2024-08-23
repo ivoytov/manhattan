@@ -14,5 +14,10 @@ body {
 /* Set the AG Grid container to fill the entire viewport */
 #myGrid {
     width: 100%;
-    height: calc(100% - 400px);
+    height: calc(100% - 600px);
+}
+
+#map {
+    height: 180px;
+    width: 100%;
 }
