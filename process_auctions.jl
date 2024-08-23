@@ -32,7 +32,7 @@ function main()
     # Select only columns from sales DataFrame
     select!(merged_df, names(sales))
 
-    filter!(row -> row."BUILDING CLASS CATEGORY" != "45  CONDO HOTELS", merged_df)
+    filter!(row -> !startswith(row."BUILDING CLASS CATEGORY", "45"), merged_df)
     CSV.write("transactions/auction_sales.csv", merged_df)
 
     fc = GeoJSON.read("lotblock.geojson")
