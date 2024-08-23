@@ -9,7 +9,7 @@ function loadCSV(url) {
             complete: results => {
                 // Convert "SALE DATE" property to JavaScript Date objects
                 results.data = results.data.map(obj => {
-                    const dateKey = "SALE DATE" in obj ? "SALE DATE" : "period"
+                    const dateKey = "date"
 
                     // Use destructuring to get other properties if needed
                     const { [dateKey]: saleDate, ...rest } = obj;
@@ -233,6 +233,25 @@ const gridOptions = {
             params.successCallback(repeats);
         },
     },
+    // Listen for AG Grid filter changes
+    onFilterChanged: function () {
+        // Get all displayed rows
+        let visibleRows = [];
+        gridApi.forEachNodeAfterFilterAndSort(function (node) {
+            visibleRows.push(node.data);
+        });
+
+        // Show or hide markers based on visible rows
+        for (let key in markers) {
+            markers[key].forEach(l => l.removeFrom(map)); // Remove all markers from map initially
+        }
+        visibleRows.forEach(function (row) {
+            let key = `${row.block}-${row.borough}`;
+            if (markers[key]) {
+                markers[key].forEach(l => l.addTo(map)); // Add only visible row markers to map
+            }
+        });
+    }
 };
 
 // Create AG Grid
@@ -309,17 +328,26 @@ const borough_dict = {
         "5": "Staten Island",
 }
 
+let markers = {};
+
 // Load the GeoJSON file
 fetch('transactions/auctions.geojson')
     .then(response => response.json())
     .then(geojsonFeature => {
         L.geoJSON(geojsonFeature, {
             onEachFeature: function (feature, layer) {
-                
-                layer.on('click', function () {
-                    let block = feature.properties.BLOCK;
-                    let borough = borough_dict[feature.properties.BORO];
+                let block = feature.properties.BLOCK;
+                let borough = borough_dict[feature.properties.BORO];
 
+                // Store the marker in the markers object
+                let key = `${block}-${borough}`;
+                if (!markers[key]) {
+                    markers[key] = []
+                }
+                markers[key].push(layer);
+
+                layer.on('click', function () {
+                    
                     // Highlight the row in AG Grid
                     gridApi.forEachNode(function (node) {
                         if (node.data.block === block && node.data.borough === borough) {
@@ -330,7 +358,11 @@ fetch('transactions/auctions.geojson')
                         }
                     });
                 });
+                
             }
+
+            
         }).addTo(map);
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
+
