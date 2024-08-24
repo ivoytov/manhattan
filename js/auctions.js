@@ -173,7 +173,7 @@ const gridOptions = {
                     headerName: "Category", field: "BUILDING CLASS CATEGORY",
                   },
                   {
-                    headerName: "Apt #", field: "APARTMENT NUMBER"
+                    headerName: "Apt #", field: "APARTMENT NUMBER",
                   },
                   {
                     headerName: "Total Units", field: "TOTAL UNITS",
@@ -191,18 +191,6 @@ const gridOptions = {
                     headerName: 'Sale Price',
                     field: "SALE PRICE",
                     valueFormatter: (params) => formattedCurrency.format(params.value),
-                },
-                {
-                    headerName: 'Change, $',
-                    field: "priceChange",
-                    filter: 'agNumberColumnFilter',
-                    valueFormatter: (params) => params.value != null ? formattedCurrency.format(params.value) : "N/A",
-                },
-                {
-                    headerName: 'Change, %',
-                    field: "priceChangePct",
-                    filter: 'agNumberColumnFilter',
-                    valueFormatter: (params) => params.value != null ? formattedPercent.format(params.value) : "N/A",
                 },
 
             ],
