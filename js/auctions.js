@@ -259,6 +259,8 @@ Promise.all(csvPromises).then(([_, auctions]) => {
             const transactions = getTransactions(auction)
             if (transactions.length > 0) {
                 auction.address =  transactions[transactions.length - 1]["ADDRESS"]
+            } else {
+                auction.address = auction.case_name
             }
 
         }
