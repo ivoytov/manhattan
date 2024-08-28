@@ -1,6 +1,4 @@
 import subprocess
-import requests
-from io import BytesIO
 from PyPDF2 import PdfReader
 import re
 from datetime import datetime

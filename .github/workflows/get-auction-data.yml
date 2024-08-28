@@ -42,6 +42,7 @@ jobs:
       run: |
         node scrapers/brooklyn.js
         python -u scrapers/manhattan.py
+        python -u scrapers/bronx.py
 
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
