@@ -2,7 +2,6 @@ import subprocess
 from PyPDF2 import PdfReader
 import re
 from datetime import datetime
-import os
 import pandas as pd
 
 # Download the PDF file
@@ -14,8 +13,6 @@ doc = PdfReader("foreclosure-auctions.pdf")
 all_text = ""
 for page in doc.pages:
     all_text += page.extract_text() + "\n"
-
-import re
 
 def extract_auctions(text):
     # Step 1: Separate the file into chunks by "Calendar Date: MM/DD/YYYY"
