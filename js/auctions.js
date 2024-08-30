@@ -295,17 +295,13 @@ const toner = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{
     attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
 });
 
-const sat = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}.jpg', {
-    maxZoom: 16,
-    attribution: '&copy; CNES, Distribution Airbus DS, &copy; Airbus DS, &copy; PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>', 
-});
 
 const map = L.map('map', {
     center: [40.7143, -74.0060],
     zoom: 13,
     layers: [toner]
 })
-const layerControl = L.control.layers({"Streets": toner, "Satellite": sat}).addTo(map);
+const layerControl = L.control.layers({"Streets": toner}).addTo(map);
 
 
 // Function to calculate the centroid of a GeoJSON geometry
