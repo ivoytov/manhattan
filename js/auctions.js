@@ -289,13 +289,24 @@ function getTransactions(data) {
     return repeats;
 }
 
-let map = L.map('map').setView([40.7143, -74.0060], 13);
-
 // Style URL format in XYZ PNG format; see our documentation for more options
-L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
+const toner = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
     maxZoom: 20,
     attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
-}).addTo(map);
+});
+
+const sat = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}.jpg', {
+    maxZoom: 16,
+    attribution: '&copy; CNES, Distribution Airbus DS, &copy; Airbus DS, &copy; PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>', 
+});
+
+const map = L.map('map', {
+    center: [40.7143, -74.0060],
+    zoom: 13,
+    layers: [toner]
+})
+const layerControl = L.control.layers({"Streets": toner, "Satellite": sat}).addTo(map);
+
 
 // Function to calculate the centroid of a GeoJSON geometry
 function getCentroid(geometry) {
@@ -332,7 +343,7 @@ let markers = {};
 fetch('transactions/auctions.geojson')
     .then(response => response.json())
     .then(geojsonFeature => {
-        L.geoJSON(geojsonFeature, {
+        lots = L.geoJSON(geojsonFeature, {
             onEachFeature: function (feature, layer) {
                 let block = feature.properties.BLOCK;
                 let borough = borough_dict[feature.properties.BORO];
@@ -360,7 +371,8 @@ fetch('transactions/auctions.geojson')
             }
 
             
-        }).addTo(map);
+        }).addTo(map)
+        layerControl.addOverlay(lots, "Auction Locations")
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
 
