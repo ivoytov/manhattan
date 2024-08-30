@@ -59,6 +59,8 @@ async function main() {
     const existingAuctionsFile = 'transactions/foreclosure_auctions.csv';
     let existingAuctionsData = await readFile(existingAuctionsFile, 'utf8');
     const stringifier = stringify({ header: false });
+    const writeableStream = createWriteStream(existingAuctionsFile, { flags: 'a' });
+    stringifier.pipe(writeableStream);
 
     let existingAuctions = [];
     parse(existingAuctionsData, {
@@ -68,6 +70,7 @@ async function main() {
         if (err) throw err;
         existingAuctions = records.filter(row => row.borough === 'Brooklyn').map(row => [row.date, row.case_number]);
     });
+
     console.log('Connecting to Scraping Browser...');
 
     const browser = await connect({
@@ -123,17 +126,14 @@ async function main() {
                 console.log(`Added new auction data for ${linkText}`);
                 await unlink(downloadedFileName);
 
-
             } catch (error) {
                 console.error(`Error processing ${linkText}: ${error.message}`);
                 // Optionally, you can add a retry mechanism here 
             }
-            const writeableStream = createWriteStream(existingAuctionsFile, { flags: 'a' });
-            stringifier.pipe(writeableStream);
-
         }
     } finally {
         await browser.close();
+        stringifier.end(); // End the stringifier stream properly
     }
 }
 
