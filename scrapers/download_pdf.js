@@ -4,18 +4,18 @@ import { open } from 'fs/promises'
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 
 export async function download_pdf(url) { 
-    console.log(`You passed: ${url}`); 
+    // console.log(`You passed: ${url}`); 
     const browser = await connect({ 
         browserWSEndpoint: SBR_WS_ENDPOINT, 
     }); 
 
     const fileName = url.split('/').pop();  
-    console.log(`Saving as: ${fileName}`); 
+    // console.log(`Saving as: ${fileName}`); 
 
     const file = await open(fileName, 'w'); 
 
     try { 
-        console.log('Connected! Navigating to pdf...'); 
+        // console.log('Connected! Navigating to pdf...'); 
         const page = await browser.newPage(); 
         page.setDefaultNavigationTimeout(3 * 60 * 1000); 
 
@@ -44,7 +44,7 @@ export async function download_pdf(url) {
             }); 
         }); 
 
-        console.log('Saving pdf stream to file...'); 
+        // console.log('Saving pdf stream to file...'); 
         const { stream } = await client.send('Fetch.takeResponseBodyAsStream', { requestId }); 
 
         let totalBytes = 0; 
@@ -53,7 +53,7 @@ export async function download_pdf(url) {
             const chunk = Buffer.from(data, base64Encoded ? 'base64' : 'utf8'); 
             await file.write(chunk); 
             totalBytes += chunk.length; 
-            console.log(`Got chunk: ${chunk.length} bytes, Total: ${totalBytes} bytes, EOF: ${eof}`); 
+            // console.log(`Got chunk: ${chunk.length} bytes, Total: ${totalBytes} bytes, EOF: ${eof}`); 
             if (eof) break; 
         } 
         await client.send('IO.close', { handle: stream }); 

@@ -11,7 +11,22 @@ import { download_pdf } from './download_pdf.js';
 import { connect } from 'puppeteer-core';
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 
+function getNextThursday(dateString) {
+    // Step 1: Parse the date string into a Date object
+    const date = new Date(dateString);
 
+    // Step 2: Calculate the difference in days to the next Thursday
+    // Day of the week as an integer (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const dayOfWeek = date.getUTCDay();
+    
+    // Calculate how many days until next Thursday (4)
+    const daysUntilNextThursday = (4 - dayOfWeek + 7) % 7 || 7;
+
+    // Step 3: Adjust the date
+    date.setUTCDate(date.getUTCDate() + daysUntilNextThursday + 7);
+
+    return date;
+}
 
 async function extractTextFromPdf(pdfPath) {
     const options = {
@@ -29,8 +44,6 @@ async function extractTextFromPdf(pdfPath) {
     const imagePath = response.path;
 
     const { data: { text } } = await recognize(imagePath, 'eng');
-    console.log("-------EXTRACTED PDF --------");
-    console.log(text);
 
     await unlink(imagePath);
 
@@ -38,7 +51,7 @@ async function extractTextFromPdf(pdfPath) {
 }
 
 function extractBlockLot(text) {
-    const primaryPattern = /Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)Lots?\s*[: ]\s*(\d+)/i;
+    const primaryPattern = /Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)(\sand\s)Lots?\s*[: ]\s*(\d+)/i;
     const secondaryPattern = /(\d{3,4})-(\d{1,2})/;
 
     const matchPrimary = text.match(primaryPattern);
@@ -94,7 +107,9 @@ async function main() {
         }
 
         const auctionDateStr = auctionDateMatch[0];
-        const auctionDate = new Date(auctionDateStr).toISOString().split('T')[0];
+        const adjustedDate = getNextThursday(auctionDateStr)
+        const auctionDate = adjustedDate.toISOString().split('T')[0];
+        console.log(`Auction date found: ${auctionDate}`)
 
         const pdfLinks = Array.from(document.querySelectorAll('a'))
             .map(link => [link.textContent, link.href])
@@ -106,7 +121,7 @@ async function main() {
                 continue;
             }
 
-            console.log(`Processing PDF: ${pdfUrl} (Link text: ${linkText})`);
+            // console.log(`Processing PDF: ${pdfUrl} (Link text: ${linkText})`);
             try {
                 const downloadedFileName = await download_pdf(`https://www.nycourts.gov${pdfUrl}`);
                 console.log(`Extracting text from: ${downloadedFileName}`);
@@ -116,8 +131,8 @@ async function main() {
                 const [block, lot] = extractBlockLot(extractedText);
                 if (!block || !lot) {
                     console.log(`Block and lot not found in ${pdfUrl}.`);
-                    await unlink(downloadedFileName);
-                    continue;
+                    console.log("-------EXTRACTED PDF --------");
+                    console.log(extractedText);
                 }
 
                 const address = convertToAddress(linkText);
