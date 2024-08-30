@@ -68,20 +68,27 @@ function loadTransactionDataCSV(url) {
     });
 }
 
+function updateURLWithFilters(filters) {
+    const params = new URLSearchParams(window.location.search);
 
-// Filter model
-const defaultFilter = {
-    "BUILDING CLASS CATEGORY": {
-        filterType: 'text',
-        type: 'condo',
-    },
-    "SALE PRICE": {
-        filterType: 'number',
-        type: 'greaterThan',
-        filter: 100000
-    }
+    Object.keys(filters).forEach(column => {
+        params.set(column, JSON.stringify(filters[column]));
+    });
+
+    // Update the URL in the address bar
+    window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
 }
 
+function applyFiltersFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const filters = {};
+
+    params.forEach((value, key) => {
+        filters[key] = JSON.parse(value);
+    });
+
+    gridApi.setFilterModel(filters);
+}
 
 // date,case_number,case_name,block,lot
 
@@ -128,10 +135,6 @@ const formattedCurrency = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 0,
 });
 
-const coopsFilter = (row) =>
-    row['BUILDING CLASS CATEGORY'].startsWith('09')
-    || row['BUILDING CLASS CATEGORY'].startsWith('10')
-    || row['BUILDING CLASS CATEGORY'].startsWith('17')
 
 const formattedPercent = new Intl.NumberFormat('en-US', {
     style: 'percent',
@@ -223,6 +226,9 @@ const gridOptions = {
     },
     // Listen for AG Grid filter changes
     onFilterChanged: function () {
+        const allFilters = gridApi.getFilterModel()
+        updateURLWithFilters(allFilters);
+
         // Get all displayed rows
         let visibleRows = [];
         gridApi.forEachNodeAfterFilterAndSort(function (node) {
@@ -245,6 +251,8 @@ const gridOptions = {
 // Create AG Grid
 const gridDiv = document.querySelector('#myGrid');
 const gridApi = agGrid.createGrid(gridDiv, gridOptions)
+// Load and apply filters from URL when the grid initializes
+applyFiltersFromURL(gridApi);
 
 const csvPromises = [
     loadTransactionDataCSV('transactions/auction_sales.csv'),
@@ -270,9 +278,9 @@ Promise.all(csvPromises).then(([_, auctions]) => {
         gridApi.setGridOption('rowData', auctions)
         gridApi.sizeColumnsToFit()
     })
-    // .catch(error => {
-    //     console.error('Error loading CSV files:', error);
-    // });
+    .catch(error => {
+        console.error('Error loading CSV files:', error);
+    });
 
 
 function getTransactions(data) {
