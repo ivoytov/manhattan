@@ -1,5 +1,5 @@
 // Function to load CSV file using PapaParse
-function loadCSV(url) {
+function loadCSV(url, dateKey = "date") {
     return new Promise((resolve, reject) => {
         Papa.parse(url, {
             download: true,
@@ -9,7 +9,6 @@ function loadCSV(url) {
             complete: results => {
                 // Convert "SALE DATE" property to JavaScript Date objects
                 results.data = results.data.map(obj => {
-                    const dateKey = "date"
 
                     // Use destructuring to get other properties if needed
                     const { [dateKey]: saleDate, ...rest } = obj;
@@ -33,43 +32,9 @@ function loadCSV(url) {
 }
 let combinedData = []
 
-// Function to load CSV file using PapaParse
-function loadTransactionDataCSV(url) {
-    return new Promise((resolve, reject) => {
-        Papa.parse(url, {
-            header: true,
-            download: true,
-            skipEmptyLines: true,
-            dynamicTyping: true,
-            worker: false,
-            step: row => {
-                const dateKey = "SALE DATE"
-
-                // Use destructuring to get other properties if needed
-                const { [dateKey]: saleDate, ...rest } = row.data;
-
-                // Convert string to Date, set to midnight (otherwise date filter doesn't work)
-                const saleDateObj = new Date(saleDate);
-                saleDateObj.setHours(24, 0, 0, 0)
-
-                // Add other properties back if needed
-                const cleanRow = { [dateKey]: saleDateObj, ...rest };
-                
-                combinedData.push(cleanRow)
-            },
-            complete: () => {
-                console.log("All done")
-                resolve(true)
-            },
-            error: error => {
-                reject(error.message);
-            }
-        });
-    });
-}
 
 function updateURLWithFilters(filters) {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams();
 
     Object.keys(filters).forEach(column => {
         params.set(column, JSON.stringify(filters[column]));
@@ -101,7 +66,7 @@ const columnDefs = [
     {
         headerName: "Address",
         field: "address",
-        cellRenderer: 'agGroupCellRenderer' 
+        cellRenderer: 'agGroupCellRenderer'
     },
     {
         headerName: "Case #",
@@ -116,7 +81,7 @@ const columnDefs = [
         sort: "desc",
         sortIndex: 0
     },
- 
+
     {
         headerName: "Block", field: "block",
         filter: 'agNumberColumnFilter',
@@ -125,7 +90,7 @@ const columnDefs = [
         headerName: "Lot", field: "lot",
         filter: 'agNumberColumnFilter',
     },
-    
+
 ]
 
 const formattedCurrency = new Intl.NumberFormat('en-US', {
@@ -165,23 +130,23 @@ const gridOptions = {
         detailGridOptions: {
             columnDefs: [
                 {
-                    headerName: "Address", field: "ADDRESS", 
+                    headerName: "Address", field: "ADDRESS",
                     minWidth: 200,
-                  },
-                  {
+                },
+                {
                     headerName: "Neighborhood", field: "NEIGHBORHOOD",
                     filter: 'agSetColumnFilter'
-                  },
-                  {
+                },
+                {
                     headerName: "Category", field: "BUILDING CLASS CATEGORY",
-                  },
-                  {
+                },
+                {
                     headerName: "Apt #", field: "APARTMENT NUMBER",
-                  },
-                  {
+                },
+                {
                     headerName: "Total Units", field: "TOTAL UNITS",
                     filter: 'agNumberColumnFilter',
-                  },
+                },
                 {
                     field: 'SALE DATE',
                     headerName: 'Sale Date',
@@ -255,32 +220,32 @@ const gridApi = agGrid.createGrid(gridDiv, gridOptions)
 applyFiltersFromURL(gridApi);
 
 const csvPromises = [
-    loadTransactionDataCSV('transactions/auction_sales.csv'),
-    loadCSV('transactions/foreclosure_auctions.csv')
+    loadCSV('transactions/auction_sales.csv', 'SALE DATE'),
+    loadCSV('transactions/foreclosure_auctions.csv', 'date')
 ]
 
 // Use Promise.all to wait for all promises to resolve
-Promise.all(csvPromises).then(([_, auctions]) => {
-
-        // get the address from transaction records
-        for (const auction of auctions) {
-            const transactions = getTransactions(auction)
-            if (transactions.length > 0) {
-                auction.address =  transactions[transactions.length - 1]["ADDRESS"]
-            } else {
-                auction.address = auction.case_name
-            }
-
+Promise.all(csvPromises).then(([sales, auctions]) => {
+    combinedData = sales
+    // get the address from transaction records
+    for (const auction of auctions) {
+        const transactions = getTransactions(auction)
+        if (transactions.length > 0) {
+            auction.address = transactions[transactions.length - 1]["ADDRESS"]
+        } else {
+            auction.address = auction.case_name
         }
-        
 
-        // load the full table
-        gridApi.setGridOption('rowData', auctions)
-        gridApi.sizeColumnsToFit()
-    })
-    .catch(error => {
-        console.error('Error loading CSV files:', error);
-    });
+    }
+
+
+    // load the full table
+    gridApi.setGridOption('rowData', auctions)
+    gridApi.sizeColumnsToFit()
+})
+.catch(error => {
+    console.error('Error loading CSV files:', error);
+});
 
 
 function getTransactions(data) {
@@ -301,13 +266,13 @@ const map = L.map('map', {
     zoom: 13,
     layers: [toner]
 })
-const layerControl = L.control.layers({"Streets": toner}).addTo(map);
+const layerControl = L.control.layers({ "Streets": toner }).addTo(map);
 
 
 // Function to calculate the centroid of a GeoJSON geometry
 function getCentroid(geometry) {
     let latlng = [];
-    
+
     switch (geometry.type) {
         case 'Polygon':
             latlng = L.polygon(geometry.coordinates).getBounds().getCenter();
@@ -326,11 +291,11 @@ function getCentroid(geometry) {
 }
 
 const borough_dict = {
-        "1": "Manhattan",
-        "2": "Bronx",
-        "3": "Brooklyn",
-        "4": "Queens",
-        "5": "Staten Island",
+    "1": "Manhattan",
+    "2": "Bronx",
+    "3": "Brooklyn",
+    "4": "Queens",
+    "5": "Staten Island",
 }
 
 let markers = {};
@@ -352,7 +317,7 @@ fetch('transactions/auctions.geojson')
                 markers[key].push(layer);
 
                 layer.on('click', function () {
-                    
+
                     // Highlight the row in AG Grid
                     gridApi.forEachNode(function (node) {
                         if (node.data.block === block && node.data.borough === borough) {
@@ -363,10 +328,10 @@ fetch('transactions/auctions.geojson')
                         }
                     });
                 });
-                
+
             }
 
-            
+
         }).addTo(map)
         layerControl.addOverlay(lots, "Auction Locations")
     })
