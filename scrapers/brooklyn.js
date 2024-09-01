@@ -134,10 +134,10 @@ async function main() {
                     console.log("-------EXTRACTED PDF --------");
                     console.log(extractedText);
                 }
-
+                const lien = null
                 const address = convertToAddress(linkText);
 
-                stringifier.write(['Brooklyn', auctionDate, linkText, address, block, lot])
+                stringifier.write(['Brooklyn', auctionDate, linkText, address, block, lot, lien])
                 console.log(`Added new auction data for ${linkText}`);
                 await unlink(downloadedFileName);
 

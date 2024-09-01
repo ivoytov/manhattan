@@ -43,7 +43,8 @@ for date, chunk in auctions.items():
             "case_number": auction_chunks[i],
             "case_name": auction_chunks[i+1].splitlines()[0],
             "block": None,
-            "lot": None
+            "lot": None,
+            "lien": None
         })
 
 df = pd.DataFrame(cases)

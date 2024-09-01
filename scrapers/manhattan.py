@@ -52,8 +52,9 @@ data = {
     "date": [auction_date] * len(case_numbers),
     "case_number": case_numbers,
     "case_name": case_names,
-    "block": ["" for _ in case_numbers],
-    "lot": ["" for _ in case_numbers],
+    "block": [None for _ in case_numbers],
+    "lot": [None for _ in case_numbers],
+    "lien": [None for _ in case_numbers],
 }
 
 df = pd.DataFrame(data)
