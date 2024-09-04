@@ -3,14 +3,16 @@ import { connect } from 'puppeteer-core';
 import { open } from 'fs/promises'
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 
-export async function download_pdf(url) { 
+export async function download_pdf(url, browser = null, fileName = null) { 
     // console.log(`You passed: ${url}`); 
-    const browser = await connect({ 
-        browserWSEndpoint: SBR_WS_ENDPOINT, 
-    }); 
 
-    const fileName = url.split('/').pop();  
-    // console.log(`Saving as: ${fileName}`); 
+    if (!browser) {
+        browser = await connect({ 
+            browserWSEndpoint: SBR_WS_ENDPOINT, 
+        }); 
+    }
+    
+    fileName = fileName ?? url.split('/').pop();  
 
     const file = await open(fileName, 'w'); 
 
