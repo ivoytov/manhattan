@@ -4,6 +4,7 @@ import { Parser } from '@json2csv/plainjs';
 import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters'
 import { extractTextFromPdf, extractBlockLot, extractJudgement } from './utils.js';
 import { download_notice_of_sale } from './notice_of_sale.js'
+import { SingleBar } from 'cli-progress'
 
 // File paths
 const csvFilePath = 'transactions/foreclosure_auctions.csv';
@@ -19,16 +20,22 @@ async function processCSV() {
             rows.push(row);
         })
         .on('end', async () => {
+            const missing_cases = rows.filter(row => !row.block || !row.lot)
+            console.log("The following cases are missing BBL info:")
+            missing_cases.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
+            const pbar = new SingleBar()
+            pbar.start(missing_cases.length,0)
             // Process rows with missing block and lot
             for (const row of rows) {
                 if (!row.block || !row.lot) {
+                    pbar.increment()
                     const indexNumber = row.case_number;
                     const pdfPath = `saledocs/${indexNumber.replace('/', '-')}.pdf`;
 
                     try {
                         // Check if PDF already exists
                         if (!existsSync(pdfPath)) {
-                            console.log(`Couldn't find ${pdfPath}, downloading...`)
+                            console.log(`\nCouldn't find ${pdfPath}, downloading...`)
                             // Download PDF
                             const res = await download_notice_of_sale(indexNumber, row.borough);
                             if (!res) continue
@@ -54,6 +61,7 @@ async function processCSV() {
 
                 }
             }
+            pbar.stop()
 
             // Configuration options for json2csv
             const opts = {

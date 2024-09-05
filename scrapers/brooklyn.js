@@ -4,7 +4,7 @@ import { stringify } from 'csv-stringify';
 import { readFile, unlink, copyFile } from 'fs/promises';
 import { JSDOM } from 'jsdom';
 import { download_pdf } from './download_pdf';
-import {extractTextFromPdf, extractBlockLot, extractIndexNumber } from './utils'
+import {extractTextFromPdf, extractBlockLot, extractIndexNumber, extractJudgement } from './utils'
 import { connect } from 'puppeteer-core';
 
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
@@ -99,7 +99,7 @@ async function main() {
                     console.log("-------EXTRACTED PDF --------");
                     console.log(extractedText);
                 }
-                const lien = null
+                const lien = extractJudgement(extractedText)
                 const address = convertToAddress(linkText);
 
                 stringifier.write(['Brooklyn', auctionDate, indexNumber, address, block, lot, lien])

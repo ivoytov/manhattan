@@ -4,6 +4,7 @@ from datetime import datetime
 import pandas as pd
 
 # Download the PDF file
+# https://iapps.courts.state.ny.us/webcivil/FCASCalendarDetail?court=2%2FFWYCPhXL%2FrkUkjUhoRyw%3D%3D&court_part=LhoRb9Aia0adt0BAPV6XSg%3D%3D&hInclude=NO&hiddenDateFrom=09/05/2024&hSort=time&hiddenOutputFormat=HTML&search=Part
 doc = PdfReader("webcivil_court_calendar.pdf")
 
 # Extract text from all pages

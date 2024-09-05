@@ -59,7 +59,7 @@ export async function download_notice_of_sale(index_number, county) {
     });
 
     if (!downloadUrl) {
-        console.warn('Did not find link to download!');
+        console.warn('Did not find link to download!', index_number, county);
         await browser.disconnect();
         return null
     }
