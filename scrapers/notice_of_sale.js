@@ -2,8 +2,7 @@ import { connect } from 'puppeteer-core';
 import { download_pdf } from './download_pdf.js';
 
 
-// const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
-const SBR_WS_ENDPOINT = `ws://127.0.0.1:9222/devtools/browser/e474b55b-88c5-4e84-a301-0da1a8e586d8`
+const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 const url = "https://iapps.courts.state.ny.us/nyscef/CaseSearch"
 
 
