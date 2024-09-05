@@ -55,7 +55,9 @@ function applyFiltersFromURL() {
     gridApi.setFilterModel(filters);
 }
 
-// date,case_number,case_name,block,lot
+// splitter functionality
+const splitter = document.getElementById('splitter')
+
 
 // grid columns
 const columnDefs = [
@@ -243,9 +245,9 @@ Promise.all(csvPromises).then(([sales, auctions]) => {
     gridApi.setGridOption('rowData', auctions)
     gridApi.sizeColumnsToFit()
 })
-.catch(error => {
-    console.error('Error loading CSV files:', error);
-});
+    .catch(error => {
+        console.error('Error loading CSV files:', error);
+    });
 
 
 function getTransactions(data) {
@@ -337,3 +339,24 @@ fetch('transactions/auctions.geojson')
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
 
+let isResizing = false
+splitter.addEventListener('mousedown', (e) => {
+    isResizing = true;
+})
+
+const mapDiv = document.getElementById('map')
+document.addEventListener('mousemove', (e) => {
+    if (!isResizing) return;
+    const newMapHeight = e.clientY;
+    const newGridHeight = window.innerHeight - e.clientY - splitter.offsetHeight;
+
+    mapDiv.style.height = newMapHeight + 'px'
+    gridDiv.style.height = newGridHeight + 'px'
+    map.invalidateSize()
+    gridApi.sizeColumnsToFit()
+
+})
+
+document.addEventListener('mouseup', () => {
+    isResizing = false
+})

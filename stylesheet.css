@@ -11,8 +11,14 @@ body {
     height: 400px;
 }
 
+#splitter {
+    height: 10px;
+    background-color: #ccc;
+    cursor: row-resize;
+}
+
 /* Set the AG Grid container to fill the entire viewport */
 #myGrid {
     width: 100%;
-    height: calc(100% - 400px);
+    height: calc(100% - 410px);
 }
