@@ -21,8 +21,15 @@ async function processCSV() {
         })
         .on('end', async () => {
             const missing_cases = rows.filter(row => !row.block || !row.lot)
+            
+            console.log("The following cases are missing PDF files:")
+            const missing_pdfs = missing_cases.filter(({case_number}) => !existsSync(`saledocs/${case_number.replace('/', '-')}.pdf`))
+            missing_pdfs.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
+
+            const missing_bbls = missing_cases.filter(row => !missing_pdfs.includes(row))
             console.log("The following cases are missing BBL info:")
-            missing_cases.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
+            missing_bbls.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
+
             const pbar = new SingleBar()
             pbar.start(missing_cases.length,0)
             // Process rows with missing block and lot
