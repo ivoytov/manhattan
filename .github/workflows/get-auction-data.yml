@@ -43,6 +43,7 @@ jobs:
         node scrapers/brooklyn.js
         python -u scrapers/manhattan.py
         python -u scrapers/bronx.py
+        node scrapers/get_missing_block_lot.js
 
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
