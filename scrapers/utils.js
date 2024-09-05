@@ -5,7 +5,7 @@ import { open, unlink } from 'fs/promises'
 
 
 export function extractBlockLot(text) {
-    const primaryPattern = /Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)(\sand\s)Lots?\s*[: ]\s*(\d+)/i;
+    const primaryPattern = /Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)\sand\sL[ao]+ts?\s*[: ]\s*(\d+)/i;
     const secondaryPattern = /(\d{3,4})-(\d{1,2})/;
 
     const matchPrimary = text.match(primaryPattern);
@@ -15,6 +15,19 @@ export function extractBlockLot(text) {
     if (matchSecondary) return [matchSecondary[1], matchSecondary[2]];
 
     return [null, null];
+}
+
+export function extractJudgement(text) {
+    const regex = /^\$\d{1,3}(,\d{3})*(\.\d{2})?$/
+    const match = text.match(regex);
+    if (!match) return null
+
+    // Extract the numerical amount (without the $ sign and commas)
+    let numericString = match[1].replace(/,/g, ''); // Remove commas
+
+    // Convert the numeric string to a number
+    const numericAmount = parseFloat(numericString);
+    return numericAmount
 }
 
 // See https://iappscontent.courts.state.ny.us/NYSCEF/live/help/IndexNumberFormats.pdf
