@@ -34,7 +34,7 @@ def extract_auctions(text):
         
         for property_chunk in property_chunks[1:]:  # Skip the first chunk before the first "2:15 PM"
             # Step 3: Extract required fields
-            index_number = re.search(r'Index #:\s+(\d{5,6}/\d{4}[A-Z]?)', property_chunk)
+            index_number = re.search(r'Index #:\s+(\d{5,6}/\d{4}E?)', property_chunk)
             remarks = re.search(r'Remarks[\s:;]+(?:Premises[\s:;]+)?(.+)', property_chunk)
             block = re.search(r'\Block[\s:;]*(\d+)\b', property_chunk, re.IGNORECASE)
             lot = re.search(r'\bLot[\s:;]*(\d+)\b', property_chunk, re.IGNORECASE)

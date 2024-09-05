@@ -1,14 +1,12 @@
 import { createWriteStream } from 'fs';
-import { fromPath } from 'pdf2pic';
-import pkg from 'tesseract.js';
-const { recognize } = pkg
 import { parse } from 'csv-parse';
-
 import { stringify } from 'csv-stringify';
-import { readFile, unlink } from 'fs/promises';
+import { readFile, unlink, copyFile } from 'fs/promises';
 import { JSDOM } from 'jsdom';
-import { download_pdf } from './download_pdf.js';
+import { download_pdf } from './download_pdf';
+import {extractTextFromPdf, extractBlockLot, extractIndexNumber } from './utils'
 import { connect } from 'puppeteer-core';
+
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 
 function getNextThursday(dateString) {
@@ -26,41 +24,6 @@ function getNextThursday(dateString) {
     date.setUTCDate(date.getUTCDate() + daysUntilNextThursday + 7);
 
     return date;
-}
-
-async function extractTextFromPdf(pdfPath) {
-    const options = {
-        density: 100,
-        saveFilename: 'temp_image',
-        savePath: './',
-        format: 'png',
-        width: 600,
-        height: 800
-    };
-
-    const convert = fromPath(pdfPath, options);
-
-    const response = await convert(1);
-    const imagePath = response.path;
-
-    const { data: { text } } = await recognize(imagePath, 'eng');
-
-    await unlink(imagePath);
-
-    return text;
-}
-
-function extractBlockLot(text) {
-    const primaryPattern = /Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)(\sand\s)Lots?\s*[: ]\s*(\d+)/i;
-    const secondaryPattern = /(\d{3,4})-(\d{1,2})/;
-
-    const matchPrimary = text.match(primaryPattern);
-    if (matchPrimary) return [matchPrimary[1], matchPrimary[2]];
-
-    const matchSecondary = text.match(secondaryPattern);
-    if (matchSecondary) return [matchSecondary[1], matchSecondary[2]];
-
-    return [null, null];
 }
 
 function convertToAddress(filename) {
@@ -94,7 +57,8 @@ async function main() {
 
     try {
         console.log('Connected! Navigating...');
-        await page.goto('https://www.nycourts.gov/legacyPDFs/courts/2jd/kings/civil/foreclosures/foreclosure%20scans/', { waitUntil: 'networkidle2' });
+        const url = 'https://www.nycourts.gov/legacyPDFs/courts/2jd/kings/civil/foreclosures/foreclosure%20scans/'
+        await page.goto(url, { waitUntil: 'networkidle2' });
         console.log('Navigated! Scraping page content...');
 
         const html = await page.content();
@@ -127,6 +91,7 @@ async function main() {
                 console.log(`Extracting text from: ${downloadedFileName}`);
 
                 const extractedText = await extractTextFromPdf(downloadedFileName);
+                const indexNumber = await extractIndexNumber(extractedText)
 
                 const [block, lot] = extractBlockLot(extractedText);
                 if (!block || !lot) {
@@ -137,8 +102,10 @@ async function main() {
                 const lien = null
                 const address = convertToAddress(linkText);
 
-                stringifier.write(['Brooklyn', auctionDate, linkText, address, block, lot, lien])
+                stringifier.write(['Brooklyn', auctionDate, indexNumber, address, block, lot, lien])
                 console.log(`Added new auction data for ${linkText}`);
+                const newFileName = "saledocs/" + indexNumber.replace('/','-') + '.pdf'
+                await copyFile(downloadedFileName, newFileName)
                 await unlink(downloadedFileName);
 
             } catch (error) {
