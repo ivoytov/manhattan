@@ -198,8 +198,10 @@ const gridOptions = {
 
         // Get all displayed rows
         let visibleRows = [];
-        gridApi.forEachNodeAfterFilterAndSort(function (node) {
-            visibleRows.push(node.data);
+        gridApi.forEachNodeAfterFilterAndSort((node) => {
+            if (node.data.block && node.data.borough) {
+                visibleRows.push(node.data);
+            }
         });
 
         // Show or hide markers based on visible rows
@@ -321,7 +323,7 @@ fetch('transactions/auctions.geojson')
                 layer.on('click', function () {
 
                     // Highlight the row in AG Grid
-                    gridApi.forEachNode(function (node) {
+                    gridApi.forEachNodeAfterFilterAndSort(function (node) {
                         if (node.data.block === block && node.data.borough === borough) {
                             node.setSelected(true, true); // Select the row
 
@@ -340,23 +342,40 @@ fetch('transactions/auctions.geojson')
     .catch(error => console.error('Error loading GeoJSON:', error));
 
 let isResizing = false
-splitter.addEventListener('mousedown', (e) => {
-    isResizing = true;
-})
-
 const mapDiv = document.getElementById('map')
-document.addEventListener('mousemove', (e) => {
-    if (!isResizing) return;
-    const newMapHeight = e.clientY;
-    const newGridHeight = window.innerHeight - e.clientY - splitter.offsetHeight;
 
-    mapDiv.style.height = newMapHeight + 'px'
-    gridDiv.style.height = newGridHeight + 'px'
-    map.invalidateSize()
-    gridApi.sizeColumnsToFit()
+splitter.addEventListener('mousedown', startResize())
+document.addEventListener('mousemove', resize())
+document.addEventListener('mouseup', stopResize())
 
-})
+splitter.addEventListener('touchstart', startResize())
+document.addEventListener('touchmove', resize())
+document.addEventListener('touchend', stopResize())
 
-document.addEventListener('mouseup', () => {
-    isResizing = false
-})
+function stopResize() {
+    return () => {
+        isResizing = false;
+    };
+}
+
+function resize() {
+    return (e) => {
+        if (!isResizing) return;
+        const lastY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+        const newMapHeight = lastY;
+        const newGridHeight = window.innerHeight - lastY - splitter.offsetHeight;
+
+        mapDiv.style.height = newMapHeight + 'px';
+        gridDiv.style.height = newGridHeight + 'px';
+        map.invalidateSize();
+        gridApi.sizeColumnsToFit();
+
+    };
+}
+
+function startResize() {
+    return (e) => {
+        isResizing = true;
+    };
+}
+
