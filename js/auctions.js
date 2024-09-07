@@ -51,8 +51,8 @@ function applyFiltersFromURL() {
         const futureDate = new Date();
         futureDate.setDate(currentDate.getDate() + 7);
         gridApi.setColumnFilterModel('date', {
-            dateFrom: currentDate, 
-            dateTo: futureDate, 
+            dateFrom: currentDate.toISOString(),
+            dateTo: futureDate.toISOString(), 
             filterType: "date", 
             type: "inRange"
         })
