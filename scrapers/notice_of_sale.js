@@ -1,7 +1,6 @@
 import { connect } from 'puppeteer-core';
 import { download_pdf } from './download_pdf.js';
 
-
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 const url = "https://iapps.courts.state.ny.us/nyscef/CaseSearch"
 
@@ -21,9 +20,9 @@ const county_map = {
     "Staten Island": "43",
 }
 
-export async function download_notice_of_sale(index_number, county) {
+export async function download_notice_of_sale(index_number, county, endpoint = SBR_WS_ENDPOINT) {
     const browser = await connect({
-        browserWSEndpoint: SBR_WS_ENDPOINT,
+        browserWSEndpoint: endpoint,
     });
 
     console.log('Connected! Navigating...');

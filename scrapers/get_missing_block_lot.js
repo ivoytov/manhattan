@@ -5,6 +5,27 @@ import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } fro
 import { extractTextFromPdf, extractBlockLot, extractJudgement } from './utils.js';
 import { download_notice_of_sale } from './notice_of_sale.js'
 import { SingleBar } from 'cli-progress'
+import { exec } from 'child_process';
+import readline from 'readline';
+import path from 'path';
+
+// Check for the --interactive flag in the command-line arguments
+const isInteractive = process.argv.includes('--interactive');
+
+const rl = isInteractive ? readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+}) : null;
+
+const browser = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser')+1] : null;
+
+async function prompt(question) {
+    return new Promise((resolve) => {
+        rl.question(question, (answer) => {
+            resolve(parseInt(answer));
+        });
+    });
+}
 
 // File paths
 const csvFilePath = 'transactions/foreclosure_auctions.csv';
@@ -21,9 +42,9 @@ async function processCSV() {
         })
         .on('end', async () => {
             const missing_cases = rows.filter(row => !row.block || !row.lot)
-            
+
             console.log("The following cases are missing PDF files:")
-            const missing_pdfs = missing_cases.filter(({case_number}) => !existsSync(`saledocs/${case_number.replace('/', '-')}.pdf`))
+            const missing_pdfs = missing_cases.filter(({ case_number }) => !existsSync(`saledocs/${case_number.replace('/', '-')}.pdf`))
             missing_pdfs.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
 
             const missing_bbls = missing_cases.filter(row => !missing_pdfs.includes(row))
@@ -31,30 +52,47 @@ async function processCSV() {
             missing_bbls.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
 
             const pbar = new SingleBar()
-            pbar.start(missing_cases.length,0)
+            pbar.start(missing_cases.length, 0)
             // Process rows with missing block and lot
             for (const row of rows) {
                 if (!row.block || !row.lot) {
                     pbar.increment()
                     const indexNumber = row.case_number;
-                    const pdfPath = `saledocs/${indexNumber.replace('/', '-')}.pdf`;
+                    const pdfPath = path.resolve(`saledocs/${indexNumber.replace('/', '-')}.pdf`);
 
                     try {
                         // Check if PDF already exists
                         if (!existsSync(pdfPath)) {
                             console.log(`\nCouldn't find ${pdfPath}, downloading...`)
                             // Download PDF
-                            const res = await download_notice_of_sale(indexNumber, row.borough);
-                            if (!res) continue
+                            const res = await download_notice_of_sale(indexNumber, row.borough, browser);
+                            if (!res) {
+                                if (isInteractive) {
+                                    // Get 'block' and 'lot' from the user
+                                    console.log(`\nGet BBL for ${indexNumber}`)
+                                    row.block = await prompt('Enter block: ');
+                                    row.lot = await prompt('Enter lot: ');
+                                }
+                                continue
+                            }
                         }
 
                         // Extract text from PDF
                         const text = await extractTextFromPdf(pdfPath);
 
                         // Extract block and lot
-                        const [block, lot] = extractBlockLot(text);
-                        if (!block || !lot) {
-                            // console.log(text)
+                        let [block, lot] = extractBlockLot(text);
+                        if (isInteractive && (!block || !lot)) {
+                            // Open the PDF file with the default application on macOS
+                            const child = exec(`open "${pdfPath}"`);
+
+                            // Get 'block' and 'lot' from the user
+                            console.log("\nOpening pdf file")
+                            block = await prompt('Enter block: ');
+                            lot = await prompt('Enter lot: ');
+
+                            // Close the PDF
+                            exec(`osascript -e 'tell application "Preview" to close (every document whose path is "${pdfPath}")'`);
                         }
 
                         // Update row with new block and lot
@@ -69,18 +107,19 @@ async function processCSV() {
                 }
             }
             pbar.stop()
+            rl.close()
 
             // Configuration options for json2csv
             const opts = {
                 formatters: {
-                  string: stringQuoteOnlyIfNecessaryFormatter()
+                    string: stringQuoteOnlyIfNecessaryFormatter()
                 }
             }
 
             // Convert updated rows back to CSV
             const parser = new Parser(opts);
-            const updatedCsv = parser.parse(rows);
-            
+            const updatedCsv = parser.parse(rows) + '\n';
+
 
             // Write updated CSV to file
             writeFileSync(csvFilePath, updatedCsv, 'utf8');
