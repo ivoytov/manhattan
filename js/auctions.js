@@ -343,6 +343,8 @@ fetch('transactions/auctions.geojson')
                     });
                 });
 
+                gridApi.onFilterChanged()
+
             }
 
 
