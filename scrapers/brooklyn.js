@@ -1,11 +1,31 @@
-import { createWriteStream } from 'fs';
+import { createWriteStream, existsSync } from 'fs';
 import { parse } from 'csv-parse';
 import { stringify } from 'csv-stringify';
 import { readFile, unlink, copyFile } from 'fs/promises';
 import { JSDOM } from 'jsdom';
-import { download_pdf } from './download_pdf';
-import {extractTextFromPdf, extractBlockLot, extractIndexNumber, extractJudgement } from './utils'
+import { download_pdf } from './download_pdf.js';
+import {extractTextFromPdf, extractBlockLot, extractIndexNumber, extractJudgement } from './utils.js'
 import { connect } from 'puppeteer-core';
+import readline from 'readline';
+import { exec } from 'child_process';
+
+
+// Check for the --interactive flag in the command-line arguments
+const isInteractive = process.argv.includes('--interactive');
+
+const rl = isInteractive ? readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+}) : null;
+
+async function prompt(question) {
+    return new Promise((resolve) => {
+        rl.question(question, (answer) => {
+            resolve(parseInt(answer));
+        });
+    });
+}
+
 
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 
@@ -85,27 +105,49 @@ async function main() {
                 continue;
             }
 
-            // console.log(`Processing PDF: ${pdfUrl} (Link text: ${linkText})`);
             try {
-                const downloadedFileName = await download_pdf(`https://www.nycourts.gov${pdfUrl}`);
+                const downloadedFileName = `saledocs/${linkText}`
+                if (!existsSync(downloadedFileName)) {
+                    await download_pdf(`https://www.nycourts.gov${pdfUrl}`, downloadedFileName);
+                }
                 console.log(`Extracting text from: ${downloadedFileName}`);
 
                 const extractedText = await extractTextFromPdf(downloadedFileName);
-                const indexNumber = await extractIndexNumber(extractedText)
+                let indexNumber = await extractIndexNumber(extractedText)
+                if(isInteractive && !indexNumber) {
+                    const child = exec(`open "${downloadedFileName}"`);
 
-                const [block, lot] = extractBlockLot(extractedText);
-                if (!block || !lot) {
-                    console.log(`Block and lot not found in ${pdfUrl}.`);
-                    console.log("-------EXTRACTED PDF --------");
-                    console.log(extractedText);
+                    // Get 'block' and 'lot' from the user
+                    console.log("\nOpening pdf file")
+                    indexNumber = await prompt('Enter index #: ');
+
+                    // Close the PDF
+                    exec(`osascript -e 'tell application "Preview" to close (every document whose path is "${pdfPath}")'`);
+                }
+
+                let [block, lot] = extractBlockLot(extractedText);
+                if (isInteractive && (!block || !lot)) {
+                    // Open the PDF file with the default application on macOS
+                    const child = exec(`open "${pdfPath}"`);
+
+                    // Get 'block' and 'lot' from the user
+                    console.log("\nOpening pdf file")
+                    block = await prompt('Enter block: ');
+                    lot = await prompt('Enter lot: ');
+
+                    // Close the PDF
+                    exec(`osascript -e 'tell application "Preview" to close (every document whose path is "${pdfPath}")'`);
                 }
                 const lien = extractJudgement(extractedText)
                 const address = convertToAddress(linkText);
 
                 stringifier.write(['Brooklyn', auctionDate, indexNumber, address, block, lot, lien])
                 console.log(`Added new auction data for ${linkText}`);
-                const newFileName = "saledocs/" + indexNumber.replace('/','-') + '.pdf'
-                await copyFile(downloadedFileName, newFileName)
+                if (indexNumber) {
+                    const newFileName = "saledocs/" + indexNumber.replace('/','-') + '.pdf'
+                    await copyFile(downloadedFileName, newFileName)
+                }
+                
                 await unlink(downloadedFileName);
 
             } catch (error) {
