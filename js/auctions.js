@@ -55,8 +55,6 @@ function applyFiltersFromURL() {
     gridApi.setFilterModel(filters);
 }
 
-// splitter functionality
-const splitter = document.getElementById('splitter')
 
 
 // grid columns
@@ -340,6 +338,9 @@ fetch('transactions/auctions.geojson')
         layerControl.addOverlay(lots, "Auction Locations")
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
+
+// splitter functionality
+const splitter = document.getElementById('splitter')
 
 let isResizing = false
 const mapDiv = document.getElementById('map')

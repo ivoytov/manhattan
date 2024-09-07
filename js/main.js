@@ -508,3 +508,44 @@ Promise.all([
 // Initialize the echarts instance based on the prepared dom
 const myChart = echarts.init(document.getElementById('main'));
 
+// splitter functionality
+const splitter = document.getElementById('splitter')
+
+let isResizing = false
+const mapDiv = document.getElementById('main')
+
+splitter.addEventListener('mousedown', startResize())
+document.addEventListener('mousemove', resize())
+document.addEventListener('mouseup', stopResize())
+
+splitter.addEventListener('touchstart', startResize())
+document.addEventListener('touchmove', resize())
+document.addEventListener('touchend', stopResize())
+
+function stopResize() {
+    return () => {
+        isResizing = false;
+    };
+}
+
+function resize() {
+    return (e) => {
+        if (!isResizing) return;
+        const lastY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+        const newMapHeight = lastY;
+        const newGridHeight = window.innerHeight - lastY - splitter.offsetHeight;
+
+        mapDiv.style.height = newMapHeight + 'px';
+        gridDiv.style.height = newGridHeight + 'px';
+        myChart.resize()
+        gridApi.sizeColumnsToFit();
+
+    };
+}
+
+function startResize() {
+    return (e) => {
+        isResizing = true;
+    };
+}
+

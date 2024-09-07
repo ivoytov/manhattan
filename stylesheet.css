@@ -8,7 +8,7 @@ body {
 
 .top-graph {
     width: 100%;
-    height: 30%;
+    height: 40%;
 }
 
 #splitter {
@@ -20,5 +20,5 @@ body {
 /* Set the AG Grid container to fill the entire viewport */
 #myGrid {
     width: 100%;
-    height: calc(100% - 30% - 10px);
+    height: calc(100% - 40% - 10px);
 }
