@@ -343,13 +343,13 @@ fetch('transactions/auctions.geojson')
                     });
                 });
 
-                gridApi.onFilterChanged()
 
             }
 
 
         }).addTo(map)
         layerControl.addOverlay(lots, "Auction Locations")
+        gridApi.onFilterChanged()
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
 
