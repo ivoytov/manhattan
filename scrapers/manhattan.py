@@ -24,6 +24,7 @@ for page in doc.pages:
 # Function to extract the date, case numbers, and case names
 def parse_court_data(data):
     # Extract the auction date
+    data = data.replace("Wednesday September 1 1, 2024", "Wednesday September 11, 2024")
     date_regex = r"\s+(\w+\s+\d{1,2},\s+\d{4})"
     date_match = re.search(date_regex, data)
     auction_date = datetime.strptime(date_match.group(1), "%B %d, %Y").date()
