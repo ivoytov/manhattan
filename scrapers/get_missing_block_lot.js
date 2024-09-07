@@ -69,8 +69,12 @@ async function processCSV() {
                                 if (isInteractive) {
                                     // Get 'block' and 'lot' from the user
                                     console.log(`\nGet BBL for ${indexNumber}`)
-                                    row.block = parseInt(await prompt('Enter block: '));
-                                    row.lot = parseInt(await prompt('Enter lot: ');)
+                                    if (!row.block) {
+                                        row.block = parseInt(await prompt('Enter block: '));    
+                                    }
+                                    if (!row.lot) {
+                                        row.lot = parseInt(await prompt('Enter lot: '))
+                                    }                                    
                                 }
                                 continue
                             }
