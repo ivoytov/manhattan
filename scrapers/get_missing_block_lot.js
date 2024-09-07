@@ -56,7 +56,6 @@ async function processCSV() {
             // Process rows with missing block and lot
             for (const row of rows) {
                 if (!row.block || !row.lot) {
-                    pbar.increment()
                     const indexNumber = row.case_number;
                     const pdfPath = path.resolve(`saledocs/${indexNumber.replace('/', '-')}.pdf`);
 
@@ -70,8 +69,8 @@ async function processCSV() {
                                 if (isInteractive) {
                                     // Get 'block' and 'lot' from the user
                                     console.log(`\nGet BBL for ${indexNumber}`)
-                                    row.block = await prompt('Enter block: ');
-                                    row.lot = await prompt('Enter lot: ');
+                                    row.block = parseInt(await prompt('Enter block: '));
+                                    row.lot = parseInt(await prompt('Enter lot: ');)
                                 }
                                 continue
                             }
@@ -102,6 +101,8 @@ async function processCSV() {
                         console.log(`Updated ${indexNumber} with block: ${block} and lot: ${lot} and judgement ${row.lien}`)
                     } catch (e) {
                         console.error("Error during PDF processing:", indexNumber, e);
+                    } finally {
+                        pbar.increment()
                     }
 
                 }

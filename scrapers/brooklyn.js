@@ -8,10 +8,12 @@ import {extractTextFromPdf, extractBlockLot, extractIndexNumber, extractJudgemen
 import { connect } from 'puppeteer-core';
 import readline from 'readline';
 import { exec } from 'child_process';
+import { SingleBar } from 'cli-progress'
 
 
 // Check for the --interactive flag in the command-line arguments
 const isInteractive = process.argv.includes('--interactive');
+
 
 const rl = isInteractive ? readline.createInterface({
     input: process.stdin,
@@ -21,13 +23,15 @@ const rl = isInteractive ? readline.createInterface({
 async function prompt(question) {
     return new Promise((resolve) => {
         rl.question(question, (answer) => {
-            resolve(parseInt(answer));
+            resolve(answer);
         });
     });
 }
 
 
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
+const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser')+1] : SBR_WS_ENDPOINT;
+
 
 function getNextThursday(dateString) {
     // Step 1: Parse the date string into a Date object
@@ -70,7 +74,7 @@ async function main() {
     console.log('Connecting to Scraping Browser...');
 
     const browser = await connect({
-        browserWSEndpoint: SBR_WS_ENDPOINT,
+        browserWSEndpoint: endpoint,
     });
 
     const page = await browser.newPage();
@@ -99,60 +103,57 @@ async function main() {
             .map(link => [link.textContent, link.href])
             .filter(([_, href]) => href && href.endsWith('.pdf'));
 
+            const pbar = new SingleBar()
+            pbar.start(pdfLinks.length, 0)
         for (const [linkText, pdfUrl] of pdfLinks) {
-            if (existingAuctions.some(([date, caseNumber]) => date === auctionDate && caseNumber === linkText)) {
+            const address = convertToAddress(linkText);
+
+            if (existingAuctions.some(([date, case_name]) => date === auctionDate && address === case_name)) {
                 console.log(`Auction ${auctionDate}, ${linkText} already exists. Skipping.`);
+                pbar.increment();
                 continue;
             }
 
             try {
-                const downloadedFileName = `saledocs/${linkText}`
-                if (!existsSync(downloadedFileName)) {
-                    await download_pdf(`https://www.nycourts.gov${pdfUrl}`, downloadedFileName);
+                const pdfPath = pdfUrl.split('/').pop()
+                if (!existsSync(pdfPath)) {
+                    await download_pdf(`https://www.nycourts.gov${pdfUrl}`);
                 }
-                console.log(`Extracting text from: ${downloadedFileName}`);
+                console.log(`Extracting text from: ${pdfPath}`);
 
-                const extractedText = await extractTextFromPdf(downloadedFileName);
+                const extractedText = await extractTextFromPdf(pdfPath);
                 let indexNumber = await extractIndexNumber(extractedText)
-                if(isInteractive && !indexNumber) {
-                    const child = exec(`open "${downloadedFileName}"`);
-
-                    // Get 'block' and 'lot' from the user
-                    console.log("\nOpening pdf file")
-                    indexNumber = await prompt('Enter index #: ');
-
-                    // Close the PDF
-                    exec(`osascript -e 'tell application "Preview" to close (every document whose path is "${pdfPath}")'`);
-                }
-
                 let [block, lot] = extractBlockLot(extractedText);
-                if (isInteractive && (!block || !lot)) {
+
+                if (isInteractive && (!block || !lot || !indexNumber)) {
                     // Open the PDF file with the default application on macOS
                     const child = exec(`open "${pdfPath}"`);
 
                     // Get 'block' and 'lot' from the user
-                    console.log("\nOpening pdf file")
-                    block = await prompt('Enter block: ');
-                    lot = await prompt('Enter lot: ');
-
+                    console.log("\n\n")
+                    if(!indexNumber) {
+                        indexNumber = await prompt('Enter index #: ');
+                    }
+                    
                     // Close the PDF
                     exec(`osascript -e 'tell application "Preview" to close (every document whose path is "${pdfPath}")'`);
                 }
                 const lien = extractJudgement(extractedText)
-                const address = convertToAddress(linkText);
 
                 stringifier.write(['Brooklyn', auctionDate, indexNumber, address, block, lot, lien])
                 console.log(`Added new auction data for ${linkText}`);
-                if (indexNumber) {
+                if (indexNumber != null) {
                     const newFileName = "saledocs/" + indexNumber.replace('/','-') + '.pdf'
-                    await copyFile(downloadedFileName, newFileName)
+                    await copyFile(pdfPath, newFileName)
                 }
                 
-                await unlink(downloadedFileName);
+                await unlink(pdfPath);
 
             } catch (error) {
                 console.error(`Error processing ${linkText}: ${error.message}`);
                 // Optionally, you can add a retry mechanism here 
+            } finally {
+                pbar.increment()
             }
         }
     } finally {
