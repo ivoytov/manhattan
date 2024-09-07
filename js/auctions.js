@@ -46,6 +46,19 @@ function updateURLWithFilters(filters) {
 
 function applyFiltersFromURL() {
     const params = new URLSearchParams(window.location.search);
+    if(params.size == 0) {
+        const currentDate = new Date();
+        const futureDate = new Date();
+        futureDate.setDate(currentDate.getDate() + 7);
+        gridApi.setColumnFilterModel('date', {
+            dateFrom: currentDate, 
+            dateTo: futureDate, 
+            filterType: "date", 
+            type: "inRange"
+        })
+        gridApi.onFilterChanged()
+        return
+    }
     const filters = {};
 
     params.forEach((value, key) => {
@@ -78,10 +91,9 @@ const columnDefs = [
         suppressSizeToFit: true,
         minWidth: 120,
         filter: 'agDateColumnFilter',
-        sort: "desc",
-        sortIndex: 0
+        sort: "asc",
+        sortIndex: 0,
     },
-
     {
         headerName: "Block", field: "block",
         filter: 'agNumberColumnFilter',
