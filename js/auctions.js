@@ -226,12 +226,12 @@ const gridOptions = {
 
         // Show or hide markers based on visible rows
         for (let key in markers) {
-            markers[key].removeFrom(map); // Remove all markers from map initially
+            markers[key].forEach(l => l.removeFrom(map)); // Remove all markers from map initially
         }
         visibleRows.forEach(function (row) {
             const key = `${row.block}-${row.borough}`;
             if (markers[key]) {
-                markers[key].addTo(map); // Add only visible row markers to map
+                markers[key].forEach(l => l.addTo(map)); // Add only visible row markers to map
             }
         });
     }
@@ -335,8 +335,11 @@ fetch('transactions/auctions.geojson')
 
                 // Store the marker in the markers object
                 const key = `${block}-${borough}`;
-                markers[key] = layer;
-
+                if (!markers[key]) {
+                    markers[key] = []
+                }
+                markers[key].push(layer);
+                
                 layer.on('click', function () {
 
                     // Highlight the row in AG Grid
