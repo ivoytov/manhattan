@@ -112,7 +112,7 @@ async function processCSV() {
                 }
             }
             pbar.stop()
-            rl.close()
+            if (isInteractive) rl.close()
 
             // Configuration options for json2csv
             const opts = {

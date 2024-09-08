@@ -159,7 +159,7 @@ async function main() {
         pbar.stop()
     } finally {
 
-        rl.close()
+        if (isInteractive) rl.close()
         await browser.close();
         stringifier.end(); // End the stringifier stream properly
     }
