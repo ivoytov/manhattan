@@ -59,11 +59,17 @@ df = pd.DataFrame(auction_data)
 # Define the CSV file path (adjust path as needed)
 csv_file_path = "transactions/foreclosure_auctions.csv"
 existing_df = pd.read_csv(csv_file_path).query("borough == 'Bronx'")
-existing_df['date'] = pd.to_datetime(existing_df['date']).dt.strftime('%Y-%m-%d')
+# existing_df['date'] = pd.to_datetime(existing_df['date']).dt.strftime('%Y-%m-%d')
 
 
-# Merge the new data into the existing DataFrame
-new_sales = pd.concat([existing_df, df]).drop_duplicates(subset=['borough', 'date', 'case_number'], keep=False)
+# Merge dataframes with an indicator to identify the origin of each row
+merged_df = df.merge(existing_df, on=['borough', 'date', 'case_number'], how='left', indicator=True)
+
+# Keep only rows that are in df but not in existing_df
+new_sales = merged_df[merged_df['_merge'] == 'left_only']
+
+# Drop the indicator column, because it is not needed anymore
+new_sales = new_sales.drop(columns=['_merge'])
 
 # Save the updated DataFrame back to the CSV file
 if not new_sales.empty:

@@ -131,12 +131,22 @@ const defaultColDef = {
     resizable: true
 }
 
+function zoomToBlock(event) {
+    if (!event.node.isSelected()) {
+        return
+    }
+    const key = `${event.node.data.block}-${event.node.data.borough}`;
+    map.fitBounds(markers[key].getBounds(), {maxZoom: 14})
+  }
+
 // Initialize AG Grid
 const gridOptions = {
     columnDefs: columnDefs,
     defaultColDef: defaultColDef,
     masterDetail: true,
     detailRowAutoHeight: true,
+    rowSelection: 'single',
+    onRowSelected: zoomToBlock,
 
     detailCellRendererParams: {
         detailGridOptions: {
@@ -216,12 +226,12 @@ const gridOptions = {
 
         // Show or hide markers based on visible rows
         for (let key in markers) {
-            markers[key].forEach(l => l.removeFrom(map)); // Remove all markers from map initially
+            markers[key].removeFrom(map); // Remove all markers from map initially
         }
         visibleRows.forEach(function (row) {
-            let key = `${row.block}-${row.borough}`;
+            const key = `${row.block}-${row.borough}`;
             if (markers[key]) {
-                markers[key].forEach(l => l.addTo(map)); // Add only visible row markers to map
+                markers[key].addTo(map); // Add only visible row markers to map
             }
         });
     }
@@ -324,11 +334,8 @@ fetch('transactions/auctions.geojson')
                 let borough = borough_dict[feature.properties.BORO];
 
                 // Store the marker in the markers object
-                let key = `${block}-${borough}`;
-                if (!markers[key]) {
-                    markers[key] = []
-                }
-                markers[key].push(layer);
+                const key = `${block}-${borough}`;
+                markers[key] = layer;
 
                 layer.on('click', function () {
 

@@ -41,6 +41,7 @@ function main()
     lb.BORO = [borough_dict[parse(Int, id)] for id in lb.BORO]
     merged_json = innerjoin(lb, auctions, on = [:BORO => :borough, :BLOCK => :block])
     select!(merged_json, [:OBJECTID, :BORO, :BLOCK, :geometry])
+    unique!(merged_json)
     features = [feature for feature in fc if feature.OBJECTID in merged_json.OBJECTID]
     GeoJSON.write("transactions/auctions.geojson",GeoJSON.FeatureCollection(features=features))
 
