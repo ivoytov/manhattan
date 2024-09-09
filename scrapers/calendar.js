@@ -13,14 +13,14 @@ console.log('Connecting to Scraping Browser...');
 
 
 const boroughConfigDict = {
-    // "Queens": {
-    //     courtId: "80",
-    //     calendarId: "38968",
-    // }, 
-    // "Manhattan": {
-    //     courtId: "60",
-    //     calendarId: "38272",
-    // },
+    "Queens": {
+        courtId: "80",
+        calendarId: "38968",
+    }, 
+    "Manhattan": {
+        courtId: "60",
+        calendarId: "38272",
+    },
     "Bronx": {
         courtId: "124",
         calendarId: "38936",
