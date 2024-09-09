@@ -32,7 +32,9 @@ function main()
     # Select only columns from sales DataFrame
     select!(merged_df, names(sales))
 
-    filter!(row -> !ismissing(row."BUILDING CLASS CATEGORY") && !startswith(row."BUILDING CLASS CATEGORY", "45"), merged_df)
+    exclude_prefixes = ["45", "25", "26", "28"]
+    filter!(row -> !ismissing(row."BUILDING CLASS CATEGORY") &&
+        all(prefix -> !startswith(row."BUILDING CLASS CATEGORY", prefix), exclude_prefixes), merged_df)    
     CSV.write("transactions/auction_sales.csv", merged_df)
 
     fc = GeoJSON.read("lotblock.geojson")
