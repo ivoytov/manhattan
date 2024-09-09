@@ -73,6 +73,14 @@ function applyFiltersFromURL() {
 // grid columns
 const columnDefs = [
     {
+        headerName: "Sold?",
+        field: "isSold",
+        cellDataType: 'boolean',
+        filter: 'agSetColumnFilter',
+        suppressSizeToFit: true,
+        minWidth: 40,
+      },
+    {
         field: "borough",
         filter: 'agSetColumnFilter',
     },
@@ -254,10 +262,16 @@ Promise.all(csvPromises).then(([sales, auctions]) => {
     // get the address from transaction records
     for (const auction of auctions) {
         const transactions = getTransactions(auction)
+        
         if (transactions.length > 0) {
-            auction.address = transactions[transactions.length - 1]["ADDRESS"]
-        } else {
-            auction.address = auction.case_name
+            if (!auction.address) {
+                auction.address = transactions[transactions.length - 1]["ADDRESS"]
+            }
+            auction.isSold = transactions.some(t => {
+                const millisecondsInADay = 24 * 60 * 60 * 1000;
+                const dayDifference = (t["SALE DATE"] - auction.date ) / millisecondsInADay
+                return dayDifference >= 0 && dayDifference <= 90 && t["SALE PRICE"] > 10000
+            })
         }
 
     }
@@ -339,7 +353,7 @@ fetch('transactions/auctions.geojson')
                     markers[key] = []
                 }
                 markers[key].push(layer);
-                
+
                 layer.on('click', function () {
 
                     // Highlight the row in AG Grid

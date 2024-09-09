@@ -101,7 +101,7 @@ async function processCSV() {
                         // Update row with new block and lot
                         row.block = block;
                         row.lot = lot;
-                        row.lien = extractJudgement(text)
+                        row.judgement = extractJudgement(text)
                         console.log(`Updated ${indexNumber} with block: ${block} and lot: ${lot} and judgement ${row.lien}`)
                     } catch (e) {
                         console.error("Error during PDF processing:", indexNumber, e);

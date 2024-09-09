@@ -131,7 +131,6 @@ const columnDefs = [
     field: "outlier",
     cellDataType: 'boolean',
     filter: 'agSetColumnFilter',
-
   },
   {
     headerName: "Address", field: "ADDRESS", sort: "asc", sortIndex: 1,

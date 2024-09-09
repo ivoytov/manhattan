@@ -125,7 +125,7 @@ async function main() {
                 let indexNumber = await extractIndexNumber(extractedText)
                 let [block, lot] = extractBlockLot(extractedText);
 
-                if (isInteractive && (!block || !lot || !indexNumber)) {
+                if (isInteractive && !indexNumber) {
                     // Open the PDF file with the default application on macOS
                     const child = exec(`open "${pdfPath}"`);
 
@@ -138,9 +138,9 @@ async function main() {
                     // Close the PDF
                     exec(`osascript -e 'tell application "Preview" to close (every document whose path is "${pdfPath}")'`);
                 }
-                const lien = extractJudgement(extractedText)
+                const judgement = extractJudgement(extractedText)
 
-                stringifier.write(['Brooklyn', auctionDate, indexNumber, address, block, lot, lien])
+                stringifier.write(['Brooklyn', auctionDate, indexNumber, null, block, lot, judgement, address])
                 console.log(`Added new auction data for ${linkText}`);
                 if (indexNumber != null) {
                     const newFileName = "saledocs/" + indexNumber.replace('/', '-') + '.pdf'

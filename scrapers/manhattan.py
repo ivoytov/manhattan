@@ -55,7 +55,8 @@ data = {
     "case_name": case_names,
     "block": [None for _ in case_numbers],
     "lot": [None for _ in case_numbers],
-    "lien": [None for _ in case_numbers],
+    "judgement": [None for _ in case_numbers],
+    "address": [None for _ in case_numbers],
 }
 
 df = pd.DataFrame(data)
