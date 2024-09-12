@@ -3,7 +3,7 @@ import csv from 'csv-parser';
 import { Parser } from '@json2csv/plainjs';
 import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters'
 import { extractTextFromPdf, extractBlockLot, extractJudgement } from './utils.js';
-import { download_notice_of_sale } from './notice_of_sale.js'
+import { download_filing } from './notice_of_sale.js'
 import { SingleBar } from 'cli-progress'
 import { exec } from 'child_process';
 import readline from 'readline';
@@ -19,16 +19,17 @@ const rl = isInteractive ? readline.createInterface({
 
 const browser = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser')+1] : null;
 
+// must parseInt() on the response if you want it to be a number
 async function prompt(question) {
     return new Promise((resolve) => {
         rl.question(question, (answer) => {
-            resolve(parseInt(answer));
+            resolve(answer);
         });
     });
 }
 
 // File paths
-const csvFilePath = 'transactions/foreclosure_auctions.csv';
+const csvFilePath = 'transactions/foreclosure_cases.csv';
 
 // Read CSV and process each row
 async function processCSV() {
@@ -64,7 +65,7 @@ async function processCSV() {
                         if (!existsSync(pdfPath)) {
                             console.log(`\nCouldn't find ${pdfPath}, downloading...`)
                             // Download PDF
-                            const res = await download_notice_of_sale(indexNumber, row.borough, browser);
+                            const res = await download_filing(indexNumber, row.borough, browser);
                             if (!res) {
                                 if (isInteractive) {
                                     // Get 'block' and 'lot' from the user
