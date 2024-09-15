@@ -6,7 +6,7 @@ import { open, unlink } from 'fs/promises'
 
 export function extractBlockLot(text) {
     const primaryPattern = /Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)\sand\sL[ao]+ts?\s*[: ]\s*(\d+)/i;
-    const secondaryPattern = /(\d{3,4})-(\d{1,2})/;
+    const secondaryPattern = /(\d{3,5})-(\d{1,4})/;
 
     const matchPrimary = text.match(primaryPattern);
     if (matchPrimary) return [matchPrimary[1], matchPrimary[2]];

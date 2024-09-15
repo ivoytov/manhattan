@@ -1,7 +1,11 @@
 import { connect } from 'puppeteer-core';
 import { download_pdf } from './download_pdf.js';
+import path from 'path';
+import { existsSync } from 'fs';
 
-const SBR_WS_ENDPOINT = 'ws://127.0.0.1:9222/devtools/browser/e0f7c846-beef-45cb-8125-625c68082024' //`wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
+
+// const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
+const SBR_WS_ENDPOINT = "ws://127.0.0.1:9222/devtools/browser/e0f7c846-beef-45cb-8125-625c68082024"
 const url = "https://iapps.courts.state.ny.us/nyscef/CaseSearch"
 
 
@@ -13,12 +17,11 @@ const county_map = {
     "Staten Island": "43",
 }
 
- const FilingType = Object.freeze({
-    NOTICE_OF_SALE: {id: "1163", path: "noticeofsale"},
-    JUDGEMENT: {id: "1310", path: "judgement"},
+const FilingType = Object.freeze({
+    JUDGEMENT: { id: "1310", dir: "judgement" },
+    NOTICE_OF_SALE: { id: "1163", dir: "noticeofsale" },
+    SURPLUS_MONEY_FORM: { id: "1741", dir: "surplusmoney" }
 })
-
-
 
 if (import.meta.url === `file://${process.argv[1]}`) {
     download_filing(process.argv[2], process.argv[3]).catch(err => {
@@ -27,17 +30,42 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     });
 }
 
+function missing_filings(index_number) {
+    const out = []
+    for (const f in FilingType) {
+        const {dir} = FilingType[f]
+        
+        const filename = index_number.replace('/', '-') + ".pdf"
+        const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
+        if (!existsSync(pdfPath)) { 
+            out.push(f)
+        }
+    }
+    return out
+}
 
-export async function download_filing(index_number, county, filing = FilingType.NOTICE_OF_SALE, endpoint = SBR_WS_ENDPOINT) {
+
+export async function download_filing(index_number, county, endpoint = SBR_WS_ENDPOINT) {
+    const missingFilings = missing_filings(index_number)
+    if (!missingFilings.length) {
+        // no filings to get
+        // console.log("No filings to get")
+        return
+    }
+    // console.log("missing filings")
+    // missingFilings.forEach(f => console.log(f))
+    
+    
+
     const browser = await connect({
-        browserWSEndpoint: endpoint,
+        browserWSEndpoint: SBR_WS_ENDPOINT,
     });
 
-    console.log('Connected! Navigating...');
+    // console.log('Connected! Navigating...');
     const page = await browser.newPage();
 
     await page.goto(url, { waitUntil: 'networkidle2' });
-    console.log('Navigated! Searching for case...');
+    // console.log('Navigated! Searching for case...');
 
     await page.locator('#txtCaseIdentifierNumber').fill(index_number);
     await page.locator('select#txtCounty').fill(county_map[county]);
@@ -46,36 +74,46 @@ export async function download_filing(index_number, county, filing = FilingType.
 
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
-    console.log('Navigated! Clicking first case result...');
-    await page.locator('#form > table.NewSearchResults > tbody > tr > td > a').click();
+    // console.log('Navigated! Clicking first case result...');
+    try {
+        await page.locator('#form > table.NewSearchResults > tbody > tr > td > a').click();
+    } catch (e) {
+        console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
+        return
+    }
+    
 
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
-    console.log('Navigated! Selecting document type...');
+    // console.log('Navigated! Selecting document type...');
     const availableFilings = await page.$$eval("select#selDocumentType > option", options => {
         return options.map(el => el.value)
     })
-    if (!availableFilings.includes(filing.id)) {
-        console.warn(`No filing of requested type ${filing.id} exists`, index_number, county);
-        await browser.disconnect();
-        return null
+    let res;
+
+    for (const filing of missingFilings) {
+        const {dir, id} = FilingType[filing]
+        // console.log(filing, dir, id)
+        const filename = index_number.replace('/', '-') + ".pdf"
+        const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
+        if (!existsSync(pdfPath) && availableFilings.includes(id)) {
+            // console.log(`Trying to get filing ${id}`)
+
+            await page.locator('select#selDocumentType').fill(id);
+            await page.click('input[name="btnNarrow"]'); // To submit the form
+            await page.waitForNetworkIdle();
+
+            const downloadUrl = await page.$eval("#form > div.tabBody > table > tbody > tr:last-child > td:nth-child(2) > a", el => el.href)
+            res = await download_pdf(downloadUrl, pdfPath);
+
+            await page.click("input[name='btnClear']")
+            await page.waitForNetworkIdle();
+        } 
     }
 
-    await page.locator('select#selDocumentType').fill(filing.id);
-    await page.click('input[name="btnNarrow"]'); // To submit the form
-    await page.waitForNetworkIdle();
-
-    const downloadUrl = await page.$eval("#form > div.tabBody > table > tbody > tr > td:last-child > a", el => el.href)
-    console.log("downloadUrl", downloadUrl)
-    if (!downloadUrl) {
-        console.warn('Did not find link to download!', index_number, county);
-        await browser.disconnect();
-        return null
-    }
-
-    const filename = await download_pdf(downloadUrl, "saledocs/" + filing.path + '/' + index_number.replace('/', '-') + ".pdf");
-
-    console.log(`Downloaded. ${filename}`);
+    // finish up
+    await page.close()
     browser.disconnect();
-    return filename
+    return res
+
 }

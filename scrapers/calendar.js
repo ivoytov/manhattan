@@ -45,7 +45,7 @@ for (const borough in boroughConfigDict) {
 
 
 // case_number,borough,auction_date,has_nos,has_smf,has_judgement,has_nyscef
-const csvFilePath = 'transactions/foreclosure_cases.csv';
+const csvFilePath = 'foreclosures/cases.csv';
 const rows = [];
 // Read the CSV file
 createReadStream(csvFilePath)
