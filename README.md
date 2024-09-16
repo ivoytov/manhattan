@@ -9,3 +9,4 @@ See [foreclosure auction data](https://ivoytov.github.io/manhattan/auctions.html
 
 [Search Engine](https://iapps.courts.state.ny.us/nyscef/CaseSearch) for court cases by number
 
+[Manhattan Auction Calendar](https://www.nycourts.gov/legacypdfs/courts/1jd/supctmanh/foreclosures/auctions.pdf)
