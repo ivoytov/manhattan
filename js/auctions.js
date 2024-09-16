@@ -260,38 +260,41 @@ const csvPromises = [
 Promise.all(csvPromises).then(([sales, auctions, lots]) => {
     combinedData = sales
     // get the address from transaction records
-    for (const auction of auctions) {
-        const lot = lots.find(({case_number}) => case_number == auction.case_number)
-
-        if(lot) {
-            auction.block = lot.block
-            auction.lot = lot.lot
-            auction.address = lot.address
-        } else {
-            auction.block = null
-            auction.lot = null
-            auction.address = null
+    for (const lot of lots) {
+        const auctionMatches = auctions.filter(({ case_number }) => case_number == lot.case_number)
+        if (!auctionMatches) {
+            console.log("Couldn't find a match for lot", lot.case_number)
+            continue
         }
         
+        const auction = auctionMatches[0]
+        if(!auction) {
+            console.log("Couldn't find a match for lot", lot.case_number)
+            continue
+        }
+        lot.auction_date = auction.auction_date
+        lot.case_name = auction.case_name
 
-        const transactions = getTransactions(auction)
+        const transactions = getTransactions(lot)
 
         if (transactions.length > 0) {
-            if (!auction.address) {
-                auction.address = transactions[transactions.length - 1]["ADDRESS"]
+            if (!lot.address) {
+                lot.address = transactions[transactions.length - 1]["ADDRESS"]
             }
-            auction.isSold = new Date() > auction.date ? transactions.some(t => {
+            lot.isSold = new Date() > lot.auction_date ? transactions.some(t => {
                 const millisecondsInADay = 24 * 60 * 60 * 1000;
-                const dayDifference = (t["SALE DATE"] - auction.date) / millisecondsInADay
+                const dayDifference = (t["SALE DATE"] - lot.auction_date) / millisecondsInADay
                 return dayDifference >= 0 && dayDifference <= 90 && t["SALE PRICE"] > 10000
-            }) : null
+            }) : false
+        } else {
+            lot.isSold = false
         }
 
     }
 
 
     // load the full table
-    gridApi.setGridOption('rowData', auctions)
+    gridApi.setGridOption('rowData', lots)
     gridApi.sizeColumnsToFit()
 })
     .catch(error => {

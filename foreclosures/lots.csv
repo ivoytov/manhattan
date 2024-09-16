@@ -399,7 +399,10 @@ case_number,borough,block,lot,address
 028101/2007,Brooklyn,2006,50,
 531047/2021,Brooklyn,4722,28,
 810088/2010,Manhattan,1937,11,
-850126/2019,Manhattan,1011,4153,
+850126/2019,Manhattan,1274,1054,"30 Central Park South, Unit 14D, New York, NY 10019"
+850126/2019,Manhattan,1011,4153,"106 Central Park South, Unit 7L, New York, NY 10019"
+850126/2019,Manhattan,1405,32,"177 East 70th St., New York, NY 10021"
+850126/2019,Manhattan,1404,1028,"715 Park Ave, Unit 6E, New York, NY 10021"
 850279/2021,Manhattan,1634,16,
 850147/2023,Manhattan,1009,37,
 850199/2022,Manhattan,1006,1302,
