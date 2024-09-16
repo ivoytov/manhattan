@@ -4,8 +4,7 @@ import path from 'path';
 import { existsSync } from 'fs';
 
 
-// const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
-const SBR_WS_ENDPOINT = "ws://127.0.0.1:9222/devtools/browser/e0f7c846-beef-45cb-8125-625c68082024"
+const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 const url = "https://iapps.courts.state.ny.us/nyscef/CaseSearch"
 
 
@@ -58,7 +57,7 @@ export async function download_filing(index_number, county, endpoint = SBR_WS_EN
     
 
     const browser = await connect({
-        browserWSEndpoint: SBR_WS_ENDPOINT,
+        browserWSEndpoint: endpoint,
     });
 
     // console.log('Connected! Navigating...');

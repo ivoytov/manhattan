@@ -4,17 +4,38 @@ const { recognize } = pkg
 import { open, unlink } from 'fs/promises'
 
 
+export async function extractAddress(text) {
+    let courtAddresses = await readFileToArray("foreclosures/court_addresses.log")
+    courtAddresses = courtAddresses.map(add => add.toLowerCase())
+    const nyAddressRegex = /(?<=premises known as\s)(\d+\s+\w+(\s+\w+)*,\s+\w+(\s+\w+)*,\s+(NY|New York)\s+\d{5})/gi;
+
+    const matches = text.match(nyAddressRegex)
+    
+    if(!matches) {
+        return matches
+    }
+    console.log("Matches", matches)
+    const match = matches.find(match => {
+        const input = match.toLowerCase()
+        return !courtAddresses.includes(input)
+    })
+    return match
+}
+
 export function extractBlockLot(text) {
-    const primaryPattern = /Block\s*[: ]\s*(\d+)\s*(?:[^\d]*?)\sand\sL[ao]+ts?\s*[: ]\s*(\d+)/i;
-    const secondaryPattern = /(\d{3,5})-(\d{1,4})/;
+    const blockPattern = /Block\s*[: ]\s*(\d+)/i;
+    const lotPattern = /Lot\s*[: ]\s*(\d+)/i;
+    const combinedPattern = /(\d{3,5})-(\d{1,4})/;
 
-    const matchPrimary = text.match(primaryPattern);
-    if (matchPrimary) return [matchPrimary[1], matchPrimary[2]];
+    const matchBlock = text.match(blockPattern);
+    const matchLot = text.match(lotPattern);
 
-    const matchSecondary = text.match(secondaryPattern);
-    if (matchSecondary) return [matchSecondary[1], matchSecondary[2]];
+    if (matchBlock && matchLot) return [matchBlock[1], matchLot[1]];
 
-    return [null, null];
+    const matchCombined = text.match(combinedPattern);
+    if (matchCombined) return [matchCombined[1], matchCombined[2]];
+
+    return [matchBlock, matchLot];
 }
 
 export function extractJudgement(text) {
@@ -60,5 +81,13 @@ export async function extractTextFromPdf(pdfPath) {
     await unlink(imagePath);
 
     return text;
+}
+export async function readFileToArray(path) {
+    const file = await open(path);
+    const rows = [];
+    for await (const row of file.readLines()) {
+        rows.push(row);
+    }
+    return rows;
 }
 
