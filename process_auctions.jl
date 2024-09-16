@@ -23,7 +23,7 @@ end
 # Main function to calculate and export home price indices
 function main()
     sales = initialize_data()
-    auctions = read_csv("transactions/foreclosure_auctions.csv")
+    auctions = read_csv("foreclosures/lots.csv")
     
 
     # Merge auctions and sales DataFrames
@@ -35,7 +35,7 @@ function main()
     exclude_prefixes = ["45", "25", "26", "28"]
     filter!(row -> !ismissing(row."BUILDING CLASS CATEGORY") &&
         all(prefix -> !startswith(row."BUILDING CLASS CATEGORY", prefix), exclude_prefixes), merged_df)    
-    CSV.write("transactions/auction_sales.csv", merged_df)
+    CSV.write("foreclosures/auction_sales.csv", merged_df)
 
     fc = GeoJSON.read("lotblock.geojson")
     lb = DataFrame(fc)
@@ -45,7 +45,7 @@ function main()
     select!(merged_json, [:OBJECTID, :BORO, :BLOCK, :geometry])
     unique!(merged_json)
     features = [feature for feature in fc if feature.OBJECTID in merged_json.OBJECTID]
-    GeoJSON.write("transactions/auctions.geojson",GeoJSON.FeatureCollection(features=features))
+    GeoJSON.write("foreclosures/auctions.geojson",GeoJSON.FeatureCollection(features=features))
 
 end
 
