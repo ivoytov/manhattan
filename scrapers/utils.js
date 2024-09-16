@@ -22,21 +22,32 @@ export async function extractAddress(text) {
     return match
 }
 
-export function extractBlockLot(text) {
-    const blockPattern = /Block\s*[: ]\s*(\d+)/i;
-    const lotPattern = /Lot\s*[: ]\s*(\d+)/i;
+export function extractBlock(text) {
+    const blockPattern = /Block[:\s]+(\d+)/i;
+    
     const combinedPattern = /(\d{3,5})-(\d{1,4})/;
 
     const matchBlock = text.match(blockPattern);
-    const matchLot = text.match(lotPattern);
-
-    if (matchBlock && matchLot) return [matchBlock[1], matchLot[1]];
+    if (matchBlock) return matchBlock[1]
 
     const matchCombined = text.match(combinedPattern);
-    if (matchCombined) return [matchCombined[1], matchCombined[2]];
-
-    return [matchBlock, matchLot];
+    if (matchCombined) return matchCombined[1]
+    return null
 }
+
+export function extractLot(text) {
+    const blockPattern = /Lot[:\s]+(\d+)/i;
+    
+    const combinedPattern = /(\d{3,5})-(\d{1,4})/;
+
+    const matchBlock = text.match(blockPattern);
+    if (matchBlock) return matchBlock[1]
+
+    const matchCombined = text.match(combinedPattern);
+    if (matchCombined) return matchCombined[2]
+    return null
+}
+
 
 export function extractJudgement(text) {
     const regex = /^\$\d{1,3}(,\d{3})*(\.\d{2})?$/

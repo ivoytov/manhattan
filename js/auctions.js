@@ -143,7 +143,7 @@ function zoomToBlock(event) {
         return
     }
     const key = `${event.node.data.block}-${event.node.data.borough}`;
-    map.fitBounds(markers[key].getBounds(), { maxZoom: 14 })
+    map.fitBounds(markers[key][0].getBounds(), { maxZoom: 14 })
 }
 
 // Initialize AG Grid

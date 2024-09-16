@@ -3,7 +3,7 @@ import { readFile, readdir } from 'fs/promises'
 import neatCsv from 'neat-csv'
 import { Parser } from '@json2csv/plainjs';
 import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters'
-import { extractTextFromPdf, extractBlockLot, extractJudgement, extractAddress } from './utils.js';
+import { extractTextFromPdf, extractBlock, extractLot, extractJudgement, extractAddress } from './utils.js';
 import { download_filing } from './notice_of_sale.js'
 import { SingleBar, Presets } from 'cli-progress'
 import { exec } from 'child_process';
@@ -52,14 +52,10 @@ async function getFilings() {
     // Read the CSV file
     const casesPath = 'foreclosures/cases.csv'
     const rows = await neatCsv(await readFile(casesPath))
+    const sortedRows = rows.sort((a,b) => new Date(b.auction_date) - new Date(a.auction_date))
 
-    const pbar = new SingleBar({
-        clearOnComplete: false,
-        hideCursor: true,
-        format: '{case_number} {bar} {percentage}% | time: {duration_formatted} | ETA: {eta_formatted} |  {value}/{total}'
-    }, Presets.shades_grey)
     const start = process.argv.includes('--skip') ? parseInt(process.argv[process.argv.indexOf('--skip') + 1]) : 0;
-    const subrows = rows.slice(start, rows.length)
+    const subrows = sortedRows.slice(start, sortedRows.length)
     pbar.start(rows.length, start + 1)
     for (const [idx, row] of subrows.entries()) {
         pbar.update(idx + start + 1, row)
@@ -98,7 +94,6 @@ async function getBlockAndLot() {
     for (const [idx, foreclosureCase] of casesWithFiles.entries()) {
         // pbar.update(idx, foreclosureCase)
         const case_number = foreclosureCase.case_number
-        console.log(`${case_number} ${foreclosureCase.borough} ${foreclosureCase.auction_date}`)
         let row = lots.find((lot) => lot.case_number == case_number)
 
         if (!row) {
@@ -110,6 +105,8 @@ async function getBlockAndLot() {
         if (row.block && row.lot) { // && row.address) {
             continue
         }
+        console.log(`${case_number} ${foreclosureCase.borough} ${foreclosureCase.auction_date}`)
+
 
         // Extract text from PDF
         const filename = case_number.replace('/', '-') + ".pdf"
@@ -123,7 +120,8 @@ async function getBlockAndLot() {
             console.error(case_number, "Error extracting text from ", pdfPath, e)
             continue
         }
-        let [block, lot] = extractBlockLot(text);
+        let block = extractBlock(text);
+        let lot = extractLot(text);
         let address = await extractAddress(text);
 
         if (isInteractive) {
@@ -185,5 +183,6 @@ async function getBlockAndLot() {
     console.log('CSV file has been updated with missing block and lot values.');
 }
 
-// getFilings()
-getBlockAndLot()
+// await getFilings()
+await getBlockAndLot()
+pbar.stop()
