@@ -91,20 +91,7 @@ async function getBlockAndLot() {
         .map(item => item.name.slice(0, item.name.length - 4).replace('-', '/'));
 
     const casesWithFiles = cases.filter(cse => files.some(file => file === cse.case_number))
-        .sort((a, b) => {
-        // Check if either `block` or `lot` is null in both records
-        const aHasNull = a.block === null || a.lot === null;
-        const bHasNull = b.block === null || b.lot === null;
-
-        // If both A and B have `block` or `lot` as null, they are considered equal
-        if (aHasNull && bHasNull) return 0;
-        // If only A has `block` or `lot` as null, it comes first
-        if (aHasNull) return -1;
-        // If only B has `block` or `lot` as null, it comes first
-        if (bHasNull) return 1;    
-            
-            return b.auction_date - a.auction_date
-        })
+        .sort((a, b) => new Date(b.auction_date) - new Date(a.auction_date))
 
     // pbar.start(casesWithFiles.length, 1)
 
@@ -120,7 +107,7 @@ async function getBlockAndLot() {
             lots.push(row)
         }
 
-        if (row.block && row.lot && row.address) {
+        if (row.block && row.lot) { // && row.address) {
             continue
         }
 
@@ -155,11 +142,11 @@ async function getBlockAndLot() {
             } else {
                 console.log("Lot", row.lot)
             }
-            if (!row.address) {
-                const input = await prompt('Enter address: ', address ?? '')
-                if (input === null) break
-                row.address = input
-            }
+            // if (!row.address) {
+            //     const input = await prompt('Enter address: ', address ?? '')
+            //     if (input === null) break
+            //     row.address = input
+            // }
             while(true) {
                 const more = await prompt('Is there another lot in the auction (y/n)?', 'n')
                 if (more == 'n') break 
@@ -168,7 +155,7 @@ async function getBlockAndLot() {
                 lots.push(row)
                 row.block = parseInt(await prompt('Enter block: ', ''))
                 row.lot = parseInt(await prompt('Enter lot: ', ''))
-                row.address = await prompt('Enter address: ', '')
+                // row.address = await prompt('Enter address: ', '')
             }
             
 

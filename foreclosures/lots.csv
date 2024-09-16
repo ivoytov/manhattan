@@ -8,12 +8,12 @@ case_number,borough,block,lot,address
 810052/2011,Manhattan,1914,146,"132 West 130th Street, New York, NY 10027"
 153027/2013,Manhattan,2060,38,"404 WEST 146TH STREET, NEW YORK, NY 10031"
 850110/2019,Manhattan,1171,2111,"240 RIVERSIDE BOULEVARD, UNIT 10A, NEW YORK, NY 10069"
-651246/2022,Manhattan,821,10,
-850188/2014,Manhattan,1287,1040,
-850111/2020,Manhattan,1090,1351,
-157781/2020,Manhattan,1845,1110,
-850219/2021,Manhattan,762,5,
-850085/2022,Manhattan,742,1032,
+651246/2022,Manhattan,821,10,"55 West 19th StreetNew York, New York 10011"
+850188/2014,Manhattan,1287,1040,"641 5th Avenue #26H, NewYork, NY10022."
+850111/2020,Manhattan,1090,1351,"627-635 West 42nd Street, Unit 15JNewYork, NY10036"
+157781/2020,Manhattan,1845,1110,"Unit 11K300 Cathedral ParkwayNew York, New York 10026"
+850219/2021,Manhattan,762,5,"510 9th Avenue, New York, NY 10018"
+850085/2022,Manhattan,742,1032,"305 West 18th st, Unit 2F, NY, NY 10011"
 850086/2022,Manhattan,742,1006,
 105925/2008,Manhattan,1815,44,
 117054/2008,Manhattan,1868,1240,
@@ -508,7 +508,7 @@ case_number,borough,block,lot,address
 702447/2014,Queens,,,
 711182/2017,Queens,,,
 711665/2017,Queens,,,
-700833/2022,Queens,,,
+700833/2022,Queens,12529,253,
 708606/2014,Queens,855,22,
 35507/2014E,Bronx,430,47,
 303519/2008E,Bronx,,,
@@ -536,7 +536,7 @@ case_number,borough,block,lot,address
 30930/2017E,Bronx,,,
 381069/2011,Bronx,,,
 381070/2011,Bronx,,,
-32600/2017E,Bronx,,,
+32600/2017E,Bronx,2360,1090,
 135393/2017,Staten Island,199,6,
 28101/2007,Brooklyn,,,
 15622/2008,Brooklyn,260,26,
