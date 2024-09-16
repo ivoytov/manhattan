@@ -10,13 +10,11 @@ const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.
 
 console.log('Connecting to Scraping Browser...');
 
-
-
 const boroughConfigDict = {
     "Queens": {
         courtId: "80",
         calendarId: "38968",
-    }, 
+    },
     "Manhattan": {
         courtId: "60",
         calendarId: "38272",
@@ -36,12 +34,18 @@ const boroughConfigDict = {
 }
 
 let auctionLots = []
+let maxDate = new Date()
+maxDate.setDate(maxDate.getDate() + 14)
+maxDate = maxDate.toISOString().split('T')[0]
 for (const borough in boroughConfigDict) {
-    auctionLots = auctionLots.concat( await getAuctionLots(borough, boroughConfigDict[borough]));
+    const newLots = await getAuctionLots(borough, boroughConfigDict[borough], maxDate)
+    console.log(`Scraped ${newLots.length} total foreclosure cases for ${borough}`)
+    auctionLots = auctionLots.concat(newLots);
 }
 
 
-const csvFilePath = 'transactions/foreclosure_auctions.csv';
+// case_number,borough,auction_date,has_nos,has_smf,has_judgement,has_nyscef
+const csvFilePath = 'foreclosures/cases.csv';
 const rows = [];
 // Read the CSV file
 createReadStream(csvFilePath)
@@ -50,13 +54,17 @@ createReadStream(csvFilePath)
         rows.push(row);
     })
     .on('end', async () => {
-        const newLots = auctionLots.filter(lot => !rows.some(({borough, case_number, date}) => borough === lot.borough && 
-                                                    case_number === lot.case_number && 
-                                                    date === lot.date))
+        const newLots = auctionLots.filter(lot => !rows.some(({ borough, case_number }) => borough === lot.borough &&
+            case_number === lot.case_number))
         rows.push(...newLots)
+        
+        console.log(`Found ${newLots.length} net new foreclosure cases before ${maxDate} across all boroughs.`)
+
 
         // Convert updated rows back to CSV
+        //case_number,borough,auction_date,case_name
         const opts = {
+            fields: ['case_number','borough','auction_date','case_name'],
             formatters: {
                 string: stringQuoteOnlyIfNecessaryFormatter()
             }
@@ -69,7 +77,7 @@ createReadStream(csvFilePath)
 
         console.log('CSV file has been updated with missing block and lot values.');
     });
-async function getAuctionLots(borough, {courtId, calendarId }) {
+async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     const browser = await connect({
         browserWSEndpoint: endpoint,
     });
@@ -87,7 +95,7 @@ async function getAuctionLots(borough, {courtId, calendarId }) {
     await page.locator("input#btnFindCalendar").click();
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
-    // check if there is an option select page
+    // check if there is an option to select on page
     if (await page.$("input#btnApply")) {
         page.locator("#showForm > tbody > tr:nth-child(6) > td > input:nth-child(1)").click()
         page.locator("input#btnApply").click()
@@ -104,7 +112,6 @@ async function getAuctionLots(borough, {courtId, calendarId }) {
             // Step 2: Remove the day of the week (Friday)
             let dateWithoutDay = dateString.replace(/^\w+ /, ""); // Removes the first word (the day)
 
-
             // Step 3: Create a Date object
             return new Date(dateWithoutDay);
         };
@@ -115,7 +122,7 @@ async function getAuctionLots(borough, {courtId, calendarId }) {
             const date = newDate.toISOString().split('T')[0];
             return {
                 case_number: dt.childNodes[0].wholeText.split(' ')[2],
-                date: date,
+                auction_date: date,
                 case_name: dt.children[0].text
             };
         });
@@ -123,6 +130,10 @@ async function getAuctionLots(borough, {courtId, calendarId }) {
 
     });
     browser.disconnect();
-    return auctionLots.map(lot => ({borough: borough, ...lot}))
+
+    console.log(`Scraped ${auctionLots.length} total foreclosure cases.`)
+    const filteredLots = auctionLots.filter(({ auction_date }) => auction_date < maxDate)
+                                    .map(lot => ({ borough: borough, ...lot }))
+    return filteredLots
 }
 

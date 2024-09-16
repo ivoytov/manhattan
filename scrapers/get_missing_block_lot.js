@@ -1,13 +1,15 @@
-import { createReadStream, writeFileSync, existsSync } from 'fs';
-import csv from 'csv-parser';
+import { writeFileSync, existsSync, createReadStream } from 'fs';
+import { readFile, readdir } from 'fs/promises'
+import neatCsv from 'neat-csv'
 import { Parser } from '@json2csv/plainjs';
 import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters'
-import { extractTextFromPdf, extractBlockLot, extractJudgement } from './utils.js';
-import { download_notice_of_sale } from './notice_of_sale.js'
-import { SingleBar } from 'cli-progress'
+import { extractTextFromPdf, extractBlockLot, extractJudgement, extractAddress } from './utils.js';
+import { download_filing } from './notice_of_sale.js'
+import { SingleBar, Presets } from 'cli-progress'
 import { exec } from 'child_process';
 import readline from 'readline';
 import path from 'path';
+import { readFileToArray } from './utils.js';
 
 // Check for the --interactive flag in the command-line arguments
 const isInteractive = process.argv.includes('--interactive');
@@ -17,120 +19,171 @@ const rl = isInteractive ? readline.createInterface({
     output: process.stdout
 }) : null;
 
-const browser = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser')+1] : null;
+const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
+const browser = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser') + 1] : SBR_WS_ENDPOINT;
 
-async function prompt(question) {
+const pbar = new SingleBar({
+    clearOnComplete: false,
+    hideCursor: false,
+    format: '{case_number} {bar} {percentage}% | time: {duration_formatted} | ETA: {eta_formatted} |  {value}/{total} | {auction_date}'
+}, Presets.shades_grey)
+
+// must parseInt() on the response if you want it to be a number
+// Function to prompt with a default answer
+async function prompt(question, defaultAnswer = '') {
     return new Promise((resolve) => {
-        rl.question(question, (answer) => {
-            resolve(parseInt(answer));
+        const formattedQuestion = defaultAnswer ? `${question} [${defaultAnswer}]: ` : `${question}: `;
+
+        rl.question(formattedQuestion, (answer) => {
+            if (answer.trim() === 'q') resolve(null)
+            resolve(answer.trim() === '' ? defaultAnswer : answer);
         });
     });
 }
 
-// File paths
-const csvFilePath = 'transactions/foreclosure_auctions.csv';
+async function getFilings() {
+    // Read LOG file
+    const logPath = 'foreclosures/cases.log'
+    let notInCEF = await readFileToArray(logPath);
+    notInCEF = notInCEF.filter(line => line.endsWith("Not in CEF")).map(line => line.split(' ')[0])
+    console.log("Not in CEF", notInCEF)
 
-// Read CSV and process each row
-async function processCSV() {
-    const rows = [];
 
     // Read the CSV file
-    createReadStream(csvFilePath)
-        .pipe(csv())
-        .on('data', (row) => {
-            rows.push(row);
-        })
-        .on('end', async () => {
-            const missing_cases = rows.filter(row => !row.block || !row.lot)
+    const casesPath = 'foreclosures/cases.csv'
+    const rows = await neatCsv(await readFile(casesPath))
 
-            console.log("The following cases are missing PDF files:")
-            const missing_pdfs = missing_cases.filter(({ case_number }) => !existsSync(`saledocs/${case_number.replace('/', '-')}.pdf`))
-            missing_pdfs.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
+    const pbar = new SingleBar({
+        clearOnComplete: false,
+        hideCursor: true,
+        format: '{case_number} {bar} {percentage}% | time: {duration_formatted} | ETA: {eta_formatted} |  {value}/{total}'
+    }, Presets.shades_grey)
+    const start = process.argv.includes('--skip') ? parseInt(process.argv[process.argv.indexOf('--skip') + 1]) : 0;
+    const subrows = rows.slice(start, rows.length)
+    pbar.start(rows.length, start + 1)
+    for (const [idx, row] of subrows.entries()) {
+        pbar.update(idx + start + 1, row)
+        if (row.case_number in notInCEF) {
+            continue
+        }
+        try {
+            await download_filing(row.case_number, row.borough, browser);
+        } catch (e) {
+            console.warn("\n\nError with", row.case_number, row.borough, "error:", e)
+        }
+    }
 
-            const missing_bbls = missing_cases.filter(row => !missing_pdfs.includes(row))
-            console.log("The following cases are missing BBL info:")
-            missing_bbls.forEach((row, idx) => console.log(idx, row.case_number, row.borough))
-
-            const pbar = new SingleBar()
-            pbar.start(missing_cases.length, 0)
-            // Process rows with missing block and lot
-            for (const row of rows) {
-                if (!row.block || !row.lot) {
-                    const indexNumber = row.case_number;
-                    const pdfPath = path.resolve(`saledocs/${indexNumber.replace('/', '-')}.pdf`);
-
-                    try {
-                        // Check if PDF already exists
-                        if (!existsSync(pdfPath)) {
-                            console.log(`\nCouldn't find ${pdfPath}, downloading...`)
-                            // Download PDF
-                            const res = await download_notice_of_sale(indexNumber, row.borough, browser);
-                            if (!res) {
-                                if (isInteractive) {
-                                    // Get 'block' and 'lot' from the user
-                                    console.log(`\nGet BBL for ${indexNumber}`)
-                                    if (!row.block) {
-                                        row.block = parseInt(await prompt('Enter block: '));    
-                                    }
-                                    if (!row.lot) {
-                                        row.lot = parseInt(await prompt('Enter lot: '))
-                                    }                                    
-                                }
-                                continue
-                            }
-                        }
-
-                        // Extract text from PDF
-                        const text = await extractTextFromPdf(pdfPath);
-
-                        // Extract block and lot
-                        let [block, lot] = extractBlockLot(text);
-                        if (isInteractive && (!block || !lot)) {
-                            // Open the PDF file with the default application on macOS
-                            const child = exec(`open "${pdfPath}"`);
-
-                            // Get 'block' and 'lot' from the user
-                            console.log("\nOpening pdf file")
-                            block = await prompt('Enter block: ');
-                            lot = await prompt('Enter lot: ');
-
-                            // Close the PDF
-                            exec(`osascript -e 'tell application "Preview" to close (every document whose path is "${pdfPath}")'`);
-                        }
-
-                        // Update row with new block and lot
-                        row.block = block;
-                        row.lot = lot;
-                        row.judgement = extractJudgement(text)
-                        console.log(`Updated ${indexNumber} with block: ${block} and lot: ${lot} and judgement ${row.lien}`)
-                    } catch (e) {
-                        console.error("Error during PDF processing:", indexNumber, e);
-                    } finally {
-                        pbar.increment()
-                    }
-
-                }
-            }
-            pbar.stop()
-            if (isInteractive) rl.close()
-
-            // Configuration options for json2csv
-            const opts = {
-                formatters: {
-                    string: stringQuoteOnlyIfNecessaryFormatter()
-                }
-            }
-
-            // Convert updated rows back to CSV
-            const parser = new Parser(opts);
-            const updatedCsv = parser.parse(rows) + '\n';
-
-
-            // Write updated CSV to file
-            writeFileSync(csvFilePath, updatedCsv, 'utf8');
-
-            console.log('CSV file has been updated with missing block and lot values.');
-        });
 }
 
-processCSV().catch(err => console.error("Error updating the CSV file", err));
+// fill in lots info
+async function getBlockAndLot() {
+    // read in the cases file
+    const cases = await neatCsv(await readFile("foreclosures/cases.csv"))
+    const lotsPath = "foreclosures/lots.csv"
+    const lots = await neatCsv(await readFile(lotsPath))
+
+    // read in which files exist
+    const dir = 'saledocs/noticeofsale'
+    const items = await readdir(dir, { withFileTypes: true });
+
+    const files = items
+        .filter(item => item.isFile())
+        .map(item => item.name.slice(0, item.name.length - 4).replace('-', '/'));
+
+    const casesWithFiles = cases.filter(cse => files.some(file => file === cse.case_number))
+        .sort((a, b) => new Date(b.auction_date) - new Date(a.auction_date))
+
+    // pbar.start(casesWithFiles.length, 1)
+
+    for (const [idx, foreclosureCase] of casesWithFiles.entries()) {
+        // pbar.update(idx, foreclosureCase)
+        const case_number = foreclosureCase.case_number
+        console.log(`${case_number} ${foreclosureCase.borough} ${foreclosureCase.auction_date}`)
+        let row = lots.find((lot) => lot.case_number == case_number)
+
+        if (!row) {
+            console.log(case_number, "not found in lots.csv")
+            row = { case_number: case_number, borough: foreclosureCase.borough }
+            lots.push(row)
+        }
+
+        if (row.block && row.lot) { // && row.address) {
+            continue
+        }
+
+        // Extract text from PDF
+        const filename = case_number.replace('/', '-') + ".pdf"
+        const pdfPath = dir + "/" + filename
+
+        // Extract block and lot
+        let text = null
+        try {
+            text = await extractTextFromPdf(pdfPath);
+        } catch (e) {
+            console.error(case_number, "Error extracting text from ", pdfPath, e)
+            continue
+        }
+        let [block, lot] = extractBlockLot(text);
+        let address = await extractAddress(text);
+
+        if (isInteractive) {
+            // Get 'block' and 'lot' from the user
+            // Open the PDF file with the default application on macOS
+            exec(`open "${pdfPath}"`);
+            if (!row.block) {
+                const input = await prompt('Enter block: ', block ?? '')
+                if (input === null) break
+                row.block = parseInt(input);
+            } else {
+                console.log("Block", row.block)
+            }
+            if (!row.lot) {
+                row.lot = parseInt(await prompt('Enter lot: ', lot ?? ''))
+            } else {
+                console.log("Lot", row.lot)
+            }
+            // if (!row.address) {
+            //     const input = await prompt('Enter address: ', address ?? '')
+            //     if (input === null) break
+            //     row.address = input
+            // }
+            while(true) {
+                const more = await prompt('Is there another lot in the auction (y/n)?', 'n')
+                if (more == 'n') break 
+                // make another row in lots
+                row = { case_number: case_number, borough: foreclosureCase.borough }
+                lots.push(row)
+                row.block = parseInt(await prompt('Enter block: ', ''))
+                row.lot = parseInt(await prompt('Enter lot: ', ''))
+                // row.address = await prompt('Enter address: ', '')
+            }
+            
+
+            exec(`osascript -e 'tell application "Preview" to close (every document whose name is "${filename}")'`);
+
+        }
+
+    }
+
+    // pbar.stop()
+    if (isInteractive) rl.close()
+
+    // Configuration options for json2csv
+    const opts = {
+        formatters: {
+            string: stringQuoteOnlyIfNecessaryFormatter()
+        }
+    }
+
+    // Convert updated rows back to CSV
+    const parser = new Parser(opts);
+    const updatedCsv = parser.parse(lots) + '\n';
+
+    // Write updated CSV to file
+    writeFileSync(lotsPath, updatedCsv, 'utf8');
+
+    console.log('CSV file has been updated with missing block and lot values.');
+}
+
+// getFilings()
+getBlockAndLot()

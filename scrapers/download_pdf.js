@@ -5,7 +5,7 @@ import { open } from 'fs/promises'
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 
 export async function download_pdf(url, fileName = url.split('/').pop()) { 
-    console.log(`In download_pdf with url: ${url}`); 
+    // console.log(`In download_pdf with url: ${url}`); 
 
     const browser = await connect({ 
         browserWSEndpoint: SBR_WS_ENDPOINT, 
@@ -66,7 +66,7 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
             throw new Error("PDF content seems too small, might be corrupted."); 
         } 
 
-        console.log('PDF downloaded successfully'); 
+        // console.log('PDF downloaded successfully'); 
         return fileName; 
     } catch (e) { 
         console.error("Error during PDF processing:", e); 

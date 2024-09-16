@@ -14,23 +14,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 2
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'  
+        fetch-depth: 2 
         
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'  
 
-    - name: Install python dependencies
+    - name: Install Teseract
       run: |
         sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils graphicsmagick -y
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
 
     - name: Install node and dependencies
       run: |
@@ -40,8 +33,6 @@ jobs:
       env:
         BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
-        python -u scrapers/manhattan.py
-        python -u scrapers/bronx.py
         node scrapers/get_missing_block_lot.js
 
     - name: Set up Julia

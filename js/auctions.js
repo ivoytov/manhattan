@@ -1,5 +1,5 @@
 // Function to load CSV file using PapaParse
-function loadCSV(url, dateKey = "date") {
+function loadCSV(url, dateKey = "auction_date") {
     return new Promise((resolve, reject) => {
         Papa.parse(url, {
             download: true,
@@ -7,21 +7,20 @@ function loadCSV(url, dateKey = "date") {
             skipEmptyLines: true,
             dynamicTyping: true,
             complete: results => {
-                // Convert "SALE DATE" property to JavaScript Date objects
-                results.data = results.data.map(obj => {
+                if (dateKey) {
+                    // Convert "SALE DATE" property to JavaScript Date objects
+                    results.data = results.data.map(obj => {
+                        // Use destructuring to get other properties if needed
+                        const { [dateKey]: saleDate, ...rest } = obj;
 
-                    // Use destructuring to get other properties if needed
-                    const { [dateKey]: saleDate, ...rest } = obj;
+                        // Convert string to Date, set to midnight (otherwise date filter doesn't work)
+                        const saleDateObj = new Date(saleDate);
+                        saleDateObj.setHours(24, 0, 0, 0)
 
-                    // Convert string to Date, set to midnight (otherwise date filter doesn't work)
-                    const saleDateObj = new Date(saleDate);
-                    saleDateObj.setHours(24, 0, 0, 0)
-
-                    // Add other properties back if needed
-                    return { [dateKey]: saleDateObj, ...rest };
-                });
-
-
+                        // Add other properties back if needed
+                        return { [dateKey]: saleDateObj, ...rest };
+                    });
+                }
                 resolve(results.data);
             },
             error: error => {
@@ -46,14 +45,14 @@ function updateURLWithFilters(filters) {
 
 function applyFiltersFromURL() {
     const params = new URLSearchParams(window.location.search);
-    if(params.size == 0) {
+    if (params.size == 0) {
         const currentDate = new Date();
         const futureDate = new Date();
         futureDate.setDate(currentDate.getDate() + 7);
-        gridApi.setColumnFilterModel('date', {
+        gridApi.setColumnFilterModel('auction_date', {
             dateFrom: currentDate.toISOString(),
-            dateTo: futureDate.toISOString(), 
-            filterType: "date", 
+            dateTo: futureDate.toISOString(),
+            filterType: "auction_date",
             type: "inRange"
         })
         gridApi.onFilterChanged()
@@ -79,7 +78,7 @@ const columnDefs = [
         filter: 'agSetColumnFilter',
         suppressSizeToFit: true,
         minWidth: 40,
-      },
+    },
     {
         field: "borough",
         filter: 'agSetColumnFilter',
@@ -95,7 +94,7 @@ const columnDefs = [
     },
     {
         headerName: "Auction Date",
-        field: "date",
+        field: "auction_date",
         suppressSizeToFit: true,
         minWidth: 120,
         filter: 'agDateColumnFilter',
@@ -144,8 +143,8 @@ function zoomToBlock(event) {
         return
     }
     const key = `${event.node.data.block}-${event.node.data.borough}`;
-    map.fitBounds(markers[key].getBounds(), {maxZoom: 14})
-  }
+    map.fitBounds(markers[key].getBounds(), { maxZoom: 14 })
+}
 
 // Initialize AG Grid
 const gridOptions = {
@@ -252,26 +251,40 @@ const gridApi = agGrid.createGrid(gridDiv, gridOptions)
 applyFiltersFromURL(gridApi);
 
 const csvPromises = [
-    loadCSV('transactions/auction_sales.csv', 'SALE DATE'),
-    loadCSV('transactions/foreclosure_auctions.csv', 'date')
+    loadCSV('foreclosures/auction_sales.csv', 'SALE DATE'),
+    loadCSV('foreclosures/cases.csv', dateKey = 'auction_date'),
+    loadCSV('foreclosures/lots.csv', dateKey = null)
 ]
 
 // Use Promise.all to wait for all promises to resolve
-Promise.all(csvPromises).then(([sales, auctions]) => {
+Promise.all(csvPromises).then(([sales, auctions, lots]) => {
     combinedData = sales
     // get the address from transaction records
     for (const auction of auctions) {
-        const transactions = getTransactions(auction)
+        const lot = lots.find(({case_number}) => case_number == auction.case_number)
+
+        if(lot) {
+            auction.block = lot.block
+            auction.lot = lot.lot
+            auction.address = lot.address
+        } else {
+            auction.block = null
+            auction.lot = null
+            auction.address = null
+        }
         
+
+        const transactions = getTransactions(auction)
+
         if (transactions.length > 0) {
             if (!auction.address) {
                 auction.address = transactions[transactions.length - 1]["ADDRESS"]
             }
-            auction.isSold = transactions.some(t => {
+            auction.isSold = new Date() > auction.date ? transactions.some(t => {
                 const millisecondsInADay = 24 * 60 * 60 * 1000;
-                const dayDifference = (t["SALE DATE"] - auction.date ) / millisecondsInADay
+                const dayDifference = (t["SALE DATE"] - auction.date) / millisecondsInADay
                 return dayDifference >= 0 && dayDifference <= 90 && t["SALE PRICE"] > 10000
-            })
+            }) : null
         }
 
     }
@@ -339,7 +352,7 @@ const borough_dict = {
 let markers = {};
 
 // Load the GeoJSON file
-fetch('transactions/auctions.geojson')
+fetch('foreclosures/auctions.geojson')
     .then(response => response.json())
     .then(geojsonFeature => {
         lots = L.geoJSON(geojsonFeature, {
