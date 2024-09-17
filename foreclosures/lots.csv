@@ -77,7 +77,7 @@ case_number,borough,block,lot,address
 704072/2019,Queens,12044,55,
 718290/2019,Queens,11682,45,
 717755/2021,Queens,133,24,
-725487/2020,Queens,2019,5,
+725487/2020,Queens,1701,102,"32-17 106th Street, East Elmhurst, New York 11369"
 709107/2021,Queens,13435,17,
 705474/2016,Queens,2007,4,
 701689/2018,Queens,110,25,
@@ -542,10 +542,10 @@ case_number,borough,block,lot,address
 32600/2017E,Bronx,2360,1090,
 135393/2017,Staten Island,199,6,
 28101/2007,Brooklyn,,,
-15622/2008,Brooklyn,260,26,
+15622/2008,Brooklyn,8513,43,"1796 East 53rd Street, Brooklyn, NY 11234."
 20156/2008,Brooklyn,,,
 30795/2008,Brooklyn,205,11,
-9760/2009,Brooklyn,260,26,
+9760/2009,Brooklyn,6976,8,"3854 Laurel Avenue, Brooklyn, NY 11224"
 11054/2009,Brooklyn,663,66,
 21316/2009,Brooklyn,,,
 13127/2012,Brooklyn,991,1,

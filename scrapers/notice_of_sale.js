@@ -17,7 +17,7 @@ const county_map = {
 }
 
 const FilingType = Object.freeze({
-    JUDGEMENT: { id: "1310", dir: "judgement" },
+    // JUDGEMENT: { id: "1310", dir: "judgement" },
     NOTICE_OF_SALE: { id: "1163", dir: "noticeofsale" },
     SURPLUS_MONEY_FORM: { id: "1741", dir: "surplusmoney" }
 })
@@ -44,8 +44,8 @@ function missing_filings(index_number) {
 }
 
 
-export async function download_filing(index_number, county, endpoint = SBR_WS_ENDPOINT) {
-    const missingFilings = missing_filings(index_number)
+export async function download_filing(index_number, county, endpoint = SBR_WS_ENDPOINT, filings = null) {
+    const missingFilings = filings ?? missing_filings(index_number)
     if (!missingFilings.length) {
         // no filings to get
         // console.log("No filings to get")

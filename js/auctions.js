@@ -109,6 +109,18 @@ const columnDefs = [
         headerName: "Lot", field: "lot",
         filter: 'agNumberColumnFilter',
     },
+    {
+        headerName: "Judgement Amt", field: "judgement",
+        valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
+    },
+    {
+        headerName: "Upset Price", field: "upset_price",
+        valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
+    },
+    {
+        headerName: "Sale Price", field: "winning_bid",
+        valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
+    }
 
 ]
 
@@ -253,27 +265,31 @@ applyFiltersFromURL(gridApi);
 const csvPromises = [
     loadCSV('foreclosures/auction_sales.csv', 'SALE DATE'),
     loadCSV('foreclosures/cases.csv', dateKey = 'auction_date'),
-    loadCSV('foreclosures/lots.csv', dateKey = null)
+    loadCSV('foreclosures/lots.csv', dateKey = null),
+    loadCSV('foreclosures/bids.csv', dateKey = null)
 ]
 
 // Use Promise.all to wait for all promises to resolve
-Promise.all(csvPromises).then(([sales, auctions, lots]) => {
+Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
     combinedData = sales
     // get the address from transaction records
     for (const lot of lots) {
         const auctionMatches = auctions.filter(({ case_number }) => case_number == lot.case_number)
-        if (!auctionMatches) {
+        if (!auctionMatches.length) {
             console.log("Couldn't find a match for lot", lot.case_number)
             continue
         }
         
         const auction = auctionMatches[0]
-        if(!auction) {
-            console.log("Couldn't find a match for lot", lot.case_number)
-            continue
-        }
         lot.auction_date = auction.auction_date
         lot.case_name = auction.case_name
+
+        const result = bids.find(({case_number}) => case_number == lot.case_number)
+        if(result) {
+            lot.judgement = result.judgement
+            lot.upset_price = result.upset_price
+            lot.winning_bid = result.winning_bid
+        }
 
         const transactions = getTransactions(lot)
 
