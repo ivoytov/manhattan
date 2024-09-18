@@ -16,7 +16,7 @@ const county_map = {
     "Staten Island": "43",
 }
 
-const FilingType = Object.freeze({
+export const FilingType = Object.freeze({
     // JUDGEMENT: { id: "1310", dir: "judgement" },
     NOTICE_OF_SALE: { id: "1163", dir: "noticeofsale" },
     SURPLUS_MONEY_FORM: { id: "1741", dir: "surplusmoney" }
@@ -37,15 +37,21 @@ function missing_filings(index_number) {
         const filename = index_number.replace('/', '-') + ".pdf"
         const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
         if (!existsSync(pdfPath)) { 
-            out.push(f)
+            out.push(FilingType[f])
         }
     }
     return out
 }
 
 
-export async function download_filing(index_number, county, endpoint = SBR_WS_ENDPOINT, filings = null) {
-    const missingFilings = filings ?? missing_filings(index_number)
+export async function download_filing(index_number, county, endpoint = SBR_WS_ENDPOINT, filing = null) {
+    const filename = index_number.replace('/', '-') + ".pdf"
+    let missingFilings = missing_filings(index_number)
+    
+    if(filing) {
+        missingFilings = missingFilings.filter(f => f.id == filing.id)
+    }
+    
     if (!missingFilings.length) {
         // no filings to get
         // console.log("No filings to get")
@@ -89,11 +95,8 @@ export async function download_filing(index_number, county, endpoint = SBR_WS_EN
         return options.map(el => el.value)
     })
     let res;
+    for (const {dir, id} of missingFilings) {
 
-    for (const filing of missingFilings) {
-        const {dir, id} = FilingType[filing]
-        // console.log(filing, dir, id)
-        const filename = index_number.replace('/', '-') + ".pdf"
         const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
         if (!existsSync(pdfPath) && availableFilings.includes(id)) {
             // console.log(`Trying to get filing ${id}`)

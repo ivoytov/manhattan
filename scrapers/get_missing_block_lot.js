@@ -4,7 +4,7 @@ import neatCsv from 'neat-csv'
 import { Parser } from '@json2csv/plainjs';
 import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters'
 import { extractTextFromPdf, extractBlock, extractLot, extractJudgement, extractAddress } from './utils.js';
-import { download_filing } from './notice_of_sale.js'
+import { download_filing, FilingType } from './notice_of_sale.js'
 import { SingleBar, Presets } from 'cli-progress'
 import { exec } from 'child_process';
 import readline from 'readline';
@@ -25,6 +25,7 @@ const browser = process.argv.includes('--browser') ? process.argv[process.argv.i
 const pbar = new SingleBar({
     clearOnComplete: false,
     hideCursor: false,
+    etaBuffer: 100,
     format: '{case_number} {bar} {percentage}% | time: {duration_formatted} | ETA: {eta_formatted} |  {value}/{total} | {auction_date}'
 }, Presets.shades_grey)
 
@@ -74,13 +75,50 @@ async function getFilings() {
         try {
             // if auction date in the future, only get the notice of sale, otherwise get the surplus money form too
             const today = new Date()
-            const filings = (new Date(row.auction_date) < today) ? null : [FilingType.NOTICE_OF_SALE]
-            await download_filing(row.case_number, row.borough, browser, filings);
+            const filing = (new Date(row.auction_date) < today) ? null : FilingType.NOTICE_OF_SALE
+            await download_filing(row.case_number, row.borough, browser, filing);
         } catch (e) {
             console.warn("\n\nError with", row.case_number, row.borough, "error:", e)
         }
     }
 
+}
+
+async function get_winning_bids(casesWithFiles, bids) {
+    for (const [idx, foreclosureCase] of casesWithFiles.entries()) {
+        const case_number = foreclosureCase.case_number
+        console.log(case_number, foreclosureCase.auction_date, `${idx}/${casesWithFiles.length}`)
+        let row = bids.find((bid) => bid.case_number == case_number)
+
+        if (!row) {
+            console.log(case_number, "not found in bids.csv")
+            row = { case_number: case_number, borough: foreclosureCase.borough, auction_date: foreclosureCase.auction_date }
+            bids.push(row)
+        }
+
+        if (row.judgement && row.upset_price && row.winning_bid) { 
+            continue
+        }
+        console.log(`${case_number} ${foreclosureCase.borough} ${foreclosureCase.auction_date}`)
+
+        // Extract text from PDF manually
+        const filename = case_number.replace('/', '-') + ".pdf"
+        const dir = 'saledocs/surplusmoney'
+        const pdfPath = dir + "/" + filename
+
+        // Open the PDF file with the default application on macOS
+        exec(`open "${pdfPath}"`);
+        
+        for (const key of ["judgement", "upset_price", "winning_bid", "auction_date"]) {
+            const input = await prompt(`Enter ${key}:`, row[key] ?? '')
+            if (input == '') return bids
+            row[key] = key === "auction_date" ? input: parseFloat(input);
+        }
+
+        exec(`osascript -e 'tell application "Preview" to close (every document whose name is "${filename}")'`);
+
+    }
+    return bids
 }
 
 async function getAuctionResults() {
@@ -100,71 +138,13 @@ async function getAuctionResults() {
     const casesWithFiles = cases.filter(cse => files.some(file => file === cse.case_number))
         .sort((a, b) => new Date(b.auction_date) - new Date(a.auction_date))
 
-    for (const foreclosureCase of casesWithFiles) {
-        const case_number = foreclosureCase.case_number
-        let row = bids.find((bid) => bid.case_number == case_number)
+    const updatedBids = await get_winning_bids(casesWithFiles, bids)
 
-        if (!row) {
-            console.log(case_number, "not found in bids.csv")
-            row = { case_number: case_number, borough: foreclosureCase.borough }
-            bids.push(row)
-        }
-
-        if (row.judgement && row.upset_price && row.winning_bid) { 
-            continue
-        }
-        console.log(`${case_number} ${foreclosureCase.borough} ${foreclosureCase.auction_date}`)
-
-
-        // Extract text from PDF
-        const filename = case_number.replace('/', '-') + ".pdf"
-        const pdfPath = dir + "/" + filename
-
-        // Extract block and lot
-        let text = null
-        try {
-            text = await extractTextFromPdf(pdfPath);
-        } catch (e) {
-            console.error(case_number, "Error extracting text from ", pdfPath, e)
-            continue
-        }
-        
-
-        if (isInteractive) {
-            // Get 'block' and 'lot' from the user
-            // Open the PDF file with the default application on macOS
-            exec(`open "${pdfPath}"`);
-            if (!row.judgement) {
-                const input = await prompt('Enter judgement:')
-                if (input == '') break
-                row.judgement = parseFloat(input);
-            } else {
-                console.log("Judgement", row.judgement)
-            }
-            if (!row.upset_price) {
-                const input = await prompt('Enter upset_price:')
-                if (input == '') break
-                row.upset_price = parseFloat(input);
-            } else {
-                console.log("upset_price", row.upset_price)
-            }
-            if (!row.winning_bid) {
-                const input = await prompt('Enter winning_bid:')
-                if (input == '') break
-                row.winning_bid = parseFloat(input);
-            } else {
-                console.log("winning_bid", row.winning_bid)
-            }
-
-            exec(`osascript -e 'tell application "Preview" to close (every document whose name is "${filename}")'`);
-        }
-
-    }
+    
     if (isInteractive) rl.close()
 
-
     // Convert updated rows back to CSV
-    const updatedCsv = parser.parse(bids) + '\n';
+    const updatedCsv = parser.parse(updatedBids) + '\n';
 
     // Write updated CSV to file
     writeFileSync(bidsPath, updatedCsv, 'utf8');
@@ -196,7 +176,7 @@ async function getBlockAndLot() {
         let row = lots.find((lot) => lot.case_number == case_number)
 
         if (!row) {
-            console.log(case_number, "not found in lots.csv")
+            // console.log(case_number, "not found in lots.csv")
             row = { case_number: case_number, borough: foreclosureCase.borough }
             lots.push(row)
         }
@@ -239,11 +219,11 @@ async function getBlockAndLot() {
             } else {
                 console.log("Lot", row.lot)
             }
-            // if (!row.address) {
-            //     const input = await prompt('Enter address: ', address ?? '')
-            //     if (input === null) break
-            //     row.address = input
-            // }
+            if (!row.address) {
+                const input = await prompt('Enter address: ', address ?? '')
+                if (input === null) break
+                row.address = input
+            }
             while (true) {
                 const more = await prompt('Is there another lot in the auction (y/n)?', 'n')
                 if (more == 'n') break

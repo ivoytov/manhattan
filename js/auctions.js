@@ -109,14 +109,14 @@ const columnDefs = [
         headerName: "Lot", field: "lot",
         filter: 'agNumberColumnFilter',
     },
-    {
-        headerName: "Judgement Amt", field: "judgement",
-        valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
-    },
-    {
-        headerName: "Upset Price", field: "upset_price",
-        valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
-    },
+    // {
+    //     headerName: "Judgement Amt", field: "judgement",
+    //     valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
+    // },
+    // {
+    //     headerName: "Upset Price", field: "upset_price",
+    //     valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
+    // },
     {
         headerName: "Sale Price", field: "winning_bid",
         valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
@@ -284,7 +284,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
         lot.auction_date = auction.auction_date
         lot.case_name = auction.case_name
 
-        const result = bids.find(({case_number}) => case_number == lot.case_number)
+        const result = bids.find(({case_number, auction_date}) => case_number == lot.case_number && auction_date == lot.auction_date)
         if(result) {
             lot.judgement = result.judgement
             lot.upset_price = result.upset_price

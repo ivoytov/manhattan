@@ -21,10 +21,6 @@ jobs:
       with:
         node-version: '20'  
 
-    - name: Install Teseract
-      run: |
-        sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils graphicsmagick -y
-
     - name: Install node and dependencies
       run: |
         npm install
@@ -33,7 +29,7 @@ jobs:
       env:
         BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
-        node scrapers/get_missing_block_lot.js
+        node scrapers/calendar.js
 
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1

@@ -75,7 +75,7 @@ createReadStream(csvFilePath)
         // Write updated CSV to file
         writeFileSync(csvFilePath, updatedCsv, 'utf8');
 
-        console.log('CSV file has been updated with missing block and lot values.');
+        console.log('CSV file has been updated with new foreclosure cases.');
     });
 async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     const browser = await connect({
