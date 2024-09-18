@@ -478,7 +478,7 @@ case_number,borough,block,lot,address
 715033/2020,Queens,13270,40,
 245700025/2021,Queens,,,
 707103/2023,Queens,,,
-724510/2020,Queens,,,
+724510/2020,Queens,12632,45,"118-25 202nd Street, Saint Albans, NY 11412"
 714823/2021,Queens,,,
 707237/2014,Queens,216,16,
 707691/2014,Queens,280,26,
@@ -528,7 +528,7 @@ case_number,borough,block,lot,address
 808046/2023E,Bronx,3237,90,
 35411/2013E,Bronx,4790,20,
 32450/2016E,Bronx,845,25,
-814427/2021E,Bronx,,,
+814427/2021E,Bronx,5725,1020,"2600 Henry HudsonParkway, Unit 5D, Bronx, NY 10463"
 381105/2007E,Bronx,,,
 35507/2014E,Bronx,430,47,
 35256/2015E,Bronx,2684,143,
@@ -688,7 +688,7 @@ case_number,borough,block,lot,address
 130779/2011,Staten Island,,,
 135390/2015,Staten Island,3108,28,
 135355/2017,Staten Island,918,252,
-135094/2018,Staten Island,,,
+135094/2018,Staten Island,5108,9,"82 Greencroft Avenue, Staten Island, NY 10308"
 135014/2019,Staten Island,,,
 135164/2019,Staten Island,7702,302,
 135053/2020,Staten Island,,,
