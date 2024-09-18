@@ -96,7 +96,7 @@ async function get_winning_bids(casesWithFiles, bids) {
             bids.push(row)
         }
 
-        if (row.judgement && row.upset_price && row.winning_bid) { 
+        if (row.judgement && row.upset_price && row.winning_bid && row.auction_date) { 
             continue
         }
         console.log(`${case_number} ${foreclosureCase.borough} ${foreclosureCase.auction_date}`)
