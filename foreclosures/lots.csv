@@ -464,7 +464,7 @@ case_number,borough,block,lot,address
 709519/2017,Queens,855,22,
 706794/2018,Queens,227,50,
 701288/2019,Queens,10193,22,
-713191/2020,Queens,,,
+713191/2020,Queens,12573,10,
 723598/2022,Queens,131,46,
 721068/2021,Queens,7805,41,
 723024/2021,Queens,430,47,
@@ -484,8 +484,8 @@ case_number,borough,block,lot,address
 707691/2014,Queens,280,26,
 702169/2017,Queens,430,47,
 705181/2017,Queens,,,
-710581/2018,Queens,,,
-711316/2018,Queens,,,
+710581/2018,Queens,10896,1,"20002 104th Ave, Saint Albans, NY 11412"
+711316/2018,Queens,8639,75,"24855 A/K/A 248-55 88th Road, Bellerose, NY 11426"
 717146/2017,Queens,430,47,
 706830/2019,Queens,,,
 717123/2020,Queens,2006,1,
@@ -654,11 +654,11 @@ case_number,borough,block,lot,address
 150703/2023,Staten Island,,,
 152044/2022,Staten Island,1673,30,
 130404/2012,Staten Island,7866,45,
-130692/2013,Staten Island,,,
+130692/2013,Staten Island,499,62,
 130074/2014,Staten Island,,,
-130126/2014,Staten Island,,,
+130126/2014,Staten Island,7892,82,"191 Chelsea Street, Staten Island, NY 10307"
 135462/2014,Staten Island,5642,7,
-130029/2015,Staten Island,,,
+130029/2015,Staten Island,6029,84,"36 Raily Court, Staten Island, NY 10312"
 135263/2015,Staten Island,4058,251,
 135553/2018,Staten Island,7996,1,
 135239/2019,Staten Island,5744,21,
@@ -683,19 +683,19 @@ case_number,borough,block,lot,address
 135218/2022,Staten Island,3629,20,
 150932/2023,Staten Island,564,30,
 103572/2008,Staten Island,2005,7,
-131221/2013,Staten Island,,,
+131221/2013,Staten Island,1127,12,
 135162/2013,Staten Island,139,12,
 130779/2011,Staten Island,,,
 135390/2015,Staten Island,3108,28,
 135355/2017,Staten Island,918,252,
 135094/2018,Staten Island,5108,9,"82 Greencroft Avenue, Staten Island, NY 10308"
-135014/2019,Staten Island,,,
+135014/2019,Staten Island,1254,24,"115 South Avenue, Staten Island, NY 10303"
 135164/2019,Staten Island,7702,302,
 135053/2020,Staten Island,,,
-135143/2022,Staten Island,,,
+135143/2022,Staten Island,3066,51,
 135166/2022,Staten Island,6221,61,
 135223/2022,Staten Island,,,
-135285/2022,Staten Island,,,
+135285/2022,Staten Island,3019,1036,"95D Narrows Road North a/k/a 8D-95D Narrows Road North, Staten Island,"
 151627/2022,Staten Island,7105,506,
 135176/2023,Staten Island,,,
 135276/2023,Staten Island,,,
@@ -715,11 +715,45 @@ case_number,borough,block,lot,address
 135033/2014,Staten Island,2401,1302,
 380625/2011E,Bronx,5058,50,
 517743/2019,Brooklyn,8148,7,
-850207/2019,Manhattan,,,
-850596/2023,Manhattan,,,
+850207/2019,Manhattan,1009,37,
+850596/2023,Manhattan,1009,37,
 850370/2014,Manhattan,1223,1226,
 810049/2012,Manhattan,25,1503,
 655136/2020,Manhattan,763,65,
 850044/2021,Manhattan,16,1878,
 159028/2023,Manhattan,1171,2226,
 160015/2023,Manhattan,190,1440,"25 N. Moore St, Apt 7B, New York, NY 10013"
+850041/2019,Manhattan,1006,1303,
+850026/2019,Manhattan,1006,1303,
+850208/2018,Manhattan,1006,1303,
+850375/2023,Manhattan,1006,1303,
+850339/2013,Manhattan,2023,27,"203 West 137th Street, New York, NY 10030"
+850032/2023,Manhattan,860,34,
+850179/2023,Manhattan,1009,37,"102 WEST 57TH STREET, NEW YORK, NY 10019"
+850190/2023,Manhattan,1006,1302,"1335 AVENUE OF THE AMERICAS, NEW YORK, NY 10019"
+850233/2023,Manhattan,1009,37,"102 WEST 57TH STREET, NEW YORK, NY 10019"
+850285/2023,Manhattan,1006,1302,"1335 AVENUE OF THE AMERICAS, NEW YORK, NY 10019"
+850122/2017,Manhattan,1009,37,
+16332/2008,Brooklyn,5418,47,"375 Webster Avenue, Brooklyn, NY 11230"
+22410/2008,Brooklyn,3362,39,"333 Woodbine Street, Brooklyn, NY 11237"
+32025/2009,Brooklyn,7677,35,"2322 Avenue N, Brooklyn, NY 11210"
+996/2010,Brooklyn,2248,1004,"420 Marcy Avenue Unit No. 4, Brooklyn, NY  11206"
+28569/2011,Brooklyn,3851,23,"584 Hinsdale Street, Brooklyn, NY 11207"
+18008/2009,Brooklyn,4691,30,"486 E 95TH ST, BROOKLYN, NY 11212"
+27190/2009,Brooklyn,5165,51,"2179 Clarendon Road, Brooklyn, New York 11226"
+500601/2013,Brooklyn,4727,37,"5515 Tilden Avenue, Brooklyn, NY 11203"
+501252/2013,Brooklyn,4988,16,
+519103/2017,Brooklyn,3664,28,"90 Miller Avenue and Miller Avenue, Brooklyn, NY 11207"
+519103/2017,Brooklyn,3664,29,"90 Miller Avenue, Brooklyn, NY 11207"
+511253/2019,Brooklyn,3723,6,"281 Vermont Street, Brooklyn, NY 11207"
+514946/2019,Brooklyn,2605,17,
+514946/2019,Brooklyn,2605,30,"273 Russell St, Brooklyn, NY"
+514946/2019,Brooklyn,2625,148,"146 Diamon St, Brooklyn, NY"
+514946/2019,Brooklyn,2575,14,"313 Eckford St, Brooklyn, NY"
+516919/2019,Brooklyn,1851,2,
+517140/2019,Brooklyn,3539,17,"165 HERZL STREET, BROOKLYN, NY 11212"
+520824/2019,Brooklyn,8283,13,"1365 East 99th Street, Brooklyn, NY 11236"
+521890/2019,Brooklyn,1160,72,"375 Park Place, Brooklyn NY 11238"
+517031/2022,Brooklyn,848,14,"522 57th Street, Brooklyn, NY 11220"
+529192/2022,Brooklyn,1429,1213,"770B Lefferts Avenue, Unit P13, Brooklyn, NY 11203"
+532933/2022,Brooklyn,4761,1,"1087-1089 Utica Avenue, Brooklyn, NY 11203"

@@ -3,7 +3,7 @@
 .venv
 .env
 node_modules
-*.pdf
+saledocs/judgement
 *.png
 eng.traineddata
 calendar_test.js

@@ -1,15 +1,13 @@
-import { writeFileSync, existsSync, createReadStream } from 'fs';
-import { readFile, readdir } from 'fs/promises'
-import neatCsv from 'neat-csv'
+import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters';
 import { Parser } from '@json2csv/plainjs';
-import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters'
-import { extractTextFromPdf, extractBlock, extractLot, extractJudgement, extractAddress } from './utils.js';
-import { download_filing, FilingType } from './notice_of_sale.js'
-import { SingleBar, Presets } from 'cli-progress'
 import { exec } from 'child_process';
+import { Presets, SingleBar } from 'cli-progress';
+import { writeFileSync } from 'fs';
+import { readdir, readFile } from 'fs/promises';
+import neatCsv from 'neat-csv';
 import readline from 'readline';
-import path from 'path';
-import { readFileToArray } from './utils.js';
+import { download_filing, FilingType } from './notice_of_sale.js';
+import { extractAddress, extractBlock, extractLot, extractTextFromPdf, readFileToArray } from './utils.js';
 
 // Check for the --interactive flag in the command-line arguments
 const isInteractive = process.argv.includes('--interactive');
@@ -62,16 +60,14 @@ async function getFilings() {
     // Read the CSV file
     const casesPath = 'foreclosures/cases.csv'
     const rows = await neatCsv(await readFile(casesPath))
-    const sortedRows = rows.sort((a, b) => new Date(b.auction_date) - new Date(a.auction_date))
+    const sortedRows = rows.filter(row => !notInCEF.includes(row.case_number))
+                            .sort((a, b) => new Date(b.auction_date) - new Date(a.auction_date))
 
     const start = process.argv.includes('--skip') ? parseInt(process.argv[process.argv.indexOf('--skip') + 1]) : 0;
     const subrows = sortedRows.slice(start, sortedRows.length)
     pbar.start(rows.length, start + 1)
     for (const [idx, row] of subrows.entries()) {
         pbar.update(idx + start + 1, row)
-        if (row.case_number in notInCEF) {
-            continue
-        }
         try {
             // if auction date in the future, only get the notice of sale, otherwise get the surplus money form too
             const today = new Date()
@@ -178,6 +174,7 @@ async function promptForBlockAndLot(casesWithFiles, lots) {
         let text = null
         try {
             text = await extractTextFromPdf(pdfPath);
+            console.log(text)
         } catch (e) {
             console.error(case_number, "Error extracting text from ", pdfPath, e)
             continue
@@ -188,15 +185,21 @@ async function promptForBlockAndLot(casesWithFiles, lots) {
 
         // Get 'block' and 'lot' from the user
         // Open the PDF file with the default application on macOS
-        
+
         exec(`open "${pdfPath}"`);
         const values = [["block", block], ["lot", lot]]
+        // console.log(values)
+        // console.log(["row.block", row.block], ["row.lot", row.lot], ["row.address", row.address])
         if (address) {
             values.push(["address", address])
         }
+
+        // Iterate through values and update them
         for (const [key, parsedValue] of values) {
-            const input = await prompt(`Enter ${key}:`, row[key] ?? parsedValue ?? '')
-            if (input == '') return lots
+            const promptValue = row[key] ? row[key] : (parsedValue ?? '')
+            const input = await prompt(`Enter ${key}:`, promptValue)
+            if (input === null) return lots
+            if (input === "s") continue
             row[key] = key === "address" ? input : parseInt(input);
         }
 

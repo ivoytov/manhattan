@@ -4,29 +4,20 @@ const { recognize } = pkg
 import { open, unlink } from 'fs/promises'
 
 
-export async function extractAddress(text) {
-    let courtAddresses = await readFileToArray("foreclosures/court_addresses.log")
-    courtAddresses = courtAddresses.map(add => add.toLowerCase())
-    const nyAddressRegex = /(?<=premises known as\s)(\d+\s+\w+(\s+\w+)*,\s+\w+(\s+\w+)*,\s+(NY|New York)\s+\d{5})/gi;
+export function extractAddress(text) {
+    text = text.replace(/\n/g, ' ');
+    const nyAddressRegex = /(?<=premises known as\s|prem\.\s*k\/a\s|lying and being at\s)([\s\S]*?)(\s+(NY|New York)(\s+\d{5})?)/gi;
 
     const matches = text.match(nyAddressRegex)
-    
-    if(!matches) {
-        return matches
-    }
-    console.log("Matches", matches)
-    const match = matches.find(match => {
-        const input = match.toLowerCase()
-        return !courtAddresses.includes(input)
-    })
-    return match
+    if(matches) return matches[1]
+    return null
 }
+
+const combinedPattern = /\s(\d{3,5})-(\d{1,4})[\.\s]/;
 
 export function extractBlock(text) {
     const blockPattern = /Block[:\s]+(\d+)/i;
     
-    const combinedPattern = /(\d{3,5})-(\d{1,4})/;
-
     const matchBlock = text.match(blockPattern);
     if (matchBlock) return matchBlock[1]
 
@@ -36,9 +27,8 @@ export function extractBlock(text) {
 }
 
 export function extractLot(text) {
-    const blockPattern = /Lot[:\s]+(\d+)/i;
+    const blockPattern = /\sLots?[:\s]+(\d+)/i;
     
-    const combinedPattern = /(\d{3,5})-(\d{1,4})/;
 
     const matchBlock = text.match(blockPattern);
     if (matchBlock) return matchBlock[1]
@@ -74,12 +64,12 @@ export function extractIndexNumber(text) {
 
 export async function extractTextFromPdf(pdfPath) {
     const options = {
-        density: 100,
         saveFilename: 'temp_image',
         savePath: './',
         format: 'png',
-        width: 600,
-        height: 800
+        width: 2550,
+        height: 3300,
+        density: 330,
     };
 
     const convert = fromPath(pdfPath, options);
