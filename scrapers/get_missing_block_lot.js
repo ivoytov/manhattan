@@ -252,7 +252,7 @@ async function getBlockAndLot() {
     console.log('CSV file has been updated with missing block and lot values.');
 }
 
-// await getFilings()
+await getFilings()
 await getBlockAndLot()
-// await getAuctionResults()
+await getAuctionResults()
 pbar.stop()
