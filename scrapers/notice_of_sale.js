@@ -32,11 +32,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 function missing_filings(index_number) {
     const out = []
     for (const f in FilingType) {
-        const {dir} = FilingType[f]
-        
+        const { dir } = FilingType[f]
+
         const filename = index_number.replace('/', '-') + ".pdf"
         const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
-        if (!existsSync(pdfPath)) { 
+        if (!existsSync(pdfPath)) {
             out.push(FilingType[f])
         }
     }
@@ -44,23 +44,21 @@ function missing_filings(index_number) {
 }
 
 
-export async function download_filing(index_number, county, endpoint = SBR_WS_ENDPOINT, filing = null) {
+export async function download_filing(index_number, county, auction_date = null, endpoint = SBR_WS_ENDPOINT,) {
     const filename = index_number.replace('/', '-') + ".pdf"
     let missingFilings = missing_filings(index_number)
-    
-    if(filing) {
-        missingFilings = missingFilings.filter(f => f.id == filing.id)
+
+    if (auction_date && new Date(auction_date) > new Date()) {
+        // if auction date in the future, only get the notice of sale, otherwise get the surplus money form too
+        missingFilings = missingFilings.filter(filing => filing == FilingType.SURPLUS_MONEY_FORM)
     }
-    
+
     if (!missingFilings.length) {
         // no filings to get
         // console.log("No filings to get")
         return
     }
-    // console.log("missing filings")
-    // missingFilings.forEach(f => console.log(f))
-    
-    
+
 
     const browser = await connect({
         browserWSEndpoint: endpoint,
@@ -86,7 +84,7 @@ export async function download_filing(index_number, county, endpoint = SBR_WS_EN
         console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
         return
     }
-    
+
 
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
@@ -95,7 +93,7 @@ export async function download_filing(index_number, county, endpoint = SBR_WS_EN
         return options.map(el => el.value)
     })
     let res;
-    for (const {dir, id} of missingFilings) {
+    for (const { dir, id } of missingFilings) {
 
         const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
         if (!existsSync(pdfPath) && availableFilings.includes(id)) {
@@ -110,7 +108,7 @@ export async function download_filing(index_number, county, endpoint = SBR_WS_EN
 
             await page.click("input[name='btnClear']")
             await page.waitForNetworkIdle();
-        } 
+        }
     }
 
     // finish up
@@ -119,3 +117,11 @@ export async function download_filing(index_number, county, endpoint = SBR_WS_EN
     return res
 
 }
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+    download_filing(process.argv[2], process.argv[3], process.argv[4]).catch(err => {
+        console.error(err.stack || err);
+        process.exitCode = 1;
+    }).then(() => { process.exitCode = 0 });
+}
+

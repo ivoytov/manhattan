@@ -69,10 +69,7 @@ async function getFilings() {
     for (const [idx, row] of subrows.entries()) {
         pbar.update(idx + start + 1, row)
         try {
-            // if auction date in the future, only get the notice of sale, otherwise get the surplus money form too
-            const today = new Date()
-            const filing = (new Date(row.auction_date) < today) ? null : FilingType.NOTICE_OF_SALE
-            await download_filing(row.case_number, row.borough, browser, filing);
+            await download_filing(row.case_number, row.borough, row.auction_date, browser);
         } catch (e) {
             console.warn("\n\nError with", row.case_number, row.borough, "error:", e)
         }
