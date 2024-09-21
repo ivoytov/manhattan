@@ -479,11 +479,11 @@ case_number,borough,block,lot,address
 245700025/2021,Queens,,,
 707103/2023,Queens,,,
 724510/2020,Queens,12632,45,"118-25 202nd Street, Saint Albans, NY 11412"
-714823/2021,Queens,,,
+714823/2021,Queens,208,41,"40-20 50TH AVENUE, SUNNYSIDE, NY 11104"
 707237/2014,Queens,216,16,
 707691/2014,Queens,280,26,
 702169/2017,Queens,430,47,
-705181/2017,Queens,,,
+705181/2017,Queens,12294,56,"134 25 155th Street, Jamaica, NY 11434"
 710581/2018,Queens,10896,1,"20002 104th Ave, Saint Albans, NY 11412"
 711316/2018,Queens,8639,75,"24855 A/K/A 248-55 88th Road, Bellerose, NY 11426"
 717146/2017,Queens,430,47,
@@ -491,7 +491,7 @@ case_number,borough,block,lot,address
 717123/2020,Queens,2006,1,
 717755/2021,Queens,133,24,
 709562/2019,Queens,13022,102,
-707859/2021,Queens,,,
+707859/2021,Queens,1242,51,"33-31 69th Street, Woodside, NY 11377"
 703734/2014,Queens,2004,28,
 706420/2014,Queens,6420,20,
 710750/2016,Queens,3325,36,
@@ -757,3 +757,22 @@ case_number,borough,block,lot,address
 517031/2022,Brooklyn,848,14,"522 57th Street, Brooklyn, NY 11220"
 529192/2022,Brooklyn,1429,1213,"770B Lefferts Avenue, Unit P13, Brooklyn, NY 11203"
 532933/2022,Brooklyn,4761,1,"1087-1089 Utica Avenue, Brooklyn, NY 11203"
+850173/2022,Manhattan,2225,38,"152 Sherman Avenue, New York, NY 10034"
+158480/2022,Manhattan,440,1301,"427 EAST 12TH STREET, #1A, NEW YORK, NY10009"
+518279/2017,Brooklyn,7665,20,"1363 East 29th Street, Brooklyn, NY 11210"
+523208/2016,Brooklyn,8166,38,"9716 Farragut Road, Brooklyn, NY 11236"
+513029/2018,Brooklyn,5429,13,"332 Parkville Avenue, Brooklyn, NY 11230"
+522860/2020,Brooklyn,3447,60,"Moffat Street, Brooklyn, NY 11207"
+521203/2017,Brooklyn,7684,38,"1408 East 31st Street, Brooklyn, NY 11210"
+511373/2014,Brooklyn,7807,78,"2076 Ralph Avenue, Brooklyn, NY 11234"
+10129/2009,Brooklyn,3509,21,"661 Ralph Avenue, Brooklyn, NY 11212"
+1946/2009,Brooklyn,3411,20,"1170 Halsey Street, Brooklyn, "
+5357/2009,Brooklyn,7626,11,"1181 East 26th Street, Brooklyn, NY 11210"
+3282/2010,Brooklyn,7895,69,"1740 East 51st Street, Brooklyn, NY 11234"
+4029/2013,Brooklyn,8064,1,"1280 E 86TH ST, BROOKLYN, NY 11236"
+501462/2013,Brooklyn,8343,53,"1136 Bergen Ave, Brooklyn, NY 11234"
+9719/2013,Brooklyn,5032,89,"125 Midwood Street, Brooklyn, NY 11225 a"
+506959/2014,Brooklyn,937,1003,"99 4th Avenue, Unit 2L, Brooklyn, NY 11217"
+502465/2015,Brooklyn,7735,73,"1092 East 52nd Street, Brooklyn, NY 11234"
+505426/2016,Brooklyn,8033,71,"1076 East 82nd Street, Brooklyn, NY 11236"
+525511/2018,Brooklyn,3830,48,"546 Powell Street, Brooklyn, NY 11212"

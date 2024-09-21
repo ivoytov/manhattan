@@ -10,8 +10,8 @@ end
 
 
 function extract_address(text)
-    text = replace(text, "\n"=>" ")
-    pattern = r"premises known as\s|prem\.\s*k\/a\s|lying and being at\s([\s\S]*?)(\s+(NY|New York)(\s+\d{5})?)"
+    @show text = replace(text, "\n" => " ")
+    pattern = r"(?:premises known as\s|prem\.\s*k\/a\s|lying and being at\s)([\sa-z,\-0-9]+(?:,?\s+(NY|New York)(\s+\d{5})?)?)"i
     m = match(pattern, text)
     if m !== nothing
         return m.captures[1]
@@ -22,30 +22,30 @@ end
 
 # Extract block from text
 function extract_block(text)
-    block_pattern = r"Block[:\s]+(\d+)"
+    block_pattern = r"Block[:\s]+(\d+)"i
     combined_pattern = r"\s(\d{3,5})-(\d{1,4})[\.\s]"
     match_block = match(block_pattern, text)
     if match_block !== nothing
-        return match_block.match[1]
+        return match_block.captures[1]
     end
     match_combined = match(combined_pattern, text)
     if match_combined !== nothing
-        return match_combined.match[1]
+        return match_combined.captures[1]
     end
     return nothing
 end
 
 # Extract lot from text
 function extract_lot(text)
-    lot_pattern = r"\sLots?[:\s]+(\d+)"
+    lot_pattern = r"\sLots?[:\s]+(\d+)"i
     combined_pattern = r"\s(\d{3,5})-(\d{1,4})[\.\s]"
     match_lot = match(lot_pattern, text)
     if match_lot !== nothing
-        return match_lot.match[1]
+        return match_lot.captures[1]
     end
     match_combined = match(combined_pattern, text)
     if match_combined !== nothing
-        return match_combined.match[2]
+        return match_combined.captures[2]
     end
     return nothing
 end
@@ -57,7 +57,7 @@ function extract_text_from_pdf(pdf_path)
     text_path = case_number * ".txt"
 
     # Call the GraphicsMagick command
-    run(`gm convert -density 330 $pdf_path $image_path`)
+    run(`bash -c "gm convert -density 330 $pdf_path $image_path > /dev/null 2>&1"`)
 
     run_tesseract(image_path, text_path)
     text = read(text_path, String)
@@ -68,41 +68,65 @@ end
 
 # Prompt for winning bid
 function prompt_for_winning_bid(cases, bids)
-    p = Progress(nrow(cases))
+    # p = Progress(nrow(cases))
     for foreclosure_case in eachrow(cases)
         case_number = foreclosure_case.case_number
-        next!(p; showvalues = [("case #", case_number), ("date", foreclosure_case.auction_date)])
         
-        rows = subset(bids, :case_number => x -> x .== case_number)
-        if isempty(rows)
-            row = Dict(:case_number => case_number, :borough => foreclosure_case.borough, :auction_date => foreclosure_case.auction_date)
-            push!(bids, row)
-        else 
-            row = rows[1, :]
-        end
-        
-        if all(!ismissing(row[j]) for j in ["judgement", "upset_price", "winning_bid", "auction_date"])
+        if case_number ∉ bids.case_number
+            row = (
+                case_number=case_number, 
+                borough=foreclosure_case.borough, 
+                auction_date=foreclosure_case.auction_date,
+                judgement=missing,
+                upset_price=missing,
+                winning_bid=missing
+            )
+            push!(lots, row)
+        end 
+
+        # modifying row from here on will alter the DataFrame
+        row = bids[findfirst(==(case_number), bids.case_number), :]
+        if  (row.judgement, row.upset_price, row.winning_bid) .|> !ismissing |> all
             continue
         end
-        
+
+
         println("$case_number $(foreclosure_case.borough) $(foreclosure_case.auction_date)")
-        
-        # Extract text from PDF manually
-        filename = replace(case_number, "/", "-") * ".pdf"
-        dir = "saledocs/surplusmoney"
-        pdf_path = joinpath(dir, filename)
-        
+
         # Open the PDF file with the default application on macOS
         run(`open "$pdf_path"`)
-        
-        for key in ["judgement", "upset_price", "winning_bid", "auction_date"]
-            input = prompt("Enter $key:", get(row, key, ""))
-            if input == ""
-                return bids
+
+        # Extract text from PDF manually
+        filename = replace(case_number, "/" => "-") * ".pdf"
+        pdf_path = joinpath("saledocs/surplusmoney", filename)
+
+        values = (
+            judgement=missing,
+            upset_price=missing,
+            winning_bid=missing
+        )
+
+        # Iterate through values and update them
+        for (key, parsed_value) in pairs(values)
+            if !ismissing(row[key])
+                prompt_value = row[key]
+            elseif parsed_value === nothing
+                prompt_value = ""
+            else
+                prompt_value = parsed_value
             end
-            row[key] = key == "auction_date" ? input : parse(Float64, input)
+
+            input = prompt("Enter $key:", prompt_value)
+            if input === nothing
+                return lots
+            end
+            if input == "s"
+                continue
+            end
+            row[key] = parse(Float64, input)
         end
-        
+
+
         run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
     end
     return bids
@@ -114,18 +138,18 @@ function get_auction_results()
     cases = CSV.read("foreclosures/cases.csv", DataFrame)
     bids_path = "foreclosures/bids.csv"
     bids = CSV.read(bids_path, DataFrame)
-    
+
     # Read in which files exist
-    files = readdir("saledocs/surplusmoney") .|> x->replace(x[1:end-4], "-"=> "/")
-    
+    files = readdir("saledocs/surplusmoney") .|> x -> replace(x[1:end-4], "-" => "/")
+
     filter!(row -> row.case_number in files, cases)
     sort!(cases, order(:auction_date, rev=true))
-    
+
     updated_bids = prompt_for_winning_bid(cases, bids)
-    
+
     # Convert updated rows back to CSV
     CSV.write(bids_path, updated_bids)
-    
+
     println("CSV file bids.csv has been updated with missing bid results values.")
 end
 
@@ -133,26 +157,24 @@ end
 function prompt_for_block_and_lot(cases, lots)
     for foreclosure_case in eachrow(cases)
         case_number = foreclosure_case.case_number
-        
-        rows = subset(lots, :case_number => x -> x .== case_number)
-        if isempty(rows)
-            row = Dict(:case_number => case_number, :borough => foreclosure_case.borough)
+
+        if case_number ∉ lots.case_number
+            row = (case_number=case_number, borough=foreclosure_case.borough, block=missing, lot=missing, address=missing)
             push!(lots, row)
-        else 
-            row = rows[1, :]
-        end
-        
-        if all(!ismissing(row[j]) for j in ["block", "lot"])
+        end 
+        # modifying row from here on will alter the DataFrame
+        row =  lots[findfirst(==(case_number), lots.case_number), :]
+
+        if  (row.block, row.lot) .|> !ismissing |> all
             continue
         end
-        
+
         println("$case_number $(foreclosure_case.borough) $(foreclosure_case.auction_date)")
-        
+
         # Extract text from PDF
         filename = replace(case_number, "/" => "-") * ".pdf"
-        dir = "saledocs/noticeofsale"
-        pdf_path = joinpath(dir, filename)
-        
+        pdf_path = joinpath("saledocs/noticeofsale", filename)
+
         # Extract block and lot
         text = try
             extract_text_from_pdf(pdf_path)
@@ -160,22 +182,26 @@ function prompt_for_block_and_lot(cases, lots)
             println("$case_number Error extracting text from $pdf_path: $e")
             continue
         end
-        
-        block = extract_block(text)
-        lot = extract_lot(text)
-        address = extract_address(text)
-        
+
         # Open the PDF file with the default application on macOS
         run(`open "$pdf_path"`)
-        
-        values = [("block", block), ("lot", lot)]
-        if address !== nothing
-            push!(values, ("address", address))
-        end
-        
+
+        values = (
+            block=extract_block(text),
+            lot=extract_lot(text),
+            address=extract_address(text)
+        )
+
         # Iterate through values and update them
-        for (key, parsed_value) in values
-            prompt_value = get(row, key, parsed_value === nothing ? "" : parsed_value)
+        for (key, parsed_value) in pairs(values)
+            if !ismissing(row[key])
+                prompt_value = row[key]
+            elseif parsed_value === nothing
+                prompt_value = ""
+            else
+                prompt_value = parsed_value
+            end
+
             input = prompt("Enter $key:", prompt_value)
             if input === nothing
                 return lots
@@ -183,21 +209,26 @@ function prompt_for_block_and_lot(cases, lots)
             if input == "s"
                 continue
             end
-            row[key] = key == "address" ? input : parse(Int, input)
+            row[key] = key == :address ? input : parse(Int, input)
         end
         
+
         while true
             more = prompt("Is there another lot in the auction (y/n)?", "n")
             if more == "n"
                 break
             end
-            new_row = Dict("case_number" => case_number, "borough" => foreclosure_case.borough)
-            new_row["block"] = parse(Int, prompt("Enter block: ", ""))
-            new_row["lot"] = parse(Int, prompt("Enter lot: ", ""))
-            new_row["address"] = prompt("Enter address: ", "")
+            new_row = (
+                case_number=case_number,
+                borough=foreclosure_case.borough,
+                block=parse(Int, prompt("Enter block: ", "")),
+                lot=parse(Int, prompt("Enter lot: ", "")),
+                address=prompt("Enter address: ", "")
+            )
+
             push!(lots, new_row)
         end
-        
+
         run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
     end
     return lots
@@ -209,18 +240,18 @@ function get_block_and_lot()
     cases = CSV.read("foreclosures/cases.csv", DataFrame)
     lots_path = "foreclosures/lots.csv"
     lots = CSV.read(lots_path, DataFrame)
-    
+
     # Read in which files exist
-    files = readdir("saledocs/noticeofsale") .|> x->replace(x[1:end-4], "-"=> "/")
-    
+    files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
+
     filter!(row -> row.case_number in files, cases)
     sort!(cases, order(:auction_date, rev=true))
-    
+
     updated_lots = prompt_for_block_and_lot(cases, lots)
-    
+
     # Convert updated rows back to CSV
     CSV.write(lots_path, updated_lots)
-    
+
     println("CSV file has been updated with missing block and lot values.")
 end
 

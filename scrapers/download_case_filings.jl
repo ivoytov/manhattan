@@ -14,7 +14,7 @@ function get_filings()
     p = Progress(nrow(rows))
 
     # Define the number of concurrent tasks
-    max_concurrent_tasks = 4
+    max_concurrent_tasks = 12
     task_channel = Channel{Bool}(max_concurrent_tasks)
     
     # Fill the channel with 'true' values to represent available task slots
