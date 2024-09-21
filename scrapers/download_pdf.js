@@ -36,7 +36,7 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
                     resolve(requestId); 
                 } 
             }); 
-            page.goto(url).catch(e => { 
+            page.goto(url, {timeout: 2*60*1000}).catch(e => { 
                 if (!resolved) { 
                     reject(e); 
                 } 

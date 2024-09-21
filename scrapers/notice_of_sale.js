@@ -67,7 +67,7 @@ export async function download_filing(index_number, county, auction_date = null,
     // console.log('Connected! Navigating...');
     const page = await browser.newPage();
 
-    await page.goto(url, { waitUntil: 'networkidle2' });
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 2*60*1000 });
     // console.log('Navigated! Searching for case...');
 
     await page.locator('#txtCaseIdentifierNumber').fill(index_number);

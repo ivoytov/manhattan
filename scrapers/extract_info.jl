@@ -225,30 +225,8 @@ function get_block_and_lot()
 end
 
 
-# Get filings
-function get_filings()
-    log_path = "foreclosures/cases.log"
-    not_in_cef = readlines(log_path) |> x -> filter(y -> endswith(y, "Not in CEF"), x) |> x -> map(y -> split(y, " ")[1], x)
-    
-    cases_path = "foreclosures/cases.csv"
-    rows = CSV.read(cases_path, DataFrame)
-    filter!(row -> !(row.case_number in not_in_cef), rows)
-    sort!(rows, order(:auction_date, rev=true))
-    
-    p = Progress(nrow(rows))
-    for row in eachrow(rows)
-        next!(p; showvalues = [("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date)])
-        try
-            run(`bash -c "source ~/.nvm/nvm.sh && { nvm use 20 > /dev/null; } && node scrapers/notice_of_sale.js $(row.case_number) $(row.borough) $(row.auction_date) > /dev/null 2>&1"`)        
-        catch e
-            println("Error downloading filings for $(row.case_number) $(row.borough)")
-        end
-    end
-end
-
 # Main function
 function main()
-    get_filings()
     get_block_and_lot()
     get_auction_results()
 end

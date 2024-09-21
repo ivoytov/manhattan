@@ -33,16 +33,17 @@ const boroughConfigDict = {
     },
 }
 
-let auctionLots = []
 let maxDate = new Date()
 maxDate.setDate(maxDate.getDate() + 14)
 maxDate = maxDate.toISOString().split('T')[0]
-for (const borough in boroughConfigDict) {
-    const newLots = await getAuctionLots(borough, boroughConfigDict[borough], maxDate)
-    console.log(`Scraped ${newLots.length} total foreclosure cases for ${borough}`)
-    auctionLots = auctionLots.concat(newLots);
-}
+const promises = Object.keys(boroughConfigDict).map(async (borough) => {
+    const newLots = await getAuctionLots(borough, boroughConfigDict[borough], maxDate);
+    console.log(`Scraped ${newLots.length} total foreclosure cases for ${borough}`);
+    return newLots;
+});
 
+const results = await Promise.all(promises);
+const auctionLots = results.flat()
 
 // case_number,borough,auction_date,has_nos,has_smf,has_judgement,has_nyscef
 const csvFilePath = 'foreclosures/cases.csv';
