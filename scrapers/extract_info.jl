@@ -1,4 +1,4 @@
-using CSV, DataFrames, ProgressMeter, OCReract
+using CSV, DataFrames, ProgressMeter, OCReract, Dates
 
 # Function to prompt with a default answer
 function prompt(question, default_answer="")
@@ -8,46 +8,33 @@ function prompt(question, default_answer="")
     return input == "" ? "$default_answer" : input
 end
 
+# Function to extract matches based on a pattern
+function extract_pattern(text, patterns)
+    for pattern in patterns
+        m = match(pattern, text)
+        if m !== nothing
+            return m.captures[1]
+        end
+    end
+    return nothing
+end
 
+# Function to extract address
 function extract_address(text)
-    @show text = replace(text, "\n" => " ")
     pattern = r"(?:premises known as\s|prem\.\s*k\/a\s|lying and being at\s)([\sa-z,\-0-9]+(?:,?\s+(NY|New York)(\s+\d{5})?)?)"i
-    m = match(pattern, text)
-    if m !== nothing
-        return m.captures[1]
-    else
-        return nothing
-    end
+    return extract_pattern(text, [pattern])
 end
 
-# Extract block from text
+# Function to extract block
 function extract_block(text)
-    block_pattern = r"Block[:\s]+(\d+)"i
-    combined_pattern = r"\s(\d{3,5})-(\d{1,4})[\.\s]"
-    match_block = match(block_pattern, text)
-    if match_block !== nothing
-        return match_block.captures[1]
-    end
-    match_combined = match(combined_pattern, text)
-    if match_combined !== nothing
-        return match_combined.captures[1]
-    end
-    return nothing
+    patterns = [r"Block[:\s]+(\d+)"i, r"\s(\d{3,5})-(\d{1,4})[\.\s]"]
+    return extract_pattern(text, patterns)
 end
 
-# Extract lot from text
+# Function to extract lot
 function extract_lot(text)
-    lot_pattern = r"\sLots?[:\s]+(\d+)"i
-    combined_pattern = r"\s(\d{3,5})-(\d{1,4})[\.\s]"
-    match_lot = match(lot_pattern, text)
-    if match_lot !== nothing
-        return match_lot.captures[1]
-    end
-    match_combined = match(combined_pattern, text)
-    if match_combined !== nothing
-        return match_combined.captures[2]
-    end
-    return nothing
+    patterns = [r"\sLots?[:\s]+(\d+)"i, r"\s(\d{3,5})-(\d{1,4})[\.\s]"]
+    return extract_pattern(text, patterns)
 end
 
 # Extract text from PDF
@@ -71,8 +58,11 @@ function prompt_for_winning_bid(cases, bids)
     # p = Progress(nrow(cases))
     for foreclosure_case in eachrow(cases)
         case_number = foreclosure_case.case_number
+        if foreclosure_case.auction_date > today()
+            continue
+        end
         
-        if case_number ∉ bids.case_number
+        if isnothing(findfirst(bids.case_number .== case_number .&& bids.auction_date .== foreclosure_case.auction_date))
             row = (
                 case_number=case_number, 
                 borough=foreclosure_case.borough, 
@@ -81,11 +71,11 @@ function prompt_for_winning_bid(cases, bids)
                 upset_price=missing,
                 winning_bid=missing
             )
-            push!(lots, row)
+            push!(bids, row)
         end 
 
         # modifying row from here on will alter the DataFrame
-        row = bids[findfirst(==(case_number), bids.case_number), :]
+        row = bids[findfirst(bids.case_number .== case_number .&& bids.auction_date .== foreclosure_case.auction_date), :]
         if  (row.judgement, row.upset_price, row.winning_bid) .|> !ismissing |> all
             continue
         end
@@ -93,14 +83,15 @@ function prompt_for_winning_bid(cases, bids)
 
         println("$case_number $(foreclosure_case.borough) $(foreclosure_case.auction_date)")
 
-        # Open the PDF file with the default application on macOS
-        run(`open "$pdf_path"`)
-
         # Extract text from PDF manually
         filename = replace(case_number, "/" => "-") * ".pdf"
         pdf_path = joinpath("saledocs/surplusmoney", filename)
 
+        # Open the PDF file with the default application on macOS
+        run(`open "$pdf_path"`)
+
         values = (
+            auction_date=foreclosure_case.auction_date,
             judgement=missing,
             upset_price=missing,
             winning_bid=missing
@@ -110,7 +101,7 @@ function prompt_for_winning_bid(cases, bids)
         for (key, parsed_value) in pairs(values)
             if !ismissing(row[key])
                 prompt_value = row[key]
-            elseif parsed_value === nothing
+            elseif isnothing(parsed_value) || ismissing(parsed_value)
                 prompt_value = ""
             else
                 prompt_value = parsed_value
@@ -118,12 +109,12 @@ function prompt_for_winning_bid(cases, bids)
 
             input = prompt("Enter $key:", prompt_value)
             if input === nothing
-                return lots
+                return bids
             end
             if input == "s"
                 continue
             end
-            row[key] = parse(Float64, input)
+            row[key] = key == :auction_date ? Date(input, "yyyy-mm-dd") : parse(Float64, input)
         end
 
 
@@ -182,6 +173,7 @@ function prompt_for_block_and_lot(cases, lots)
             println("$case_number Error extracting text from $pdf_path: $e")
             continue
         end
+        replace!(text, "\n" => " ")
 
         # Open the PDF file with the default application on macOS
         run(`open "$pdf_path"`)
@@ -203,7 +195,7 @@ function prompt_for_block_and_lot(cases, lots)
             end
 
             input = prompt("Enter $key:", prompt_value)
-            if input === nothing
+            if isnothing(parsed_value) || ismissing(parsed_value)
                 return lots
             end
             if input == "s"
