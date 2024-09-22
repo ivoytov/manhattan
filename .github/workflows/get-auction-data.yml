@@ -24,8 +24,6 @@ jobs:
     - name: Install node and dependencies
       run: |
         npm install
-
-
         
     - name: Download new data and update CSVs
       env:
@@ -36,7 +34,7 @@ jobs:
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
       with:
-          version: '1.9'
+          version: '1.10'
           
     - name: Install julia dependencies
       run: |
@@ -45,9 +43,9 @@ jobs:
           
     - name: Process auctions
       env:
-        JULIA_NUM_THREADS: 8
+        JULIA_NUM_THREADS: 4
       run: |
-        # julia --project=. --threads=8 download_case_filings.jl
+        julia --project=. --threads=4 scraoers/download_case_filings.jl
         # Check if new files are created
         if [[ `git status --porcelain` ]]; then
           git status

@@ -53,12 +53,7 @@ export async function download_filing(index_number, county, auction_date = null,
         missingFilings = missingFilings.filter(filing => filing == FilingType.SURPLUS_MONEY_FORM)
     }
 
-    if (!missingFilings.length) {
-        // no filings to get
-        // console.log("No filings to get")
-        return
-    }
-
+    if (!missingFilings.length) return
 
     const browser = await connect({
         browserWSEndpoint: endpoint,
@@ -68,7 +63,6 @@ export async function download_filing(index_number, county, auction_date = null,
     const page = await browser.newPage();
 
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 2*60*1000 });
-    // console.log('Navigated! Searching for case...');
 
     await page.locator('#txtCaseIdentifierNumber').fill(index_number);
     await page.locator('select#txtCounty').fill(county_map[county]);
@@ -119,7 +113,9 @@ export async function download_filing(index_number, county, auction_date = null,
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-    download_filing(process.argv[2], process.argv[3], process.argv[4]).catch(err => {
+    const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser') + 1] : SBR_WS_ENDPOINT;
+
+    download_filing(process.argv[2], process.argv[3], process.argv[4], endpoint).catch(err => {
         console.error(err.stack || err);
         process.exitCode = 1;
     }).then(() => { process.exitCode = 0 });

@@ -58,14 +58,14 @@ createReadStream(csvFilePath)
         const newLots = auctionLots.filter(lot => !rows.some(({ borough, case_number }) => borough === lot.borough &&
             case_number === lot.case_number))
         rows.push(...newLots)
-        
+
         console.log(`Found ${newLots.length} net new foreclosure cases before ${maxDate} across all boroughs.`)
 
 
         // Convert updated rows back to CSV
         //case_number,borough,auction_date,case_name
         const opts = {
-            fields: ['case_number','borough','auction_date','case_name'],
+            fields: ['case_number', 'borough', 'auction_date', 'case_name'],
             formatters: {
                 string: stringQuoteOnlyIfNecessaryFormatter()
             }
@@ -78,6 +78,8 @@ createReadStream(csvFilePath)
 
         console.log('CSV file has been updated with new foreclosure cases.');
     });
+
+    
 async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     const browser = await connect({
         browserWSEndpoint: endpoint,
@@ -87,7 +89,7 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
 
     console.log('Connected! Navigating...');
     const url = 'https://iapps.courts.state.ny.us/webcivil/FCASCalendarSearch';
-    await page.goto(url, { waitUntil: 'networkidle2' });
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 2*60*1000  });
     await page.waitForSelector('select#cboCourt');
     await page.select('select#cboCourt', courtId); // QUEENS Superior Court
     await page.waitForSelector('select#cboCourtPart');
@@ -134,7 +136,7 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
 
     console.log(`Scraped ${auctionLots.length} total foreclosure cases.`)
     const filteredLots = auctionLots.filter(({ auction_date }) => auction_date < maxDate)
-                                    .map(lot => ({ borough: borough, ...lot }))
+        .map(lot => ({ borough: borough, ...lot }))
     return filteredLots
 }
 
