@@ -173,7 +173,7 @@ function prompt_for_block_and_lot(cases, lots)
             println("$case_number Error extracting text from $pdf_path: $e")
             continue
         end
-        replace!(text, "\n" => " ")
+        text = replace(text, "\n" => " ")
 
         # Open the PDF file with the default application on macOS
         run(`open "$pdf_path"`)
