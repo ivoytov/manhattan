@@ -38,6 +38,18 @@ function get_filings()
         running_tasks += 1
         
     end
+
+    while running_tasks > 0
+        for (case_number, process) in tasks
+            if !success(process)
+                continue
+            end
+            fail_jobs += process.exitcode
+            running_tasks -= 1
+            filter!(tsk-> tsk[1] != case_number, tasks)
+        end
+        sleep(3) # Wait for a slot to be available
+    end
     
 end
 
