@@ -43,7 +43,7 @@ jobs:
           
     - name: Process auctions
       run: |
-        julia --project=. scrapers/download_case_filings.jl
+        # julia --project=. scrapers/download_case_filings.jl
         # Check if new files are created
         if [[ `git status --porcelain` ]]; then
           git status
