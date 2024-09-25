@@ -14,33 +14,15 @@ function get_filings()
     # filter!(row -> start_dt < row.auction_date < end_dt, rows)
     sort!(rows, order(:auction_date))
     
-    # Define the number of concurrent tasks
-    max_concurrent_tasks = 30
-    running_tasks = []
-    tasks_list = copy(rows.case_number)
-    fail_jobs = 0
-    
-    p = Progress(length(tasks_list))
-    while length(tasks_list) > 0
-        while length(running_tasks) >= max_concurrent_tasks
-            for (case_number, process) in running_tasks
-                if !success(process)
-                    continue
-                end
-                @show process
-                fail_jobs += process.exitcode
-                filter!(tsk-> tsk[1] != case_number, running_tasks)
-            end
-            sleep(3) # Wait for a slot to be available
+    p = Progress(nrow(rows))
+    Threads.@threads :dynamic for row in eachrow(rows)
+            next!(p; showvalues = [("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date)])
+            try
+                run(pipeline(`node scrapers/notice_of_sale.js $(row.case_number) $(row.borough) $(row.auction_date)`, devnull))
+            catch e
+                println("Error downloading filings for $(row.case_number) $(row.borough)")
         end
-
-        row = rows[findfirst(rows.case_number .== pop!(tasks_list)), :]
-        tsk = run(`node scrapers/notice_of_sale.js $(row.case_number) $(row.borough) $(row.auction_date)`, wait=false) 
-        push!(running_tasks, (row.case_number, tsk))
-        # println("Starting task $(row.case_number) running tasks $(length(running_tasks))/$max_concurrent_tasks remaining tasks $(length(tasks_list)) failed jobs $fail_jobs") 
-        next!(p; showvalues = [("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date), ("# active tasks", length(running_tasks)), ("# failed", fail_jobs)])      
-
-    end 
+    end
     
 end
 
