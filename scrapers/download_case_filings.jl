@@ -12,7 +12,7 @@ function get_filings()
     sort!(rows, order(:auction_date, rev=true))
     
     # Define the number of concurrent tasks
-    max_concurrent_tasks = 12
+    max_concurrent_tasks = 6
     running_tasks = 0
     tasks = []
     fail_jobs = 0
