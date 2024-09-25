@@ -9,18 +9,18 @@ function get_filings()
     cases_path = "foreclosures/cases.csv"
     rows = CSV.read(cases_path, DataFrame)
     filter!(row -> !(row.case_number in not_in_cef), rows)
-    start_dt = Dates.today() - Dates.Day(0)
-    end_dt = Dates.today() + Dates.Day(14)
-    filter!(row -> start_dt < row.auction_date < end_dt, rows)
+    # start_dt = Dates.today() - Dates.Day(0)
+    # end_dt = Dates.today() + Dates.Day(14)
+    # filter!(row -> start_dt < row.auction_date < end_dt, rows)
     sort!(rows, order(:auction_date))
     
     # Define the number of concurrent tasks
-    max_concurrent_tasks = 6
+    max_concurrent_tasks = 30
     running_tasks = []
     tasks_list = copy(rows.case_number)
     fail_jobs = 0
     
-    # p = Progress(length(tasks_list))
+    p = Progress(length(tasks_list))
     while length(tasks_list) > 0
         while length(running_tasks) >= max_concurrent_tasks
             for (case_number, process) in running_tasks
@@ -37,8 +37,8 @@ function get_filings()
         row = rows[findfirst(rows.case_number .== pop!(tasks_list)), :]
         tsk = run(`node scrapers/notice_of_sale.js $(row.case_number) $(row.borough) $(row.auction_date)`, wait=false) 
         push!(running_tasks, (row.case_number, tsk))
-        println("Starting task $(row.case_number) running tasks $(length(running_tasks))/$max_concurrent_tasks remaining tasks $(length(tasks_list)) failed jobs $fail_jobs") 
-        # next!(p; showvalues = [("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date), ("# active tasks", length(running_tasks)), ("# failed", fail_jobs)])      
+        # println("Starting task $(row.case_number) running tasks $(length(running_tasks))/$max_concurrent_tasks remaining tasks $(length(tasks_list)) failed jobs $fail_jobs") 
+        next!(p; showvalues = [("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date), ("# active tasks", length(running_tasks)), ("# failed", fail_jobs)])      
 
     end 
     
