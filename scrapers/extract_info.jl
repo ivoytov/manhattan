@@ -33,7 +33,7 @@ end
 
 # Function to extract lot
 function extract_lot(text)
-    patterns = [r"\sLots?[:\s]+(\d+)"i, r"\s(\d{3,5})-(\d{1,4})[\.\s]"]
+    patterns = [r"\sLots?[:\s]+(\d+)"i, r"\s\d{3,5}-(\d{1,4})[\.\s]"]
     return extract_pattern(text, patterns)
 end
 
@@ -154,9 +154,9 @@ function prompt_for_block_and_lot(cases, lots)
             push!(lots, row)
         end 
         # modifying row from here on will alter the DataFrame
-        row =  lots[findfirst(==(case_number), lots.case_number), :]
+        row = lots[findfirst(==(case_number), lots.case_number), :]
 
-        if  (row.block, row.lot) .|> !ismissing |> all
+        if (row.block, row.lot) .|> !ismissing |> all
             continue
         end
 
@@ -195,7 +195,7 @@ function prompt_for_block_and_lot(cases, lots)
             end
 
             input = prompt("Enter $key:", prompt_value)
-            if isnothing(parsed_value) || ismissing(parsed_value)
+            if isnothing(input) || ismissing(input)
                 return lots
             end
             if input == "s"

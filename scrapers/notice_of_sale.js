@@ -1,7 +1,7 @@
 import { connect } from 'puppeteer-core';
 import { download_pdf } from './download_pdf.js';
 import path from 'path';
-import { existsSync } from 'fs';
+import { existsSync, appendFile } from 'fs';
 
 
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
@@ -22,13 +22,6 @@ export const FilingType = Object.freeze({
     SURPLUS_MONEY_FORM: { id: "1741", dir: "surplusmoney" }
 })
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-    download_filing(process.argv[2], process.argv[3]).catch(err => {
-        console.error(err.stack || err);
-        process.exit(1);
-    });
-}
-
 function missing_filings(index_number) {
     const out = []
     for (const f in FilingType) {
@@ -48,9 +41,9 @@ export async function download_filing(index_number, county, auction_date = null,
     const filename = index_number.replace('/', '-') + ".pdf"
     let missingFilings = missing_filings(index_number)
 
-    if (auction_date && new Date(auction_date) > new Date()) {
+    if (auction_date && (new Date(auction_date) > new Date())) {
         // if auction date in the future, only get the notice of sale, otherwise get the surplus money form too
-        missingFilings = missingFilings.filter(filing => filing == FilingType.SURPLUS_MONEY_FORM)
+        missingFilings = missingFilings.filter(filing => filing != FilingType.SURPLUS_MONEY_FORM)
     }
 
     if (!missingFilings.length) return
@@ -71,7 +64,6 @@ export async function download_filing(index_number, county, auction_date = null,
 
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
-    // console.log('Navigated! Clicking first case result...');
     try {
         await page.locator('#form > table.NewSearchResults > tbody > tr > td > a').click();
     } catch (e) {
@@ -86,9 +78,20 @@ export async function download_filing(index_number, county, auction_date = null,
     const availableFilings = await page.$$eval("select#selDocumentType > option", options => {
         return options.map(el => el.value)
     })
+    // check for motion to discontinue
+    if (availableFilings.includes("3664")) {
+        appendFile("foreclosures/cases.log", `${index_number} Discontinued\n`, (err) => {
+            if (err) {
+              console.error('Failed to append to the file:', err);
+            } else {
+                console.log(`Case ${index_number} Motion to Discontinue detected`)
+            }
+          });
+        return
+    }
     let res;
     for (const { dir, id } of missingFilings) {
-
+        
         const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
         if (!existsSync(pdfPath) && availableFilings.includes(id)) {
             // console.log(`Trying to get filing ${id}`)
@@ -97,8 +100,16 @@ export async function download_filing(index_number, county, auction_date = null,
             await page.click('input[name="btnNarrow"]'); // To submit the form
             await page.waitForNetworkIdle();
 
-            const downloadUrl = await page.$eval("#form > div.tabBody > table > tbody > tr:last-child > td:nth-child(2) > a", el => el.href)
-            res = await download_pdf(downloadUrl, pdfPath);
+          
+            let downloadUrl
+            try {
+                downloadUrl = await page.$eval("#form > div.tabBody > table > tbody > tr:last-child > td:nth-child(2) > a", el => el.href)
+            } catch (e) {
+                console.warn(`\n\n${index_number} ${dir} couldn't find a valid download link.`)
+                return
+            }
+            
+            res = await download_pdf(downloadUrl, pdfPath);            
 
             await page.click("input[name='btnClear']")
             await page.waitForNetworkIdle();

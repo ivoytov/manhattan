@@ -456,7 +456,7 @@ case_number,borough,block,lot,address
 703513/2014,Queens,2008,1,
 714175/2016,Queens,110,19,
 719740/2021,Queens,142,64,
-718411/2022,Queens,,,
+718411/2022,Queens,5572,72," 49-52 169th Street, Flushing, New York 11365"
 717663/2021,Queens,430,47,
 703385/2023,Queens,1998,2,
 704168/2016,Queens,260,28,
@@ -469,8 +469,8 @@ case_number,borough,block,lot,address
 721068/2021,Queens,7805,41,
 723024/2021,Queens,430,47,
 726242/2021,Queens,1931,1045,
-705365/2014,Queens,,,
-710688/2015,Queens,,,
+705365/2014,Queens,10391,37,
+710688/2015,Queens,13648,48,"253-43 147th Road, Rosedale, NY 11422"
 712380/2015,Queens,2013,53,
 704841/2018,Queens,,,
 707851/2019,Queens,138,59,
@@ -675,7 +675,7 @@ case_number,borough,block,lot,address
 152086/2022,Staten Island,5447,105,
 135752/2016,Staten Island,1120,37,
 130256/2010,Staten Island,1495,1125,
-130334/2010,Staten Island,,,
+130334/2010,Staten Island,47,107,"412 JERSEYSTREET, STATEN ISLAND, NY"
 135076/2014,Staten Island,914,63,
 135355/2016,Staten Island,165,1,
 135639/2017,Staten Island,4500,26,
@@ -685,19 +685,19 @@ case_number,borough,block,lot,address
 103572/2008,Staten Island,2005,7,
 131221/2013,Staten Island,1127,12,
 135162/2013,Staten Island,139,12,
-130779/2011,Staten Island,,,
+130779/2011,Staten Island,5316,36,"42 Robinson Avenue, Staten Island, NY 10312"
 135390/2015,Staten Island,3108,28,
 135355/2017,Staten Island,918,252,
 135094/2018,Staten Island,5108,9,"82 Greencroft Avenue, Staten Island, NY 10308"
 135014/2019,Staten Island,1254,24,"115 South Avenue, Staten Island, NY 10303"
 135164/2019,Staten Island,7702,302,
-135053/2020,Staten Island,,,
+135053/2020,Staten Island,3739,12,228 Moreland Street
 135143/2022,Staten Island,3066,51,
 135166/2022,Staten Island,6221,61,
-135223/2022,Staten Island,,,
+135223/2022,Staten Island,848,271,"22 Holly Street, Staten Island, NY 10304"
 135285/2022,Staten Island,3019,1036,"95D Narrows Road North a/k/a 8D-95D Narrows Road North, Staten Island,"
 151627/2022,Staten Island,7105,506,
-135176/2023,Staten Island,,,
+135176/2023,Staten Island,3686,51,"41 Beachview Avenue, Staten Island, NY 10306"
 135276/2023,Staten Island,,,
 132310/2009,Staten Island,812,40,
 130313/2010,Staten Island,157,197,
@@ -777,3 +777,17 @@ case_number,borough,block,lot,address
 505426/2016,Brooklyn,8033,71,"1076 East 82nd Street, Brooklyn, NY 11236"
 525511/2018,Brooklyn,3830,48,"546 Powell Street, Brooklyn, NY 11212"
 850084/2022,Manhattan,846,1304,"7 East 17th Street, Unit 3N, New York, NY 10003"
+700025/2021,Queens,13110,47,"13624 220th Street, Springfield Gardens, NY 11413"
+850068/2011,Manhattan,1032,1526,"50 W 42nd Street, Unit#58E, New York, NY 10036"
+850206/2017,Manhattan,2082,17,"531 WEST 150TH STREET, NEW YORK, NY 10031"
+151261/2023,Manhattan,1379,1189,"610 Park Avenue, PH16E, New York, NY"
+159358/2022,Manhattan,1310,1382,"140 East 56th Street, Unit 8E, New York, NY 10022"
+850220/2023,Manhattan,525,1720,"184 Thompson Street, #5V, New York, NY 10012"
+3057/2007,Brooklyn,1642,81,"689 Madison Street, Brooklyn, NY 11221"
+510632/2016,Brooklyn,4123,51,"577 Ridgewood Avenue, Brooklyn, NY 11208-1833"
+528945/2022,Brooklyn,1671,76,"383 Macdonough Street, Brooklyn, NY 11233"
+512614/2021,Brooklyn,1201,1029,"1311 Pacific Street, #603"
+504171/2022,Brooklyn,1820,62,"389 Madison Street, Brooklyn, NY 11221"
+505780/2022,Brooklyn,1124,20,"942 Atlantic Avenue, Brooklyn, New York 11238"
+532617/2022,Brooklyn,,,
+525393/2023,Brooklyn,5088,43,1406 Nostrand Avenue

@@ -91,6 +91,10 @@ const columnDefs = [
     {
         headerName: "Case #",
         field: "case_number",
+        cellRenderer: function(params) {
+            const filename = 'saledocs/noticeofsale/' + params.value.replace('/', '-') +'.pdf'
+            return `<a href="${filename}" target="_blank">`+ params.value + '</a>'
+        }
     },
     {
         headerName: "Auction Date",
