@@ -578,7 +578,7 @@ case_number,borough,block,lot,address
 525480/2020,Brooklyn,,,
 525492/2020,Brooklyn,2018,2,
 507559/2022,Brooklyn,,,
-518499/2021,Brooklyn,,,
+518499/2021,Brooklyn,6713,21,"1040 East 12 Street, Brooklyn, NY"
 524986/2022,Brooklyn,,,
 531047/2021,Brooklyn,,,
 504056/2023,Brooklyn,,,
@@ -789,5 +789,5 @@ case_number,borough,block,lot,address
 512614/2021,Brooklyn,1201,1029,"1311 Pacific Street, #603"
 504171/2022,Brooklyn,1820,62,"389 Madison Street, Brooklyn, NY 11221"
 505780/2022,Brooklyn,1124,20,"942 Atlantic Avenue, Brooklyn, New York 11238"
-532617/2022,Brooklyn,,,
+532617/2022,Brooklyn,5390,1001,"608 East 7 Street, Parking Space P1, Brooklyn, NY"
 525393/2023,Brooklyn,5088,43,1406 Nostrand Avenue

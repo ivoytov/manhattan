@@ -44,7 +44,7 @@ function extract_text_from_pdf(pdf_path)
     text_path = case_number * ".txt"
 
     # Call the GraphicsMagick command
-    run(`bash -c "gm convert -density 330 $pdf_path $image_path > /dev/null 2>&1"`)
+    run(pipeline(`gm convert -density 330 $pdf_path $image_path`, devnull))
 
     run_tesseract(image_path, text_path)
     text = read(text_path, String)
@@ -148,7 +148,7 @@ end
 function prompt_for_block_and_lot(cases, lots)
     for foreclosure_case in eachrow(cases)
         case_number = foreclosure_case.case_number
-
+      
         if case_number ∉ lots.case_number
             row = (case_number=case_number, borough=foreclosure_case.borough, block=missing, lot=missing, address=missing)
             push!(lots, row)
@@ -237,6 +237,7 @@ function get_block_and_lot()
     files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
 
     filter!(row -> row.case_number in files, cases)
+
     sort!(cases, order(:auction_date, rev=true))
 
     updated_lots = prompt_for_block_and_lot(cases, lots)
