@@ -21,7 +21,7 @@ end
 
 # Function to extract address
 function extract_address(text)
-    pattern = r"(?:premises known as\s|prem\.\s*k\/a\s|lying and being at\s)([\sa-z,\-0-9]+(?:,?\s+(NY|New York)(\s+\d{5})?)?)"i
+    pattern = r"(?:known as\s|prem\.\s*k\/a\s|premises\sk\/a\s|lying and being at\s)(([\sa-z,\-0-9#](?!\d{5}))+(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
     return extract_pattern(text, [pattern])
 end
 

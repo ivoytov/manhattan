@@ -5,14 +5,14 @@ using CSV, DataFrames, ProgressMeter, Base.Threads, Dates
 function get_filings()
     log_path = "foreclosures/cases.log"
     not_in_cef = readlines(log_path) |> 
-                x -> filter(y -> endswith(y, "Not in CEF") || endswith(y, "Discontinued"), x) |> 
+                x -> filter(y -> endswith(y, "Not in CEF") || endswith(y, "Discontinued") || endswith(y, "No PDF version"), x) |> 
                 x -> map(y -> split(y, " ")[1], x)
     
     cases_path = "foreclosures/cases.csv"
     rows = CSV.read(cases_path, DataFrame)
     filter!(row -> !(row.case_number in not_in_cef), rows)
     
-    sort!(rows, order(:auction_date))
+    sort!(rows, order(:auction_date), rev=true)
 
     start_dt = Dates.today() - Dates.Day(0)
     end_dt = Dates.today() + Dates.Day(14)
@@ -30,8 +30,16 @@ function get_filings()
     p = Progress(nrow(rows))
     Threads.@threads :dynamic for row in eachrow(rows)
             next!(p; showvalues = [("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date)])
+            row.auction_date > end_dt && continue
             try
-                run(pipeline(`node scrapers/notice_of_sale.js $(row.case_number) $(row.borough) $(row.auction_date)`, devnull))
+                args = [row.case_number, row.borough, row.auction_date]
+                if "--browser" ∈ ARGS
+                    browser = ARGS[findfirst(==("--browser"), ARGS) + 1]
+                    push!(args, "--browser")
+                    push!(args, browser)
+                end
+                `node scrapers/notice_of_sale.js $args`
+                run(pipeline(`node scrapers/notice_of_sale.js $args`, devnull))
             catch e
                 println("Error downloading filings for $(row.case_number) $(row.borough)")
         end

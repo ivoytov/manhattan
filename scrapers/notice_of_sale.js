@@ -129,6 +129,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     download_filing(process.argv[2], process.argv[3], process.argv[4], endpoint).catch(err => {
         console.error(err.stack || err);
         process.exitCode = 1;
-    }).then(() => { process.exitCode = 0 });
+    }).then(() => { process.exitCode = 0 })
+    .finally(() => { process.exit()});
 }
 
