@@ -117,13 +117,19 @@ const columnDefs = [
     //     headerName: "Judgement Amt", field: "judgement",
     //     valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
     // },
-    {
-        headerName: "Upset Price", field: "upset_price",
-        valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
-    },
+    // {
+    //     headerName: "Upset Price", field: "upset_price",
+    //     valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
+    // },
     {
         headerName: "Sale Price", field: "winning_bid",
-        valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
+        // valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
+        cellRenderer: function(params) {
+            if (params.value) {
+                const filename = 'saledocs/surplusmoney/' + params.data.case_number.replace('/', '-') +'.pdf'
+                return `<a href="${filename}" target="_blank">`+ formattedCurrency.format(params.value) + '</a>'
+            }
+        }
     }
 
 ]
