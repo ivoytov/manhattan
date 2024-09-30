@@ -76,12 +76,14 @@ const columnDefs = [
         field: "isSold",
         cellDataType: 'boolean',
         filter: 'agSetColumnFilter',
-        suppressSizeToFit: true,
-        minWidth: 40,
+        // suppressSizeToFit: true,
+        // resizeable: false,
+        maxWidth: 75,
     },
     {
         field: "borough",
         filter: 'agSetColumnFilter',
+        maxWidth: 150,
     },
     {
         headerName: "Address",
@@ -106,26 +108,28 @@ const columnDefs = [
         sortIndex: 0,
     },
     {
-        headerName: "Block", field: "block",
+        headerName: "Block", field: "block", type: "rightAligned",
         filter: 'agNumberColumnFilter',
+        maxWidth: 100,
     },
     {
-        headerName: "Lot", field: "lot",
+        headerName: "Lot", field: "lot", type: "rightAligned",
         filter: 'agNumberColumnFilter',
+        maxWidth: 100,
     },
     // {
     //     headerName: "Judgement Amt", field: "judgement",
     //     valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
     // },
-    // {
-    //     headerName: "Upset Price", field: "upset_price",
-    //     valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null
-    // },
     {
-        headerName: "Sale Price", field: "winning_bid",
+        headerName: "Upset Price", field: "upset_price", type: ["currency", "rightAligned"],
+        // valueFormatter: (params) => params.value || params.value == "" ? formattedCurrency.format(params.value) : null
+    },
+    {
+        headerName: "Sale Price", field: "winning_bid", type: ["currency", "rightAligned"],
         // valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
         cellRenderer: function(params) {
-            if (params.value) {
+            if (params.value || params.value == "") {
                 const filename = 'saledocs/surplusmoney/' + params.data.case_number.replace('/', '-') +'.pdf'
                 return `<a href="${filename}" target="_blank">`+ formattedCurrency.format(params.value) + '</a>'
             }
@@ -156,6 +160,7 @@ const defaultColDef = {
     menuTabs: ['filterMenuTab'],
     autoHeaderHeight: true,
     wrapHeaderText: true,
+    suppressHeaderMenuButton: true,
     sortable: true,
     resizable: true
 }
@@ -176,6 +181,14 @@ const gridOptions = {
     detailRowAutoHeight: true,
     rowSelection: 'single',
     onRowSelected: zoomToBlock,
+
+    columnTypes: {
+        currency: {
+          width: 150,
+          valueFormatter: ({value}) => value ? formattedCurrency.format(value) : value,
+          filter: 'agNumberColumnFilter',
+        },
+    },
 
     detailCellRendererParams: {
         detailGridOptions: {
