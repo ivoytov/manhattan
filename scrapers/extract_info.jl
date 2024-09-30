@@ -97,6 +97,18 @@ function prompt_for_winning_bid(cases, bids)
             winning_bid=missing
         )
 
+        # check if this form is for the correct Date
+        is_right_date = prompt("Is this form for the auction held on $(foreclosure_case.auction_date) (y/n)?", "n")
+        if is_right_date == "n"
+            # move the file to a new name
+            mv(pdf_path, pdf_path * ".old")
+            run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
+            continue
+        elseif isnothing(is_right_date) 
+            run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
+            return bids
+        end
+
         # Iterate through values and update them
         for (key, parsed_value) in pairs(values)
             if !ismissing(row[key])
@@ -109,9 +121,11 @@ function prompt_for_winning_bid(cases, bids)
 
             input = prompt("Enter $key:", prompt_value)
             if input === nothing
+                run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
                 return bids
             end
             if input == "s"
+                run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
                 continue
             end
             row[key] = key == :auction_date ? Date(input, "yyyy-mm-dd") : parse(Float64, input)
