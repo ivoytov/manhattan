@@ -39,7 +39,6 @@ case_number,borough,auction_date,case_name
 35650/2014E,Bronx,2024-08-26,"1370  Prospect Avenue, Bronx, N.Y. 10459    "
 36125/2020E,Bronx,2024-08-26,"1072 Findlay Avenue Bronx, NY 10458"
 380329/2008E,Bronx,2024-08-26,"4042 Baychester Avenue, Bronx, N.Y. 10466  "
-382283/2009E,Bronx,2024-08-26,"1049 East 233  Street , Bronx, N.Y. 10466"
 21985/2018E,Bronx,2024-09-09,"No# Beach Avenue , Bronx, N.Y. 10473    "
 31424/2020E,Bronx,2024-09-09,"Unit 3E, 2055 St. Raymond Avenue, Bronx, N.Y. Block: 3943; Lot: 3297"
 32054/2017E,Bronx,2024-09-09,"1774 Popham Avenue, Bronx, N.Y. 10453   "
@@ -364,7 +363,6 @@ case_number,borough,auction_date,case_name
 35650/2014E,Bronx,2024-08-26,"1370  Prospect Avenue, Bronx, N.Y. 10459    "
 36125/2020E,Bronx,2024-08-26,"1072 Findlay Avenue Bronx, NY 10458"
 380329/2008E,Bronx,2024-08-26,"4042 Baychester Avenue, Bronx, N.Y. 10466  "
-382283/2009E,Bronx,2024-08-26,"1049 East 233  Street , Bronx, N.Y. 10466"
 32752/2017E,Bronx,2024-09-23,622
 26771/2018E,Bronx,2024-09-23,Unit 
 34694/2020E,Bronx,2024-09-23,Unit 
@@ -373,7 +371,7 @@ case_number,borough,auction_date,case_name
 380846/2008E,Bronx,2024-09-23,2920
 33418/2019E,Bronx,2024-09-23,Unit 
 35265/2013E,Bronx,2024-09-23,320
-382283/2009E,Bronx,2024-09-23,1049
+382283/2009E,Bronx,2024-09-23,"1049 East 233  Street , Bronx, N.Y. 10466"
 35347/2018E,Bronx,2024-09-30,313
 382517/2009E,Bronx,2024-09-30,814
 32034/2016E,Bronx,2024-09-30,34-12

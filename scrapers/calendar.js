@@ -38,9 +38,14 @@ let maxDate = new Date()
 maxDate.setDate(maxDate.getDate() + 14)
 maxDate = maxDate.toISOString().split('T')[0]
 for (const borough in boroughConfigDict) {
-    const newLots = await getAuctionLots(borough, boroughConfigDict[borough], maxDate)
-    console.log(`Scraped ${newLots.length} total foreclosure cases for ${borough}`)
-    auctionLots = auctionLots.concat(newLots);
+    try {
+        const newLots = await getAuctionLots(borough, boroughConfigDict[borough], maxDate)
+        console.log(`Scraped ${newLots.length} total foreclosure cases for ${borough}`)
+        auctionLots = [...auctionLots, ...newLots]
+    } catch (e) {
+        console.warn(`${borough} scraper failed.`, e)
+    }
+    
 }
 
 // case_number,borough,auction_date,has_nos,has_smf,has_judgement,has_nyscef

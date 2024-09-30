@@ -28,13 +28,18 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
 
         const requestId = await new Promise((resolve, reject) => { 
             let resolved; 
-            client.on('Fetch.requestPaused', ({ requestId }) => { 
-                if (resolved) { 
-                    client.send('Fetch.continueRequest', { requestId }); 
-                } else { 
-                    resolved = true; 
-                    resolve(requestId); 
-                } 
+            client.on('Fetch.requestPaused', async ({ requestId, responseHeaders }) => { 
+                const contentTypeHeader = responseHeaders.find(header => header.name.toLowerCase() === 'content-type');
+                if (contentTypeHeader && contentTypeHeader.value.includes('text/html')) {
+                    reject(new Error('HTML response received instead of PDF'));
+                } else {
+                    if (resolved) { 
+                        client.send('Fetch.continueRequest', { requestId }); 
+                    } else { 
+                        resolved = true; 
+                        resolve(requestId); 
+                    } 
+                }
             }); 
             page.goto(url, {timeout: 2*60*1000}).catch(e => { 
                 if (!resolved) { 
