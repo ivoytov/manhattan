@@ -4,20 +4,20 @@ using CSV, DataFrames, ProgressMeter, Base.Threads, Dates
 # Get filings
 function get_filings()
     log_path = "foreclosures/cases.log"
-    not_in_cef = readlines(log_path) |> 
-                x -> filter(y -> endswith(y, "Not in CEF") || endswith(y, "Discontinued") || endswith(y, "No PDF version"), x) |> 
-                x -> map(y -> split(y, " ")[1], x)
-    
+    not_in_cef = readlines(log_path) |>
+                 x -> filter(y -> endswith(y, "Not in CEF") || endswith(y, "Discontinued") || endswith(y, "No PDF version"), x) |>
+                      x -> map(y -> split(y, " ")[1], x)
+
     cases_path = "foreclosures/cases.csv"
     rows = CSV.read(cases_path, DataFrame)
     filter!(row -> !(row.case_number in not_in_cef), rows)
-    
+
     sort!(rows, order(:auction_date), rev=true)
 
     start_dt = Dates.today() - Dates.Day(0)
     end_dt = Dates.today() + Dates.Day(14)
     urgent_cases = filter(rows) do row
-        is_soon = start_dt < row.auction_date < end_dt 
+        is_soon = start_dt < row.auction_date < end_dt
         filename = replace(row.case_number, "/" => "-")
         has_notice_of_sale = isfile("saledocs/noticeofsale/$filename.pdf")
         return is_soon && !has_notice_of_sale
@@ -26,25 +26,28 @@ function get_filings()
 
         println("$(case.case_number) $(case.borough) $(case.auction_date)")
     end
-    
+
     p = Progress(nrow(rows))
+    lck = SpinLock()
     Threads.@threads :dynamic for row in eachrow(rows)
-            next!(p; showvalues = [("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date)])
-            row.auction_date > end_dt && continue
-            try
-                args = [row.case_number, row.borough, row.auction_date]
-                if "--browser" ∈ ARGS
-                    browser = ARGS[findfirst(==("--browser"), ARGS) + 1]
-                    push!(args, "--browser")
-                    push!(args, browser)
-                end
-                `node scrapers/notice_of_sale.js $args`
-                run(pipeline(`node scrapers/notice_of_sale.js $args`, devnull))
-            catch e
-                println("Error downloading filings for $(row.case_number) $(row.borough)")
+        lock(lck) do
+            next!(p; showvalues=[("Case #", row.case_number), ("Borough", row.borough), ("Auction Date", row.auction_date)])
+        end
+        row.auction_date > end_dt && continue
+        try
+            args = [row.case_number, row.borough, row.auction_date]
+            if "--browser" ∈ ARGS
+                browser = ARGS[findfirst(==("--browser"), ARGS)+1]
+                push!(args, "--browser")
+                push!(args, browser)
+            end
+            `node scrapers/notice_of_sale.js $args`
+            run(pipeline(`node scrapers/notice_of_sale.js $args`, devnull))
+        catch e
+            println("Error downloading filings for $(row.case_number) $(row.borough)")
         end
     end
-    
+
 end
 
 

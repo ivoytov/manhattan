@@ -22,6 +22,10 @@ export const FilingType = Object.freeze({
     SURPLUS_MONEY_FORM: { id: "1741", dir: "surplusmoney" }
 })
 
+function sleep(s) {
+    return new Promise(resolve => setTimeout(resolve, s * 1000));
+}
+
 function missing_filings(index_number) {
     const out = []
     for (const f in FilingType) {
@@ -37,7 +41,7 @@ function missing_filings(index_number) {
 }
 
 
-export async function download_filing(index_number, county, auction_date = null, endpoint = SBR_WS_ENDPOINT,) {
+export async function download_filing(index_number, county, auction_date, endpoint = SBR_WS_ENDPOINT,) {
     const filename = index_number.replace('/', '-') + ".pdf"
     let missingFilings = missing_filings(index_number)
 
@@ -67,17 +71,25 @@ export async function download_filing(index_number, county, auction_date = null,
     // console.log('Connected! Navigating...');
     const page = await browser.newPage();
 
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 2*60*1000 });
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 2 * 60 * 1000 });
+    const title = await page.$eval('head > title', el => el.innerText)
+    console.log("page title", title)
+    if (title.search("aptcha") > 0) {
+        console.warn("Captcha detected")
+        await sleep(30)
+    }
 
     await page.locator('#txtCaseIdentifierNumber').fill(index_number);
+    await sleep(1)
     await page.locator('select#txtCounty').fill(county_map[county]);
-
+    await sleep(1)
     page.keyboard.press('Enter');
 
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
+    await sleep(1)
 
     try {
-        await page.locator('#form > table.NewSearchResults > tbody > tr > td > a').click();
+        await page.locator('table.NewSearchResults > tbody > tr > td > a').click();
     } catch (e) {
         console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
         return
@@ -94,11 +106,11 @@ export async function download_filing(index_number, county, auction_date = null,
     if (availableFilings.includes("3664")) {
         appendFile("foreclosures/cases.log", `${index_number} Discontinued\n`, (err) => {
             if (err) {
-              console.error('Failed to append to the file:', err);
+                console.error('Failed to append to the file:', err);
             } else {
                 console.log(`Case ${index_number} Motion to Discontinue detected`)
             }
-          });
+        });
         return
     }
     let res;
@@ -109,39 +121,62 @@ export async function download_filing(index_number, county, auction_date = null,
             // console.log(`Trying to get filing ${id}`)
 
             await page.locator('select#selDocumentType').fill(id);
+            await sleep(1)
             await page.click('input[name="btnNarrow"]'); // To submit the form
             await page.waitForNetworkIdle();
+            
+            let docs = await page.$$eval("table.NewSearchResults > tbody > tr", rows => {
+                const out = []
+                for (const row of rows) {
+                    const link = row.querySelector('td:nth-child(2) a');
+                    const received = row.querySelector('td:nth-child(3) span');
+                    if( link && received) {
+                        out.push({
+                            downloadUrl: link.href,
+                            receivedDate: received.innerText.split(" ")[1]
+                        }) 
+                    }
+                }
+                return out  
+            })
+            docs = docs.reverse()
+            console.log(docs)
+            
 
-          
-            let downloadUrl
             try {
-                const receivedDate = await page.$eval("#form > div.tabBody > table > tbody > tr:last-child > td:nth-child(3) > span", el => new Date(el.innerText.split(" ")[2]))
-
-                // if received date is before auction date, this is not the right surplus money form
-                if (auction_date && filing == FilingType.SURPLUS_MONEY_FORM && receivedDate < auction_date) {
-                    console.warn(`Found SMF with received date ${receivedDate.toISOString().split('T')[0]}, before auction date ${auction_date.toISOString().split('T')[0]}; SKIPPING`)
-                    continue
-                }  else {
-                    console.warn(`Found SMF with received date ${receivedDate.toISOString().split('T')[0]}, after auction date ${auction_date.toISOString().split('T')[0]}; PROCEEDING`)
-                }
-
-                // if received date is >90 days before the auction date, this is not the right notice of sale form
-                const earliestDayForNoticeOfSale = auction_date
-                earliestDayForNoticeOfSale.setDate(earliestDayForNoticeOfSale.getDate() - 90)
-                if (auction_date && filing == FilingType.NOTICE_OF_SALE && (receivedDate < earliestDayForNoticeOfSale || receivedDate > auction_date)) {
-                    console.warn(`Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, more than 90 days before auction date ${auction_date.toISOString().split('T')[0]}; SKIPPING`)
-                    continue
-                } else {
-                    console.warn(`Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, auction date ${auction_date.toISOString().split('T')[0]}; PROCEEDING`)
-                }
-
-                downloadUrl = await page.$eval("#form > div.tabBody > table > tbody > tr:last-child > td:nth-child(2) > a", el => el.href)
             } catch (e) {
                 console.warn(`\n\n${index_number} ${dir} couldn't find a valid download link.`)
-                continue
+                console.error("Exception", e)
+                return
+            }
+
+            if(docs.length == 0) {
+                console.warn("No valid document download links available")
+                return
             }
             
-            res = await download_pdf(downloadUrl, pdfPath);            
+            const receivedDate = new Date(docs[0].receivedDate)
+            const downloadUrl = docs[0].downloadUrl
+
+            // if received date is before auction date, this is not the right surplus money form
+            if (auction_date && filing == FilingType.SURPLUS_MONEY_FORM && receivedDate < auction_date) {
+                console.warn(`Found SMF with received date ${receivedDate.toISOString().split('T')[0]}, before auction date ${auction_date.toISOString().split('T')[0]}; SKIPPING`)
+                continue
+            }
+
+            // if received date is >90 days before the auction date, this is not the right notice of sale form
+            const earliestDayForNoticeOfSale = auction_date
+            earliestDayForNoticeOfSale.setDate(earliestDayForNoticeOfSale.getDate() - 90)
+            if (auction_date && filing == FilingType.NOTICE_OF_SALE && (receivedDate < earliestDayForNoticeOfSale || receivedDate > auction_date)) {
+                console.warn(`Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, more than 90 days before auction date ${auction_date.toISOString().split('T')[0]}; SKIPPING`)
+                continue
+            } else {
+                console.warn(`Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, auction date ${auction_date.toISOString().split('T')[0]}; PROCEEDING`)
+
+            }
+         
+
+            res = await download_pdf(downloadUrl, pdfPath);
 
             await page.click("input[name='btnClear']")
             await page.waitForNetworkIdle();
@@ -156,11 +191,11 @@ export async function download_filing(index_number, county, auction_date = null,
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-    const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser') + 1] : SBR_WS_ENDPOINT;
+    const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser') + 1] : process.env.WSS ?? SBR_WS_ENDPOINT;
     download_filing(process.argv[2], process.argv[3], new Date(process.argv[4]), endpoint).catch(err => {
         console.error(err.stack || err);
         process.exitCode = 1;
     }).then(() => { process.exitCode = 0 })
-    .finally(() => { process.exit()});
+        .finally(() => { process.exit() });
 }
 
