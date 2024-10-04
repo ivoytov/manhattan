@@ -7,6 +7,46 @@ function get_filings()
     process_data(rows, 4, "--progress" in ARGS)
 end
 
+# Define the FilingType as a constant dictionary
+const FilingType = Dict(
+    :NOTICE_OF_SALE =>  "noticeofsale",
+    :SURPLUS_MONEY_FORM => "surplusmoney"
+)
+
+get_filename(case_number) = replace(case_number, "/" => "-") * ".pdf"
+
+# Function to find missing filings
+function missing_filings(case_number, auction_date)
+    filename = get_filename(case_number)
+
+    res = []
+    for (key, dir) in FilingType
+        pdfPath = joinpath("saledocs", dir, filename)
+        if !isfile(pdfPath)
+            push!(res, dir)
+        end
+    end
+    
+
+    # For auctions in the last 5 days, don't look for a surplus money form
+    earliestDayForMoneyForm = today() - Day(5)
+
+    # For auctions more than 21 days in the future, don't look for a notice of sale
+    latestDayForNoticeOfSale = today() + Day(21)
+
+    if !isnothing(auction_date) && auction_date > earliestDayForMoneyForm
+        # If auction date in the future, only get the notice of sale, otherwise get the surplus money form too
+        res = filter(filing -> filing != FilingType[:SURPLUS_MONEY_FORM], res)
+    end
+
+    if !isnothing(auction_date) && auction_date > latestDayForNoticeOfSale
+        # If auction date too far in the future, don't look for a notice of sale
+        res = filter(filing -> filing != FilingType[:NOTICE_OF_SALE], res)
+    end
+
+    return res
+end
+
 function get_data()
     log_path = "foreclosures/cases.log"
     not_in_cef = readlines(log_path) |> 
@@ -23,15 +63,17 @@ function get_data()
     end_dt = Dates.today() + Dates.Day(14)
     urgent_cases = filter(rows) do row
         is_soon = start_dt < row.auction_date < end_dt 
-        filename = replace(row.case_number, "/" => "-")
-        has_notice_of_sale = isfile("saledocs/noticeofsale/$filename.pdf")
+        filename = get_filename(row.case_number)
+        has_notice_of_sale = isfile("saledocs/noticeofsale/$filename")
         return is_soon && !has_notice_of_sale
     end
     for case in eachrow(urgent_cases)
-
         println("$(case.case_number) $(case.borough) $(case.auction_date)")
     end
 
+    transform!(rows, [:case_number, :auction_date] => ByRow(missing_filings) => :missing_filings)
+    filter!(row -> !isempty(row.missing_filings), rows)
+    display(rows)
 	return rows
 end
 
@@ -56,7 +98,7 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
         
 		task = Task() do 
 			let row = row
-                args = [row.case_number, row.borough, row.auction_date]
+                args = [row.case_number, row.borough, row.auction_date, row.missing_filings...]
                 p = run(pipeline(`node scrapers/notice_of_sale.js $args`, out_stream, stderr), wait=true)				
                 put!(channel, (row.case_number, p.exitcode))
 			end

@@ -4,6 +4,9 @@ import { connect } from 'puppeteer-core';
 import { stringQuoteOnlyIfNecessary as stringQuoteOnlyIfNecessaryFormatter } from '@json2csv/formatters';
 import { Parser } from '@json2csv/plainjs';
 
+function sleep(s) {
+    return new Promise(resolve => setTimeout(resolve, s * 1000));
+}
 
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser') + 1] : process.env.WSS ?? SBR_WS_ENDPOINT;
@@ -93,17 +96,23 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     console.log('Connected! Navigating...');
     const url = 'https://iapps.courts.state.ny.us/webcivil/FCASCalendarSearch';
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 2*60*1000  });
-    await page.waitForSelector('select#cboCourt');
-    await page.select('select#cboCourt', courtId); // QUEENS Superior Court
-    await page.waitForSelector('select#cboCourtPart');
-    await page.select('select#cboCourtPart', calendarId); // FORECLOSURE AUCTION PART
+    await sleep(1)
+
+    await page.locator('select#cboCourt').fill(courtId);  //QUEENS Superior Court
+    await sleep(1)
+    
+    await page.locator('select#cboCourtPart').fill(calendarId); // FORECLOSURE AUCTION PART
+    await sleep(1)
 
     await page.locator("input#btnFindCalendar").click();
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
+    await sleep(10)
 
     // check if there is an option to select on page
     if (await page.$("input#btnApply")) {
         page.locator("#showForm > tbody > tr:nth-child(6) > td > input:nth-child(1)").click()
+        await sleep(1)
+
         page.locator("input#btnApply").click()
         await page.waitForNavigation({ waitUntil: 'networkidle2' });
     }
