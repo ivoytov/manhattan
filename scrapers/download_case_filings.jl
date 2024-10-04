@@ -65,8 +65,11 @@ function get_data()
 	return rows
 end
 
+const SBR_WS_ENDPOINT = "wss://$(ENV["BRIGHTDATA_AUTH"])@brd.superproxy.io:9222";
+
 
 function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
+	endpoint = isempty(get(ENV, "WSS", "")) ? SBR_WS_ENDPOINT : ENV["WSS"]
 	tasks = Task[]
 	channel = Channel{Tuple{String, Int}}(max_concurrent_tasks)
 	failed_jobs = 0
@@ -86,7 +89,7 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
         
 		task = Task() do 
 			let row = row
-                args = [row.case_number, row.borough, row.auction_date, row.missing_filings...]
+                args = [row.case_number, row.borough, row.auction_date, row.missing_filings..., "--browser", endpoint]
                 p = run(pipeline(`node scrapers/notice_of_sale.js $args`, out_stream, stderr), wait=true)				
                 put!(channel, (row.case_number, p.exitcode))
 			end
