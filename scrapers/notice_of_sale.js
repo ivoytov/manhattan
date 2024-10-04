@@ -68,12 +68,10 @@ export async function download_filing(index_number, county, auction_date, endpoi
         browserWSEndpoint: endpoint,
     });
 
-    // console.log('Connected! Navigating...');
     const page = await browser.newPage();
 
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 2 * 60 * 1000 });
     const title = await page.$eval('head > title', el => el.innerText)
-    console.log("page title", title)
     if (title.search("aptcha") > 0) {
         console.warn("Captcha detected")
         await sleep(30)
@@ -192,10 +190,13 @@ export async function download_filing(index_number, county, auction_date, endpoi
 
 if (import.meta.url === `file://${process.argv[1]}`) {
     const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser') + 1] : process.env.WSS ?? SBR_WS_ENDPOINT;
+    console.log(process.argv[2], "Starting...")
     download_filing(process.argv[2], process.argv[3], new Date(process.argv[4]), endpoint).catch(err => {
         console.error(err.stack || err);
         process.exitCode = 1;
-    }).then(() => { process.exitCode = 0 })
+    }).then(() => { 
+        console.log(process.argv[2], "Completed successfully")
+        process.exitCode = 0 })
         .finally(() => { process.exit() });
 }
 
