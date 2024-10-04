@@ -1,7 +1,7 @@
 using CSV, DataFrames, ProgressMeter, Base.Threads, Dates, Random
 
 
-# Get filings
+# Get filings. If WSS is set then we are running locally, otherwise on git.
 function get_filings()
     rows = get_data()
     process_data(rows, 4, !isempty(get(ENV, "WSS", "")))
@@ -61,7 +61,7 @@ function get_data()
 
     transform!(rows, [:case_number, :auction_date] => ByRow(missing_filings) => :missing_filings)
     filter!(row -> !isempty(row.missing_filings), rows)
-    display(rows)
+    display(rows[:, [:case_number, :borough, :auction_date]])
 	return rows
 end
 
@@ -69,7 +69,6 @@ const SBR_WS_ENDPOINT = "wss://$(ENV["BRIGHTDATA_AUTH"])@brd.superproxy.io:9222"
 
 
 function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
-	endpoint = isempty(get(ENV, "WSS", "")) ? SBR_WS_ENDPOINT : ENV["WSS"]
 	tasks = Task[]
 	channel = Channel{Tuple{String, Int}}(max_concurrent_tasks)
 	failed_jobs = 0
@@ -89,7 +88,7 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
         
 		task = Task() do 
 			let row = row
-                args = [row.case_number, row.borough, row.auction_date, row.missing_filings..., "--browser", endpoint]
+                args = [row.case_number, row.borough, row.auction_date, row.missing_filings...]
                 p = run(pipeline(`node scrapers/notice_of_sale.js $args`, out_stream, stderr), wait=true)				
                 put!(channel, (row.case_number, p.exitcode))
 			end

@@ -151,7 +151,8 @@ export async function download_filing(index_number, county, auction_date, missin
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-    const endpoint = process.argv.includes('--browser') ? process.argv[process.argv.indexOf('--browser') + 1] : process.env.WSS ?? SBR_WS_ENDPOINT;    console.log(process.argv[2], "Starting...")
+    const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;    
+    console.log(process.argv[2], "Starting...")
     const missingFilings = []
     if (process.argv.includes('surplusmoney')) {
         missingFilings.push(FilingType.SURPLUS_MONEY_FORM)
