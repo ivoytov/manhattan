@@ -42,6 +42,8 @@ jobs:
           julia --project=. -e 'using Pkg; Pkg.instantiate()'
           
     - name: Process auctions
+      env:
+        BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
         julia --project=. scrapers/download_case_filings.jl
         # Check if new files are created
