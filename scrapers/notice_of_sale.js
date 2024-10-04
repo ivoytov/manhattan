@@ -123,18 +123,18 @@ export async function download_filing(index_number, county, auction_date, missin
 
             // if received date is before auction date, this is not the right surplus money form
             if (auction_date && filing == FilingType.SURPLUS_MONEY_FORM && receivedDate < auction_date) {
-                console.warn(index_number, `Found SMF with received date ${receivedDate.toISOString().split('T')[0]}, before auction date ${auction_date.toISOString().split('T')[0]}; SKIPPING`)
+                console.warn(index_number, `Found SMF with received date ${receivedDate.toISOString().split('T')[0]}, before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
                 continue
             }
 
             // if received date is >90 days before the auction date, this is not the right notice of sale form
-            const earliestDayForNoticeOfSale = auction_date
+            const earliestDayForNoticeOfSale = new Date(auction_date)
             earliestDayForNoticeOfSale.setDate(earliestDayForNoticeOfSale.getDate() - 90)
             if (auction_date && filing == FilingType.NOTICE_OF_SALE && (receivedDate < earliestDayForNoticeOfSale || receivedDate > auction_date)) {
-                console.warn(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, more than 90 days before auction date ${auction_date.toISOString().split('T')[0]}; SKIPPING`)
+                console.warn(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, either after or more than 90 days before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
                 continue
             } else {
-                console.warn(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, auction date ${auction_date.toISOString().split('T')[0]}; PROCEEDING`)
+                console.warn(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, ${auction_date.toISOString().split('T')[0]} auction date; PROCEEDING`)
 
             }
 
@@ -151,8 +151,9 @@ export async function download_filing(index_number, county, auction_date, missin
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-    const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;    
-    console.log(process.argv[2], "Starting...")
+    const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;   
+    const auction_date = new Date(process.argv[4]) 
+    console.log(process.argv[2], auction_date, "Starting...")
     const missingFilings = []
     if (process.argv.includes('surplusmoney')) {
         missingFilings.push(FilingType.SURPLUS_MONEY_FORM)
@@ -160,7 +161,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (process.argv.includes('noticeofsale')) {
         missingFilings.push(FilingType.NOTICE_OF_SALE)
     }
-    download_filing(process.argv[2], process.argv[3], new Date(process.argv[4]), missingFilings, endpoint).catch(err => {
+    download_filing(process.argv[2], process.argv[3], auction_date, missingFilings, endpoint).catch(err => {
         console.error(err.stack || err);
         process.exitCode = 1;
     }).then(() => {
