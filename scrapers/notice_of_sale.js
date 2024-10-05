@@ -133,10 +133,7 @@ export async function download_filing(index_number, county, auction_date, missin
             if (auction_date && filing == FilingType.NOTICE_OF_SALE && (receivedDate < earliestDayForNoticeOfSale || receivedDate > auction_date)) {
                 console.warn(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, either after or more than 90 days before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
                 continue
-            } else {
-                console.warn(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, ${auction_date.toISOString().split('T')[0]} auction date; PROCEEDING`)
-
-            }
+            } 
 
             await download_pdf(downloadUrl, pdfPath);
             await page.click("input[name='btnClear']")
@@ -162,12 +159,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         missingFilings.push(FilingType.NOTICE_OF_SALE)
     }
     download_filing(process.argv[2], process.argv[3], auction_date, missingFilings, endpoint).catch(err => {
-        console.error(err.stack || err);
-        process.exitCode = 1;
-    }).then(() => {
-        console.log(process.argv[2], "Completed successfully")
-        process.exitCode = 0
+        console.error(process.argv[2], "Error processing");
+        process.exit(1);
     })
-        .finally(() => { process.exit() });
 }
 

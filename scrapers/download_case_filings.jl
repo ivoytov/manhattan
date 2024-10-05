@@ -97,7 +97,11 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
 			# Wait until a previous task finishes
 			# ("if" instead of "while" should also be fine)
 			finished_case_number, exitcode = take!(channel)
-			exitcode == 0 || (failed_jobs += 1; @warn "Processing case #$finished_case_number failed!")
+			if exitcode != 0
+				failed_jobs += 1
+				@warn "Processing case #$finished_case_number failed!"
+			end
+			
 			running_tasks -= 1
 			finished_tasks += 1
 		end
@@ -113,8 +117,10 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
 
 	while !isempty(channel)
 		finished_case_number, exitcode = take!(channel)
-		exitcode == 0 || (failed_jobs += 1; @warn "Processing case #$finished_case_number failed!")
-	end
+		if exitcode != 0
+			failed_jobs += 1
+			@warn "Processing case #$finished_case_number failed!"
+		end	end
 	println("\nNumber of failed jobs: $failed_jobs")
 
 	show_progress_bar && finish!(pb)
