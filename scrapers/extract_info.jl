@@ -111,6 +111,8 @@ function prompt_for_winning_bid(cases, bids)
 
         # Iterate through values and update them
         for (key, parsed_value) in pairs(values)
+            key == :auction_date && continue
+
             if !ismissing(row[key])
                 prompt_value = row[key]
             elseif isnothing(parsed_value) || ismissing(parsed_value)
@@ -211,8 +213,12 @@ function prompt_for_block_and_lot(cases, lots)
             input = prompt("Enter $key:", prompt_value)
             if isnothing(input) || ismissing(input)
                 return lots
-            end
-            if input == "s"
+            elseif input == "s"
+                continue
+            elseif input == "timeshare"
+                row.block = 1009
+                row.lot = 37
+                row.address = "timeshare"
                 continue
             end
             row[key] = key == :address ? input : parse(Int, input)

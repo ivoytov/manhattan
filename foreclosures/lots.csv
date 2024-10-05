@@ -473,7 +473,7 @@ case_number,borough,block,lot,address
 705365/2014,Queens,10391,37,
 710688/2015,Queens,13648,48,"253-43 147th Road, Rosedale, NY 11422"
 712380/2015,Queens,2013,53,
-704841/2018,Queens,,,
+704841/2018,Queens,2166,1017,"108-27 63rd Avenue, Unit P5, Queens, NY 11375"
 707851/2019,Queens,138,59,
 714970/2019,Queens,12014,7,
 715033/2020,Queens,13270,40,
@@ -524,7 +524,7 @@ case_number,borough,block,lot,address
 23661/2019E,Bronx,5080,48,
 24710/2019E,Bronx,3106,46,
 34242/2018E,Bronx,2826,87,
-33200/2018E,Bronx,,,
+33200/2018E,Bronx,2556,54,"311 CrimminsAvenue, Bronx, NY 10454."
 36542/2019E,Bronx,3114,4,
 808046/2023E,Bronx,3237,90,
 35411/2013E,Bronx,4790,20,
@@ -836,3 +836,10 @@ case_number,borough,block,lot,address
 505772/2015,Brooklyn,3931,51,"162 Norwood Avenue, Brooklyn, NY 11208"
 158117/2021,Manhattan,1114,1006,"43 WEST 61ST STREET, UNIT 10E, NEW YORK, NY 10023"
 508750/2016,Brooklyn,7615,42,"3304 AVENUE J, BROOKLYN, NY 11210"
+850136/2021,Manhattan,1009,37,
+653461/2022,Manhattan,1304,20,"539-555 LexingtonAvenue, New York, NY 10022[D"
+850041/2022,Manhattan,233,17,"151 Grand Street, New York, NY 10013"
+156969/2018,Manhattan,768,1217,"134 Seventh Avenue, Garage Unit 6, New York,  New York 10011"
+159354/2022,Manhattan,2170,31,"663 West 187th Street, New York, NY 10033"
+850074/2023,Manhattan,1487,1411,"530 East 76th Street, Unit 34/35AB a/k/a Unit 34COS, New York, NY 10021."
+110895/2010,Manhattan,1020,1215,"1600 BROADWAY, UNIT 21G, NEW YORK, NY 10019"
