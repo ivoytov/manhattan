@@ -93,9 +93,9 @@ const columnDefs = [
     {
         headerName: "Case #",
         field: "case_number",
-        cellRenderer: function(params) {
-            const filename = 'saledocs/noticeofsale/' + params.value.replace('/', '-') +'.pdf'
-            return `<a href="${filename}" target="_blank">`+ params.value + '</a>'
+        cellRenderer: function (params) {
+            const filename = 'saledocs/noticeofsale/' + params.value.replace('/', '-') + '.pdf'
+            return `<a href="${filename}" target="_blank">` + params.value + '</a>'
         }
     },
     {
@@ -128,10 +128,10 @@ const columnDefs = [
     {
         headerName: "Sale Price", field: "winning_bid", type: ["currency", "rightAligned"],
         // valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
-        cellRenderer: function(params) {
+        cellRenderer: function (params) {
             if (params.value || params.value == "") {
-                const filename = 'saledocs/surplusmoney/' + params.data.case_number.replace('/', '-') +'.pdf'
-                return `<a href="${filename}" target="_blank">`+ formattedCurrency.format(params.value) + '</a>'
+                const filename = 'saledocs/surplusmoney/' + params.data.case_number.replace('/', '-') + '.pdf'
+                return `<a href="${filename}" target="_blank">` + formattedCurrency.format(params.value) + '</a>'
             }
         }
     }
@@ -169,8 +169,65 @@ function zoomToBlock(event) {
     if (!event.node.isSelected()) {
         return
     }
-    const key = `${event.node.data.block}-${event.node.data.borough}`;
-    map.fitBounds(markers[key][0].getBounds(), { maxZoom: 14 })
+
+
+    let borough = borough_code_dict[event.node.data.borough]; // Example: Manhattan
+    let block = event.node.data.block;
+    let lot = event.node.data.lot > 1000 ? 7501 : event.node.data.lot;
+    const key = `${borough}-${block}-${lot}`;
+    map.fitBounds(markers[key][0].getBounds(), { maxZoom: 17 })
+
+}
+
+
+function onGridFilterChanged() {
+    const allFilters = gridApi.getFilterModel()
+    updateURLWithFilters(allFilters);
+
+    // Get all displayed rows
+    gridApi.forEachNodeAfterFilterAndSort(({ data }) => {
+        if (!data.block || !data.borough || !data.lot) {
+            return
+        }
+        const boroughCode = borough_code_dict[data.borough]
+        const block = data.block
+        const lotBilling = data.lot > 1000 ? 7501 : data.lot
+        
+        blockLotLayer.query()
+            .where(`Borough = '${boroughCode}' AND Block = ${block} AND Lot = ${lotBilling}`)
+            .run(function (error, featureCollection) {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+
+                if (featureCollection.features.length > 0) {
+                    const layer = L.geoJSON(featureCollection, {
+                        onEachFeature: function (feature, layer) {
+                            layer.on('click', function () {
+                                // Highlight the row in AG Grid
+                                gridApi.forEachNodeAfterFilterAndSort(function (node) {
+                                    if (node.data.borough === data.borough && node.data.block === data.block && node.data.lot === data.lot) {
+                                        node.setSelected(true, true); // Select the row
+
+                                        // Ensure the selected row is visible by scrolling to it
+                                        gridApi.ensureIndexVisible(node.rowIndex, 'middle');
+                                    }
+                                });
+                            });
+                        }
+                    }).addTo(map);
+
+                // Store the marker in the markers object
+
+                const key = `${boroughCode}-${block}-${lotBilling}`;
+                if (!markers[key]) {
+                    markers[key] = []
+                }
+                markers[key].push(layer);
+                }
+            });
+    });
 }
 
 // Initialize AG Grid
@@ -184,9 +241,9 @@ const gridOptions = {
 
     columnTypes: {
         currency: {
-          width: 150,
-          valueFormatter: ({value}) => value ? formattedCurrency.format(value) : value,
-          filter: 'agNumberColumnFilter',
+            width: 150,
+            valueFormatter: ({ value }) => value ? formattedCurrency.format(value) : value,
+            filter: 'agNumberColumnFilter',
         },
     },
 
@@ -254,29 +311,7 @@ const gridOptions = {
         },
     },
     // Listen for AG Grid filter changes
-    onFilterChanged: function () {
-        const allFilters = gridApi.getFilterModel()
-        updateURLWithFilters(allFilters);
-
-        // Get all displayed rows
-        let visibleRows = [];
-        gridApi.forEachNodeAfterFilterAndSort((node) => {
-            if (node.data.block && node.data.borough) {
-                visibleRows.push(node.data);
-            }
-        });
-
-        // Show or hide markers based on visible rows
-        for (let key in markers) {
-            markers[key].forEach(l => l.removeFrom(map)); // Remove all markers from map initially
-        }
-        visibleRows.forEach(function (row) {
-            const key = `${row.block}-${row.borough}`;
-            if (markers[key]) {
-                markers[key].forEach(l => l.addTo(map)); // Add only visible row markers to map
-            }
-        });
-    }
+    onFilterChanged: onGridFilterChanged
 };
 
 // Create AG Grid
@@ -302,13 +337,13 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
             console.log("Couldn't find a match for lot", lot.case_number)
             continue
         }
-        
+
         const auction = auctionMatches[0]
         lot.auction_date = auction.auction_date
         lot.case_name = auction.case_name
 
-        const result = bids.find(({case_number, auction_date}) => (case_number == lot.case_number) && (auction_date.getTime() == lot.auction_date.getTime()))
-        if(result) {
+        const result = bids.find(({ case_number, auction_date }) => (case_number == lot.case_number) && (auction_date.getTime() == lot.auction_date.getTime()))
+        if (result) {
             lot.judgement = result.judgement
             lot.upset_price = result.upset_price
             lot.winning_bid = result.winning_bid
@@ -328,7 +363,6 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
         } else {
             lot.isSold = false
         }
-
     }
 
 
@@ -361,6 +395,10 @@ const map = L.map('map', {
 })
 const layerControl = L.control.layers({ "Streets": toner }).addTo(map);
 
+const blockLotLayer = L.esri.featureLayer({
+    url: 'https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0',
+    where: "1 = 0"
+}).addTo(map);
 
 // Function to calculate the centroid of a GeoJSON geometry
 function getCentroid(geometry) {
@@ -391,46 +429,16 @@ const borough_dict = {
     "5": "Staten Island",
 }
 
+const borough_code_dict = {
+    "Manhattan": "MN",
+    "Bronx": "BX",
+    "Brooklyn": "BK",
+    "Queens": "QN",
+    "Staten Island": "SI",
+}
+
 let markers = {};
 
-// Load the GeoJSON file
-fetch('foreclosures/auctions.geojson')
-    .then(response => response.json())
-    .then(geojsonFeature => {
-        lots = L.geoJSON(geojsonFeature, {
-            onEachFeature: function (feature, layer) {
-                let block = feature.properties.BLOCK;
-                let borough = borough_dict[feature.properties.BORO];
-
-                // Store the marker in the markers object
-                const key = `${block}-${borough}`;
-                if (!markers[key]) {
-                    markers[key] = []
-                }
-                markers[key].push(layer);
-
-                layer.on('click', function () {
-
-                    // Highlight the row in AG Grid
-                    gridApi.forEachNodeAfterFilterAndSort(function (node) {
-                        if (node.data.block === block && node.data.borough === borough) {
-                            node.setSelected(true, true); // Select the row
-
-                            // Ensure the selected row is visible by scrolling to it
-                            gridApi.ensureIndexVisible(node.rowIndex, 'middle');
-                        }
-                    });
-                });
-
-
-            }
-
-
-        }).addTo(map)
-        layerControl.addOverlay(lots, "Auction Locations")
-        gridApi.onFilterChanged()
-    })
-    .catch(error => console.error('Error loading GeoJSON:', error));
 
 // splitter functionality
 const splitter = document.getElementById('splitter')
