@@ -369,6 +369,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
     // load the full table
     gridApi.setGridOption('rowData', lots)
     gridApi.sizeColumnsToFit()
+    onGridFilterChanged()
 })
     .catch(error => {
         console.error('Error loading CSV files:', error);
