@@ -192,7 +192,19 @@ function onGridFilterChanged() {
         const boroughCode = borough_code_dict[data.borough]
         const block = data.block
         const lotBilling = data.lot > 1000 ? 7501 : data.lot
-        
+
+        const onClickTableZoom = () => {
+                // Highlight the row in AG Grid
+                gridApi.forEachNodeAfterFilterAndSort(function (node) {
+                    if (node.data.borough === data.borough && node.data.block === data.block && node.data.lot === data.lot) {
+                        node.setSelected(true, true); // Select the row
+
+                        // Ensure the selected row is visible by scrolling to it
+                        gridApi.ensureIndexVisible(node.rowIndex, 'middle');
+                    }
+                });
+        }
+
         blockLotLayer.query()
             .where(`Borough = '${boroughCode}' AND Block = ${block} AND Lot = ${lotBilling}`)
             .run(function (error, featureCollection) {
@@ -204,27 +216,21 @@ function onGridFilterChanged() {
                 if (featureCollection.features.length > 0) {
                     const layer = L.geoJSON(featureCollection, {
                         onEachFeature: function (feature, layer) {
-                            layer.on('click', function () {
-                                // Highlight the row in AG Grid
-                                gridApi.forEachNodeAfterFilterAndSort(function (node) {
-                                    if (node.data.borough === data.borough && node.data.block === data.block && node.data.lot === data.lot) {
-                                        node.setSelected(true, true); // Select the row
-
-                                        // Ensure the selected row is visible by scrolling to it
-                                        gridApi.ensureIndexVisible(node.rowIndex, 'middle');
-                                    }
-                                });
-                            });
+                            layer.on('click', onClickTableZoom())
                         }
                     }).addTo(map);
 
-                // Store the marker in the markers object
+                    const centroid = getCentroid(featureCollection.features[0].geometry)
+                    console.log(centroid)
+                    const marker = L.marker([centroid.lng, centroid.lat]).addTo(markerLayer);
+                    marker.on('click', onClickTableZoom)
 
-                const key = `${boroughCode}-${block}-${lotBilling}`;
-                if (!markers[key]) {
-                    markers[key] = []
-                }
-                markers[key].push(layer);
+                    // Store the marker in the markers object
+                    const key = `${boroughCode}-${block}-${lotBilling}`;
+                    if (!markers[key]) {
+                        markers[key] = []
+                    }
+                    markers[key].push(layer);
                 }
             });
     });
@@ -317,8 +323,7 @@ const gridOptions = {
 // Create AG Grid
 const gridDiv = document.querySelector('#myGrid');
 const gridApi = agGrid.createGrid(gridDiv, gridOptions)
-// Load and apply filters from URL when the grid initializes
-applyFiltersFromURL(gridApi);
+
 
 const csvPromises = [
     loadCSV('foreclosures/auction_sales.csv', 'SALE DATE'),
@@ -369,7 +374,8 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
     // load the full table
     gridApi.setGridOption('rowData', lots)
     gridApi.sizeColumnsToFit()
-    onGridFilterChanged()
+    // Load and apply filters from URL when the grid initializes (have to wait till now so that table isn't empty)
+    applyFiltersFromURL(gridApi);
 })
     .catch(error => {
         console.error('Error loading CSV files:', error);
@@ -400,6 +406,9 @@ const blockLotLayer = L.esri.featureLayer({
     url: 'https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/MAPPLUTO/FeatureServer/0',
     where: "1 = 0"
 }).addTo(map);
+
+const markerLayer = L.layerGroup().addTo(map);
+
 
 // Function to calculate the centroid of a GeoJSON geometry
 function getCentroid(geometry) {
