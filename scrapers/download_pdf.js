@@ -11,7 +11,7 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
         browserWSEndpoint: SBR_WS_ENDPOINT, 
     }); 
     
-    const file = await open(fileName, 'w'); 
+    let file
 
     try { 
         // console.log('Connected! Navigating to pdf...'); 
@@ -47,6 +47,7 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
                 } 
             }); 
         }); 
+        file = await open(fileName, 'w'); 
 
         // console.log('Saving pdf stream to file...'); 
         const { stream } = await client.send('Fetch.takeResponseBodyAsStream', { requestId }); 
@@ -77,7 +78,9 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
         console.error("Error during PDF processing:", e); 
         throw e; 
     } finally { 
-        await file.close(); 
+        if (file) {
+            await file.close(); 
+        }
         await browser.close(); 
     } 
 } 

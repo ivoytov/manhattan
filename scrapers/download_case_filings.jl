@@ -18,7 +18,7 @@ function main()
 
 		# Combine the filtered rows with the randomly selected rows
 		rows = vcat(urgent_rows, sampled_rows)
-		print("Running on GitHub: Randomly selecting $n cases with a missing surplus money form")
+		println("Running on GitHub: Randomly selecting $n cases with a missing surplus money form")
 	end
 	
     process_data(rows, 4, is_local)

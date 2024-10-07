@@ -150,7 +150,9 @@ export async function download_filing(index_number, county, auction_date, missin
 if (import.meta.url === `file://${process.argv[1]}`) {
     const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;   
     const auction_date = new Date(process.argv[4]) 
-    console.log(process.argv[2], auction_date, "Starting...")
+
+    const args = process.argv.slice(2,process.argv.length).join(" ")
+    console.log(args, "Starting...")
     const missingFilings = []
     if (process.argv.includes('surplusmoney')) {
         missingFilings.push(FilingType.SURPLUS_MONEY_FORM)
@@ -159,8 +161,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         missingFilings.push(FilingType.NOTICE_OF_SALE)
     }
     download_filing(process.argv[2], process.argv[3], auction_date, missingFilings, endpoint).catch(err => {
-        console.error(process.argv[2], "Error processing");
-        process.exit(1);
+        console.error(args, "Error processing");
     })
+    console.log(args, "...Completed")
+
+
 }
 
