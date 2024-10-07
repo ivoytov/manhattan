@@ -1,10 +1,27 @@
 using CSV, DataFrames, ProgressMeter, Base.Threads, Dates, Random
+rng = MersenneTwister(42)
 
 
 # Get filings. If WSS is set then we are running locally, otherwise on git.
-function get_filings()
+function main()
     rows = get_data()
-    process_data(rows, 4, !isempty(get(ENV, "WSS", "")))
+	is_local = haskey(ENV, "WSS")
+	if !is_local
+		# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
+		urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
+
+		# Shuffle the remaining rows and select 15%
+		sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
+
+		n = ceil(Int, 0.15 * nrow(sampled_rows))
+		sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
+
+		# Combine the filtered rows with the randomly selected rows
+		rows = vcat(urgent_rows, sampled_rows)
+		print("Running on GitHub: Randomly selecting $n cases with a missing surplus money form")
+	end
+	
+    process_data(rows, 4, is_local)
 end
 
 # Define the FilingType as a constant dictionary
@@ -61,11 +78,10 @@ function get_data()
 
     transform!(rows, [:case_number, :auction_date] => ByRow(missing_filings) => :missing_filings)
     filter!(row -> !isempty(row.missing_filings), rows)
+
     display(rows[:, [:case_number, :borough, :auction_date]])
 	return rows
 end
-
-const SBR_WS_ENDPOINT = "wss://$(ENV["BRIGHTDATA_AUTH"])@brd.superproxy.io:9222";
 
 
 function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
@@ -127,4 +143,4 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
 end
 
 # Main function
-get_filings()
+main()

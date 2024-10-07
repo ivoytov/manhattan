@@ -2,9 +2,7 @@ using DataFrames, Dates, CSV, GLM, Statistics, GeoJSON, JSON3
 
 
 # Function to read CSV file into DataFrame
-function read_csv(file)
-    CSV.read(file, DataFrame)
-end
+read_csv(file) = CSV.read(file, DataFrame)
 
 borough_dict = Dict(1 => "Manhattan", 2 => "Bronx", 3 => "Brooklyn", 4 => "Queens", 5 => "Staten Island")
 
@@ -32,20 +30,11 @@ function main()
     # Select only columns from sales DataFrame
     select!(merged_df, names(sales))
 
+    # drop timeshares (condo hotels)
     exclude_prefixes = ["45", "25", "26", "28"]
     filter!(row -> !ismissing(row."BUILDING CLASS CATEGORY") &&
         all(prefix -> !startswith(row."BUILDING CLASS CATEGORY", prefix), exclude_prefixes), merged_df)    
     CSV.write("foreclosures/auction_sales.csv", merged_df)
-
-    fc = GeoJSON.read("lotblock.geojson")
-    lb = DataFrame(fc)
-    dropmissing!(lb, [:BORO, :BLOCK])
-    lb.BORO = [borough_dict[parse(Int, id)] for id in lb.BORO]
-    merged_json = innerjoin(lb, auctions, on = [:BORO => :borough, :BLOCK => :block])
-    select!(merged_json, [:OBJECTID, :BORO, :BLOCK, :geometry])
-    unique!(merged_json)
-    features = [feature for feature in fc if feature.OBJECTID in merged_json.OBJECTID]
-    GeoJSON.write("foreclosures/auctions.geojson",GeoJSON.FeatureCollection(features=features))
 
 end
 
