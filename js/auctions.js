@@ -220,17 +220,18 @@ function onGridFilterChanged() {
 
         let lotBilling = data.lot
         if (data.lot > 1000) {
+            lotBilling = 7501
             // get the billing lot from ArcGis service
-            getCondoBaseLot(data).then(condoBaseLot => {
-                if (condoBaseLot !== null) {
-                    console.log('CONDO_BASE_LOT:', condoBaseLot);
-                    lotBilling = condoBaseLot
-                } else {
-                    console.log('No matching CONDO_BASE_LOT found');
-                    lotBilling = 7501
+            // getCondoBaseLot(data).then(condoBaseLot => {
+            //     if (condoBaseLot !== null) {
+            //         console.log('CONDO_BASE_LOT:', condoBaseLot);
+            //         lotBilling = condoBaseLot
+            //     } else {
+            //         console.log('No matching CONDO_BASE_LOT found');
+            //         lotBilling = 7501
 
-                }
-            });
+            //     }
+            // });
         }        
         
 
