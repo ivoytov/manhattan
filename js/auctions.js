@@ -173,36 +173,70 @@ function zoomToBlock(event) {
 
     let borough = borough_code_dict[event.node.data.borough]; // Example: Manhattan
     let block = event.node.data.block;
-    let lot = event.node.data.lot > 1000 ? 7501 : event.node.data.lot;
+    let lot = event.node.data.lot;
     const key = `${borough}-${block}-${lot}`;
     map.fitBounds(markers[key][0].getBounds(), { maxZoom: 17 })
 
 }
 
 
-async function getCondoBaseLot(data) {
-    const { block, lot } = data;
-    const url = `https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer/0/query`;
-    const params = new URLSearchParams({
-        where: `UNIT_BLOCK=${block} AND UNIT_LOT=${lot}`,
-        outFields: 'CONDO_BASE_LOT',
-        returnGeometry: false,
-        f: 'json'
-    });
+async function getCondoBillingLot(data) {
+    const { block, lot, borough } = data;
+    // boro is either 1,2,3,4,5 (1 == Manhattan)
+    const boro = Object.entries(borough_dict).find(([id, boro]) => boro === borough)[0]
 
-    try {
-        const response = await fetch(`${url}?${params.toString()}`);
-        const result = await response.json();
-        if (result.features && result.features.length > 0) {
-            return result.features[0].attributes.CONDO_BASE_LOT;
-        } else {
-            throw new Error('No matching records found');
-        }
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return null;
-    }
+    const serviceUrl = `https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer`;
+    const condoUrl = `${serviceUrl}/3`
+    const condoUnitUrl = `${serviceUrl}/4`
+
+    const condoUnitQuery = L.esri.query({url: condoUnitUrl})
+
+    condoUnitQuery
+        .where(`UNIT_BORO = ${boro} and UNIT_BLOCK=${block} and UNIT_LOT=${lot}`)
+        .fields(['CONDO_BASE_BBL_KEY'])
+        .returnGeometry(false)
+        .limit(1)
+        .run((error, featureCollection, response) => {
+            if (error) {
+                console.error("Error during the condo unit query:", error)
+                return
+            }
+
+            if(!featureCollection.features.length) {
+                console.log("No data found for the input in CONDO_UNIT table", boro, block, lot)
+                data.billingLot = 7501
+                return
+            }
+
+            const condoBaseBblKey = featureCollection.features[0].properties.CONDO_BASE_BBL_KEY
+
+            const condoQuery = L.esri.query({ url: condoUrl })
+
+            condoQuery
+                .where(`CONDO_BASE_BBL_KEY = ${condoBaseBblKey}`)
+                .fields(['CONDO_BILLING_BBL'])
+                .returnGeometry(false)
+                .limit(1)
+                .run((error, featureCollection, response) => {
+                    if (error) {
+                        console.error("Error during the condo query:", error)
+                        return
+                    }
+
+                    if(!featureCollection.features.length) {
+                        console.log("No data found for the input in CONDO table", condoBaseBblKey)
+                        return
+                    }
+
+                    const condoBillingLotStr = featureCollection.features[0].properties.CONDO_BILLING_BBL
+                    const condoBillingLot = parseInt(condoBillingLotStr.slice(6,10))
+                    data.billingLot = condoBillingLot
+                })
+
+
+        })
 }
+
 
 
 
@@ -217,23 +251,8 @@ function onGridFilterChanged() {
         }
         const boroughCode = borough_code_dict[data.borough]
         const block = data.block
-
-        let lotBilling = data.lot
-        if (data.lot > 1000) {
-            lotBilling = 7501
-            // get the billing lot from ArcGis service
-            // getCondoBaseLot(data).then(condoBaseLot => {
-            //     if (condoBaseLot !== null) {
-            //         console.log('CONDO_BASE_LOT:', condoBaseLot);
-            //         lotBilling = condoBaseLot
-            //     } else {
-            //         console.log('No matching CONDO_BASE_LOT found');
-            //         lotBilling = 7501
-
-            //     }
-            // });
-        }        
-        
+        const lot = data.lot
+        const billingLot = data.billingLot ?? data.lot
 
         const onClickTableZoom = () => {
                 // Highlight the row in AG Grid
@@ -248,17 +267,17 @@ function onGridFilterChanged() {
         }
 
         blockLotLayer.query()
-            .where(`Borough = '${boroughCode}' AND Block = ${block} AND Lot = ${lotBilling}`)
+            .where(`Borough = '${boroughCode}' AND Block = ${block} AND Lot = ${billingLot}`)
             .run(function (error, featureCollection) {
                 if (error) {
-                    console.error(error);
+                    console.error("Couldn't find geometry for BBL", boroughCode, block, lot, error);
                     return;
                 }
 
                 if (featureCollection.features.length > 0) {
                     const layer = L.geoJSON(featureCollection, {
                         onEachFeature: function (feature, layer) {
-                            layer.on('click', onClickTableZoom())
+                            layer.on('click', onClickTableZoom)
                         }
                     }).addTo(map);
 
@@ -267,7 +286,7 @@ function onGridFilterChanged() {
                     marker.on('click', onClickTableZoom)
 
                     // Store the marker in the markers object
-                    const key = `${boroughCode}-${block}-${lotBilling}`;
+                    const key = `${boroughCode}-${block}-${lot}`;
                     if (!markers[key]) {
                         markers[key] = []
                     }
@@ -387,6 +406,10 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
         const auction = auctionMatches[0]
         lot.auction_date = auction.auction_date
         lot.case_name = auction.case_name
+        if (lot.lot > 1000) {
+            getCondoBillingLot(lot)
+        }
+        
 
         const result = bids.find(({ case_number, auction_date }) => (case_number == lot.case_number) && (auction_date.getTime() == lot.auction_date.getTime()))
         if (result) {
