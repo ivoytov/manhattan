@@ -245,14 +245,13 @@ function onGridFilterChanged() {
     updateURLWithFilters(allFilters);
 
     // Get all displayed rows
-    gridApi.forEachNodeAfterFilterAndSort(({ data }) => {
+    gridApi.forEachNodeAfterFilterAndSort(async ({ data }) => {
         if (!data.block || !data.borough || !data.lot) {
             return
         }
         const boroughCode = borough_code_dict[data.borough]
-        const block = data.block
-        const lot = data.lot
-        const billingLot = data.billingLot ?? data.lot
+        const lot = data.lot > 1000 ? (data.billingLot ?? 7501) : data.lot
+        
 
         const onClickTableZoom = () => {
                 // Highlight the row in AG Grid
@@ -266,11 +265,11 @@ function onGridFilterChanged() {
                 });
         }
 
-        blockLotLayer.query()
-            .where(`Borough = '${boroughCode}' AND Block = ${block} AND Lot = ${billingLot}`)
+        await blockLotLayer.query()
+            .where(`Borough = '${boroughCode}' AND Block = ${data.block} AND Lot = ${lot}`)
             .run(function (error, featureCollection) {
                 if (error) {
-                    console.error("Couldn't find geometry for BBL", boroughCode, block, lot, error);
+                    console.error("Couldn't find geometry for BBL", boroughCode, data.block, lot, error);
                     return;
                 }
 
@@ -286,7 +285,7 @@ function onGridFilterChanged() {
                     marker.on('click', onClickTableZoom)
 
                     // Store the marker in the markers object
-                    const key = `${boroughCode}-${block}-${lot}`;
+                    const key = `${boroughCode}-${data.block}-${data.lot}`;
                     if (!markers[key]) {
                         markers[key] = []
                     }
