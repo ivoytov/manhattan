@@ -180,6 +180,32 @@ function zoomToBlock(event) {
 }
 
 
+async function getCondoBaseLot(data) {
+    const { block, lot } = data;
+    const url = `https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer/0/query`;
+    const params = new URLSearchParams({
+        where: `UNIT_BLOCK=${block} AND UNIT_LOT=${lot}`,
+        outFields: 'CONDO_BASE_LOT',
+        returnGeometry: false,
+        f: 'json'
+    });
+
+    try {
+        const response = await fetch(`${url}?${params.toString()}`);
+        const result = await response.json();
+        if (result.features && result.features.length > 0) {
+            return result.features[0].attributes.CONDO_BASE_LOT;
+        } else {
+            throw new Error('No matching records found');
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+}
+
+
+
 function onGridFilterChanged() {
     const allFilters = gridApi.getFilterModel()
     updateURLWithFilters(allFilters);
@@ -191,7 +217,22 @@ function onGridFilterChanged() {
         }
         const boroughCode = borough_code_dict[data.borough]
         const block = data.block
-        const lotBilling = data.lot > 1000 ? 7501 : data.lot
+
+        let lotBilling = data.lot
+        if (data.lot > 1000) {
+            // get the billing lot from ArcGis service
+            getCondoBaseLot(data).then(condoBaseLot => {
+                if (condoBaseLot !== null) {
+                    console.log('CONDO_BASE_LOT:', condoBaseLot);
+                    lotBilling = condoBaseLot
+                } else {
+                    console.log('No matching CONDO_BASE_LOT found');
+                    lotBilling = 7501
+
+                }
+            });
+        }        
+        
 
         const onClickTableZoom = () => {
                 // Highlight the row in AG Grid
@@ -221,7 +262,6 @@ function onGridFilterChanged() {
                     }).addTo(map);
 
                     const centroid = getCentroid(featureCollection.features[0].geometry)
-                    console.log(centroid)
                     const marker = L.marker([centroid.lng, centroid.lat]).addTo(markerLayer);
                     marker.on('click', onClickTableZoom)
 

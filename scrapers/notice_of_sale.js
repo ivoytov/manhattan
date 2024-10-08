@@ -151,7 +151,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;   
     const auction_date = new Date(process.argv[4]) 
 
-    const args = process.argv.slice(2,process.argv.length).join(" ")
+    const args = process.argv.slice(2, process.argv.length).join(" ")
+    const county = process.argv[3] == 'Staten' ? `${process.argv[3]} ${process.argv[4]}` : process.argv[3]
     console.log(args, "Starting...")
     const missingFilings = []
     if (process.argv.includes('surplusmoney')) {
@@ -160,8 +161,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (process.argv.includes('noticeofsale')) {
         missingFilings.push(FilingType.NOTICE_OF_SALE)
     }
-    download_filing(process.argv[2], process.argv[3], auction_date, missingFilings, endpoint).catch(err => {
+    await download_filing(process.argv[2], county, auction_date, missingFilings, endpoint).catch(err => {
         console.error(args, "Error processing");
+        console.error(err)
     })
     console.log(args, "...Completed")
 

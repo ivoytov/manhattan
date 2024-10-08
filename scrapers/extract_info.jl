@@ -21,7 +21,7 @@ end
 
 # Function to extract address
 function extract_address(text)
-    pattern = r"(?:known as\s|prem\.\s*k\/a\s|premises\sk\/a\s|lying and being at\s)(([\sa-z,\-0-9#](?!\d{5}))+(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
+    pattern = r"(?:known as\s|prem\.\s*k\/a\s|k\/a\s|lying and being at\s)(([\sa-z,\-0-9#](?!\d{5}))+(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
     return extract_pattern(text, [pattern])
 end
 
@@ -167,7 +167,7 @@ function prompt_for_block_and_lot(cases, lots)
       
         if case_number ∉ lots.case_number
             row = (case_number=case_number, borough=foreclosure_case.borough, block=missing, lot=missing, address=missing)
-            push!(lots, row)
+            push!(lots, row; promote=true)
         end 
         # modifying row from here on will alter the DataFrame
         row = lots[findfirst(==(case_number), lots.case_number), :]
@@ -241,7 +241,7 @@ function prompt_for_block_and_lot(cases, lots)
             push!(lots, new_row)
         end
 
-        run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
+        run(`osascript -e 'tell application "Preview" to close window 1'`)
     end
     return lots
 end
