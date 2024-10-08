@@ -1,3 +1,5 @@
+const minTransactionPrice = 10000
+
 // Function to load CSV file using PapaParse
 function loadCSV(url, dateKey = "auction_date") {
     return new Promise((resolve, reject) => {
@@ -189,7 +191,7 @@ async function getCondoBillingLot(data) {
     const condoUrl = `${serviceUrl}/3`
     const condoUnitUrl = `${serviceUrl}/4`
 
-    const condoUnitQuery = L.esri.query({url: condoUnitUrl})
+    const condoUnitQuery = L.esri.query({ url: condoUnitUrl })
 
     condoUnitQuery
         .where(`UNIT_BORO = ${boro} and UNIT_BLOCK=${block} and UNIT_LOT=${lot}`)
@@ -202,7 +204,7 @@ async function getCondoBillingLot(data) {
                 return
             }
 
-            if(!featureCollection.features.length) {
+            if (!featureCollection.features.length) {
                 console.log("No data found for the input in CONDO_UNIT table", boro, block, lot)
                 data.billingLot = 7501
                 return
@@ -223,13 +225,13 @@ async function getCondoBillingLot(data) {
                         return
                     }
 
-                    if(!featureCollection.features.length) {
+                    if (!featureCollection.features.length) {
                         console.log("No data found for the input in CONDO table", condoBaseBblKey)
                         return
                     }
 
                     const condoBillingLotStr = featureCollection.features[0].properties.CONDO_BILLING_BBL
-                    const condoBillingLot = parseInt(condoBillingLotStr.slice(6,10))
+                    const condoBillingLot = parseInt(condoBillingLotStr.slice(6, 10))
                     data.billingLot = condoBillingLot
                 })
 
@@ -251,18 +253,18 @@ function onGridFilterChanged() {
         }
         const boroughCode = borough_code_dict[data.borough]
         const lot = data.lot > 1000 ? (data.billingLot ?? 7501) : data.lot
-        
+
 
         const onClickTableZoom = () => {
-                // Highlight the row in AG Grid
-                gridApi.forEachNodeAfterFilterAndSort(function (node) {
-                    if (node.data.borough === data.borough && node.data.block === data.block && node.data.lot === data.lot) {
-                        node.setSelected(true, true); // Select the row
+            // Highlight the row in AG Grid
+            gridApi.forEachNodeAfterFilterAndSort(function (node) {
+                if (node.data.borough === data.borough && node.data.block === data.block && node.data.lot === data.lot) {
+                    node.setSelected(true, true); // Select the row
 
-                        // Ensure the selected row is visible by scrolling to it
-                        gridApi.ensureIndexVisible(node.rowIndex, 'middle');
-                    }
-                });
+                    // Ensure the selected row is visible by scrolling to it
+                    gridApi.ensureIndexVisible(node.rowIndex, 'middle');
+                }
+            });
         }
 
         await blockLotLayer.query()
@@ -300,6 +302,9 @@ const gridOptions = {
     columnDefs: columnDefs,
     defaultColDef: defaultColDef,
     masterDetail: true,
+    isRowMaster: (dataItem) => {
+        return dataItem ? getTransactions(dataItem).length : false;
+    },
     detailRowAutoHeight: true,
     rowSelection: 'single',
     onRowSelected: zoomToBlock,
@@ -408,7 +413,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
         if (lot.lot > 1000) {
             getCondoBillingLot(lot)
         }
-        
+
 
         const result = bids.find(({ case_number, auction_date }) => (case_number == lot.case_number) && (auction_date.getTime() == lot.auction_date.getTime()))
         if (result) {
@@ -426,7 +431,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
             lot.isSold = new Date() > lot.auction_date ? transactions.some(t => {
                 const millisecondsInADay = 24 * 60 * 60 * 1000;
                 const dayDifference = (t["SALE DATE"] - lot.auction_date) / millisecondsInADay
-                return dayDifference >= 0 && dayDifference <= 90 && t["SALE PRICE"] > 10000
+                return dayDifference >= 0 && dayDifference <= 90 && t["SALE PRICE"] > minTransactionPrice
             }) : false
         } else {
             lot.isSold = false
@@ -446,7 +451,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
 
 
 function getTransactions(data) {
-    let repeats = combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == data.borough && BLOCK == data.block && LOT == data.lot);
+    let repeats = combinedData.filter(({ BOROUGH, BLOCK, LOT, "SALE PRICE":SALE_PRICE }) => BOROUGH == data.borough && BLOCK == data.block && LOT == data.lot && SALE_PRICE > minTransactionPrice);
     repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"]);
     return repeats;
 }
