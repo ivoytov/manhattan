@@ -1,4 +1,6 @@
 const minTransactionPrice = 10000
+let markers = {};
+
 
 // Function to load CSV file using PapaParse
 function loadCSV(url, dateKey = "auction_date") {
@@ -182,7 +184,7 @@ function zoomToBlock(event) {
 }
 
 
-async function getCondoBillingLot(data) {
+function getCondoBillingLot(data) {
     const { block, lot, borough } = data;
     // boro is either 1,2,3,4,5 (1 == Manhattan)
     const boro = Object.entries(borough_dict).find(([id, boro]) => boro === borough)[0]
@@ -226,7 +228,7 @@ async function getCondoBillingLot(data) {
                     }
 
                     if (!featureCollection.features.length) {
-                        console.log("No data found for the input in CONDO table", condoBaseBblKey)
+                        console.log("No data found for the input in CONDO table", condoBaseBblKey, boro, block, lot)
                         return
                     }
 
@@ -247,7 +249,7 @@ function onGridFilterChanged() {
     updateURLWithFilters(allFilters);
 
     // Get all displayed rows
-    gridApi.forEachNodeAfterFilterAndSort(async ({ data }) => {
+    gridApi.forEachNodeAfterFilterAndSort(({ data }) => {
         if (!data.block || !data.borough || !data.lot) {
             return
         }
@@ -266,33 +268,37 @@ function onGridFilterChanged() {
                 }
             });
         }
-
-        await blockLotLayer.query()
+        
+        blockLotLayer.query()
             .where(`Borough = '${boroughCode}' AND Block = ${data.block} AND Lot = ${lot}`)
-            .run(function (error, featureCollection) {
+            .run((error, featureCollection) => {
                 if (error) {
                     console.error("Couldn't find geometry for BBL", boroughCode, data.block, lot, error);
                     return;
                 }
 
-                if (featureCollection.features.length > 0) {
-                    const layer = L.geoJSON(featureCollection, {
-                        onEachFeature: function (feature, layer) {
-                            layer.on('click', onClickTableZoom)
-                        }
-                    }).addTo(map);
-
-                    const centroid = getCentroid(featureCollection.features[0].geometry)
-                    const marker = L.marker([centroid.lng, centroid.lat]).addTo(markerLayer);
-                    marker.on('click', onClickTableZoom)
-
-                    // Store the marker in the markers object
-                    const key = `${boroughCode}-${data.block}-${data.lot}`;
-                    if (!markers[key]) {
-                        markers[key] = []
-                    }
-                    markers[key].push(layer);
+                if (featureCollection.features.length == 0) {
+                    console.warn("failed to return any results", boroughCode, data.block, lot)
+                    return;
                 }
+        
+                const layer = L.geoJSON(featureCollection, {
+                    onEachFeature: function (feature, layer) {
+                        layer.on('click', onClickTableZoom)
+                    }
+                }).addTo(map);
+
+                const centroid = getCentroid(featureCollection.features[0].geometry)
+                const marker = L.marker([centroid.lng, centroid.lat]).addTo(markerLayer);
+                marker.on('click', onClickTableZoom)
+
+                // Store the marker in the markers object
+                const key = `${boroughCode}-${data.block}-${data.lot}`;
+                if (!markers[key]) {
+                    markers[key] = []
+                }
+                markers[key].push(layer);
+                
             });
     });
 }
@@ -306,8 +312,14 @@ const gridOptions = {
         return dataItem ? getTransactions(dataItem).length : false;
     },
     detailRowAutoHeight: true,
-    rowSelection: 'single',
+    rowSelection: { 
+        mode: 'singleRow',
+        checkboxes: false,
+        enableClickSelection: true,
+    },
     onRowSelected: zoomToBlock,
+    // Listen for AG Grid filter changes
+    onFilterChanged: onGridFilterChanged,
 
     columnTypes: {
         currency: {
@@ -380,8 +392,7 @@ const gridOptions = {
             params.successCallback(repeats);
         },
     },
-    // Listen for AG Grid filter changes
-    onFilterChanged: onGridFilterChanged
+
 };
 
 // Create AG Grid
@@ -451,7 +462,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
 
 
 function getTransactions(data) {
-    let repeats = combinedData.filter(({ BOROUGH, BLOCK, LOT, "SALE PRICE":SALE_PRICE }) => BOROUGH == data.borough && BLOCK == data.block && LOT == data.lot && SALE_PRICE > minTransactionPrice);
+    let repeats = combinedData.filter(({ BOROUGH, BLOCK, LOT, "SALE PRICE": SALE_PRICE }) => BOROUGH == data.borough && BLOCK == data.block && LOT == data.lot && SALE_PRICE > minTransactionPrice);
     repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"]);
     return repeats;
 }
@@ -515,7 +526,6 @@ const borough_code_dict = {
     "Staten Island": "SI",
 }
 
-let markers = {};
 
 
 // splitter functionality
