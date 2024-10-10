@@ -44,8 +44,9 @@ function extract_text_from_pdf(pdf_path)
     text_path = case_number * ".txt"
 
     # Call the GraphicsMagick command
-    run(pipeline(`gm convert -density 330 $pdf_path $image_path`, devnull))
+    run(pipeline(`gm convert -append -density 330 $pdf_path $image_path`, devnull))
 
+    
     run_tesseract(image_path, text_path)
     text = read(text_path, String)
     rm(image_path)
