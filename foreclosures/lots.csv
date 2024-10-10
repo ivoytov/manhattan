@@ -823,9 +823,8 @@ case_number,borough,block,lot,address
 531083/2022,Brooklyn,3379,12,"1492 Putnam Avenue, Brooklyn, NY."
 536746/2022,Brooklyn,8081,115,"1416 E. 85TH STREET, BROOKLYN, NY 11236"
 135276/2023,Staten Island,150,353,178 Bement Court
-850158/2021,Manhattan,2111,1001,"The Retail Unit at One Hanson Place, Brooklyn, New York, 11243."
+850158/2021,Brooklyn,2111,1001,"The Retail Unit at One Hanson Place, Brooklyn, New York, 11243."
 850170/2021,Manhattan,563,1012,"44 East 12th Street, Unit 5A, New York, NY 10003"
-158712/2022,Manhattan,2872,116,"1367 CLAY AVE, BRONX, NY 10457"
 850252/2022,Manhattan,1623,102," 1 East 117th Street, New York, NY 10035"
 35397/2013E,Bronx,5003,37,"1733 EDENWALD AVE, BRONX, NY 10466"
 32021/2015E,Bronx,2872,116,"1367 CLAY AVE, BRONX, NY 10457"
