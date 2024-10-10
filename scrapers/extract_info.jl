@@ -133,8 +133,7 @@ function prompt_for_winning_bid(cases, bids)
             row[key] = key == :auction_date ? Date(input, "yyyy-mm-dd") : parse(Float64, input)
         end
 
-
-        run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
+        run(`osascript -e 'tell application "Preview" to close window 1'`)
     end
     return bids
 end
