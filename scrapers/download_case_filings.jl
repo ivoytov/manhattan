@@ -21,7 +21,7 @@ function main()
 		println("Running on GitHub: Randomly selecting $n cases with a missing surplus money form")
 	end
 	
-    process_data(rows, 4, is_local)
+    process_data(rows, is_local ? 1 : 4, is_local)
 end
 
 # Define the FilingType as a constant dictionary
@@ -79,7 +79,7 @@ function get_data()
     transform!(rows, [:case_number, :auction_date] => ByRow(missing_filings) => :missing_filings)
     filter!(row -> !isempty(row.missing_filings), rows)
 
-    display(rows[:, [:case_number, :borough, :auction_date]])
+    display(rows)
 	return rows
 end
 

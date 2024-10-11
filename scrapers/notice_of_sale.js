@@ -64,7 +64,7 @@ export async function download_filing(index_number, county, auction_date, missin
         await page.locator('table.NewSearchResults > tbody > tr > td > a').click();
     } catch (e) {
         console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
-        return
+        return { error: 'Failed to find case in CEF' };
     }
 
     await page.waitForNavigation({ waitUntil: 'networkidle2' });
@@ -115,7 +115,8 @@ export async function download_filing(index_number, county, auction_date, missin
 
             if (docs.length == 0) {
                 console.warn("No valid document download links available")
-                return
+                return { error: 'No valid document links' };
+
             }
 
             const receivedDate = new Date(docs[0].receivedDate)
@@ -123,7 +124,7 @@ export async function download_filing(index_number, county, auction_date, missin
 
             // if received date is before auction date, this is not the right surplus money form
             if (auction_date && filing == FilingType.SURPLUS_MONEY_FORM && receivedDate < auction_date) {
-                console.warn(index_number, `Found SMF with received date ${receivedDate.toISOString().split('T')[0]}, before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
+                console.log(index_number, `Found SMF with received date ${receivedDate.toISOString().split('T')[0]}, before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
                 continue
             }
 
@@ -131,7 +132,7 @@ export async function download_filing(index_number, county, auction_date, missin
             const earliestDayForNoticeOfSale = new Date(auction_date)
             earliestDayForNoticeOfSale.setDate(earliestDayForNoticeOfSale.getDate() - 90)
             if (auction_date && filing == FilingType.NOTICE_OF_SALE && (receivedDate < earliestDayForNoticeOfSale || receivedDate > auction_date)) {
-                console.warn(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, either after or more than 90 days before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
+                console.log(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, either after or more than 90 days before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
                 continue
             } 
 

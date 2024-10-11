@@ -94,8 +94,11 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     const page = await browser.newPage();
 
     console.log('Connected! Navigating...');
-    const url = 'https://iapps.courts.state.ny.us/webcivil/FCASCalendarSearch';
+    const url = 'https://iapps.courts.state.ny.us/webcivil/FCASMain';
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 2*60*1000  });
+    await sleep(1)
+
+    await page.locator('body > table > tbody > tr > td:nth-child(2) > p > table:nth-child(3) > tbody > tr:nth-child(9) > td:nth-child(1) > a').click()
     await sleep(1)
 
     await page.locator('select#cboCourt').fill(courtId);  //QUEENS Superior Court
