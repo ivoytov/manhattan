@@ -21,14 +21,17 @@ end
 
 # Function to extract address
 function extract_address(text)
-    pattern = r"(?:known as\s|described as follows:\s|(?:prem\.|premises)\s*k\/a\s|lying and being at\s)(([\sa-z,\-0-9#\.\/](?!\d{5}))+(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
+    pattern = r"(?:property located at|premises known as|described as follows:?|(?:prem\.|premises)\s*k\/a|lying and being at|street address of)\s(([^.]+?)(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
     return extract_pattern(text, [pattern])
 end
 
 
 # Function to extract block
 function extract_block(text)
-    patterns = [r"Block[:\s]+(\d+)"i, r"\s(?!\(\d{3}\))\s(\d{3,5})-(\d{1,4})[\.\s]"]
+    patterns = [
+        r"Block[:\s]+(\d+)"i, 
+        r"(?<!\(\d{3}\))\s(\d{3,5})-(\d{1,4})[.]"
+    ]
     return extract_pattern(text, patterns)
 end
 
@@ -36,7 +39,7 @@ end
 function extract_lot(text)
     patterns = [
         r"\sLot(?:s?| No\.?)[:\s]+(\d+)"i, 
-        r"\s(?!\(\d{3}\))\s\d{3,5}-(\d{1,4})[\.\s]"
+        r"(?<!\(\d{3}\))\s\d{3,5}-(\d{1,4})[.]"
     ]
     return extract_pattern(text, patterns)
 end
@@ -276,8 +279,12 @@ function test_existing_data()
     # Read in which files exist
     files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
 
-    idx = findfirst(lots.case_number .== "850012/2023") 
-    for case in eachrow(lots[idx:end, :])
+    start_case = "724847/2020"
+    printstyled("Starting with case $start_case \n", color=:blue, italic=true)
+    start_idx = findfirst(lots.case_number .== start_case) 
+    total = nrow(lots)
+    for (idx, case) in enumerate(eachrow(lots))
+        idx < start_idx && continue
         case_number = case.case_number
 
         if case_number ∉ files
@@ -296,13 +303,14 @@ function test_existing_data()
         end
         text = replace(text, "\n" => " ")
 
-        println("$case_number $(case.borough) block: $(case.block) lot:$(case.lot) $(case.address)")
+        println("$idx/$total $case_number $(case.borough) block: $(case.block) lot:$(case.lot) $(case.address)")
 
         block, lot=extract_block(text), extract_lot(text)
         address=extract_address(text)
 
         block = isnothing(block) ? 0 : parse(Int, block)
         lot = isnothing(lot) ? 0 : parse(Int, lot)
+        address = isnothing(address) ? "" : address
 
         if (block == 0 || block == case.block) && 
             (lot == 0 || lot == case.lot) && 
@@ -318,17 +326,19 @@ function test_existing_data()
         @printf("%s NEW      block %5d lot %5d address %s\n", case_number, block, lot, address)
         
         is_fix = prompt("Change EXISTING to NEW (y/n)?", "n")
-        if is_fix == "y"
-            case.block = block
-            case.lot = lot
-            case.address = address
-        elseif is_fix == "q"
+        if isnothing(is_fix)
             break
+        elseif is_fix == "y"
+            lots.block[idx] = block
+            lots.lot[idx] = lot
+            lots.address[idx] = address
         end
+        run(`osascript -e 'tell application "Preview" to close window 1'`)
+
 
     end
 
-    CSV.write(lots_path, updated_lots)
+    CSV.write(lots_path, lots)
     println("CSV file has been updated with missing block and lot values.")
 end
 
