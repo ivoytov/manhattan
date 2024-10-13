@@ -1,4 +1,4 @@
-using CSV, DataFrames, ProgressMeter, OCReract, Dates
+using CSV, DataFrames, ProgressMeter, OCReract, Dates, Printf
 
 # Function to prompt with a default answer
 function prompt(question, default_answer="")
@@ -21,19 +21,23 @@ end
 
 # Function to extract address
 function extract_address(text)
-    pattern = r"(?:known as\s|described as follows:\s|(prem\.|premises)\s*k\/a\s|lying and being at\s)(([\sa-z,\-0-9#\.\/](?!\d{5}))+(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
+    pattern = r"(?:known as\s|described as follows:\s|(?:prem\.|premises)\s*k\/a\s|lying and being at\s)(([\sa-z,\-0-9#\.\/](?!\d{5}))+(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
     return extract_pattern(text, [pattern])
 end
 
+
 # Function to extract block
 function extract_block(text)
-    patterns = [r"Block[:\s]+(\d+)"i, r"\s(\d{3,5})-(\d{1,4})[\.\s]"]
+    patterns = [r"Block[:\s]+(\d+)"i, r"\s(?!\(\d{3}\))\s(\d{3,5})-(\d{1,4})[\.\s]"]
     return extract_pattern(text, patterns)
 end
 
 # Function to extract lot
 function extract_lot(text)
-    patterns = [r"\sLots?[:\s]+(\d+)"i, r"\s\d{3,5}-(\d{1,4})[\.\s]"]
+    patterns = [
+        r"\sLot(?:s?| No\.?)[:\s]+(\d+)"i, 
+        r"\s(?!\(\d{3}\))\s\d{3,5}-(\d{1,4})[\.\s]"
+    ]
     return extract_pattern(text, patterns)
 end
 
@@ -44,10 +48,10 @@ function extract_text_from_pdf(pdf_path)
     text_path = case_number * ".txt"
 
     # Call the GraphicsMagick command
-    run(pipeline(`gm convert -append -density 330 $pdf_path $image_path`, devnull))
+    run(pipeline(`gm convert -append -density 330 $pdf_path $image_path`, stdout=devnull, stderr=devnull))
 
     
-    run_tesseract(image_path, text_path)
+    run_tesseract(image_path, text_path, lang="eng", user_defined_dpi=330)
     text = read(text_path, String)
     rm(image_path)
     rm(text_path)
@@ -80,9 +84,6 @@ function prompt_for_winning_bid(cases, bids)
         if  (row.judgement, row.upset_price, row.winning_bid) .|> !ismissing |> all
             continue
         end
-
-
-        println("$case_number $(foreclosure_case.borough) $(foreclosure_case.auction_date)")
 
         # Extract text from PDF manually
         filename = replace(case_number, "/" => "-") * ".pdf"
@@ -268,6 +269,69 @@ function get_block_and_lot()
     println("CSV file has been updated with missing block and lot values.")
 end
 
+function test_existing_data()
+    lots_path = "foreclosures/lots.csv"
+    lots = CSV.read(lots_path, DataFrame)
+
+    # Read in which files exist
+    files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
+
+    idx = findfirst(lots.case_number .== "850012/2023") 
+    for case in eachrow(lots[idx:end, :])
+        case_number = case.case_number
+
+        if case_number ∉ files
+            continue
+        end
+        # Extract text from PDF
+        filename = replace(case_number, "/" => "-") * ".pdf"
+        pdf_path = joinpath("saledocs/noticeofsale", filename)
+
+        # Extract block and lot
+        text = try
+            extract_text_from_pdf(pdf_path)
+        catch e
+            println("$case_number Error extracting text from $pdf_path: $e")
+            continue
+        end
+        text = replace(text, "\n" => " ")
+
+        println("$case_number $(case.borough) block: $(case.block) lot:$(case.lot) $(case.address)")
+
+        block, lot=extract_block(text), extract_lot(text)
+        address=extract_address(text)
+
+        block = isnothing(block) ? 0 : parse(Int, block)
+        lot = isnothing(lot) ? 0 : parse(Int, lot)
+
+        if (block == 0 || block == case.block) && 
+            (lot == 0 || lot == case.lot) && 
+            (isnothing(address) || ismissing(case.address) || address == case.address)
+            continue
+        end
+
+        # Open the PDF file with the default application on macOS
+        run(`open "$pdf_path"`)
+
+        printstyled(text, "\n\n", italic=true)
+        @printf("%s EXISTING block %5d lot %5d address %s\n", case_number, case.block, case.lot, case.address)
+        @printf("%s NEW      block %5d lot %5d address %s\n", case_number, block, lot, address)
+        
+        is_fix = prompt("Change EXISTING to NEW (y/n)?", "n")
+        if is_fix == "y"
+            case.block = block
+            case.lot = lot
+            case.address = address
+        elseif is_fix == "q"
+            break
+        end
+
+    end
+
+    CSV.write(lots_path, updated_lots)
+    println("CSV file has been updated with missing block and lot values.")
+end
+
 
 # Main function
 function main()
@@ -275,4 +339,5 @@ function main()
     get_auction_results()
 end
 
-main()
+# main()
+test_existing_data()

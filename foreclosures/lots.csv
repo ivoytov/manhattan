@@ -11,7 +11,7 @@ case_number,borough,block,lot,address
 651246/2022,Manhattan,821,10,"55 West 19th StreetNew York, New York 10011"
 850188/2014,Manhattan,1287,1040,"641 5th Avenue #26H, NewYork, NY10022."
 850111/2020,Manhattan,1090,1351,"627-635 West 42nd Street, Unit 15JNewYork, NY10036"
-157781/2020,Manhattan,1845,1110,"Unit 11K300 Cathedral ParkwayNew York, New York 10026"
+157781/2020,Manhattan,1110,1845,"Unit 11K300 Cathedral ParkwayNew York, New York 10026"
 850219/2021,Manhattan,762,5,"510 9th Avenue, New York, NY 10018"
 850085/2022,Manhattan,742,1032,"305 West 18th st, Unit 2F, NY, NY 10011"
 850086/2022,Manhattan,742,1006,
@@ -628,7 +628,7 @@ case_number,borough,block,lot,address
 135114/2020,Staten Island,768,23,"15 Graves Street, Staten Island, NY 10314"
 135218/2022,Staten Island,3629,20,
 150932/2023,Staten Island,564,30,
-103572/2008,Staten Island,2005,7,
+103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303"
 131221/2013,Staten Island,1127,12,
 135162/2013,Staten Island,139,12,
 130779/2011,Staten Island,5316,36,"42 Robinson Avenue, Staten Island, NY 10312"
@@ -644,17 +644,17 @@ case_number,borough,block,lot,address
 135285/2022,Staten Island,3019,1036,"95D Narrows Road North a/k/a 8D-95D Narrows Road North, Staten Island,"
 151627/2022,Staten Island,7105,506,
 135176/2023,Staten Island,3686,51,"41 Beachview Avenue, Staten Island, NY 10306"
-132310/2009,Staten Island,812,40,
+132310/2009,Staten Island,1012,25,"44 Bennetts Street, Staten Island, New York 10302"
 130313/2010,Staten Island,157,197,
-135292/2013,Staten Island,430,47,
-135674/2016,Staten Island,1997,82,
+135292/2013,Staten Island,7317,245,"59 Pembrook Loop, Staten Island, NY 10309"
+135674/2016,Staten Island,648,29,"969 VAN DUZER STREET, STATEN ISLAND, NY 10304-1863"
 135360/2017,Staten Island,226,117,
-135209/2018,Staten Island,742,12,
+135209/2018,Staten Island,232,39,"793 Delafield Avenue. Staten Island, NY10310"
 135029/2020,Staten Island,1074,18,
 151783/2022,Staten Island,6048,83,
-135202/2023,Staten Island,167,1,
-135075/2015,Staten Island,2007,1,
-135175/2018,Staten Island,181,18,
+135202/2023,Staten Island,3633,27,"155 Locust Avenue, Staten Island, NY 10306"
+135075/2015,Staten Island,7821,23,"7126 Amboy Road, Staten Island, (City of New York) NY 1030"
+135175/2018,Staten Island,49,84,"184-186 Beachwood Avenue, Staten Island, NY 10301"
 135033/2014,Staten Island,2401,1302,
 380625/2011E,Bronx,5058,50,
 517743/2019,Brooklyn,8148,7,

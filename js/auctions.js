@@ -92,7 +92,8 @@ const columnDefs = [
     {
         headerName: "Address",
         field: "address",
-        cellRenderer: 'agGroupCellRenderer'
+        cellRenderer: 'agGroupCellRenderer',
+        minWidth: 200,
     },
     {
         headerName: "Case #",
@@ -111,14 +112,20 @@ const columnDefs = [
         sort: "asc",
         sortIndex: 0,
     },
+    // {
+    //     headerName: "Block", field: "block", type: "rightAligned",
+    //     filter: 'agNumberColumnFilter',
+    //     maxWidth: 100,
+    // },
+    // {
+    //     headerName: "Lot", field: "lot", type: "rightAligned",
+    //     filter: 'agNumberColumnFilter',
+    //     maxWidth: 100,
+    // },
     {
-        headerName: "Block", field: "block", type: "rightAligned",
-        filter: 'agNumberColumnFilter',
-        maxWidth: 100,
-    },
-    {
-        headerName: "Lot", field: "lot", type: "rightAligned",
-        filter: 'agNumberColumnFilter',
+        headerName: "BBL", 
+        type: "rightAligned",
+        valueGetter: p => `${p.data.block}-${p.data.lot}`,
         maxWidth: 100,
     },
     // {
