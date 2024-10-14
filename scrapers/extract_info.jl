@@ -21,7 +21,7 @@ end
 
 # Function to extract address
 function extract_address(text)
-    pattern = r"(?:property located at|known as|described as follows:?|(?:prem\.|premises)\s*k\/a|lying and being at|street address of)\s((.+?)(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
+    pattern = r"(?:building located at|property located at|(?<!formerly )known as|described as follows:?(?!\s*See|\s*beginning|\s*All that)|(?:prem\.|premises)\s*k\/a|lying and being at|street address of)\s((.+?)(?:,?\s+(N\.?Y\.?|New\s?York(?! Avenue)))(\s+\d{5})?)"i
     return extract_pattern(text, [pattern])
 end
 
@@ -29,8 +29,9 @@ end
 # Function to extract block
 function extract_block(text)
     patterns = [
-        r"Block[:\s]+(\d+)"i, 
-        r"(?<!\(\d{3}\))\s(\d{3,5})-(\d{1,4})[.]"
+        r"\bBlock[:\s]+(\d+)"i, 
+        r"SBL\.?:?\s*(\d{3,5})-\d{1,4}"i,
+        r"(?<!\(\d{3}\))\s(\d{3,5})-(\d{1,4})[.)]"
     ]
     return extract_pattern(text, patterns)
 end
@@ -38,8 +39,9 @@ end
 # Function to extract lot
 function extract_lot(text)
     patterns = [
-        r"\sLot(?:s?| No\.?)[:\s]+(\d+)"i, 
-        r"(?<!\(\d{3}\))\s\d{3,5}-(\d{1,4})[.]"
+        r"\bLot(?:\(?s?\)?| No\.?)[:\s]+(\d+)"i, 
+        r"SBL\.?:?\s*(\d{3,5})-\d{1,4}"i,
+        r"(?<!\(\d{3}\))\s\d{3,5}-(\d{1,4})[.)]"
     ]
     return extract_pattern(text, patterns)
 end
@@ -48,7 +50,7 @@ end
 function extract_text_from_pdf(pdf_path)
     case_number = basename(pdf_path)[1:end-4]
     image_path = case_number * ".png"
-    text_path = case_number * ".txt"
+    text_path = case_number # .txt gets appended automatically
 
     # Call the GraphicsMagick command
     run(pipeline(`gm convert -append -density 330 $pdf_path $image_path`, stdout=devnull, stderr=devnull))
@@ -272,16 +274,19 @@ function get_block_and_lot()
     println("CSV file has been updated with missing block and lot values.")
 end
 
-function test_existing_data()
+function test_existing_data(start_case = nothing)
     lots_path = "foreclosures/lots.csv"
     lots = CSV.read(lots_path, DataFrame)
 
     # Read in which files exist
     files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
+    
+    start_idx = 1
+    if !isnothing(start_case)
+        printstyled("Starting with case $start_case \n", color=:blue, italic=true)
+        start_idx = findfirst(lots.case_number .== start_case) 
+    end 
 
-    start_case = "711411/2016"
-    printstyled("Starting with case $start_case \n", color=:blue, italic=true)
-    start_idx = findfirst(lots.case_number .== start_case) 
     total = nrow(lots)
     for (idx, case) in enumerate(eachrow(lots))
         idx < start_idx && continue
@@ -322,8 +327,8 @@ function test_existing_data()
         printstyled("\n", text, "\n", italic=true)
 
 
-        @printf("%s EXISTING block %5d lot %5d address %s\n", case_number, case.block, case.lot, case.address)
-        @printf("%s NEW      block %5d lot %5d address %s\n", case_number, block, lot, address)
+        printstyled(@sprintf("%s EXISTING block %6d lot %5d address %s\n", case_number, case.block, case.lot, case.address), color=:light_magenta)
+        printstyled(@sprintf("%s NEW      block %6d lot %5d address %s\n", case_number, block, lot, address), color=:light_green)
         
         is_fix = prompt("Change EXISTING to NEW (y/n)?", "n")
         if isnothing(is_fix)
@@ -350,4 +355,4 @@ function main()
 end
 
 # main()
-test_existing_data()
+test_existing_data("135075/2015")
