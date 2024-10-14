@@ -21,7 +21,7 @@ end
 
 # Function to extract address
 function extract_address(text)
-    pattern = r"(?:property located at|premises known as|described as follows:?|(?:prem\.|premises)\s*k\/a|lying and being at|street address of)\s(([^.]+?)(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
+    pattern = r"(?:property located at|known as|described as follows:?|(?:prem\.|premises)\s*k\/a|lying and being at|street address of)\s((.+?)(?:,?\s+(NY|New\s?York))(\s+\d{5})?)"i
     return extract_pattern(text, [pattern])
 end
 
@@ -279,7 +279,7 @@ function test_existing_data()
     # Read in which files exist
     files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
 
-    start_case = "724847/2020"
+    start_case = "711411/2016"
     printstyled("Starting with case $start_case \n", color=:blue, italic=true)
     start_idx = findfirst(lots.case_number .== start_case) 
     total = nrow(lots)
@@ -304,7 +304,6 @@ function test_existing_data()
         text = replace(text, "\n" => " ")
 
         println("$idx/$total $case_number $(case.borough) block: $(case.block) lot:$(case.lot) $(case.address)")
-
         block, lot=extract_block(text), extract_lot(text)
         address=extract_address(text)
 
@@ -320,8 +319,9 @@ function test_existing_data()
 
         # Open the PDF file with the default application on macOS
         run(`open "$pdf_path"`)
+        printstyled("\n", text, "\n", italic=true)
 
-        printstyled(text, "\n\n", italic=true)
+
         @printf("%s EXISTING block %5d lot %5d address %s\n", case_number, case.block, case.lot, case.address)
         @printf("%s NEW      block %5d lot %5d address %s\n", case_number, block, lot, address)
         
