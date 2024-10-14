@@ -355,4 +355,4 @@ function main()
 end
 
 main()
-# test_existing_data("135075/2015")
+test_existing_data()
