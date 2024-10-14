@@ -47,6 +47,24 @@ function updateURLWithFilters(filters) {
     window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
 }
 
+// Create a custom control for the button
+const clearTableFilter = L.Control.extend({
+    options: {
+      position: 'bottomright'
+    },
+    onAdd: function (map) {
+      const container = L.DomUtil.create('button');
+      container.innerHTML = 'Clear Filters';
+      container.onclick = function () {
+        // Update the URL in the address bar to remove all filters
+        window.history.replaceState({}, '', `${window.location.pathname}`);
+        applyFiltersFromURL();
+      }
+      return container;
+    }
+  });
+
+
 function applyFiltersFromURL() {
     const params = new URLSearchParams(window.location.search);
     if (params.size == 0) {
@@ -495,6 +513,8 @@ const blockLotLayer = L.esri.featureLayer({
 
 const markerLayer = L.layerGroup().addTo(map);
 
+// Add the custom control to the map
+map.addControl(new clearTableFilter());
 
 // Function to calculate the centroid of a GeoJSON geometry
 function getCentroid(geometry) {
