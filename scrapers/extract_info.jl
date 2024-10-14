@@ -354,5 +354,5 @@ function main()
     get_auction_results()
 end
 
-# main()
-test_existing_data("135075/2015")
+main()
+# test_existing_data("135075/2015")

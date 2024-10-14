@@ -79,7 +79,7 @@ function get_data()
     transform!(rows, [:case_number, :auction_date] => ByRow(missing_filings) => :missing_filings)
     filter!(row -> !isempty(row.missing_filings), rows)
 
-    display(rows)
+    display(rows[:, [:case_number, :borough, :auction_date, :missing_filings]])
 	return rows
 end
 
