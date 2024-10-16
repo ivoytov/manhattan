@@ -57,17 +57,15 @@ const clearTableFilter = L.Control.extend({
       container.innerHTML = 'Clear Filters';
       container.onclick = function () {
         // Update the URL in the address bar to remove all filters
-        window.history.replaceState({}, '', `${window.location.pathname}`);
-        applyFiltersFromURL();
+        applyFiltersFromURL()
       }
       return container;
     }
   });
 
 
-function applyFiltersFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.size == 0) {
+function applyFiltersFromURL(params = null) {
+    if (params === null || params.size == 0) {
         const currentDate = new Date();
         const futureDate = new Date();
         futureDate.setDate(currentDate.getDate() + 7);
@@ -479,7 +477,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
     gridApi.setGridOption('rowData', lots)
     gridApi.sizeColumnsToFit()
     // Load and apply filters from URL when the grid initializes (have to wait till now so that table isn't empty)
-    applyFiltersFromURL(gridApi);
+    applyFiltersFromURL(new URLSearchParams(window.location.search));
 })
     .catch(error => {
         console.error('Error loading CSV files:', error);
