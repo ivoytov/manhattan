@@ -166,90 +166,67 @@ function get_auction_results()
     println("CSV file bids.csv has been updated with missing bid results values.")
 end
 
-# Prompt for block and lot
-function prompt_for_block_and_lot(cases, lots)
-    for foreclosure_case in eachrow(cases)
-        case_number = foreclosure_case.case_number
-      
-        if case_number ∉ lots.case_number
-            row = (case_number=case_number, borough=foreclosure_case.borough, block=missing, lot=missing, address=missing)
-            push!(lots, row; promote=true)
-        end 
-        # modifying row from here on will alter the DataFrame
-        row = lots[findfirst(==(case_number), lots.case_number), :]
+notice_of_sale_path(case_number) = joinpath("saledocs/noticeofsale", replace(case_number, "/" => "-") * ".pdf")
 
-        if (row.block, row.lot) .|> !ismissing |> all
-            continue
-        end
-
-        println("$case_number $(foreclosure_case.borough) $(foreclosure_case.auction_date)")
-
-        # Extract text from PDF
-        filename = replace(case_number, "/" => "-") * ".pdf"
-        pdf_path = joinpath("saledocs/noticeofsale", filename)
-
-        # Extract block and lot
-        text = try
-            extract_text_from_pdf(pdf_path)
-        catch e
-            println("$case_number Error extracting text from $pdf_path: $e")
-            continue
-        end
-        text = replace(text, "\n" => " ")
-
-        # Open the PDF file with the default application on macOS
-        run(`open "$pdf_path"`)
-
-        values = (
-            block=extract_block(text),
-            lot=extract_lot(text),
-            address=extract_address(text)
-        )
-
-        # Iterate through values and update them
-        for (key, parsed_value) in pairs(values)
-            if !ismissing(row[key])
-                prompt_value = row[key]
-            elseif parsed_value === nothing
-                prompt_value = ""
-            else
-                prompt_value = parsed_value
-            end
-
-            input = prompt("Enter $key:", prompt_value)
-            if isnothing(input) || ismissing(input)
-                return lots
-            elseif input == "s"
-                continue
-            elseif input == "timeshare"
-                row.block = 1009
-                row.lot = 37
-                row.address = "timeshare"
-                continue
-            end
-            row[key] = key == :address ? input : parse(Int, input)
-        end
-        
-
-        while true
-            more = prompt("Is there another lot in the auction (y/n)?", "n")
-            if more == "n"
-                break
-            end
-            new_row = (
-                case_number=case_number,
-                borough=foreclosure_case.borough,
-                block=parse(Int, prompt("Enter block: ", "")),
-                lot=parse(Int, prompt("Enter lot: ", "")),
-                address=prompt("Enter address: ", "")
-            )
-
-            push!(lots, new_row)
-        end
-
-        run(`osascript -e 'tell application "Preview" to close window 1'`)
+# Extract block/lot/address from file
+function parse_notice_of_sale(pdf_path)
+    # Extract text from PDF
+    text = try
+        extract_text_from_pdf(pdf_path)
+    catch e
+        println("$case_number Error extracting text from $pdf_path: $e")
+        return (block=missing, lot=missing, address=missing)
     end
-    return lots
+    text = replace(text, "\n" => " ")
+
+    values = (
+        block=extract_block(text),
+        lot=extract_lot(text),
+        address=extract_address(text)
+    )
+    return values
+end
+
+# Prompt for block and lot
+function prompt_for_block_and_lot(pdf_path, values)
+    # Open the PDF file with the default application on macOS
+    run(`open "$pdf_path"`)
+    # Iterate through values and update them
+    res = Dict()
+    for (key, parsed_value) in pairs(values)
+        if parsed_value === nothing
+            prompt_value = ""
+        else
+            prompt_value = parsed_value
+        end
+
+        input = prompt("Enter $key:", prompt_value)
+        if isnothing(input) || ismissing(input) || input == "s" 
+            return nothing
+        end
+        res[key] = input
+    end
+    
+
+    # while true
+    #     more = prompt("Is there another lot in the auction (y/n)?", "n")
+    #     if more == "n"
+    #         break
+    #     end
+    #     new_row = (
+    #         case_number=case_number,
+    #         borough=foreclosure_case.borough,
+    #         block=parse(Int, prompt("Enter block: ", "")),
+    #         lot=parse(Int, prompt("Enter lot: ", "")),
+    #         address=prompt("Enter address: ", "")
+    #     )
+
+    #     push!(lots, new_row)
+    # end
+
+    run(`osascript -e 'tell application "Preview" to close window 1'`)
+    res = (; (Symbol(k) => v for (k,v) in b)...)
+    return res
 end
 
 # Get block and lot
@@ -266,11 +243,31 @@ function get_block_and_lot()
 
     sort!(cases, order(:auction_date, rev=true))
 
-    updated_lots = prompt_for_block_and_lot(cases, lots)
+    new_cases = antijoin(cases, lots, on=:case_number)
+
+    for case in eachrow(new_cases)
+        pdf_path = notice_of_sale_path(case.case_number)
+        values = parse_notice_of_sale(pdf_path)
+        if isnothing(values.block) || isnothing(values.lot)
+            if "-i" ∈ ARGS
+                values = prompt_for_block_and_lot(pdf_path, values)
+            else
+                continue
+            end
+        end
+        row = (
+            case_number=case.case_number, 
+            borough=case.borough, 
+            block=parse(Int,values.block), 
+            lot=parse(Int, values.lot), 
+            address=isnothing(values.address) ? missing : values.address
+        )
+        @show row
+        push!(lots, row)
+    end
 
     # Convert updated rows back to CSV
-    CSV.write(lots_path, updated_lots)
-
+    CSV.write(lots_path, lots)
     println("CSV file has been updated with missing block and lot values.")
 end
 
@@ -351,7 +348,9 @@ end
 # Main function
 function main()
     get_block_and_lot()
-    get_auction_results()
+    if "-i" ∈ ARGS
+        get_auction_results()
+    end
 end
 
 main()
