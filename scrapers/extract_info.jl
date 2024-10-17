@@ -293,25 +293,16 @@ function test_existing_data(start_case = nothing)
             continue
         end
         # Extract text from PDF
-        filename = replace(case_number, "/" => "-") * ".pdf"
-        pdf_path = joinpath("saledocs/noticeofsale", filename)
+        pdf_path = notice_of_sale_path(case_number)
+        values = parse_notice_of_sale(pdf_path)
 
-        # Extract block and lot
-        text = try
-            extract_text_from_pdf(pdf_path)
-        catch e
-            println("$case_number Error extracting text from $pdf_path: $e")
-            continue
-        end
-        text = replace(text, "\n" => " ")
 
         println("$idx/$total $case_number $(case.borough) block: $(case.block) lot:$(case.lot) $(case.address)")
-        block, lot=extract_block(text), extract_lot(text)
-        address=extract_address(text)
 
-        block = isnothing(block) ? 0 : parse(Int, block)
-        lot = isnothing(lot) ? 0 : parse(Int, lot)
-        address = isnothing(address) ? "" : address
+
+        block = isnothing(values.block) ? 0 : parse(Int, values.block)
+        lot = isnothing(values.lot) ? 0 : parse(Int, values.lot)
+        address = isnothing(values.address) ? "" : values.address
 
         if (block == 0 || block == case.block) && 
             (lot == 0 || lot == case.lot) && 
