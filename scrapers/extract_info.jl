@@ -249,7 +249,7 @@ function get_block_and_lot()
         pdf_path = notice_of_sale_path(case.case_number)
         values = parse_notice_of_sale(pdf_path)
         if isnothing(values.block) || isnothing(values.lot)
-            if "-i" ∈ ARGS
+            if "-i" ∈ ARGS || haskey(ENV, "WSS")
                 values = prompt_for_block_and_lot(pdf_path, values)
             else
                 continue
@@ -339,7 +339,7 @@ end
 # Main function
 function main()
     get_block_and_lot()
-    if "-i" ∈ ARGS
+    if "-i" ∈ ARGS || haskey(ENV, "WSS")
         get_auction_results()
     end
 end
