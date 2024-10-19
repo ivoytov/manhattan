@@ -6,22 +6,18 @@ rng = MersenneTwister(42)
 function main()
     rows = get_data()
 	is_local = haskey(ENV, "WSS")
-	if !is_local
-		# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
-		urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
+	# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
+	urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
 
-		# Shuffle the remaining rows and select 15%
-		sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
-
-		n = ceil(Int, 0.15 * nrow(sampled_rows))
-		sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
-
-		# Combine the filtered rows with the randomly selected rows
-		rows = vcat(urgent_rows, sampled_rows)
-		println("Running on GitHub: Randomly selecting $n cases with a missing surplus money form")
-	end
+	# Shuffle the remaining rows and select 15%
+	sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
 	
-    process_data(rows, is_local ? 1 : 4, is_local)
+	n = is_local ? nrow(sampled_rows) : min(100, ceil(Int, 0.15 * nrow(sampled_rows)))
+	sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
+
+	# Combine the filtered rows with the randomly selected rows
+	rows = vcat(urgent_rows, sampled_rows)
+    process_data(rows, is_local ? 4 : 4, is_local)
 end
 
 # Define the FilingType as a constant dictionary

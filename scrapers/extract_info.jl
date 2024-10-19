@@ -262,7 +262,7 @@ function get_block_and_lot()
             lot=parse(Int, values.lot), 
             address=isnothing(values.address) ? missing : values.address
         )
-        @show row
+        printstyled(@sprintf("%s block %6d lot %5d address %s\n", row.case_number, row.block, row.lot, ismissing(row.address) ? "missing" : row.address), color=:light_green)
         push!(lots, row)
     end
 
