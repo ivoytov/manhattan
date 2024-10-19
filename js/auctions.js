@@ -69,6 +69,7 @@ function applyFiltersFromURL(params = null) {
         const currentDate = new Date();
         const futureDate = new Date();
         futureDate.setDate(currentDate.getDate() + 7);
+        gridApi.setFilterModel(null)
         gridApi.setColumnFilterModel('auction_date', {
             dateFrom: currentDate.toISOString(),
             dateTo: futureDate.toISOString(),
@@ -109,7 +110,7 @@ const columnDefs = [
         headerName: "Address",
         field: "address",
         cellRenderer: 'agGroupCellRenderer',
-        minWidth: 200,
+        minWidth: 400,
     },
     {
         headerName: "Case #",
@@ -268,6 +269,8 @@ function getCondoBillingLot(data) {
 
 
 function onGridFilterChanged() {
+    markerLayer.clearLayers()
+    outlineLayer.clearLayers()
     const allFilters = gridApi.getFilterModel()
     updateURLWithFilters(allFilters);
 
@@ -309,7 +312,7 @@ function onGridFilterChanged() {
                     onEachFeature: function (feature, layer) {
                         layer.on('click', onClickTableZoom)
                     }
-                }).addTo(map);
+                }).addTo(outlineLayer);
 
                 const centroid = getCentroid(featureCollection.features[0].geometry)
                 const marker = L.marker([centroid.lng, centroid.lat]).addTo(markerLayer);
@@ -331,9 +334,7 @@ const gridOptions = {
     columnDefs: columnDefs,
     defaultColDef: defaultColDef,
     masterDetail: true,
-    isRowMaster: (dataItem) => {
-        return dataItem ? getTransactions(dataItem).length : false;
-    },
+    isRowMaster: (dataItem) => dataItem ? getTransactions(dataItem).length : false,
     detailRowAutoHeight: true,
     rowSelection: { 
         mode: 'singleRow',
@@ -510,6 +511,8 @@ const blockLotLayer = L.esri.featureLayer({
 }).addTo(map);
 
 const markerLayer = L.layerGroup().addTo(map);
+const outlineLayer = L.layerGroup().addTo(map);
+
 
 // Add the custom control to the map
 map.addControl(new clearTableFilter());

@@ -46,7 +46,7 @@ function loadTransactionDataCSV(url) {
       dynamicTyping: true,
       worker: false,
       step: row => {
-        const dateKey = "SALE DATE" 
+        const dateKey = "SALE DATE"
 
         // Use destructuring to get other properties if needed
         const { [dateKey]: saleDate, ...rest } = row.data;
@@ -131,11 +131,12 @@ const columnDefs = [
     field: "outlier",
     cellDataType: 'boolean',
     filter: 'agSetColumnFilter',
+    maxWidth: 100,
   },
   {
     headerName: "Address", field: "ADDRESS", sort: "asc", sortIndex: 1,
     cellRenderer: 'agGroupCellRenderer',
-    minWidth: 200,
+    minWidth: 400,
   },
   {
     headerName: "Sale Date", field: "SALE DATE",
@@ -169,31 +170,24 @@ const columnDefs = [
     filterParams: houseClassFilterParams,
   },
   {
-    headerName: "Block", field: "BLOCK",
-    filter: 'agNumberColumnFilter',
+    headerName: "BBL",
+    type: "rightAligned",
+    valueGetter: p => `${p.data.BLOCK}-${p.data.LOT}`,
+    maxWidth: 100,
   },
   {
-    headerName: "Lot", field: "LOT",
-    filter: 'agNumberColumnFilter',
-  },
-  {
-    headerName: "Apt #", field: "APARTMENT NUMBER"
+    headerName: "Apt #", field: "APARTMENT NUMBER",
+    maxWidth: 100,
   },
   {
     headerName: "Total Units", field: "TOTAL UNITS",
     filter: 'agNumberColumnFilter',
-  },
-  {
-    headerName: "Land Sqft", field: "LAND SQUARE FEET",
-    filter: 'agNumberColumnFilter',
-  },
-  {
-    headerName: "Gross Sqft", field: "GROSS SQUARE FEET",
-    filter: 'agNumberColumnFilter',
+    maxWidth: 100,
   },
   {
     headerName: "Year Built", field: "YEAR BUILT",
     filter: 'agNumberColumnFilter',
+    maxWidth: 100,
   },
   {
     headerName: "Sale Price",
@@ -221,6 +215,15 @@ const formattedPercent = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 1
 })
 
+function getTransactions(data) {
+  let repeats = coopsFilter(data) ? combinedData.filter(({ ADDRESS }) => ADDRESS == data.ADDRESS)
+  : combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == data.BOROUGH && BLOCK == data.BLOCK && LOT == data.LOT)
+
+  // remove erroneous transactions
+  repeats = repeats.filter((transaction) => transaction["SALE PRICE"] >= 100000)
+  return repeats
+} 
+
 
 const defaultColDef = {
   flex: 1,
@@ -228,9 +231,10 @@ const defaultColDef = {
   filter: 'agTextColumnFilter',
   menuTabs: ['filterMenuTab'],
   autoHeaderHeight: true,
-  wrapHeaderText: true,
+  wrapHeaderText: false,
   sortable: true,
-  resizable: true
+  resizable: true,
+  suppressHeaderMenuButton: true,
 }
 
 // Initialize AG Grid
@@ -238,7 +242,6 @@ const gridOptions = {
   columnDefs: columnDefs,
   defaultColDef: defaultColDef,
   masterDetail: true,
-  //detailRowHeight: 200,
   detailRowAutoHeight: true,
 
   detailCellRendererParams: {
@@ -279,13 +282,10 @@ const gridOptions = {
     },
     getDetailRowData: (params) => {
       // find all transactions for this address
-      let repeats = coopsFilter(params.data) ? combinedData.filter(({ ADDRESS }) => ADDRESS == params.data.ADDRESS)
-        : combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == params.data.BOROUGH && BLOCK == params.data.BLOCK && LOT == params.data.LOT)
+      let repeats = getTransactions(params.data)
       repeats.sort((a, b) => a["SALE DATE"] - b["SALE DATE"])
 
-      // remove erroneous transactions
-      repeats = repeats.filter((transaction) => transaction["SALE PRICE"] >= 100000)
-
+     
       // add % price change
       repeats = repeats.map((transaction, index, arr) => {
         // For the first row, priceChange is null
@@ -303,6 +303,8 @@ const gridOptions = {
     },
   },
 };
+
+
 
 // Create AG Grid
 const gridDiv = document.querySelector('#myGrid');
@@ -331,14 +333,14 @@ loadCSV('transactions/outliers.csv').then((outs) => {
   return true
 }).then((retValue) => {
   Promise.all(csvPromises)
-  .then((resultsArray) => {
-    // load the full table
-    gridApi.setGridOption('rowData', combinedData)
-    gridApi.sizeColumnsToFit()
-  })
-  .catch(error => {
-    console.error('Error loading CSV files:', error);
-  });  
+    .then((resultsArray) => {
+      // load the full table
+      gridApi.setGridOption('rowData', combinedData)
+      gridApi.sizeColumnsToFit()
+    })
+    .catch(error => {
+      console.error('Error loading CSV files:', error);
+    });
 })
 
 
@@ -405,7 +407,7 @@ Promise.all([
       },
       dataset: [
         {
-          dimensions: [{ name: 'period', type: 'time' }, "top_decile","top_third","bottom_decile","middle_third","bottom_third","all" ],
+          dimensions: [{ name: 'period', type: 'time' }, "top_decile", "top_third", "bottom_decile", "middle_third", "bottom_third", "all"],
           source: idx,
         },
       ],
@@ -522,29 +524,29 @@ document.addEventListener('touchmove', resize())
 document.addEventListener('touchend', stopResize())
 
 function stopResize() {
-    return () => {
-        isResizing = false;
-    };
+  return () => {
+    isResizing = false;
+  };
 }
 
 function resize() {
-    return (e) => {
-        if (!isResizing) return;
-        const lastY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-        const newMapHeight = lastY;
-        const newGridHeight = window.innerHeight - lastY - splitter.offsetHeight;
+  return (e) => {
+    if (!isResizing) return;
+    const lastY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+    const newMapHeight = lastY;
+    const newGridHeight = window.innerHeight - lastY - splitter.offsetHeight;
 
-        mapDiv.style.height = newMapHeight + 'px';
-        gridDiv.style.height = newGridHeight + 'px';
-        myChart.resize()
-        gridApi.sizeColumnsToFit();
+    mapDiv.style.height = newMapHeight + 'px';
+    gridDiv.style.height = newGridHeight + 'px';
+    myChart.resize()
+    gridApi.sizeColumnsToFit();
 
-    };
+  };
 }
 
 function startResize() {
-    return (e) => {
-        isResizing = true;
-    };
+  return (e) => {
+    isResizing = true;
+  };
 }
 
