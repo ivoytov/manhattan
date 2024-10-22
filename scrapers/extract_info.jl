@@ -206,26 +206,9 @@ function prompt_for_block_and_lot(pdf_path, values)
         end
         res[key] = input
     end
-    
-
-    # while true
-    #     more = prompt("Is there another lot in the auction (y/n)?", "n")
-    #     if more == "n"
-    #         break
-    #     end
-    #     new_row = (
-    #         case_number=case_number,
-    #         borough=foreclosure_case.borough,
-    #         block=parse(Int, prompt("Enter block: ", "")),
-    #         lot=parse(Int, prompt("Enter lot: ", "")),
-    #         address=prompt("Enter address: ", "")
-    #     )
-
-    #     push!(lots, new_row)
-    # end
 
     run(`osascript -e 'tell application "Preview" to close window 1'`)
-    res = (; (Symbol(k) => v for (k,v) in b)...)
+    res = (; (Symbol(k) => v for (k,v) in res)...)
     return res
 end
 
@@ -262,7 +245,7 @@ function get_block_and_lot()
             lot=parse(Int, values.lot), 
             address=isnothing(values.address) ? missing : values.address
         )
-        printstyled(@sprintf("%s block %6d lot %5d address %s\n", row.case_number, row.block, row.lot, ismissing(row.address) ? "missing" : row.address), color=:light_green)
+        printstyled(@sprintf("%12s block %6d lot %5d address %s\n", row.case_number, row.block, row.lot, ismissing(row.address) ? "missing" : row.address), color=:light_green)
         push!(lots, row)
     end
 
@@ -315,8 +298,8 @@ function test_existing_data(start_case = nothing)
         printstyled("\n", text, "\n", italic=true)
 
 
-        printstyled(@sprintf("%s EXISTING block %6d lot %5d address %s\n", case_number, case.block, case.lot, case.address), color=:light_magenta)
-        printstyled(@sprintf("%s NEW      block %6d lot %5d address %s\n", case_number, block, lot, address), color=:light_green)
+        printstyled(@sprintf("%12s EXISTING block %6d lot %5d address %s\n", case_number, case.block, case.lot, case.address), color=:light_magenta)
+        printstyled(@sprintf("%12s NEW      block %6d lot %5d address %s\n", case_number, block, lot, address), color=:light_green)
         
         is_fix = prompt("Change EXISTING to NEW (y/n)?", "n")
         if isnothing(is_fix)
