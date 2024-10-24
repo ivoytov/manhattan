@@ -10,7 +10,7 @@ month = Date("2024-09-30")
 
 cases = cases[(month - Month(1)) .< cases.auction_date .<= month, :]
 bids = bids[(month - Month(1)) .< bids.auction_date .<= month, :]
-sales = sales[(month - Month(1)) .< sales[!, "SALE DATE"] .<= (month + Month(1)), :]
+sales = sales[(month - Month(1)) .< sales[!, "SALE DATE"] .<= (month + Month(3)), :]
 
 auctions = innerjoin(cases, lots, on = [:case_number, :borough])
 leftjoin!(auctions, bids, on = [:case_number, :borough, :auction_date])
@@ -22,18 +22,22 @@ boro_auctions = combine(groupby(auctions, :borough),
         :case_number => length => :count, 
 )
 
-sold_auctions = filter(:winning_bid => >(100), dropmissing(auctions, :winning_bid))
+completed_auctions = dropmissing(auctions, :winning_bid)
+sold_auctions = filter(:winning_bid => >(100), completed_auctions)
+
 
 boro_sales = combine(groupby(sold_auctions, :borough),
     :winning_bid => length => :sold_count,
-    :judgement => sum,
-    :winning_bid => sum,
-    [:upset_price, :winning_bid] => ((u, w) -> mean(w ./ u)) => :avg_overbid
+    :judgement => mean,
+    :upset_price => mean,
+    :winning_bid => mean,
+    [:upset_price, :judgement] => ((u, j) -> mean(u ./ j)) => :avg_upset_to_judgement,
+    [:upset_price, :winning_bid] => ((u, w) -> mean(filter(isfinite, w ./ u))) => :avg_overbid
 )
 
-df = outerjoin(boro_auctions, boro_sales, on=:borough)
-df.judgement_sum = coalesce.(df.judgement_sum, 0)
-df.winning_bid_sum = coalesce.(df.winning_bid_sum, 0)
-df.sold_count = coalesce.(df.sold_count, 0)
+boro_completes = combine(groupby(completed_auctions, :borough), nrow => :completed)
+
+df = outerjoin(boro_auctions, boro_completes, boro_sales, on=:borough)
+df[:, r"mean|count"] = coalesce.(df[:, r"mean|count"],0)
 df
 

@@ -83,6 +83,7 @@ createReadStream(csvFilePath)
         writeFileSync(csvFilePath, updatedCsv, 'utf8');
 
         console.log('CSV file has been updated with new foreclosure cases.');
+        process.exit()
     });
 
     
@@ -107,17 +108,22 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     await page.locator('select#cboCourtPart').fill(calendarId); // FORECLOSURE AUCTION PART
     await sleep(1)
 
-    await page.locator("input#btnFindCalendar").click();
-    await page.waitForNavigation({ waitUntil: 'networkidle2' });
-    await sleep(10)
+    await Promise.all([
+        page.locator("input#btnFindCalendar").click(),
+        page.waitForNavigation({ waitUntil: 'networkidle2' })
+    ])
+    await sleep(2)
 
     // check if there is an option to select on page
     if (await page.$("input#btnApply")) {
         page.locator("#showForm > tbody > tr:nth-child(6) > td > input:nth-child(1)").click()
         await sleep(1)
 
-        page.locator("input#btnApply").click()
-        await page.waitForNavigation({ waitUntil: 'networkidle2' });
+        await Promise.all([
+            page.locator("input#btnApply").click(),
+            page.waitForNavigation({ waitUntil: 'networkidle2' })
+        ])
+        
     }
 
     // extract auction info

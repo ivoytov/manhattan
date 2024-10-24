@@ -55,19 +55,23 @@ export async function download_filing(index_number, county, auction_date, missin
     await sleep(1)
     await page.locator('select#txtCounty').fill(county_map[county]);
     await sleep(1)
-    page.keyboard.press('Enter');
-
-    await page.waitForNavigation({ waitUntil: 'networkidle2' });
-    await sleep(1)
+    await Promise.all([
+        page.keyboard.press('Enter'),
+        page.waitForNavigation({
+          waitUntil: 'networkidle2',
+        }),
+      ]);
+    
 
     try {
-        await page.locator('table.NewSearchResults > tbody > tr > td > a').click();
+        await Promise.all([
+            page.locator('table.NewSearchResults > tbody > tr > td > a').click(),
+            page.waitForNavigation({ waitUntil: 'networkidle2' })
+        ])
     } catch (e) {
         console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
         return { error: 'Failed to find case in CEF' };
     }
-
-    await page.waitForNavigation({ waitUntil: 'networkidle2' });
 
     // console.log('Navigated! Selecting document type...');
     const availableFilings = await page.$$eval("select#selDocumentType > option", options => {
@@ -164,7 +168,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     }
     await download_filing(process.argv[2], county, auction_date, missingFilings, endpoint).catch(err => {
         console.error(args, "Error processing");
-        console.error(err)
+        // console.error(err)
     })
     console.log(args, "...Completed")
     process.exit()
