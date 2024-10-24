@@ -81,7 +81,7 @@ function prompt_for_winning_bid(cases, bids)
                 upset_price=missing,
                 winning_bid=missing
             )
-            push!(bids, row)
+            push!(bids, row; promote=true)
         end 
 
         # modifying row from here on will alter the DataFrame

@@ -49,12 +49,12 @@ export async function download_filing(index_number, county, auction_date, missin
     const page = await browser.newPage();
 
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 2 * 60 * 1000 });
-    await sleep(1)
+    // await sleep(1)
 
     await page.locator('#txtCaseIdentifierNumber').fill(index_number);
-    await sleep(1)
-    await page.locator('select#txtCounty').fill(county_map[county]);
-    await sleep(1)
+    // await sleep(1)
+    await page.select('select#txtCounty', county_map[county]);
+    // await sleep(1)
     await Promise.all([
         page.keyboard.press('Enter'),
         page.waitForNavigation({
@@ -66,7 +66,7 @@ export async function download_filing(index_number, county, auction_date, missin
     try {
         await Promise.all([
             page.locator('table.NewSearchResults > tbody > tr > td > a').click(),
-            page.waitForNavigation({ waitUntil: 'networkidle2' })
+            page.waitForNavigation()
         ])
     } catch (e) {
         console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
@@ -96,7 +96,7 @@ export async function download_filing(index_number, county, auction_date, missin
         if (!existsSync(pdfPath) && availableFilings.includes(id)) {
             // console.log(`Trying to get filing ${id}`)
 
-            await page.locator('select#selDocumentType').fill(id);
+            await page.select('select#selDocumentType', id);
             await sleep(1)
             await page.click('input[name="btnNarrow"]'); // To submit the form
             await page.waitForNetworkIdle();
@@ -168,7 +168,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     }
     await download_filing(process.argv[2], county, auction_date, missingFilings, endpoint).catch(err => {
         console.error(args, "Error processing");
-        // console.error(err)
+        console.error(err)
     })
     console.log(args, "...Completed")
     process.exit()

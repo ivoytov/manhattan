@@ -48,7 +48,7 @@ for (const borough in boroughConfigDict) {
     } catch (e) {
         console.warn(`${borough} scraper failed.`, e)
     }
-    
+
 }
 
 // case_number,borough,auction_date,has_nos,has_smf,has_judgement,has_nyscef
@@ -86,7 +86,7 @@ createReadStream(csvFilePath)
         process.exit()
     });
 
-    
+
 async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     const browser = await connect({
         browserWSEndpoint: endpoint,
@@ -95,35 +95,31 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     const page = await browser.newPage();
 
     console.log('Connected! Navigating...');
-    const url = 'https://iapps.courts.state.ny.us/webcivil/FCASMain';
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 2*60*1000  });
-    await sleep(1)
-
-    await page.locator('body > table > tbody > tr > td:nth-child(2) > p > table:nth-child(3) > tbody > tr:nth-child(9) > td:nth-child(1) > a').click()
-    await sleep(1)
-
-    await page.locator('select#cboCourt').fill(courtId);  //QUEENS Superior Court
-    await sleep(1)
-    
-    await page.locator('select#cboCourtPart').fill(calendarId); // FORECLOSURE AUCTION PART
-    await sleep(1)
+    const url = 'https://iapps.courts.state.ny.us/webcivil/FCASCalendarSearch';
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 2 * 60 * 1000 });
+    await sleep(4)
 
     await Promise.all([
-        page.locator("input#btnFindCalendar").click(),
+        page.select('select#cboCourt', courtId),  //QUEENS Superior Court
         page.waitForNavigation({ waitUntil: 'networkidle2' })
     ])
-    await sleep(2)
+
+    await page.select('select#cboCourtPart', calendarId); // FORECLOSURE AUCTION PART
+
+    await Promise.all([
+        page.waitForNavigation({ waitUntil: 'networkidle2' }),
+        page.locator("input#btnFindCalendar").click(),
+    ])
 
     // check if there is an option to select on page
     if (await page.$("input#btnApply")) {
         page.locator("#showForm > tbody > tr:nth-child(6) > td > input:nth-child(1)").click()
-        await sleep(1)
 
         await Promise.all([
             page.locator("input#btnApply").click(),
             page.waitForNavigation({ waitUntil: 'networkidle2' })
         ])
-        
+
     }
 
     // extract auction info
