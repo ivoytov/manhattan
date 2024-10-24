@@ -58,15 +58,17 @@ export async function download_filing(index_number, county, auction_date, missin
     await Promise.all([
         page.keyboard.press('Enter'),
         page.waitForNavigation({
-          waitUntil: 'networkidle2',
+            waitUntil: 'networkidle2',
         }),
-      ]);
-    
+    ]);
+
 
     try {
         await Promise.all([
             page.locator('table.NewSearchResults > tbody > tr > td > a').click(),
-            page.waitForNavigation()
+            page.waitForNavigation({
+                waitUntil: 'networkidle0',
+            })
         ])
     } catch (e) {
         console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
@@ -138,7 +140,7 @@ export async function download_filing(index_number, county, auction_date, missin
             if (auction_date && filing == FilingType.NOTICE_OF_SALE && (receivedDate < earliestDayForNoticeOfSale || receivedDate > auction_date)) {
                 console.log(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, either after or more than 90 days before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
                 continue
-            } 
+            }
 
             await download_pdf(downloadUrl, pdfPath);
             await page.click("input[name='btnClear']")
@@ -153,8 +155,8 @@ export async function download_filing(index_number, county, auction_date, missin
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-    const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;   
-    const auction_date = new Date(process.argv[4]) 
+    const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;
+    const auction_date = new Date(process.argv[4])
 
     const args = process.argv.slice(2, process.argv.length).join(" ")
     const county = process.argv[3] == 'Staten' ? `${process.argv[3]} ${process.argv[4]}` : process.argv[3]
