@@ -49,7 +49,8 @@ export async function download_filing(index_number, county, auction_date, missin
     const page = await browser.newPage();
 
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 2 * 60 * 1000 });
-    // await sleep(1)
+    
+    // await inspect(client);
 
     await page.locator('#txtCaseIdentifierNumber').fill(index_number);
     // await sleep(1)
@@ -74,6 +75,15 @@ export async function download_filing(index_number, county, auction_date, missin
         console.warn(`\n\n${index_number} couldn't find a valid case with this index`)
         return { error: 'Failed to find case in CEF' };
     }
+
+    if (endpoint == SBR_WS_ENDPOINT) {
+        const client = await page.createCDPSession(page);
+        const { status } = await client.send('Captcha.waitForSolve', {
+            detectTimeout: 10 * 1000,
+        });
+        console.log(`Captcha status: ${status}`);
+    }
+    
 
     // console.log('Navigated! Selecting document type...');
     const availableFilings = await page.$$eval("select#selDocumentType > option", options => {
@@ -175,5 +185,15 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     console.log(args, "...Completed")
     process.exit()
 
+}
+
+async function inspect(client) {
+    const { frameTree: { frame } } = await client.send('Page.getFrameTree');
+    const { url: inspectUrl } = await client.send('Page.inspect', {
+        frameId: frame.id,
+    });
+    console.log(`You can inspect this session at: ${inspectUrl}.`);
+    console.log(`Scraping will continue in 10 seconds...`);
+    await sleep(10);
 }
 

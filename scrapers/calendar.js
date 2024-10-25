@@ -42,7 +42,10 @@ maxDate.setDate(maxDate.getDate() + 14)
 maxDate = maxDate.toISOString().split('T')[0]
 for (const borough in boroughConfigDict) {
     try {
-        const newLots = await getAuctionLots(borough, boroughConfigDict[borough], maxDate)
+        const newLots = await getAuctionLots(borough, boroughConfigDict[borough], maxDate).catch(err => {
+            console.error(borough, "Error processing");
+            console.error(err)
+        })
         console.log(`Scraped ${newLots.length} total foreclosure cases for ${borough}`)
         auctionLots = [...auctionLots, ...newLots]
     } catch (e) {
@@ -111,6 +114,18 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
         page.locator("input#btnFindCalendar").click(),
     ])
 
+    if (endpoint == SBR_WS_ENDPOINT) {
+        const client = await page.createCDPSession(page);
+        const { status } = await client.send('Captcha.waitForSolve', {
+            detectTimeout: 10 * 1000,
+        });
+        console.log(`Captcha status: ${status}`);
+        if (status === 'solve_failed'){
+            return { error: "captcha solve failed"}
+        }
+        // await inspect(client)
+    }
+
     // check if there is an option to select on page
     if (await page.$("input#btnApply")) {
         page.locator("#showForm > tbody > tr:nth-child(6) > td > input:nth-child(1)").click()
@@ -157,3 +172,12 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     return filteredLots
 }
 
+async function inspect(client) {
+    const { frameTree: { frame } } = await client.send('Page.getFrameTree');
+    const { url: inspectUrl } = await client.send('Page.inspect', {
+        frameId: frame.id,
+    });
+    console.log(`You can inspect this session at: ${inspectUrl}.`);
+    console.log(`Scraping will continue in 10 seconds...`);
+    await sleep(10);
+}
