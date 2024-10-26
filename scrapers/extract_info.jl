@@ -13,7 +13,7 @@ function extract_pattern(text, patterns)
     for pattern in patterns
         m = match(pattern, text)
         if m !== nothing
-            return m.captures[1]
+            return length(m.captures) > 0 ? m.captures[1] : m
         end
     end
     return nothing
@@ -29,7 +29,7 @@ end
 # Function to extract block
 function extract_block(text)
     patterns = [
-        r"\bBlock[:\s]+(\d+)"i, 
+        r"\bBlock[:\s]+(\d{1,5})\b"i, 
         r"SBL\.?:?\s*(\d{3,5})-\d{1,4}"i,
         r"(?<!\(\d{3}\))\s(\d{3,5})-(\d{1,4})[.)]"
     ]
@@ -39,9 +39,18 @@ end
 # Function to extract lot
 function extract_lot(text)
     patterns = [
-        r"\bLot(?:\(?s?\)?| No\.?)[:\s]+(\d+)"i, 
+        r"\bLot(?:\(?s?\)?| No\.?)[:\s]+(\d{1,4})"i, 
         r"SBL\.?:?\s*(\d{3,5})-\d{1,4}"i,
         r"(?<!\(\d{3}\))\s\d{3,5}-(\d{1,4})[.)]"
+    ]
+    return extract_pattern(text, patterns)
+end
+
+function detect_multiple_lots(text)
+    patterns = [
+        r"\b\d{1,4}\s?(&|and)\s?\d{1,4}"i,
+        r"\b(lot:? )(\d{1,4}).+?\b(lot:? )(?!(\2))\d{1,4}"i,
+        r"\blots?:?\s\d{1,4},\s\d{1,4}"i,
     ]
     return extract_pattern(text, patterns)
 end
@@ -174,15 +183,15 @@ function parse_notice_of_sale(pdf_path)
     text = try
         extract_text_from_pdf(pdf_path)
     catch e
-        println("$case_number Error extracting text from $pdf_path: $e")
-        return (block=missing, lot=missing, address=missing)
+        println("Error extracting text from $pdf_path: $e")
+        return missing
     end
     text = replace(text, "\n" => " ")
-
     values = (
         block=extract_block(text),
         lot=extract_lot(text),
-        address=extract_address(text)
+        address=extract_address(text),
+        is_combo=detect_multiple_lots(text),
     )
     return values
 end
@@ -231,6 +240,11 @@ function get_block_and_lot()
     for case in eachrow(new_cases)
         pdf_path = notice_of_sale_path(case.case_number)
         values = parse_notice_of_sale(pdf_path)
+        ismissing(values) && continue
+
+        if !isnothing(values.is_combo)
+            println("$(case.case_number) Possible combo lot")
+        end
         if isnothing(values.block) || isnothing(values.lot)
             if "-i" ∈ ARGS || haskey(ENV, "WSS")
                 values = prompt_for_block_and_lot(pdf_path, values)
@@ -258,6 +272,10 @@ function test_existing_data(start_case = nothing)
     lots_path = "foreclosures/lots.csv"
     lots = CSV.read(lots_path, DataFrame)
 
+    combo_cases = unique(lots[nonunique(lots, [:case_number]), :case_number])
+    # don't try to check cases with > 1 parcel as the regex will fail
+    filter!(:case_number => ∉(combo_cases), lots)
+
     # Read in which files exist
     files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
     
@@ -268,8 +286,7 @@ function test_existing_data(start_case = nothing)
     end 
 
     total = nrow(lots)
-    for (idx, case) in enumerate(eachrow(lots))
-        idx < start_idx && continue
+    for (idx, case) in enumerate(eachrow(lots[start_idx:end, :]))
         case_number = case.case_number
 
         if case_number ∉ files
@@ -279,27 +296,30 @@ function test_existing_data(start_case = nothing)
         pdf_path = notice_of_sale_path(case_number)
         values = parse_notice_of_sale(pdf_path)
 
+        println(@sprintf("%4d/%4d %12s block %5d-%4d %s", start_idx + idx - 1, total, case_number, case.block, case.lot, case.address))
 
-        println("$idx/$total $case_number $(case.borough) block: $(case.block) lot:$(case.lot) $(case.address)")
-
-
+        ismissing(values) && continue
         block = isnothing(values.block) ? 0 : parse(Int, values.block)
         lot = isnothing(values.lot) ? 0 : parse(Int, values.lot)
         address = isnothing(values.address) ? "" : values.address
+        is_combo = isnothing(values.is_combo) ? "" : "COMBO"
 
         if (block == 0 || block == case.block) && 
             (lot == 0 || lot == case.lot) && 
-            (isnothing(address) || ismissing(case.address) || address == case.address)
+            # (address == "" || ismissing(case.address) || address == case.address) &&
+            (is_combo != "COMBO")
             continue
         end
 
-        # Open the PDF file with the default application on macOS
         run(`open "$pdf_path"`)
-        printstyled("\n", text, "\n", italic=true)
-
+        # Open the PDF file with the default application on macOS
+        if is_combo == "COMBO"
+            printstyled("$case_number COMBO detected\n", bold=true, color=:yellow)
+            continue
+        end
 
         printstyled(@sprintf("%12s EXISTING block %6d lot %5d address %s\n", case_number, case.block, case.lot, case.address), color=:light_magenta)
-        printstyled(@sprintf("%12s NEW      block %6d lot %5d address %s\n", case_number, block, lot, address), color=:light_green)
+        printstyled(@sprintf("%12s NEW      block %6d lot %5d address %s %s\n", case_number, block, lot, address, is_combo), color=:light_green)
         
         is_fix = prompt("Change EXISTING to NEW (y/n)?", "n")
         if isnothing(is_fix)
@@ -328,4 +348,4 @@ function main()
 end
 
 main()
-# test_existing_data()
+# test_existing_data("722814/2021")
