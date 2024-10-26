@@ -57,7 +57,7 @@ export async function download_filing(index_number, county, auction_date, missin
     await page.select('select#txtCounty', county_map[county]);
     // await sleep(1)
     await Promise.all([
-        page.keyboard.press('Enter'),
+        page.locator('button.BTN_Green').click(),
         page.waitForNavigation({
             waitUntil: 'networkidle2',
         }),
