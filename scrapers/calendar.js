@@ -48,7 +48,6 @@ for (const borough in boroughConfigDict) {
     } catch (e) {
         console.warn(`${borough} scraper failed.`, e)
     }
-
 }
 
 // case_number,borough,auction_date,has_nos,has_smf,has_judgement,has_nyscef
@@ -61,11 +60,18 @@ createReadStream(csvFilePath)
         rows.push(row);
     })
     .on('end', async () => {
-        const newLots = auctionLots.filter(lot => !rows.some(({ borough, case_number }) => borough === lot.borough &&
-            case_number === lot.case_number))
+        // for cases that were already in the file, update the auction date
+        const existingLots = auctionLots.filter(lot => rows.some(({ case_number }) => case_number === lot.case_number))
+        for (const lot of existingLots) {
+            const row = rows.find(({case_number}) => case_number === lot.case_number)
+            row.auction_date = lot.auction_date
+        }
+
+        // append brand new cases that we haven't seen before
+        const newLots = auctionLots.filter(lot => !rows.some(({ case_number }) => case_number === lot.case_number))
         rows.push(...newLots)
 
-        console.log(`Found ${newLots.length} net new foreclosure cases before ${maxDate} across all boroughs.`)
+        console.log(`Updated ${existingLots.length} lots and Found ${newLots.length} net new foreclosure cases before ${maxDate} across all boroughs.`)
 
 
         // Convert updated rows back to CSV
