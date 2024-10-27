@@ -57,7 +57,7 @@ export async function download_filing(index_number, county, auction_date, missin
     await page.select('select#txtCounty', county_map[county]);
     // await sleep(1)
     await Promise.all([
-        page.locator('button.BTN_Green').click(),
+        page.locator("button[name='btnSubmit']").click(),
         page.waitForNavigation({
             waitUntil: 'networkidle2',
         }),
@@ -82,10 +82,12 @@ export async function download_filing(index_number, county, auction_date, missin
             detectTimeout: 10 * 1000,
         });
         console.log(`Captcha status: ${status}`);
+        if (status === 'solve_failed'){
+            return { error: "captcha solve failed"}
+        }
     }
     
 
-    // console.log('Navigated! Selecting document type...');
     const availableFilings = await page.$$eval("select#selDocumentType > option", options => {
         return options.map(el => el.value)
     })
@@ -98,7 +100,7 @@ export async function download_filing(index_number, county, auction_date, missin
                 console.log(`Case ${index_number} Motion to Discontinue detected`)
             }
         });
-        return
+        return { error: "case discontinued"}
     }
 
     const filename = index_number.replace('/', '-') + ".pdf"
@@ -106,12 +108,14 @@ export async function download_filing(index_number, county, auction_date, missin
         const { dir, id } = filing
         const pdfPath = path.resolve(`saledocs/${dir}/${filename}`);
         if (!existsSync(pdfPath) && availableFilings.includes(id)) {
-            // console.log(`Trying to get filing ${id}`)
-
             await page.select('select#selDocumentType', id);
-            await sleep(1)
-            await page.click('input[name="btnNarrow"]'); // To submit the form
-            await page.waitForNetworkIdle();
+
+            await Promise.all([
+                await page.locator("input[name='btnNarrow']").click(),
+                await page.waitForNavigation({
+                    waitUntil: 'networkidle0',
+                })
+            ])
 
             let docs = await page.$$eval("table.NewSearchResults > tbody > tr", rows => {
                 const out = []
@@ -130,9 +134,7 @@ export async function download_filing(index_number, county, auction_date, missin
             docs = docs.reverse()
 
             if (docs.length == 0) {
-                console.warn("No valid document download links available")
-                return { error: 'No valid document links' };
-
+                return { error: 'No valid document links available' };
             }
 
             const receivedDate = new Date(docs[0].receivedDate)
@@ -153,8 +155,12 @@ export async function download_filing(index_number, county, auction_date, missin
             }
 
             await download_pdf(downloadUrl, pdfPath);
-            await page.click("input[name='btnClear']")
-            await page.waitForNetworkIdle();
+            await Promise.all([
+                await page.locator("input[name='btnClear']").click(),
+                await page.waitForNavigation({
+                    waitUntil: 'networkidle0',
+                })
+            ])
         }
     }
 
@@ -179,8 +185,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         missingFilings.push(FilingType.NOTICE_OF_SALE)
     }
     await download_filing(process.argv[2], county, auction_date, missingFilings, endpoint).catch(err => {
-        console.error(args, "Error processing");
-        console.error(err)
+        console.error(args, "Error processing", err);
     })
     console.log(args, "...Completed")
     process.exit()
