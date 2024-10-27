@@ -1,6 +1,7 @@
 case_number,borough,block,lot,address
 850288/2013,Manhattan,1917,27,"107 WEST 132ND STREET, NEW YORK"
 850271/2018,Manhattan,384,1307,"209 East 2nd Street, Unit 7 New York, New York 10009"
+850122/2019,Manhattan,892,1359,"45 Park Avenue, Unit 1203 and Parking Unit 7, New York, NY 10016"
 850046/2022,Manhattan,2025,28,"203 West 139th Street, New York, NY 10030."
 850055/2022,Manhattan,764,15,"241 West 14th Street, New York, New York"
 850121/2022,Manhattan,31,1333,"75 WALL STREET, UNIT# 38M, NEW YORK, NY 10005"
@@ -25,6 +26,8 @@ case_number,borough,block,lot,address
 850198/2021,Manhattan,482,1201,
 850194/2019,Manhattan,27,1044,
 850059/2022,Manhattan,1006,1305,
+850089/2022,Manhattan,1517,1101,
+850012/2023,Manhattan,1847,59,
 850013/2023,Manhattan,1953,59,
 35805/2015E,Bronx,4690,34,"3802 Bronxwood Avenue, Bronx, New York 10469"
 381069/2012E,Bronx,4934,56,
@@ -48,7 +51,7 @@ case_number,borough,block,lot,address
 709301/2022,Queens,9503,29,
 705281/2016,Queens,10875,50,"100-35 207TH STREET, QUEENS VILLAGE, NY 11429"
 716127/2019,Queens,15658,1,"13-73 BEACH CHANNEL DRIVE, FAR ROCKAWAY, NY"
-722814/2021,Queens,12317,56,"140-46 LATHAM LANE, JAMAICA, NY 11434"
+722814/2021,Queens,140,46,
 708279/2023,Queens,835,157,
 709077/2023,Queens,11947,283,
 711615/2023,Queens,15637,171,
@@ -72,6 +75,8 @@ case_number,borough,block,lot,address
 725487/2020,Queens,1701,102,"32-17 106TH STREET, EAST ELMHURST, NY 11369"
 709107/2021,Queens,13435,17,
 705474/2016,Queens,9545,6,"107-12 107TH AVE, OZONE PARK, NY 11417"
+701689/2018,Queens,11146,21,"110-25 217TH STREET QUEENS VILLAGE, NY 11429"
+701689/2018,Queens,11146,24,"110-25 217TH STREET QUEENS VILLAGE, NY 11429"
 721397/2022,Queens,6597,62,"137-62 70th Road, Flushing, NY 11867"
 725416/2021,Queens,567,126,
 715870/2018,Queens,10868,39,"201- 09 104th Avenue, Saint Albans A.K.A. Queens Village A.K.A. Hollis A.K.A. Jamaica,  New York 11412"
@@ -99,7 +104,7 @@ case_number,borough,block,lot,address
 708338/2016,Queens,11656,1,"114-01 130th Street, South Ozone Park, NY 11420"
 704227/2017,Queens,10246,41,"171-12 107th Avenue, Jamaica, New York 11433"
 713650/2016,Queens,1092,72,
-714020/2017,Queens,10217,38,"93-18 170th Street, Jamaica, NY 11433"
+714020/2017,Queens,2007,1,
 708990/2018,Queens,12076,128,
 713451/2017,Queens,11670,22,
 716851/2017,Queens,10805,1,
@@ -110,13 +115,16 @@ case_number,borough,block,lot,address
 709965/2021,Queens,11719,56,"132-44 114th Street, South Ozone Park, NY 11420"
 705287/2015,Queens,11136,16,
 701211/2016,Queens,12462,6," 177-34 Baisley Blvd Jamaica, NY 11434"
+720950/2020,Queens,14173,56,"159-38 95th Street, Howard Beach, NY 11414"
+720950/2020,Queens,14173,57,"159-38 95th Street, Howard Beach, NY 11414"
 716226/2022,Queens,11741,60,"133-48 121ST STREET, SOUTH OZONE PARK, NY 11420"
 704236/2017,Queens,12955,22,
 704644/2021,Queens,1466,48,"35-39 92nd Street, Jackson Heights, New York"
 709150/2023,Queens,13305,26,"146-38 176th Street, Jamaica, NY 11434"
 702059/2015,Queens,1755,77,
-707084/2018,Queens,15705,35,
+707084/2018,Queens,5705,35,
 703411/2019,Queens,10195,173,"110-16 169th Street, Jamaica, NY 11433"
+700551/2021,Queens,1602,66,
 717902/2022,Queens,11689,5,"133-10 116TH AVE, SOUTH OZONE PARK, NY 11420"
 705395/2022,Queens,1740,24,"35-44 100TH STREET, CORONA, NY 11368"
 713176/2021,Queens,3483,17,
@@ -186,8 +194,9 @@ case_number,borough,block,lot,address
 723360/2022,Queens,9335,221,"127-01 89th Ave, Richmond Hill, NY 11418"
 716502/2023,Queens,9041,75,
 719526/2022,Queens,1542,1140,"82-25 Queens Boulevard, PS7, Elmhurst, NY 11373"
-705480/2015,Queens,10868,9,
+705480/2015,Queens,201,18,
 709530/2023,Queens,15461,19,
+714924/2021,Queens,11425,1038,
 702754/2012,Queens,9601,74,
 700443/2015,Queens,11684,1,"127-02 116th Avenue, South Ozone Park, NY 11420"
 706032/2014,Queens,1410,54,
@@ -197,11 +206,16 @@ case_number,borough,block,lot,address
 714340/2018,Queens,15485,6,
 720103/2021,Queens,13104,19,"222-05 135TH AVE, JAMAICA, NY 11413"
 718666/2018,Queens,11009,41,"191-37 115TH AVENUE, SAINT ALBANS, NY 11412"
+712776/2020,Queens,4019,126,"114-03 Taipei Court, Queens, New York 11356"
+712776/2020,Queens,4019,130,"114-11 Taipei Court, Queens, New York 11356"
+712776/2020,Queens,4019,133,"114-21 Taipei Court, Queens, New York 11356"
 724847/2020,Queens,11076,46,
 712486/2022,Queens,3526,58,
 717415/2019,Queens,12451,12,
 705814/2023,Queens,3590,60,
 713140/2021,Queens,12626,19,
+724654/2021,Queens,12717,143,"187-19 Pineville Lane, Springfield Gardens, NY 11413"
+724654/2021,Queens,12720,141,"187-19 Pineville Lane, Springfield Gardens, NY 11413"
 710724/2021,Queens,2297,25,
 701206/2015,Queens,9426,58,"10127 108th Street, Jamaica, NY 11419"
 707394/2015,Queens,14005,87,"159-44 85th Street, Howard Beach, New York 11414"
@@ -306,7 +320,7 @@ case_number,borough,block,lot,address
 701444/2016,Queens,11108,47,
 709522/2019,Queens,3714,43,"78-47 61st Street, Ridgewood a/k/a Glendale, New York 11385"
 702945/2016,Queens,16065,26,
-703897/2015,Queens,20292,1715,"118-29 205th Street, Saint Albans, NY."
+703897/2015,Queens,2015,19,
 701789/2019,Queens,12990,5,
 711561/2017,Queens,13657,49,
 706169/2023,Queens,4917,1,
@@ -355,11 +369,18 @@ case_number,borough,block,lot,address
 28101/2007,Brooklyn,2006,50,
 531047/2021,Brooklyn,4722,28,
 810088/2010,Manhattan,1937,11,
+850126/2019,Manhattan,1274,1054,"30 Central Park South, Unit 14D, New York"
+850126/2019,Manhattan,1011,4153,"106 Central Park South, Unit 7L, New York, NY 10019"
+850126/2019,Manhattan,1405,32,"177 East 70th St., New York, NY 10021"
+850126/2019,Manhattan,1404,1028,"715 Park Ave, Unit 6E, New York, NY 10021"
 850279/2021,Manhattan,1634,16,
 850147/2023,Manhattan,1009,37,
 850199/2022,Manhattan,1006,1302,
+35805/2015E,Bronx,4690,34,
 381105/2007E,Bronx,2879,284,
 381839/2009E,Bronx,4535,24,
+35581/2014E,Bronx,5600,46,
+35650/2014E,Bronx,2971,4,
 36125/2020E,Bronx,2433,52,
 380329/2008E,Bronx,4982,14,"4042 Baychester Avenue, Bronx, NY 10466"
 32752/2017E,Bronx,4824,49,
@@ -380,10 +401,12 @@ case_number,borough,block,lot,address
 31291/2019E,Bronx,3944,4766,
 381462/2010E,Bronx,2855,28,
 34605/2018E,Bronx,3944,1072,
+36113/2020E,Bronx,4987,43,
 32843/2016E,Bronx,4824,55,
 32944/2016E,Bronx,4878,8,
 32199/2017E,Bronx,4082,20,
 380325/2013E,Bronx,4686,53,
+35722/2014E,Bronx,4001,51,
 32458/2016E,Bronx,4828,40,
 32796/2017E,Bronx,2516,147,
 32745/2017E,Bronx,2879,67,
@@ -396,7 +419,7 @@ case_number,borough,block,lot,address
 719740/2021,Queens,12059,33,"142-64 Rockaway Boulevard, Jamaica, New York"
 718411/2022,Queens,5572,72," 49-52 169th Street, Flushing, New York 11365"
 717663/2021,Queens,9020,25,"86-01 95th Avenue a/k/a 8601 95th Avenue, Ozone Park, NY 11416"
-703385/2023,Queens,15706,67,
+703385/2023,Queens,15706,67,"Block 15706, Lot 67. Sold subject to terms and conditions of filed judgment and terms of sale. NICOLE KATSORHIS, Referee., LEVY & LEVY, Attys. for Pltf., 12 Tulip Dr., Great Neck, NY"
 704168/2016,Queens,10711,23,"91-38 Springfield Boulevard, Queens Village, NY 11428"
 713788/2016,Queens,9119,60,"103-19 96th Street, Ozone Park, NY 11417"
 709519/2017,Queens,5191,34," 143-55 Cherry Avenue Flushing, NY 11355"
@@ -411,6 +434,8 @@ case_number,borough,block,lot,address
 710688/2015,Queens,13648,48,"253-43 147th Road, Rosedale, NY 11422"
 712380/2015,Queens,10366,22," 10226 188th St Hollis, NY 11423"
 704841/2018,Queens,2166,1017,"108-27 63rd Avenue, Unit P5, Queens, NY 11375"
+707851/2019,Queens,9841,46,"87-34 169"" Street, Jamaica, NY 11432"
+707851/2019,Queens,9841,48,"87-34 169"" Street, Jamaica, NY 11432"
 714970/2019,Queens,12014,7,
 715033/2020,Queens,13270,40,
 724510/2020,Queens,12632,45,"118-25 202nd Street, Saint Albans, NY 11412"
@@ -452,6 +477,7 @@ case_number,borough,block,lot,address
 34242/2018E,Bronx,2826,87,
 33200/2018E,Bronx,2556,54,"573 East 1415 Street a/k/a 573-575 East 1415 Street a/k/a 311 Crimmins Avenue, Bronx, NY 10454"
 36542/2019E,Bronx,3114,4,
+808046/2023E,Bronx,3237,90,
 35411/2013E,Bronx,4790,20,
 32450/2016E,Bronx,4796,148,"2922 Ely Avenue, Bronx, NY 10469"
 814427/2021E,Bronx,5725,1020,"2600 Henry Hudson Parkway, Unit 5D, Bronx, NY 10463"
@@ -501,8 +527,8 @@ case_number,borough,block,lot,address
 511691/2018,Brooklyn,4041,38,"408 Siclen Ave., Brooklyn, NY 11207"
 524477/2017,Brooklyn,8343,1105,"1123 East 73rd Street, Unit 68, Brooklyn, NY 11234"
 500838/2019,Brooklyn,4360,44,
-500838/2019,Brooklyn,4360,45,
 508839/2019,Brooklyn,8060,1145,
+517743/2019,Brooklyn,8148,9,
 518415/2019,Brooklyn,4752,9,"9205 Avenue B, Brooklyn, NY 11236"
 504770/2020,Brooklyn,6026,58,
 511745/2019,Brooklyn,8243,166,
@@ -592,7 +618,7 @@ case_number,borough,block,lot,address
 135175/2018,Staten Island,49,84,"184-186 Beachwood Avenue, Staten Island, NY 10301"
 135033/2014,Staten Island,2401,1302,
 380625/2011E,Bronx,5058,50,
-380625/2011E,Bronx,5058,49,
+517743/2019,Brooklyn,8148,7,
 850207/2019,Manhattan,1009,37,
 850596/2023,Manhattan,1009,37,
 850370/2014,Manhattan,1223,1226,
@@ -621,7 +647,13 @@ case_number,borough,block,lot,address
 27190/2009,Brooklyn,5165,51,"2179 Clarendon Road, Brooklyn, New York 11226"
 500601/2013,Brooklyn,4727,37,"5515 Tilden Avenue, Brooklyn, NY 11203"
 501252/2013,Brooklyn,4988,16,
+519103/2017,Brooklyn,3664,28,"90 Miller Avenue and Miller Avenue, Brooklyn, NY 11207"
+519103/2017,Brooklyn,3664,29,"90 Miller Avenue, Brooklyn, NY 11207"
 511253/2019,Brooklyn,3723,6,"281 Vermont Street, Brooklyn, NY 11207"
+514946/2019,Brooklyn,2605,17,
+514946/2019,Brooklyn,2605,30,"273 Russell St, Brooklyn, NY"
+514946/2019,Brooklyn,2625,148,"146 Diamon St, Brooklyn, NY"
+514946/2019,Brooklyn,2575,14,"313 Eckford St, Brooklyn, NY"
 516919/2019,Brooklyn,1851,2,
 517140/2019,Brooklyn,3539,17,"165 HERZL STREET, BROOKLYN, NY 11212"
 520824/2019,Brooklyn,8283,13,"1365 East 99th Street, Brooklyn, NY 11236"
@@ -670,13 +702,15 @@ case_number,borough,block,lot,address
 150524/2017,Manhattan,16,6070,"21 South EndAvenue, New York, New York 10280"
 850207/2021,Manhattan,1260,1001,"24 West 45th Street, Unit C-1, New York, New York"
 850087/2022,Manhattan,846,1310,"7 East 17thStreet,Unit 6C, NewYork, NY10003"
-850264/2021,Manhattan,195,3,"388 Broadway, New York, New York 10013"
+850264/2021,Manhattan,195,3,"388 Broadway, New York, New York 10013, Block 195 Lot 3"
 20653/2010,Brooklyn,1366,76,"1357 PARK PLACE, BROOKLYN, NY 11213"
 9644/2009,Brooklyn,4074,35,"630 Hendrix Street, Brooklyn, NY 11207"
 18254/2010,Brooklyn,5194,109,"306 East 29th Street, Brooklyn, New York 11226, And Described As Follows"
 32348/2009,Brooklyn,3291,16,"446 Harman Street, Brooklyn, NY 11237"
 25123/2011,Brooklyn,5036,30,"276 Midwood Street, Brooklyn, NY 11225"
 2807/2014,Brooklyn,2134,1322,"440 Kent Avenue, Apt. #22C, Brooklyn, NY 11249"
+9500/2013,Brooklyn,8237,1007,"1364 East 92nd Street, Unit 3 aka 103 and Unit 1G, Brooklyn, NY 11236"
+9500/2013,Brooklyn,8237,1001,"1364 East 92nd Street, Unit 3 aka 103 and Unit 1G, Brooklyn, NY 11236"
 501594/2015,Brooklyn,3614,24,"523 Chester Street, Brooklyn, NY 11212"
 502885/2015,Brooklyn,4303,43,"705 Bradford Street, Brooklyn, NY 11207"
 504924/2015,Brooklyn,7735,29,"1091 East 51st Street, Brooklyn, NY 11234"
@@ -695,8 +729,12 @@ case_number,borough,block,lot,address
 525160/2022,Brooklyn,8039,1011,"8714 Avenue J, Unit 4BE, Brooklyn, NY"
 523241/2022,Brooklyn,6362,100,"Benson Avenue, Brooklyn, New York"
 527054/2023,Brooklyn,1354,58,"138 Utica Ave., Brooklyn, New York 11213"
+528551/2022,Brooklyn,8720,1594,"40 Oceana Drive West Unit PH1-A, Brooklyn, NY 11235"
+528551/2022,Brooklyn,8720,1518,"40 Oceana Drive West Unit PH1-A, Brooklyn, NY 11235"
 528898/2022,Brooklyn,8273,1020,"10803 Seaview Avenue, Parking Unit P20, Brooklyn, NY"
 534112/2022,Brooklyn,7806,63,"1070 E 59th St Brooklyn, NY 11234"
+538048/2022,Brooklyn,1979,14,"477 Washington Avenue, Brooklyn, NY 11238"
+538048/2022,Brooklyn,1964,8,"135 St. James Place, Brooklyn, NY11238"
 503870/2016,Brooklyn,1349,1106,"1609 Bergen St, Unit 3, Brooklyn, NY 11213"
 505772/2015,Brooklyn,3931,51,"162 Norwood Avenue, Brooklyn, NY 11208"
 158117/2021,Manhattan,1114,1006,"43 WEST 61ST STREET, UNIT 10E, NEW YORK, NY 10023"
@@ -758,12 +796,13 @@ case_number,borough,block,lot,address
 36049/2019E,Bronx,5428,45,"843 Logan Avenue, Bronx, NY 10465"
 512103/2022,Brooklyn,5975,22,"28 79th Street, Brooklyn, (City of New York) NY 11209"
 512523/2021,Brooklyn,5214,32,"1207 ROGERS AVENUE, BROOKLYN, NY 11226"
-516846/2021,Brooklyn,798,41,"5118-5124 4TH AVENUE, BROOKLYN, NY 11220"
 516846/2021,Brooklyn,798,43,"5118-5124 4TH AVENUE, BROOKLYN, NY 11220"
 509432/2023,Brooklyn,3756,5,"391 NEW JERSEY AVENUE, BROOKLYN, NY 11207"
 501752/2021,Brooklyn,6259,22,"1638 78""""Street, Brooklyn, NY11214."
 706830/2019,Queens,1713,51,"33-33 98th Street, Corona, NY 11368"
 152278/2022,Staten Island,3085,8,"FINGERBOARD ROAD, STATEN ISLAND, NY"
+131109/2013,Staten Island,576,75,"48 WARD AVENUE, STATEN ISLAND, NY 10304"
+131109/2013,Staten Island,576,77,"48 WARD AVENUE, STATEN ISLAND, NY 10304"
 135457/2023,Staten Island,1644,1026,"1260 RICHMOND AVENUE, UNIT 114, STATEN ISLAND, NY 10314"
 37825/2006,Brooklyn,7797,45,"1353 East 49th Street, Brooklyn, NY 11234"
 12015/2008,Brooklyn,1131,1035,
@@ -780,6 +819,9 @@ case_number,borough,block,lot,address
 503395/2021,Brooklyn,4208,7,"179 Milford Street, Brooklyn, NY 11208"
 507810/2021,Brooklyn,7905,40,"5724 Beverley Road, Brooklyn, NY 11203"
 519586/2020,Brooklyn,764,60,"337 48TH STREET, BROOKLYN, NY 11220"
+504832/2022,Brooklyn,1869,29,"1399 Atlantic Avenue, Brooklyn, NY 11216"
+504832/2022,Brooklyn,1869,30,"1399 Atlantic Avenue, Brooklyn, NY 11216]"
+504832/2022,Brooklyn,1869,31,"1399 Atlantic Avenue, Brooklyn, NY 11216]"
 500853/2023,Brooklyn,8331,1037,"9526 SCHENCK STREET, PS 10, BROOKLYN, NY"
 502508/2023,Brooklyn,3625,23,"579 Chester Street, Brooklyn, NY 11212"
 502845/2023,Brooklyn,3539,140,"175 Herzl Street, Brooklyn, NY 11212"
@@ -788,7 +830,7 @@ case_number,borough,block,lot,address
 529670/2022,Brooklyn,8220,31,"EAST 93RD STREET, BROOKLYN, NY"
 537469/2022,Brooklyn,1890,68,"112 HALL STREET, BROOKLYN, NY 11205"
 705203/2013,Queens,9109,1,"89- 02 103rd Avenue, Ozone Park, NY 11417"
-707933/2022,Queens,1542,1103,"82-25 QUEENS BLVD., UNIT 1C, ELMHURST, NEW YORK"
+707933/2022,Queens,1542,1103,"Block: 1542 Lot: 1103; Said premises known as 82-25 QUEENS BLVD., UNIT 1C, ELMHURST, NEW YORK"
 711617/2022,Queens,10837,39,"99-16 191* Street, Hollis, NY 11423"
 708640/2017,Queens,9350,16,"91-24 Lefferts Boulevard, Richmond Hill, New York 11418"
 721820/2020,Queens,12204,127,"150-54 Foch Boulevard, Jamaica, New York 11434"
@@ -802,6 +844,12 @@ case_number,borough,block,lot,address
 135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304"
 157609/2022,Manhattan,459,1113,"52 EAST 4TH STREET, #PH2, NEW YORK"
 850215/2022,Manhattan,1623,133,"1455 Sth Avenue a/k/a 1455/1459 5th Avenue, New York"
+850429/2023,Manhattan,1721,1002,"3-5 West 122nd Street, Units 1B, New York"
+850429/2023,Manhattan,1721,1007,"3-5 West 122nd Street, Units 2C, New York"
+850429/2023,Manhattan,1721,1011,"3-5 West 122nd Street, Units 3C, New York"
+850429/2023,Manhattan,1721,1013,"3-5 West 122nd Street, Units 4A, New York"
+850429/2023,Manhattan,1721,1021,"3-5 West 122nd Street, Units 6A, New York"
+850429/2023,Manhattan,1721,1024,"3-5 West 122nd Street, Units 6D, New York"
 703332/2022,Queens,13049,69,"17933 143rd Avenue, Jamaica, New York 11434"
 721569/2022,Queens,5354,17,"4022 190th Street, Flushing, NY 11358"
 381207/2012E,Bronx,2880,333,"1619 Undercliff Avenue,  Bronx, NY 10453"
@@ -823,6 +871,8 @@ case_number,borough,block,lot,address
 29971/2008,Brooklyn,8110,54,"717 East 92nd Street, Brooklyn, NY 11236"
 1859/2010,Brooklyn,1439,32,"2054 PACIFIC ST, BROOKLYN, NY 11233"
 21330/2011,Brooklyn,4663,22,"24 East 58th Street, Brooklyn, NY 11203"
+15642/2013,Brooklyn,6557,1106,"6214 24TH AVENUE #2E, BROOKLYN, NY 11204"
+15642/2013,Brooklyn,6557,1128,"6214 24TH AVENUE #2E, BROOKLYN, NY 11204"
 16853/2013,Brooklyn,4381,139," 923 Ashford Street Brooklyn, NY 11207"
 21783/2011,Brooklyn,4696,50,"447 East 48th Street, Brooklyn, NY 11203"
 507884/2015,Brooklyn,4731,6,"5911 Tilden Avenue, Brooklyn, NY 11203"
@@ -834,7 +884,6 @@ case_number,borough,block,lot,address
 518246/2020,Brooklyn,1275,61,"1163 President Street, Brooklyn, NY 11225"
 519372/2020,Brooklyn,4719,9,"4722 Snyder Avenue, Brooklyn, NY 11203"
 520374/2020,Brooklyn,8255,31,"9004 Avenue L, Brooklyn, New York 11236"
-520374/2020,Brooklyn,8255,33,"9004 Avenue L, Brooklyn, New York 11236"
 522915/2020,Brooklyn,1419,51,"412 Utica Avenue, Brooklyn, NY 11213"
 502545/2023,Brooklyn,4671,43,"409 East 96"" Street, Brooklyn, NY 11212"
 506381/2013,Brooklyn,8017,60,"944 East 81st Street, Brooklyn, NY 11236"
@@ -849,8 +898,8 @@ case_number,borough,block,lot,address
 510328/2015,Brooklyn,3856,110,"555 CHRISTOPHER AVENUE, BROOKLYN, NY 11212"
 509135/2016,Brooklyn,3845,140,"516 Christopher Avenue, Brooklyn, NY 11212"
 519758/2019,Brooklyn,7883,16,"1407 East 58'"" Street, Brooklyn, NY 11234"
-513536/2021,Brooklyn,7558,59,"3014 GLENWOOD ROAD, BROOKLYN, NY 11210"
-500481/2023,Brooklyn,5637,42,"4914 gh Avenue, Brooklyn, New York"
+513536/2021,Brooklyn,7558,59," Said premises being known as and by street address 3014 GLENWOOD ROAD, BROOKLYN, NY 11210"
+500481/2023,Brooklyn,5637,42,"Block: 5637 Lot: 42; Said premises known as 4914 gh Avenue, Brooklyn, New York"
 502020/2023,Brooklyn,1664,75,"365 Macon Street, Brooklyn, NY 11233"
 515682/2021,Brooklyn,8299,2,"9611 Seaview Avenue, Brooklyn, NY 11236"
 525866/2020,Brooklyn,850,1015,"720 57th Street, Unit 4C, Brooklyn, NY 11220"
@@ -884,7 +933,6 @@ case_number,borough,block,lot,address
 709620/2015,Queens,12910,39,"13039 231ST ST, LAURELTON, NY 11413"
 721844/2020,Queens,15966,17,"468 Beach 45th Street, Arverne, NY 11691"
 709282/2020,Queens,5186,54,"142-11 and 142-15 Cherry Avenue, Flushing, New York 11355"
-709282/2020,Queens,5186,56,"142-11 and 142-15 Cherry Avenue, Flushing, New York 11355"
 721654/2022,Queens,5546,20,"45-54 20th Street, Bayside, New York 11361"
 130317/2013,Staten Island,3624,55,"99 Burbank Avenue, Staten Island, NY 10306"
 130840/2011,Staten Island,692,317,"398 Little Clove Road, Staten Island, NY 10301"
