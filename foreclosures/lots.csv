@@ -229,14 +229,14 @@ case_number,borough,block,lot,address
 710527/2019,Queens,13956,37,
 700118/2021,Queens,12214,31,"119-44 155th Street, Jamaica, NY 11434"
 717992/2021,Queens,11969,16,
-720243/2019,Queens,5066,3186," ALL that certain plot piece or parcel of land, with the buildings and improvements thereon erected, situate, lying and being in The Condominium Unit (Hereinafter Called The ""Unit"") In The Building (Hereinafter Called The ""Building"") Known As Grand Three At Sky View Park And By The Street Address 131-01 40th Road, Flushing, New York"
+720243/2019,Queens,5066,3186,"131-01 40th Road, Flushing, New York"
 714425/2018,Queens,16047,4,
 715032/2022,Queens,1699,26,"32-40 105th Street, East Elmhurst, NY 11369"
 703963/2023,Queens,11268,83,
 704668/2020,Queens,12452,79,"118-80 Montauk Street, Saint Albans, New York 11412"
 706296/2023,Queens,11601,43,
 725534/2022,Queens,10492,1,
-725586/2022,Queens,9136,203,"ALL that certain plot, piece or parcel of land, with the buildings and improvements thereon erected, situate, lying and being in the Borough of Queens, County of Queens, City and State of New York"
+725586/2022,Queens,9136,203,
 725900/2021,Queens,6836,35,"160- 18 76th Avenue, Fresh Meadows, NY 11366"
 705367/2022,Queens,8825,53,
 708872/2021,Queens,8221,154,
@@ -412,14 +412,14 @@ case_number,borough,block,lot,address
 32745/2017E,Bronx,2879,67,
 380623/2012E,Bronx,3044,167,
 35849/2015E,Bronx,3234,93,
-260075/2017E,Bronx,3937,3157,"apartment 9D, in the building known as W-5 a/k/a 155, and by street address 1505 Archer Road, Bronx, New York"
+260075/2017E,Bronx,3937,3157,"1505 Archer Road Apt 9D, Bronx, New York"
 725132/2021,Queens,13179,15,
 710484/2016,Queens,13748,50,"241-41 148TH DRIVE, ROSEDALE, NY 11422"
 703513/2014,Queens,1987,49," 10447 44th Avenue Flushing, NY 11368"
 719740/2021,Queens,12059,33,"142-64 Rockaway Boulevard, Jamaica, New York"
 718411/2022,Queens,5572,72," 49-52 169th Street, Flushing, New York 11365"
 717663/2021,Queens,9020,25,"86-01 95th Avenue a/k/a 8601 95th Avenue, Ozone Park, NY 11416"
-703385/2023,Queens,15706,67,"Block 15706, Lot 67. Sold subject to terms and conditions of filed judgment and terms of sale. NICOLE KATSORHIS, Referee., LEVY & LEVY, Attys. for Pltf., 12 Tulip Dr., Great Neck, NY"
+703385/2023,Queens,15706,67,
 704168/2016,Queens,10711,23,"91-38 Springfield Boulevard, Queens Village, NY 11428"
 713788/2016,Queens,9119,60,"103-19 96th Street, Ozone Park, NY 11417"
 709519/2017,Queens,5191,34," 143-55 Cherry Avenue Flushing, NY 11355"
@@ -702,7 +702,7 @@ case_number,borough,block,lot,address
 150524/2017,Manhattan,16,6070,"21 South EndAvenue, New York, New York 10280"
 850207/2021,Manhattan,1260,1001,"24 West 45th Street, Unit C-1, New York, New York"
 850087/2022,Manhattan,846,1310,"7 East 17thStreet,Unit 6C, NewYork, NY10003"
-850264/2021,Manhattan,195,3,"388 Broadway, New York, New York 10013, Block 195 Lot 3"
+850264/2021,Manhattan,195,3,"388 Broadway, New York, New York 10013"
 20653/2010,Brooklyn,1366,76,"1357 PARK PLACE, BROOKLYN, NY 11213"
 9644/2009,Brooklyn,4074,35,"630 Hendrix Street, Brooklyn, NY 11207"
 18254/2010,Brooklyn,5194,109,"306 East 29th Street, Brooklyn, New York 11226, And Described As Follows"
@@ -830,7 +830,7 @@ case_number,borough,block,lot,address
 529670/2022,Brooklyn,8220,31,"EAST 93RD STREET, BROOKLYN, NY"
 537469/2022,Brooklyn,1890,68,"112 HALL STREET, BROOKLYN, NY 11205"
 705203/2013,Queens,9109,1,"89- 02 103rd Avenue, Ozone Park, NY 11417"
-707933/2022,Queens,1542,1103,"Block: 1542 Lot: 1103; Said premises known as 82-25 QUEENS BLVD., UNIT 1C, ELMHURST, NEW YORK"
+707933/2022,Queens,1542,1103,"82-25 QUEENS BLVD., UNIT 1C, ELMHURST, NEW YORK"
 711617/2022,Queens,10837,39,"99-16 191* Street, Hollis, NY 11423"
 708640/2017,Queens,9350,16,"91-24 Lefferts Boulevard, Richmond Hill, New York 11418"
 721820/2020,Queens,12204,127,"150-54 Foch Boulevard, Jamaica, New York 11434"
@@ -898,8 +898,8 @@ case_number,borough,block,lot,address
 510328/2015,Brooklyn,3856,110,"555 CHRISTOPHER AVENUE, BROOKLYN, NY 11212"
 509135/2016,Brooklyn,3845,140,"516 Christopher Avenue, Brooklyn, NY 11212"
 519758/2019,Brooklyn,7883,16,"1407 East 58'"" Street, Brooklyn, NY 11234"
-513536/2021,Brooklyn,7558,59," Said premises being known as and by street address 3014 GLENWOOD ROAD, BROOKLYN, NY 11210"
-500481/2023,Brooklyn,5637,42,"Block: 5637 Lot: 42; Said premises known as 4914 gh Avenue, Brooklyn, New York"
+513536/2021,Brooklyn,7558,59,"3014 GLENWOOD ROAD, BROOKLYN, NY 11210"
+500481/2023,Brooklyn,5637,42,"4914 gh Avenue, Brooklyn, New York"
 502020/2023,Brooklyn,1664,75,"365 Macon Street, Brooklyn, NY 11233"
 515682/2021,Brooklyn,8299,2,"9611 Seaview Avenue, Brooklyn, NY 11236"
 525866/2020,Brooklyn,850,1015,"720 57th Street, Unit 4C, Brooklyn, NY 11220"
@@ -951,3 +951,14 @@ case_number,borough,block,lot,address
 714175/2016,Queens,9412,43,"110-19 101ST AVENUE, RICHMOND HILL, NY 11419"
 35507/2014E,Bronx,2782,87,"1354 Teller Avenue, Bronx, NY 10456"
 714175/2016,Queens,9412,43,"110-19 101ST AVENUE, RICHMOND HILL, NY 11419"
+709319/2014,Queens,529,14,
+707659/2019,Queens,11707,9,"11423 SUTTER AVENUE, SOUTH OZONE PARK, NY 11420"
+704261/2021,Queens,9417,69,"95-49 115th Street, Richmond Hill, New York 11419"
+130670/2011,Staten Island,529,14,
+135249/2018,Staten Island,3176,26,"91 NORTH RAILROAD AVENUE, STATEN ISLAND, NY 10304"
+135140/2022,Staten Island,4724,59,"359 FAIRBANKS AVENUE, STATEN ISLAND, NY 10306"
+151570/2022,Staten Island,529,14,
+27920/2011,Brooklyn,8231,57,"1036 EAST 105TH STREET, BROOKLYN, NY 11236"
+505034/2013,Brooklyn,8815,1013,"3118 Emmons Avenue, Apt 3-L, Brooklyn, NY 11236"
+515553/2015,Brooklyn,1166,80,"399 Sterling Place, Brooklyn, New York 11238"
+520848/2018,Brooklyn,1504,59," 389 Bainbridge Street Brooklyn, NY 11233"
