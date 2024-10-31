@@ -1,4 +1,4 @@
-using Dates, CSV, DataFrames, AlgebraOfGraphics, CairoMakie
+using Dates, CSV, DataFrames, AlgebraOfGraphics, CairoMakie, Statistics
 set_aog_theme!()
 
 
@@ -42,15 +42,16 @@ boro_completes = combine(groupby(completed_auctions, :borough), nrow => :complet
 df = outerjoin(boro_auctions, boro_completes, boro_sales, on=:borough)
 df[:, r"mean|count"] = coalesce.(df[:, r"mean|count"], 0)
 
-
+filter!(:winning_bid => <=(4.0e6), sold_auctions)
 axis = (width = 225, height = 225, xlabel = "Opening Bid (\$000s)", ylabel = "Winning Bid (\$000s)")
-result_overbid = data(filter(:winning_bid => <=(4.0e6), sold_auctions)) * mapping(
+result_overbid = data(sold_auctions) * mapping(
        :upset_price => (t-> t / 1000) => "Opening Bid (\$000s)", 
        :winning_bid => (t-> t / 1000) => "Winning Bid (\$000s)")
 plt = result_overbid * mapping(col=:borough)       
 
 # Define the 45-degree line as a visual element
-line_data = DataFrame(x = [0, 1500], y = [0, 1000])
+maxy = ceil(max(sold_auctions.winning_bid...) / 5e5) * 500
+line_data = DataFrame(x = [0, maxy])
 line_45 = data(line_data) * mapping(:x => identity, :x => identity) * visual(Lines,
     linestyle= :dash,
     linewidth = 1)

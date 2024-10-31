@@ -48,7 +48,7 @@ end
 
 function detect_multiple_lots(text)
     patterns = [
-        r"\b\d{1,4}\s?(&|and)\s?\d{1,4}"i,
+        r"\b\d{1,4}\s?(?:&|and)\s?\d{1,4}"i,
         r"\b(lot:? )(\d{1,4}).+?\b(lot:? )(?!(\2))\d{1,4}"i,
         r"\blots?:?\s\d{1,4},\s\d{1,4}"i,
     ]
