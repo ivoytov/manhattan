@@ -61,7 +61,7 @@ createReadStream(csvFilePath)
     })
     .on('end', async () => {
         // for cases that were already in the file, update the auction date
-        const existingLots = auctionLots.filter(lot => rows.some(({ case_number }) => case_number === lot.case_number))
+        const existingLots = auctionLots.filter(lot => rows.some(({ case_number, auction_date }) => case_number === lot.case_number && auction_date != lot.auction_date))
         for (const lot of existingLots) {
             const row = rows.find(({case_number}) => case_number === lot.case_number)
             row.auction_date = lot.auction_date
