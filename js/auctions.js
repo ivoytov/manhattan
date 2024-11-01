@@ -88,7 +88,7 @@ function applyFiltersFromURL(params = null) {
     gridApi.setFilterModel(filters);
 }
 
-
+const propertyInfoMapUrl = (borough, block, lot) => "https://propertyinformationportal.nyc.gov/parcels/unit/" + boroughIdFromName(borough) + block.toString().padStart(5, '0') + lot.toString().padStart(4, '0')
 
 // grid columns
 const columnDefs = [
@@ -97,8 +97,6 @@ const columnDefs = [
         field: "isSold",
         cellDataType: 'boolean',
         filter: 'agSetColumnFilter',
-        // suppressSizeToFit: true,
-        // resizeable: false,
         maxWidth: 75,
     },
     {
@@ -129,26 +127,13 @@ const columnDefs = [
         sort: "asc",
         sortIndex: 0,
     },
-    // {
-    //     headerName: "Block", field: "block", type: "rightAligned",
-    //     filter: 'agNumberColumnFilter',
-    //     maxWidth: 100,
-    // },
-    // {
-    //     headerName: "Lot", field: "lot", type: "rightAligned",
-    //     filter: 'agNumberColumnFilter',
-    //     maxWidth: 100,
-    // },
     {
         headerName: "BBL", 
         type: "rightAligned",
         valueGetter: p => `${p.data.block}-${p.data.lot}`,
+        cellRenderer: (p) => `<a href="${propertyInfoMapUrl(p.data.borough, p.data.block, p.data.lot)}" target="_blank">` + p.value + `</a>`,
         maxWidth: 100,
     },
-    // {
-    //     headerName: "Judgement Amt", field: "judgement",
-    //     valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
-    // },
     {
         headerName: "Upset Price", field: "upset_price", type: ["currency", "rightAligned"],
         // valueFormatter: (params) => params.value || params.value == "" ? formattedCurrency.format(params.value) : null
@@ -207,11 +192,14 @@ function zoomToBlock(event) {
 
 }
 
+function boroughIdFromName(borough) {
+    return Object.entries(borough_dict).find(([id, boro]) => boro === borough)[0]
+}
 
 function getCondoBillingLot(data) {
     const { block, lot, borough } = data;
     // boro is either 1,2,3,4,5 (1 == Manhattan)
-    const boro = Object.entries(borough_dict).find(([id, boro]) => boro === borough)[0]
+    const boro = boroughIdFromName(borough)
 
     const serviceUrl = `https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer`;
     const condoUrl = `${serviceUrl}/3`
