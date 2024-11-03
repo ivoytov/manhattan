@@ -3,12 +3,13 @@ import { connect } from 'puppeteer-core';
 import { open } from 'fs/promises'
 
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
+const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;
 
-export async function download_pdf(url, fileName = url.split('/').pop()) { 
+export async function download_pdf(url, fileName = null) { 
     console.log(`In download_pdf with url: ${url}`); 
 
     const browser = await connect({ 
-        browserWSEndpoint: SBR_WS_ENDPOINT, 
+        browserWSEndpoint: endpoint, 
     }); 
     
     let file
@@ -40,6 +41,14 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
                         resolve(requestId); 
                     } 
                 }
+
+                const contentDisposition = responseHeaders.find(header => header.name.toLowerCase() === 'content-disposition');
+                console.log(contentDisposition) 
+                const matchFilename = contentDisposition["value"].match(/filename="(.*)"/);
+                if (matchFilename) {
+                    console.log(matchFilename)
+                    fileName = fileName ?? matchFilename[1];
+                }
             }); 
             page.goto(url, {timeout: 2*60*1000}).catch(e => { 
                 if (!resolved) { 
@@ -47,9 +56,10 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
                 } 
             }); 
         }); 
+        fileName = fileName ?? "test.pdf"
         file = await open(fileName, 'w'); 
 
-        // console.log('Saving pdf stream to file...'); 
+        console.log('Saving pdf stream to file...'); 
         const { stream } = await client.send('Fetch.takeResponseBodyAsStream', { requestId }); 
 
         let totalBytes = 0; 
@@ -58,7 +68,7 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
             const chunk = Buffer.from(data, base64Encoded ? 'base64' : 'utf8'); 
             await file.write(chunk); 
             totalBytes += chunk.length; 
-            // console.log(`Got chunk: ${chunk.length} bytes, Total: ${totalBytes} bytes, EOF: ${eof}`); 
+            console.log(`Got chunk: ${chunk.length} bytes, Total: ${totalBytes} bytes, EOF: ${eof}`); 
             if (eof) break; 
         } 
         await client.send('IO.close', { handle: stream }); 
@@ -72,7 +82,7 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
             throw new Error("PDF content seems too small, might be corrupted."); 
         } 
 
-        // console.log('PDF downloaded successfully'); 
+        console.log('PDF downloaded successfully'); 
         return fileName; 
     } catch (e) { 
         console.error("Error during PDF processing:", e); 
@@ -81,7 +91,7 @@ export async function download_pdf(url, fileName = url.split('/').pop()) {
         if (file) {
             await file.close(); 
         }
-        await browser.close(); 
+        await browser.disconnect(); 
     } 
 } 
 
