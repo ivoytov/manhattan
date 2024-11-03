@@ -103,7 +103,6 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
     console.log('Connected! Navigating...');
     const url = 'https://iapps.courts.state.ny.us/webcivil/FCASCalendarSearch';
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 2 * 60 * 1000 });
-    await sleep(4)
 
     await Promise.all([
         page.select('select#cboCourt', courtId),  //QUEENS Superior Court
@@ -116,6 +115,12 @@ async function getAuctionLots(borough, { courtId, calendarId }, maxDate) {
         page.waitForNavigation({ waitUntil: 'networkidle2' }),
         page.locator("input#btnFindCalendar").click(),
     ])
+    if (courtId == boroughConfigDict['Queens'].courtId && endpoint != SBR_WS_ENDPOINT) {
+        console.log("Waiting for captcha")
+        await sleep(10)
+    }
+    
+
 
     if (endpoint == SBR_WS_ENDPOINT) {
         const client = await page.createCDPSession(page);
