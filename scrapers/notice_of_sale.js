@@ -52,10 +52,13 @@ export async function download_filing(index_number, county, auction_date, missin
     
     // await inspect(client);
 
-    await page.locator('#txtCaseIdentifierNumber').fill(index_number);
-    // await sleep(1)
-    await page.select('select#txtCounty', county_map[county]);
-    // await sleep(1)
+    try {
+        await page.locator('#txtCaseIdentifierNumber').fill(index_number);
+        await page.select('select#txtCounty', county_map[county]);    
+    }  catch (e) {
+        return { error: 'Failed to fill case number in search form' };
+    }
+  
     await Promise.all([
         page.locator("button[name='btnSubmit']").click(),
         page.waitForNavigation({
@@ -154,7 +157,7 @@ export async function download_filing(index_number, county, auction_date, missin
                 continue
             }
 
-            await download_pdf(downloadUrl, pdfPath);
+            download_pdf(downloadUrl, pdfPath);
             await Promise.all([
                 await page.locator("input[name='btnClear']").click(),
                 await page.waitForNavigation({

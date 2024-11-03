@@ -6,7 +6,7 @@ const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:
 const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;
 
 export async function download_pdf(url, fileName = null) { 
-    console.log(`In download_pdf with url: ${url}`); 
+    console.log(`In download_pdf with url: ${url} ${fileName.split('/').pop()}`); 
 
     const browser = await connect({ 
         browserWSEndpoint: endpoint, 
@@ -43,10 +43,8 @@ export async function download_pdf(url, fileName = null) {
                 }
 
                 const contentDisposition = responseHeaders.find(header => header.name.toLowerCase() === 'content-disposition');
-                console.log(contentDisposition) 
                 const matchFilename = contentDisposition["value"].match(/filename="(.*)"/);
                 if (matchFilename) {
-                    console.log(matchFilename)
                     fileName = fileName ?? matchFilename[1];
                 }
             }); 
@@ -59,7 +57,7 @@ export async function download_pdf(url, fileName = null) {
         fileName = fileName ?? "test.pdf"
         file = await open(fileName, 'w'); 
 
-        console.log('Saving pdf stream to file...'); 
+        // console.log('Saving pdf stream to file...'); 
         const { stream } = await client.send('Fetch.takeResponseBodyAsStream', { requestId }); 
 
         let totalBytes = 0; 
@@ -68,7 +66,7 @@ export async function download_pdf(url, fileName = null) {
             const chunk = Buffer.from(data, base64Encoded ? 'base64' : 'utf8'); 
             await file.write(chunk); 
             totalBytes += chunk.length; 
-            console.log(`Got chunk: ${chunk.length} bytes, Total: ${totalBytes} bytes, EOF: ${eof}`); 
+            // console.log(`Got chunk: ${chunk.length} bytes, Total: ${totalBytes} bytes, EOF: ${eof}`); 
             if (eof) break; 
         } 
         await client.send('IO.close', { handle: stream }); 
@@ -82,7 +80,8 @@ export async function download_pdf(url, fileName = null) {
             throw new Error("PDF content seems too small, might be corrupted."); 
         } 
 
-        console.log('PDF downloaded successfully'); 
+        // console.log('PDF downloaded successfully'); 
+        await page.close()
         return fileName; 
     } catch (e) { 
         console.error("Error during PDF processing:", e); 

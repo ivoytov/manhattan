@@ -17,7 +17,7 @@ function main()
 
 	# Combine the filtered rows with the randomly selected rows
 	rows = vcat(urgent_rows, sampled_rows)
-    process_data(rows, is_local ? 4 : 4, is_local)
+    process_data(rows, is_local ? 2 : 4, is_local)
 end
 
 # Define the FilingType as a constant dictionary
