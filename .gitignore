@@ -7,3 +7,4 @@ saledocs/judgement
 *.png
 eng.traineddata
 calendar_test.js
+scrapers/test.js
