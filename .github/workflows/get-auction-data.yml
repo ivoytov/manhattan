@@ -9,7 +9,7 @@ jobs:
 
   update_auctions:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -38,7 +38,7 @@ jobs:
           
     - name: Install julia dependencies
       run: |
-          sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils graphicsmagick -y
+          # sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils graphicsmagick -y
           julia --project=. -e 'using Pkg; Pkg.instantiate()'
           
     - name: Process auctions
@@ -46,7 +46,7 @@ jobs:
         BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
         julia --project=. scrapers/download_case_filings.jl
-        julia --project=. scrapers/extract_info.jl
+        # julia --project=. scrapers/extract_info.jl
         julia --project=. process_auctions.jl
 
     - name: Commit changes
