@@ -12,7 +12,7 @@ function main()
 	# Shuffle the remaining rows and select 15%
 	sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
 	
-	n = is_local ? nrow(sampled_rows) : min(15, ceil(Int, 0.15 * nrow(sampled_rows)))
+	n = is_local ? nrow(sampled_rows) : min(150, ceil(Int, 0.15 * nrow(sampled_rows)))
 	sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
 
 	# Combine the filtered rows with the randomly selected rows
