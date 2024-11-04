@@ -1,4 +1,4 @@
-using DataFrames, Dates, CSV, GLM, Statistics, GeoJSON, JSON3, HTTP
+using DataFrames, Dates, CSV, GLM, Statistics, GeoJSON, JSON3, HTTP, Printf
 
 
 # Function to read CSV file into DataFrame
@@ -23,8 +23,9 @@ end
 # Main function to calculate and export home price indices
 function main()
     sales = initialize_data()
-    auctions = read_csv("foreclosures/lots.csv")
-    
+    lot_path = "foreclosures/lots.csv"
+    auctions = read_csv(lot_path)
+    CSV.write(lot_path, transform(auctions, [:borough, :block, :lot] => ByRow(bbl) => :BBL))
 
     # Merge auctions and sales DataFrames
     dropmissing!(auctions, [:block, :lot])    
@@ -37,22 +38,22 @@ function main()
     filter!(row -> !ismissing(row."BUILDING CLASS CATEGORY") &&
         all(prefix -> !startswith(row."BUILDING CLASS CATEGORY", prefix), exclude_prefixes), merged_df)    
     CSV.write("foreclosures/auction_sales.csv", merged_df)
-
 end
 
 
 function condo_base_bbl_key(borough, block, lot)
+    lot < 1000 && throw(ArgumentError("Lot must be over 1000"))
     outfields = "CONDO_BASE_BBL_KEY"
     url = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer/4"
     # query = "Borough = 'MX' and Block = 459 and Lot = 1113"
-    query = "UNIT_BORO = '$(borough_id_dict[borough])' and UNIT_BLOCK=$block and UNIT_LOT=$lot"
-    @show query
+    query = "UNIT_BORO = '$(borough_id_dict[borough])' and UNIT_BLOCK=$(block) and UNIT_LOT=$(lot)"
     result = esri_query(url, outfields, query)
-    return result[1]["attributes"]["CONDO_BASE_BBL_KEY"]
+    isempty(result) && return missing
+    result[1]["attributes"]["CONDO_BASE_BBL_KEY"]
 end
 
-function esri_query(url, outfields, query)
-    params = Dict("f"=>"JSON", "outfields"=>outfields, "where"=>query)
+function esri_query(url, outfields, query; format="JSON")
+    params = Dict("f"=>format, "outfields"=>outfields, "where"=>query, "returnGeometry" => false)
     r = HTTP.request("POST", "$(url)/query",
                  ["Content-Type" => "application/x-www-form-urlencoded", "accept"=>"application/json"],
                  HTTP.URIs.escapeuri(params))
@@ -65,17 +66,28 @@ function condo_billing_bbl(condo_base_bbl_key)
     url = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer/3"
     # query = "Borough = 'MX' and Block = 459 and Lot = 1113"
     query = "CONDO_BASE_BBL_KEY = $condo_base_bbl_key"
-    result = esri_query(url, outfields, query) 
-    return result[1]["attributes"]["CONDO_BILLING_BBL"]
+    result = esri_query(url, outfields, query)
+    isempty(result) && return missing
+    return parse(Int,result[1]["attributes"]["CONDO_BILLING_BBL"])
 end
 
 function pluto(bbl)
-    outfields = "*"
+    outfields = ["Address", "Borough", "Block", "Lot", "ZipCode", "BldgClass", "LandUse", "BBL", "YearBuilt", "YearAlter1", "YearAlter2", "OwnerName", "LotArea", "BldgArea"]
     url = "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/ArcGIS/rest/services/MAPPLUTO/FeatureServer/0"
     query = "BBL = $bbl"
     result = esri_query(url, outfields, query) 
     return result[1]["attributes"]
 end
+
+function bbl(borough, block, lot)
+    if lot > 1000
+        key = condo_base_bbl_key(borough, block, lot)
+        !ismissing(key) && return condo_billing_bbl(key)
+    end 
+    
+    parse(Int, @sprintf("%s%05d%04d", borough_id_dict[borough], block, lot))
+end
+
 main()
 
 

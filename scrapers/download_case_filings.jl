@@ -12,7 +12,7 @@ function main()
 	# Shuffle the remaining rows and select 15%
 	sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
 	
-	n = is_local ? nrow(sampled_rows) : min(150, ceil(Int, 0.15 * nrow(sampled_rows)))
+	n = is_local ? nrow(sampled_rows) : min(15, ceil(Int, 0.15 * nrow(sampled_rows)))
 	sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
 
 	# Combine the filtered rows with the randomly selected rows
@@ -124,7 +124,18 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
 		running_tasks += 1
 	end
 
-	wait.(tasks)
+	# Wait on tasks and catch exceptions
+	for task in tasks
+		try
+			wait(task)
+		catch e
+			if isa(e, TaskFailedException)
+				println("Task failed with exception: ", e)
+			else
+				rethrow(e)  # Re-throw if it's not a TaskFailedException
+			end
+		end
+	end
 	running_tasks = 0
 	finished_tasks = length(tasks)  # i.e. nrow(rows)
 

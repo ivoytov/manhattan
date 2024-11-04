@@ -196,65 +196,6 @@ function boroughIdFromName(borough) {
     return Object.entries(borough_dict).find(([id, boro]) => boro === borough)[0]
 }
 
-function getCondoBillingLot(data) {
-    const { block, lot, borough } = data;
-    // boro is either 1,2,3,4,5 (1 == Manhattan)
-    const boro = boroughIdFromName(borough)
-
-    const serviceUrl = `https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer`;
-    const condoUrl = `${serviceUrl}/3`
-    const condoUnitUrl = `${serviceUrl}/4`
-
-    const condoUnitQuery = L.esri.query({ url: condoUnitUrl })
-
-    condoUnitQuery
-        .where(`UNIT_BORO = ${boro} and UNIT_BLOCK=${block} and UNIT_LOT=${lot}`)
-        .fields(['CONDO_BASE_BBL_KEY'])
-        .returnGeometry(false)
-        .limit(1)
-        .run((error, featureCollection, response) => {
-            if (error) {
-                console.error("Error during the condo unit query:", error)
-                return
-            }
-
-            if (!featureCollection.features.length) {
-                console.log("No data found for the input in CONDO_UNIT table", boro, block, lot)
-                data.billingLot = 7501
-                return
-            }
-
-            const condoBaseBblKey = featureCollection.features[0].properties.CONDO_BASE_BBL_KEY
-
-            const condoQuery = L.esri.query({ url: condoUrl })
-
-            condoQuery
-                .where(`CONDO_BASE_BBL_KEY = ${condoBaseBblKey}`)
-                .fields(['CONDO_BILLING_BBL'])
-                .returnGeometry(false)
-                .limit(1)
-                .run((error, featureCollection, response) => {
-                    if (error) {
-                        console.error("Error during the condo query:", error)
-                        return
-                    }
-
-                    if (!featureCollection.features.length) {
-                        console.log("No data found for the input in CONDO table", condoBaseBblKey, boro, block, lot)
-                        return
-                    }
-
-                    const condoBillingLotStr = featureCollection.features[0].properties.CONDO_BILLING_BBL
-                    const condoBillingLot = parseInt(condoBillingLotStr.slice(6, 10))
-                    data.billingLot = condoBillingLot
-                })
-
-
-        })
-}
-
-
-
 
 function onGridFilterChanged() {
     markerLayer.clearLayers()
@@ -268,8 +209,6 @@ function onGridFilterChanged() {
             return
         }
         const boroughCode = borough_code_dict[data.borough]
-        const lot = data.lot > 1000 ? (data.billingLot ?? 7501) : data.lot
-
 
         const onClickTableZoom = () => {
             // Highlight the row in AG Grid
@@ -284,7 +223,7 @@ function onGridFilterChanged() {
         }
         
         blockLotLayer.query()
-            .where(`Borough = '${boroughCode}' AND Block = ${data.block} AND Lot = ${lot}`)
+            .where(`BBL=${data.BBL}`)
             .run((error, featureCollection) => {
                 if (error) {
                     console.error("Couldn't find geometry for BBL", boroughCode, data.block, lot, error);
@@ -433,9 +372,6 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
         const auction = auctionMatches[0]
         lot.auction_date = auction.auction_date
         lot.case_name = auction.case_name
-        if (lot.lot > 1000) {
-            getCondoBillingLot(lot)
-        }
 
 
         const result = bids.find(({ case_number, auction_date }) => (case_number == lot.case_number) && (auction_date.getTime() == lot.auction_date.getTime()))
