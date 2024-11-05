@@ -1,4 +1,4 @@
-using DataFrames, Dates, CSV, GLM, Statistics, GeoJSON, JSON3, HTTP, Printf
+using DataFrames, Dates, CSV, GLM, Statistics, JSON3, HTTP, Printf
 
 
 # Function to read CSV file into DataFrame
@@ -25,7 +25,28 @@ function main()
     sales = initialize_data()
     lot_path = "foreclosures/lots.csv"
     auctions = read_csv(lot_path)
-    CSV.write(lot_path, transform(auctions, [:borough, :block, :lot] => ByRow(bbl) => :BBL))
+
+    updated_auctions = filter(:BBL => ismissing, auctions)
+    transform!(updated_auctions, [:borough, :block, :lot] => ByRow(bbl) => :BBL)
+    dropmissing!(auctions, :BBL; disallowmissing=false)
+    auctions = vcat(auctions, updated_auctions)
+    CSV.write(lot_path, auctions)
+
+    # update pluto file
+    pluto_path = "foreclosures/pluto.csv"
+    pluto_data = read_csv(pluto_path)
+    new_lots = antijoin(auctions, pluto_data, on=:BBL)
+    @show new_lots
+
+    # Iterate over each BBL in `auctions` and call the `pluto` function, storing the results in the DataFrame
+    for bbl in new_lots.BBL
+        attributes = pluto(bbl)
+        if attributes !== missing
+            push!(pluto_data, [attributes[col] for col in columns]; promote=true)
+        end
+    end
+    CSV.write(pluto_path, pluto_data)
+
 
     # Merge auctions and sales DataFrames
     dropmissing!(auctions, [:block, :lot])    
@@ -75,8 +96,16 @@ function pluto(bbl)
     outfields = ["Address", "Borough", "Block", "Lot", "ZipCode", "BldgClass", "LandUse", "BBL", "YearBuilt", "YearAlter1", "YearAlter2", "OwnerName", "LotArea", "BldgArea"]
     url = "https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/ArcGIS/rest/services/MAPPLUTO/FeatureServer/0"
     query = "BBL = $bbl"
-    result = esri_query(url, outfields, query) 
-    return result[1]["attributes"]
+    result = esri_query(url, outfields, query)
+    isempty(result) && return missing
+    attributes = result[1]["attributes"]
+    # Replace `nothing` with `missing` in the attributes
+    for key in keys(attributes)
+        if attributes[key] === nothing
+            attributes[key] = missing
+        end
+    end
+    return attributes
 end
 
 function bbl(borough, block, lot)
@@ -89,5 +118,6 @@ function bbl(borough, block, lot)
 end
 
 main()
+
 
 

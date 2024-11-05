@@ -47,7 +47,7 @@ jobs:
       run: |
         julia --project=. scrapers/download_case_filings.jl
         # julia --project=. scrapers/extract_info.jl
-        julia --project=. process_auctions.jl
+        # julia --project=. process_auctions.jl
 
     - name: Commit changes
       run: |
