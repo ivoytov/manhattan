@@ -44,8 +44,8 @@ function missing_filings(case_number, auction_date)
     # For auctions in the last 5 days, don't look for a surplus money form
     earliestDayForMoneyForm = today() - Day(5)
 
-    # For auctions more than 21 days in the future, don't look for a notice of sale
-    latestDayForNoticeOfSale = today() + Day(21)
+    # For auctions more than 35 days in the future, don't look for a notice of sale
+    latestDayForNoticeOfSale = today() + Day(35)
 
     if !isnothing(auction_date) && auction_date > earliestDayForMoneyForm
         # If auction date in the future, only get the notice of sale, otherwise get the surplus money form too

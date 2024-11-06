@@ -89,11 +89,8 @@ function prompt_for_winning_bid(cases, bids)
                 case_number=case_number, 
                 borough=foreclosure_case.borough, 
                 auction_date=foreclosure_case.auction_date,
-                judgement=missing,
-                upset_price=missing,
-                winning_bid=missing
             )
-            push!(bids, row; promote=true)
+            push!(bids, row; promote=true, cols=:subset)
         end 
 
         # modifying row from here on will alter the DataFrame
@@ -263,7 +260,7 @@ function get_block_and_lot()
             address=isnothing(values.address) ? missing : values.address
         )
         printstyled(@sprintf("%12s block %6d lot %5d address %s\n", row.case_number, row.block, row.lot, ismissing(row.address) ? "missing" : row.address), color=:light_green)
-        push!(lots, row)
+        push!(lots, row; cols=:subset)
     end
 
     # Convert updated rows back to CSV
