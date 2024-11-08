@@ -88,7 +88,7 @@ function applyFiltersFromURL(params = null) {
     gridApi.setFilterModel(filters);
 }
 
-const propertyInfoMapUrl = (borough, block, lot) => "https://propertyinformationportal.nyc.gov/parcels/unit/" + boroughIdFromName(borough) + block.toString().padStart(5, '0') + lot.toString().padStart(4, '0')
+const propertyInfoMapUrl = (borough, block, lot) => "https://propertyinformationportal.nyc.gov/parcels/" + (lot > 1000 ? "unit/" : "parcel/") + boroughIdFromName(borough) + block.toString().padStart(5, '0') + lot.toString().padStart(4, '0')
 
 // grid columns
 const columnDefs = [
