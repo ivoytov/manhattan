@@ -51,7 +51,7 @@ export async function download_filing(index_number, county, auction_date, missin
     await page.setRequestInterception(true);
 
     page.on('request', (req) => {
-        if (req.resourceType() == 'font' || req.resourceType() == 'image') {
+        if (req.resourceType() == 'stylesheet' || req.resourceType() == 'font' || req.resourceType() == 'image') {
             req.abort();
         } else {
             req.continue();
@@ -167,6 +167,7 @@ export async function download_filing(index_number, county, auction_date, missin
                 continue
             }
 
+            appendFile("foreclosures/download.log", `${dir}/${filename},${downloadUrl}`)
             download_pdf(downloadUrl, pdfPath);
             await Promise.all([
                 await page.locator("input[name='btnClear']").click(),
