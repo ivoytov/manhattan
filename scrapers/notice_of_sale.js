@@ -167,7 +167,12 @@ export async function download_filing(index_number, county, auction_date, missin
                 continue
             }
 
-            appendFile("foreclosures/download.log", `${dir}/${filename},${downloadUrl}`)
+            appendFile("foreclosures/download.log", `${dir}/${filename},${downloadUrl}`, (err) => {
+                if (err) {
+                    console.error('Failed to append to the file:', err);
+                }
+            })
+            
             download_pdf(downloadUrl, pdfPath);
             await Promise.all([
                 await page.locator("input[name='btnClear']").click(),
