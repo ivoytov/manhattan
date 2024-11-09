@@ -47,18 +47,28 @@ export async function download_filing(index_number, county, auction_date, missin
     });
 
     const page = await browser.newPage();
+    // const client = await page.createCDPSession();
+    await page.setRequestInterception(true);
+
+    page.on('request', (req) => {
+        if (req.resourceType() == 'font' || req.resourceType() == 'image') {
+            req.abort();
+        } else {
+            req.continue();
+        }
+    });
 
     await page.goto(url, { waitUntil: 'networkidle0', timeout: 2 * 60 * 1000 });
-    
+
     // await inspect(client);
 
     try {
         await page.locator('#txtCaseIdentifierNumber').fill(index_number);
-        await page.select('select#txtCounty', county_map[county]);    
-    }  catch (e) {
+        await page.select('select#txtCounty', county_map[county]);
+    } catch (e) {
         return { error: 'Failed to fill case number in search form' };
     }
-  
+
     await Promise.all([
         page.locator("button[name='btnSubmit']").click(),
         page.waitForNavigation({
@@ -85,11 +95,11 @@ export async function download_filing(index_number, county, auction_date, missin
             detectTimeout: 10 * 1000,
         });
         console.log(`Captcha status: ${status}`);
-        if (status === 'solve_failed'){
-            return { error: "captcha solve failed"}
+        if (status === 'solve_failed') {
+            return { error: "captcha solve failed" }
         }
     }
-    
+
 
     const availableFilings = await page.$$eval("select#selDocumentType > option", options => {
         return options.map(el => el.value)
@@ -103,7 +113,7 @@ export async function download_filing(index_number, county, auction_date, missin
                 console.log(`Case ${index_number} Motion to Discontinue detected`)
             }
         });
-        return { error: "case discontinued"}
+        return { error: "case discontinued" }
     }
 
     const filename = index_number.replace('/', '-') + ".pdf"
@@ -204,4 +214,3 @@ async function inspect(client) {
     console.log(`Scraping will continue in 10 seconds...`);
     await sleep(10);
 }
-

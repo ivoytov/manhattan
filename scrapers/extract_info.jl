@@ -117,8 +117,8 @@ function prompt_for_winning_bid(cases, bids)
         is_right_date = prompt("Is this form for the auction held on $(foreclosure_case.auction_date) (y/n)?", "n")
         if is_right_date == "n"
             # move the file to a new name
-            mv(pdf_path, pdf_path * ".old")
             run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
+            rm(pdf_path)
             continue
         elseif isnothing(is_right_date) 
             run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
