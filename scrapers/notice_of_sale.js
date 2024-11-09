@@ -167,7 +167,7 @@ export async function download_filing(index_number, county, auction_date, missin
                 continue
             }
 
-            appendFile("foreclosures/download.log", `${dir}/${filename},${downloadUrl}`, (err) => {
+            appendFile("foreclosures/download.csv", `${dir}/${filename},${downloadUrl}\n`, (err) => {
                 if (err) {
                     console.error('Failed to append to the file:', err);
                 }

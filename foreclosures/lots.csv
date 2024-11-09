@@ -1123,7 +1123,6 @@ case_number,borough,block,lot,address,BBL
 104217/2007,Staten Island,506,26,"57 CLINTON STREET, STATEN ISLAND, NY 10304",5005060026
 21140/2016E,Bronx,2692,34,"870 Home Street, Bronx, NY 10459",2026920034
 35422/2015E,Bronx,4492,39,"2572 Tiemann Avenue #2, Bronx, New York 10469",2044920039
-135033/2014,Staten Island,2401,1302,,
 132178/2009,Staten Island,1651,1061,"54 Farragut Avenue, Unit 61, Staten Island, NY 10303",5016517501
 153737/2022,Manhattan,594,1206,"491-497 Greenwich Street, Unit 2C, New York",1005947504
 35378/2015E,Bronx,4059,22,"1551 Radcliff Avenue, Bronx, NY 10462",2040590022
@@ -1135,3 +1134,43 @@ case_number,borough,block,lot,address,BBL
 917/2008,Brooklyn,3776,261,"754 Sutter Ave, Brooklyn, NY 11207",3037760261
 28888/2009,Brooklyn,8144,55,"980 E 95th Street, Brooklyn, NY 11236",3081440055
 28917/2008,Brooklyn,409,43,"111 Douglass Street, Brooklyn, NY 11231",3004090043
+135033/2014,Staten Island,2401,1302,,
+150976/2016,Staten Island,1076,1,"78 Faber Street f/k/a 71 Grove Street, Staten Island, NY 10302",5010760001
+32614/2017E,Bronx,5499,1003,"236 Meagher Avenue, Unit #3, Bronx, NY 10465",2054997501
+812426/2022E,Bronx,3142,28,"2070 Valentine Avenue, Bronx, New York 10457",2031420028
+4702/2009,Brooklyn,1792,38,"822 Lafayette Avenue, Brooklyn, NY 11221",3017920038
+13191/2013,Brooklyn,4793,1102,"523 Brooklyn Avenue 1B, Brooklyn, County of Kings, City and State of New York 11225",3047937502
+504398/2013,Brooklyn,8702,99,"8A Brighton 10 Court, Brooklyn, NY 11235",3087020099
+16648/2014,Brooklyn,4793,1102,"523 Brooklyn Avenue 1B, Brooklyn, County of Kings, City and State of New York 11225",3047937502
+503362/2014,Brooklyn,3602,5,"181 Newport Street, Brooklyn, NY 11212",3036020005
+506939/2015,Brooklyn,1795,24,"40 VAN BUREN STREET, BROOKLYN, NY 11221",3017950024
+510282/2014,Brooklyn,3602,5,"181 Newport Street, Brooklyn, NY 11212",3036020005
+511142/2014,Brooklyn,4715,20,"567 East 94th Street, Brooklyn, NY 11236",3047150020
+511903/2014,Brooklyn,1573,27,"2 Jardine Place, Brooklyn, NY 11233",3015730027
+512067/2014,Brooklyn,4977,28,"1314 Troy Avenue, Brooklyn, NY 11203",3049770028
+512257/2014,Brooklyn,1573,27,"2 Jardine Place, Brooklyn, NY 11233",3015730027
+506053/2016,Brooklyn,1497,60,"HEIRS, DEVISEES, DISTRIBUTEE OR SUCCESSORS IN INTEREST OF THE LATE REGGIE SIMPKINS, ETC., ET AL,  Defendants.  PLEASE TAKE NOTICE THAT  In pursuance of a Judgment of Foreclosure and Sale entered in the Office of the County Clerk of Kings County on September 12, 2019, and the Nunc Pro Tunc Order Amending the Judgment of Foreclosure and Sale duly entered in the Office of the Kings County Clerk on August 22, 2022 I, Philip Kamaras, Esq., the Referee named in said Judgment, will sell in one parcel at public auction on November 14, 2024 at Room 224 of the Kings County Supreme Court Supreme Court, 360 Adams Street, Brooklyn, NY",3014970060
+512016/2015,Brooklyn,6997,106,"1413 Neptune Avenue, Brooklyn, New York 11224",3069970106
+512146/2015,Brooklyn,6997,105,"1411 Neptune Avenue, Brooklyn, NY 11224",3069970105
+512158/2015,Brooklyn,6997,106,"1413 Neptune Avenue, Brooklyn, New York 11224",3069970106
+516400/2016,Brooklyn,7899,7,"5407 Avenue O, Brooklyn, (City of New York",3078990007
+501001/2017,Brooklyn,7135,67,"2129 East 8th Street, Brooklyn, NY 11223",3071350067
+509178/2018,Brooklyn,1986,43,"93 Monroe Street, Brooklyn, NY 11216",3019860043
+501912/2019,Brooklyn,1617,74,"937 A Greene Avenue, Brooklyn, NY 11221",3016170074
+511966/2019,Brooklyn,4518,102,"1434 Loring Avenue, Brooklyn, NY 11208",3045180102
+525891/2019,Brooklyn,4079,55,"903 Livonia Avenue, Brooklyn, NY 11207",3040790055
+519508/2021,Brooklyn,1941,11,"275 Franklin Avenue, Brooklyn, NY",3019410011
+521841/2020,Brooklyn,4079,55,"903 Livonia Avenue, Brooklyn, NY 11207",3040790055
+522105/2020,Brooklyn,1612,48,"22 Patchen Avenue, Brooklyn, New York 11221",3016120048
+525643/2019,Brooklyn,1664,39,"460 Halsey Street, Brooklyn, NY 11233",3016640039
+510591/2022,Brooklyn,1714,108,"13 Columbus Place, Brooklyn, NY 11233",3017140108
+516609/2022,Brooklyn,1664,39,"460 Halsey Street, Brooklyn, NY 11233",3016640039
+508905/2023,Brooklyn,3226,18,"556 Hart Street, Brooklyn, NY 11221",3032260018
+523058/2023,Brooklyn,3396,2,"583 EVERGREEN AVENUE, BROOKLYN, NEW YORK 11221",3033960002
+523873/2023,Brooklyn,45,1012,"346 7* Avenue, Brooklyn, NY.",3000457501
+524248/2022,Brooklyn,1342,18,"1698 Pacific Street, Brooklyn, NY 11213",3013420018
+524250/2022,Brooklyn,2912,30,"889 Metropolitan Avenue, Brooklyn, New York 11211",3029120030
+533939/2022,Brooklyn,5627,3,"1115 48 Street, Brooklyn, NY 11219",3056270003
+537750/2022,Brooklyn,1342,18,"1698 Pacific Street, Brooklyn, NY 11213",3013420018
+130670/2011,Staten Island,17,106,"106 Montgomery Ave., Staten Island, (Town of Castleton) NY 10301",5000170106
+518728/2020,Brooklyn,2168,1006,"20 Juliana Place, Unit 121, Brooklyn, New York",

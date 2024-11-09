@@ -4,15 +4,17 @@ rng = MersenneTwister(42)
 
 # Get filings. If WSS is set then we are running locally, otherwise on git.
 function main()
+	download_pdf_links()
+
     rows = get_data()
 	is_local = haskey(ENV, "WSS")
 	# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
 	urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
 
-	# Shuffle the remaining rows and select 15%
+	# Shuffle the remaining rows and select 100 at random
 	sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
 	
-	n = is_local ? nrow(sampled_rows) : min(150, ceil(Int, 0.15 * nrow(sampled_rows)))
+	n = is_local ? nrow(sampled_rows) : 100
 	sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
 
 	# Combine the filtered rows with the randomly selected rows
@@ -27,6 +29,18 @@ const FilingType = Dict(
 )
 
 get_filename(case_number) = replace(case_number, "/" => "-") * ".pdf"
+
+
+function download_pdf_links()
+	download_path = "foreclosures/download.csv"
+    rows = CSV.read(download_path, DataFrame)
+	filter!(:filename => filename -> !isfile(joinpath("saledocs", filename)), rows)
+	CSV.write(download_path, rows)
+
+	for row in eachrow(rows)
+		run(pipeline(`node scrapers/download_pdf.js $(row.url)`, stdout, stderr), wait=true)				
+	end
+end
 
 # Function to find missing filings
 function missing_filings(case_number, auction_date)
