@@ -32,15 +32,15 @@ jobs:
           
     - name: Install julia dependencies
       run: |
-          julia --project=. -e 'using Pkg; Pkg.instantiate()'
+          julia -e 'using Pkg; Pkg.add("DataFrames")'
+          julia -e 'using Pkg; Pkg.add("CSV")'
+          julia -e 'using Pkg; Pkg.add("ProgressMeter")'
           
     - name: Process auctions
       env:
         BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
       run: |
-        julia --project=. scrapers/download_case_filings.jl
-        # julia --project=. scrapers/extract_info.jl
-        # julia --project=. process_auctions.jl
+        julia scrapers/download_case_filings.jl
 
     - name: Commit changes
       run: |
