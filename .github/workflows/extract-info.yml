@@ -33,12 +33,9 @@ jobs:
         julia --project=. process_auctions.jl
 
     - name: Commit changes
-      run: |
-        git config --global user.name github-actions
-        git config --global user.email github-actions@github.com
-        git add .
-        git commit -m "Latest auction extracted data" || echo "No changes to commit"
-        git push
+      uses: ./.github/workflows/commit_changes.yml
+      with:
+        message: "Latest auction info" 
 
   push-static-pages:
     needs: update_auctions
