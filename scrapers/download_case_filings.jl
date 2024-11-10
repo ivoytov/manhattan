@@ -9,7 +9,7 @@ function main()
 	is_local = haskey(ENV, "WSS")
 	# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
 	urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
-	urgent_row_count = nrows(urgent_rows)
+	urgent_row_count = nrow(urgent_rows)
 
 	# Shuffle the remaining rows and select N at random
 	sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
@@ -24,8 +24,8 @@ function main()
 	end
 
 	# Combine the filtered rows with the randomly selected rows
-	rows = vcat(urgent_rows[1:max(nrow(urgent_rows), )], sampled_rows)
-	println("Task list: $(nrow(urgent_rows)) urgent cases, $(nrow(sampled_rows)) sampled rows")
+	rows = vcat(urgent_rows, sampled_rows)
+	println("Task list: $(nrow(urgent_rows)) urgent cases, $(nrow(sampled_rows)) sampled rows, $(nrow(rows)) total tasks")
     process_data(rows, is_local ? 2 : 4, is_local)
 end
 
