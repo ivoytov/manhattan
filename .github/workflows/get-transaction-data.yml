@@ -45,8 +45,10 @@ jobs:
       run: |
         git config --global user.name github-actions
         git config --global user.email github-actions@github.com
+        git stash --include-untracked
         git fetch origin
         git rebase origin/master
+        git stash pop || echo "No changes to apply from stash"
         git add .
         git commit -m "Latest transaction data"  || echo "No changes to commit"
         git push --force-with-lease
