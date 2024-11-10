@@ -2,7 +2,7 @@ name: Daily Auction Update
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 10 * * *'
   workflow_dispatch:
 
 jobs:
@@ -25,12 +25,6 @@ jobs:
       run: |
         npm install
         
-    - name: Download new data and update CSVs
-      env:
-        BRIGHTDATA_AUTH: ${{ secrets.BRIGHTDATA_AUTH }}
-      run: |
-        node scrapers/calendar.js
-
     - name: Set up Julia
       uses: julia-actions/setup-julia@v1
       with:
@@ -38,7 +32,6 @@ jobs:
           
     - name: Install julia dependencies
       run: |
-          # sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils graphicsmagick -y
           julia --project=. -e 'using Pkg; Pkg.instantiate()'
           
     - name: Process auctions

@@ -1,0 +1,46 @@
+name: Daily Auction Update
+
+on:
+  schedule:
+    - cron: '0 15 * * *'
+  workflow_dispatch:
+
+jobs:
+
+  update_auctions:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2 
+        
+        
+    - name: Set up Julia
+      uses: julia-actions/setup-julia@v1
+      with:
+          version: '1.10'
+          
+    - name: Install julia dependencies
+      run: |
+          sudo apt-get install tesseract-ocr libtesseract-dev poppler-utils graphicsmagick -y
+          julia --project=. -e 'using Pkg; Pkg.instantiate()'
+          
+    - name: Process auctions
+      run: |
+        julia --project=. scrapers/extract_info.jl
+        julia --project=. process_auctions.jl
+
+    - name: Commit changes
+      run: |
+        git config --global user.name github-actions
+        git config --global user.email github-actions@github.com
+        git add .
+        git commit -m "Latest auction schedule" || echo "No changes to commit"
+        git push
+
+  push-static-pages:
+    needs: update_auctions
+    uses: ./.github/workflows/static.yml
+        
