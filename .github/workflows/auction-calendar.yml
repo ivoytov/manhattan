@@ -35,8 +35,4 @@ jobs:
       uses: ./.github/workflows/commit_changes.yml
       with:
         message: "Latest auction schedule" 
-
-  push-static-pages:
-    needs: update_auctions
-    uses: ./.github/workflows/static.yml
         

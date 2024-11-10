@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  get_filings:
+  get-filings:
 
     runs-on: ubuntu-latest
 
@@ -48,6 +48,6 @@ jobs:
         message: "Latest auction filings" 
 
   push-static-pages:
-    needs: update_auctions
+    needs: get-filings
     uses: ./.github/workflows/static.yml
         

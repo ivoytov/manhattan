@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  extract_info:
+  extract-info:
 
     runs-on: ubuntu-latest
 
@@ -38,6 +38,6 @@ jobs:
         message: "Latest auction info" 
 
   push-static-pages:
-    needs: update_auctions
+    needs: extract-info
     uses: ./.github/workflows/static.yml
         
