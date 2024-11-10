@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  update_auctions:
+  extract_info:
 
     runs-on: ubuntu-latest
 

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update_auctions:
+  get_filings:
 
     runs-on: ubuntu-latest
 
