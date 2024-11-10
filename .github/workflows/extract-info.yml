@@ -37,7 +37,7 @@ jobs:
         git config --global user.name github-actions
         git config --global user.email github-actions@github.com
         git add .
-        git commit -m "Latest auction schedule" || echo "No changes to commit"
+        git commit -m "Latest auction extracted data" || echo "No changes to commit"
         git push
 
   push-static-pages:

@@ -90,6 +90,6 @@ export async function download_pdf(url, fileName = null) {
 if (import.meta.url === `file://${process.argv[1]}`) {
     download_pdf(process.argv[2]).catch(err => {
         console.error(err.stack || err);
-        process.exit(1);
+        process.exit();
     });
 }

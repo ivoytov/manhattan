@@ -23,7 +23,7 @@ end
 function extract_address(text)
     patterns = [
         r"(?:premises known(?:\sas)?|(?:building|property) located at)\s((.+?)(?:,?\s+(N\.?Y\.?|New\s?York(?! Avenue)))(\s+\d{5})?)"i,
-        r"(?:building located at|property located at|(?<!formerly )known(?:\sas)?|described as follows:?(?!\s*See|\s*beginning|\s*All that)|(?:prem\.|premises)\s*k\/a|lying and being at|street address of)\s((.+?)(?:,?\s+(N\.?Y\.?|New\s?York(?! Avenue)))(\s+\d{5})?)"i,
+        r"(?:building located at|property located at|(?<!formerly )\bknown(?:\sas)?|described as follows:?(?!\s*See|\s*beginning|\s*All that)|(?:prem\.|premises)\s*k\/a|lying and being at|street address of)\s((.+?)(?:,?\s+(N\.?Y\.?|New\s?York(?! Avenue)))(\s+\d{5})?)"i,
     ]
     return extract_pattern(text, patterns)
 end
