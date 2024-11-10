@@ -36,7 +36,6 @@ function main()
     pluto_path = "foreclosures/pluto.csv"
     pluto_data = read_csv(pluto_path)
     new_lots = antijoin(dropmissing(auctions, :BBL), pluto_data, on=:BBL)
-    @show new_lots
 
     # Iterate over each BBL in `auctions` and call the `pluto` function, storing the results in the DataFrame
     columns = ["Address", "Borough", "Block", "Lot", "ZipCode", "BldgClass", "LandUse", "BBL", "YearBuilt", "YearAlter1", "YearAlter2", "OwnerName", "LotArea", "BldgArea"]

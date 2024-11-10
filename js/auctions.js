@@ -50,18 +50,18 @@ function updateURLWithFilters(filters) {
 // Create a custom control for the button
 const clearTableFilter = L.Control.extend({
     options: {
-      position: 'bottomright'
+        position: 'bottomright'
     },
     onAdd: function (map) {
-      const container = L.DomUtil.create('button');
-      container.innerHTML = 'Clear Filters';
-      container.onclick = function () {
-        // Update the URL in the address bar to remove all filters
-        applyFiltersFromURL()
-      }
-      return container;
+        const container = L.DomUtil.create('button');
+        container.innerHTML = 'Clear Filters';
+        container.onclick = function () {
+            // Update the URL in the address bar to remove all filters
+            applyFiltersFromURL()
+        }
+        return container;
     }
-  });
+});
 
 
 function applyFiltersFromURL(params = null) {
@@ -90,6 +90,20 @@ function applyFiltersFromURL(params = null) {
 
 const propertyInfoMapUrl = (borough, block, lot) => "https://propertyinformationportal.nyc.gov/parcels/" + (lot > 1000 ? "unit/" : "parcel/") + boroughIdFromName(borough) + block.toString().padStart(5, '0') + lot.toString().padStart(4, '0')
 
+const landUseMap = [
+    "One & Two Family Buildings",
+    "Multi-Family Walk-Up Buildings",
+    "Multi-Family Elevator Buildings",
+    "Mixed Residential & Commercial Buildings",
+    "Commercial & Office Buildings",
+    "Industrial & Manufacturing",
+    "Transportation & Utility",
+    "Public Facilities & Institutions",
+    "Open Space & Outdoor Recreation",
+    "Parking Facilities",
+    "Vacant Land",
+]
+
 // grid columns
 const columnDefs = [
     {
@@ -98,6 +112,13 @@ const columnDefs = [
         cellDataType: 'boolean',
         filter: 'agSetColumnFilter',
         maxWidth: 75,
+    },
+    {
+        headerName: "Class",
+        field: "LandUse",
+        valueGetter: ({data}) => data.LandUse > 0 ? landUseMap[data.LandUse - 1] : "N/A",
+        filter: 'agSetColumnFilter',
+        maxWidth: 150,
     },
     {
         field: "borough",
@@ -128,7 +149,7 @@ const columnDefs = [
         sortIndex: 0,
     },
     {
-        headerName: "BBL", 
+        headerName: "BBL",
         type: "rightAligned",
         valueGetter: p => `${p.data.block}-${p.data.lot}`,
         cellRenderer: (p) => `<a href="${propertyInfoMapUrl(p.data.borough, p.data.block, p.data.lot)}" target="_blank">` + p.value + `</a>`,
@@ -221,20 +242,23 @@ function onGridFilterChanged() {
                 }
             });
         }
-        
+
+        if (BBL === null) {
+            return
+        }
         blockLotLayer.query()
             .where(`BBL=${data.BBL}`)
             .run((error, featureCollection) => {
                 if (error) {
-                    console.error("Couldn't find geometry for BBL", boroughCode, data.block, lot, error);
+                    console.error("Couldn't find geometry for BBL", boroughCode, data.BBL, error);
                     return;
                 }
 
                 if (featureCollection.features.length == 0) {
-                    console.warn("failed to return any results", boroughCode, data.block, lot)
+                    console.warn("failed to return any results", boroughCode, data.BBL)
                     return;
                 }
-        
+
                 const layer = L.geoJSON(featureCollection, {
                     onEachFeature: function (feature, layer) {
                         layer.on('click', onClickTableZoom)
@@ -251,7 +275,7 @@ function onGridFilterChanged() {
                     markers[key] = []
                 }
                 markers[key].push(layer);
-                
+
             });
     });
 }
@@ -263,7 +287,7 @@ const gridOptions = {
     masterDetail: true,
     isRowMaster: (dataItem) => dataItem ? getTransactions(dataItem).length : false,
     detailRowAutoHeight: true,
-    rowSelection: { 
+    rowSelection: {
         mode: 'singleRow',
         checkboxes: false,
         enableClickSelection: true,
@@ -355,11 +379,12 @@ const csvPromises = [
     loadCSV('foreclosures/auction_sales.csv', 'SALE DATE'),
     loadCSV('foreclosures/cases.csv', dateKey = 'auction_date'),
     loadCSV('foreclosures/lots.csv', dateKey = null),
-    loadCSV('foreclosures/bids.csv', dateKey = 'auction_date')
+    loadCSV('foreclosures/bids.csv', dateKey = 'auction_date'),
+    loadCSV('foreclosures/pluto.csv', dateKey = null),
 ]
 
 // Use Promise.all to wait for all promises to resolve
-Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
+Promise.all(csvPromises).then(([sales, auctions, lots, bids, pluto]) => {
     combinedData = sales
     // get the address from transaction records
     for (const lot of lots) {
@@ -372,6 +397,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
         const auction = auctionMatches[0]
         lot.auction_date = auction.auction_date
         lot.case_name = auction.case_name
+
 
 
         const result = bids.find(({ case_number, auction_date }) => (case_number == lot.case_number) && (auction_date.getTime() == lot.auction_date.getTime()))
@@ -394,6 +420,16 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids]) => {
             }) : false
         } else {
             lot.isSold = false
+        }
+
+        const plutoMatch = pluto.find(({ BBL }) => BBL == lot.BBL)
+        if (plutoMatch) {
+            if (!lot.address) {
+                lot.address = plutoMatch.Address
+            }
+            //Address,Borough,Block,Lot,ZipCode,BldgClass,LandUse,BBL,YearBuilt,YearAlter1,YearAlter2,OwnerName,LotArea,BldgArea
+            
+            lot.LandUse = plutoMatch.LandUse
         }
     }
 

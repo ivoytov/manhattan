@@ -1,5 +1,4 @@
 using CSV, DataFrames, ProgressMeter, Base.Threads, Dates, Random
-rng = MersenneTwister(42)
 
 
 # Get filings. If WSS is set then we are running locally, otherwise on git.
@@ -14,11 +13,12 @@ function main()
 	# Shuffle the remaining rows and select 100 at random
 	sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
 	
-	n = is_local ? nrow(sampled_rows) : 100
+	n = is_local ? nrow(sampled_rows) : 100 - max(nrow(urgent_rows),10)
 	sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
 
 	# Combine the filtered rows with the randomly selected rows
 	rows = vcat(urgent_rows, sampled_rows)
+	println("Task list: $(nrow(urgent_rows)) urgent cases, $(nrow(sampled_rows)) sampled rows")
     process_data(rows, is_local ? 2 : 4, is_local)
 end
 
@@ -110,9 +110,11 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
 		out_stream = stdout
 	end
 
-	for row in eachrow(rows)
+	total = nrow(rows)
+	for (idx, row) in enumerate(eachrow(rows))
 		show_progress_bar && next!(pb; showvalues = [("Case #", row.case_number), ("date: ", row.auction_date), ("# active tasks", running_tasks), ("# failed", failed_jobs), ("# finished", finished_tasks)])
-        
+        !show_progress_bar && println("$idx/$total === $(row.case_number) $(row.borough) ===")
+
 		task = Task() do 
 			let row = row
                 args = [row.case_number, row.borough, row.auction_date, row.missing_filings...]
