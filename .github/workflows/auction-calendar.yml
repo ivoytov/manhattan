@@ -32,7 +32,13 @@ jobs:
         node scrapers/calendar.js
 
     - name: Commit changes
-      uses: ./.github/workflows/commit-changes.yml
-      with:
-        message: "Latest auction schedule" 
+      run: |
+        git config --global user.name github-actions
+        git config --global user.email github-actions@github.com
+        git fetch origin
+        git rebase origin/master
+        git add .
+        git commit -m "Latest calendar "  || echo "No changes to commit"
+        git push --force-with-lease
+          
         

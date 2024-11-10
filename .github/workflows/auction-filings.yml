@@ -42,10 +42,15 @@ jobs:
         julia scrapers/download_case_filings.jl
 
     - name: Commit changes
-      if: always()
-      uses: ./.github/workflows/commit-changes.yml
-      with:
-        message: "Latest auction filings" 
+      run: |
+        git config --global user.name github-actions
+        git config --global user.email github-actions@github.com
+        git fetch origin
+        git rebase origin/master
+        git add .
+        git commit -m "Latest auction filings"  || echo "No changes to commit"
+        git push --force-with-lease
+           
 
   push-static-pages:
     needs: get-filings

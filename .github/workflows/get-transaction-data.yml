@@ -42,10 +42,15 @@ jobs:
         fi
 
     - name: Commit changes
-      uses: ./.github/workflows/commit-changes.yml
-      with:
-        message: "Latest transaction info" 
-
+      run: |
+        git config --global user.name github-actions
+        git config --global user.email github-actions@github.com
+        git fetch origin
+        git rebase origin/master
+        git add .
+        git commit -m "Latest transaction data"  || echo "No changes to commit"
+        git push --force-with-lease
+           
   push-static-pages:
     needs: update-sales
     uses: ./.github/workflows/static.yml

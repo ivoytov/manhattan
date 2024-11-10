@@ -9,15 +9,22 @@ function main()
 	is_local = haskey(ENV, "WSS")
 	# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
 	urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
+	urgent_row_count = nrows(urgent_rows)
 
-	# Shuffle the remaining rows and select 100 at random
+	# Shuffle the remaining rows and select N at random
 	sampled_rows = rows[.!in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
-	
-	n = is_local ? nrow(sampled_rows) : 10 - max(nrow(urgent_rows),10)
-	sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
+	sampled_row_count = nrow(sampled_rows)
+	println("Repo state: $urgent_row_count urgent cases, $sampled_row_count sampled rows outstanding")
+
+	if !is_local
+		max_docs = 10
+		urgent_rows = urgent_rows[1:min(nrow(urgent_rows), max_docs), :]
+		n = min(max_docs - nrow(urgent_rows), nrow(sampled_rows))
+		sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
+	end
 
 	# Combine the filtered rows with the randomly selected rows
-	rows = vcat(urgent_rows, sampled_rows)
+	rows = vcat(urgent_rows[1:max(nrow(urgent_rows), )], sampled_rows)
 	println("Task list: $(nrow(urgent_rows)) urgent cases, $(nrow(sampled_rows)) sampled rows")
     process_data(rows, is_local ? 2 : 4, is_local)
 end

@@ -32,10 +32,17 @@ jobs:
         julia --project=. scrapers/extract_info.jl
         julia --project=. process_auctions.jl
 
+        
     - name: Commit changes
-      uses: ./.github/workflows/commit-changes.yml
-      with:
-        message: "Latest auction info" 
+      run: |
+        git config --global user.name github-actions
+        git config --global user.email github-actions@github.com
+        git fetch origin
+        git rebase origin/master
+        git add .
+        git commit -m "Latest auction info"  || echo "No changes to commit"
+        git push --force-with-lease
+
 
   push-static-pages:
     needs: extract-info
