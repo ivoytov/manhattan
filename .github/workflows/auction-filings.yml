@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   update_auctions:
 
     runs-on: ubuntu-latest
@@ -43,6 +42,7 @@ jobs:
         julia scrapers/download_case_filings.jl
 
     - name: Commit changes
+      if: always()
       run: |
         git config --global user.name github-actions
         git config --global user.email github-actions@github.com
