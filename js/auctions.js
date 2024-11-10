@@ -243,7 +243,7 @@ function onGridFilterChanged() {
             });
         }
 
-        if (BBL === null) {
+        if (data.BBL === null) {
             return
         }
         blockLotLayer.query()
