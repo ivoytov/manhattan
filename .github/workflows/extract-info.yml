@@ -1,4 +1,4 @@
-name: Daily Auction Update
+name: Extract Info From Filings
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-name: Daily Auction Update
+name: Download New Filings
 
 on:
   schedule:

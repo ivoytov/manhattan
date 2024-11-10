@@ -1,4 +1,4 @@
-name: Daily Auction Update
+name: Auction Calendar
 
 on:
   schedule:
