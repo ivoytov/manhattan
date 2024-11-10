@@ -32,7 +32,7 @@ jobs:
         node scrapers/calendar.js
 
     - name: Commit changes
-      uses: ./.github/workflows/commit_changes.yml
+      uses: ./.github/workflows/commit-changes.yml
       with:
         message: "Latest auction schedule" 
         
