@@ -130,7 +130,7 @@ const columnDefs = [
         field: "Address",
         valueGetter: ({data}) => data.unit ? `${data.Address}, Unit ${data.unit}` : data.Address,
         cellRenderer: 'agGroupCellRenderer',
-        minWidth: 400,
+        minWidth: 300,
     },
     {
         headerName: "Case #",
@@ -431,9 +431,6 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids, pluto]) => {
         const transactions = getTransactions(lot)
 
         if (transactions.length > 0) {
-            if (!lot.address) {
-                lot.address = transactions[transactions.length - 1]["ADDRESS"]
-            }
             lot.isSold = new Date() > lot.auction_date ? transactions.some(t => {
                 const millisecondsInADay = 24 * 60 * 60 * 1000;
                 const dayDifference = (t["SALE DATE"] - lot.auction_date) / millisecondsInADay

@@ -1040,7 +1040,6 @@ case_number,borough,block,lot,address,BBL,unit
 850089/2022,Manhattan,1517,1101,,1015177502,COM-1
 31424/2020E,Bronx,3943,3297,,2039437501,3E
 809940/2021E,Bronx,3944,4333,,2039447501,10B
-706232/2018,Queens,14243,1115,,4142431115,
 714341/2023,Queens,3081,1017,,4030817501,6C
 719526/2022,Queens,1542,1140,"82-25 Queens Boulevard, PS7, Elmhurst, NY 11373",4015427502,PS7
 714924/2021,Queens,11425,1038,,4114257501,1H-1
@@ -1075,8 +1074,6 @@ case_number,borough,block,lot,address,BBL,unit
 524477/2017,Brooklyn,8343,1105,"1123 East 73rd Street, Unit 68, Brooklyn, NY 11234",3083437501,68
 508839/2019,Brooklyn,8060,1145,,3080607501,101
 528952/2022,Brooklyn,8493,1005,,3084937501,P2
-130256/2010,Staten Island,1495,1125,,5014957502,
-103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
 135285/2022,Staten Island,3019,1036,"95D Narrows Road North a/k/a 8D-95D Narrows Road North, Staten Island, NY 10305",5030197501,8D
 850370/2014,Manhattan,1223,1226,,1012237503,25C
 810049/2012,Manhattan,25,1503,,1000257501,19D
@@ -1099,7 +1096,6 @@ case_number,borough,block,lot,address,BBL,unit
 159358/2022,Manhattan,1310,1382,"140 East 56th Street, Unit 8E, New York, NY 10022",1013107502,8E
 850220/2023,Manhattan,525,1720,"184 Thompson Street, #5V, New York, NY 10012",1005257506,5V
 512614/2021,Brooklyn,1201,1029,"1311 Pacific Street, #603",3012017501,603
-532617/2022,Brooklyn,5390,1001,"608 East 7 Street, Parking Space P1, Brooklyn, NY",3053907501,
 850377/2015,Manhattan,1047,1096,"340 WEST 57TH STREET, UNIT 9-E, NEW YORK, NY 10019",1010477501,9E
 150524/2017,Manhattan,16,6070,"21 South EndAvenue, New York, New York 10280",1000167509,432
 850207/2021,Manhattan,1260,1001,"24 West 45th Street, Unit C-1, New York, New York",1012607501,C-1
@@ -1123,13 +1119,11 @@ case_number,borough,block,lot,address,BBL,unit
 850158/2021,Brooklyn,2111,1001,"The Retail Unit at One Hanson Place, Brooklyn, New York, 11243.",3021117501,RETL
 850170/2021,Manhattan,563,1012,"44 East 12th Street, Unit 5A, New York, NY 10003",1005637501,5A
 22175/2018E,Bronx,3432,1016,"203 Admiral Lane, Unit 02-203D, Bronx, NY 10473",2034327501,2203D
-135457/2023,Staten Island,1644,1026,"1260 RICHMOND AVENUE, UNIT 114, STATEN ISLAND, NY 10314",5016447501,
 12015/2008,Brooklyn,1131,1035,,3011317501,B3H
 17410/2009,Brooklyn,4814,1002,"644 New York Avenue, Unit 2, Brooklyn, NY 11203",3048147502,2
 500853/2023,Brooklyn,8331,1037,"9526 SCHENCK STREET, PS 10, BROOKLYN, NY",3083317501,10
 528954/2022,Brooklyn,8661,1026,"k/a 384 Neptune Avenue, Unit SR1, Brooklyn, NY 11235",3086617501,sr1
 707933/2022,Queens,1542,1103,"82-25 QUEENS BLVD., UNIT 1C, ELMHURST, NEW YORK",4015427502,1C
-135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
 157609/2022,Manhattan,459,1113,"52 EAST 4TH STREET, #PH2, NEW YORK",1004597502,PH2
 850429/2023,Manhattan,1721,1002,"3-5 West 122nd Street, Units 1B, New York",1017217501,1B
 850429/2023,Manhattan,1721,1007,"3-5 West 122nd Street, Units 2C, New York",1017217501,2C
@@ -1141,7 +1135,6 @@ case_number,borough,block,lot,address,BBL,unit
 15642/2013,Brooklyn,6557,1106,"6214 24TH AVENUE #2E, BROOKLYN, NY 11204",3065577502,2E
 15642/2013,Brooklyn,6557,1128,"6214 24TH AVENUE #2E, BROOKLYN, NY 11204",3065577502,PS3
 503735/2016,Brooklyn,2188,1202,"191 Rodney Street Apartment 2, Brooklyn, NY 11211",3021887503,2
-513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
 525866/2020,Brooklyn,850,1015,"720 57th Street, Unit 4C, Brooklyn, NY 11220",3008507502,4C
 513859/2022,Brooklyn,7122,1011,"354 VAN SICKLEN STREET, UNIT 3A, BROOKLYN, NY 11223",3071227501,3A
 152950/2022,Manhattan,1711,1203,"435 EAST 117TH STREET, UNIT NO. 3, NEW YORK",1017117501,3
@@ -1152,17 +1145,14 @@ case_number,borough,block,lot,address,BBL,unit
 850284/2017,Manhattan,1370,1005,"40 Sutton Place, Units 2D, 2E, and 2F, New York",1013707501,2D
 850284/2017,Manhattan,1370,1006,"40 Sutton Place, Units 2D, 2E, and 2F, New York",1013707501,2E
 850284/2017,Manhattan,1370,1007,"40 Sutton Place, Units 2D, 2E, and 2F, New York",1013707501,2F
-521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
 158610/2022,Manhattan,1042,1470,"310 West 52""! Street, Storage Unit 155, New York",1010427502,SU155
 532411/2022,Brooklyn,2292,1004,"2 ROEBLING ST 2-4, BROOKLYN, NY 11211",3022927503,2-4
 710609/2022,Queens,904,1014,"2554 12th Street, Unit 5B, Astoria, NY 11102",4009047501,5B
 709093/2017,Queens,11431,3113,"151-15 84th Street, Apt IN, Jamaica, NY 11414",4114317502,1N
 850135/2019,Manhattan,1580,1025,"90 East End Avenue, Unit LOB, New York",1015807501,10B
 31716/2019E,Bronx,3944,1461,"apartment 5G in the building known as N-2 a/k/a 89, and by street address 1560 Unionport Road, Bronx, New York",2039447501,5G
-705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
 850131/2021,Manhattan,1464,1020,"400 East 7Oth Street Unit 505, New York",1014647501,505
 135613/2015,Staten Island,5303,1019,"77 Harbour Court, Unit 77, Staten Island, NY 10308",5053037501,77
-135100/2019,Staten Island,2380,2036,"80 Country Drive North a/k/a 80 Country Drive North, Unit 10, Staten Island, NY 10314",5023807501,
 507882/2015,Brooklyn,1913,1904,"173 Franklin Avenue, Unit 4, Brooklyn, NY 11205",3019137503,4
 158758/2020,Manhattan,1003,1240,"150 West 51"" Street, Unit 15-5, New York",1010037501,15-5
 161375/2021,Manhattan,894,1930,"and located at: 71 Park Avenue, Unit 8C, New York",1008947503,8C
@@ -1171,9 +1161,19 @@ case_number,borough,block,lot,address,BBL,unit
 381070/2011E,Bronx,2360,1148,"769C ST. ANN'S AVENUE, NO. 42C, BRONX, NY",2023607501,42C
 132178/2009,Staten Island,1651,1061,"54 Farragut Avenue, Unit 61, Staten Island, NY 10303",5016517501,61
 153737/2022,Manhattan,594,1206,"491-497 Greenwich Street, Unit 2C, New York",1005947504,2C
-32614/2017E,Bronx,5499,1003,"236 Meagher Avenue, Unit #3, Bronx, NY 10465",2054997501,
 13191/2013,Brooklyn,4793,1102,"523 Brooklyn Avenue 1B, Brooklyn, County of Kings, City and State of New York 11225",3047937502,1B
 16648/2014,Brooklyn,4793,1102,"523 Brooklyn Avenue 1B, Brooklyn, County of Kings, City and State of New York 11225",3047937502,1B
 523873/2023,Brooklyn,45,1012,"346 7* Avenue, Brooklyn, NY.",3000457501,2L
 518728/2020,Brooklyn,2168,1006,"20 Juliana Place, Unit 121, Brooklyn, New York",3021687501,121
+706232/2018,Queens,14243,1115,,4142431115,
+130256/2010,Staten Island,1495,1125,,5014957502,
+103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
+532617/2022,Brooklyn,5390,1001,"608 East 7 Street, Parking Space P1, Brooklyn, NY",3053907501,P1
+135457/2023,Staten Island,1644,1026,"1260 RICHMOND AVENUE, UNIT 114, STATEN ISLAND, NY 10314",5016447501,114
+135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
+513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
+521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
+705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
+135100/2019,Staten Island,2380,2036,"80 Country Drive North a/k/a 80 Country Drive North, Unit 10, Staten Island, NY 10314",5023807501,10
+32614/2017E,Bronx,5499,1003,"236 Meagher Avenue, Unit #3, Bronx, NY 10465",2054997501,3
 135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
