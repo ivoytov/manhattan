@@ -42,7 +42,10 @@ jobs:
         julia scrapers/download_case_filings.jl
 
     - name: Commit changes
+      if: always()
       run: |
+        find saledocs/noticeofsale -type f -size 0 -delete
+        find saledocs/surplusmoney -type f -size 0 -delete
         git config --global user.name github-actions
         git config --global user.email github-actions@github.com
         git stash --include-untracked

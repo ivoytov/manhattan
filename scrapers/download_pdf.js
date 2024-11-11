@@ -84,9 +84,7 @@ export async function download_pdf(url, fileName) {
 
     console.log('PDF downloaded successfully'); 
     await file.close()
-    console.log("closed file")
     await page.close()
-    console.log("closed page")
     process.exit(0)
 } 
 
