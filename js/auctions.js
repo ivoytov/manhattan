@@ -266,7 +266,27 @@ function onGridFilterChanged() {
                 }).addTo(outlineLayer);
 
                 const centroid = getCentroid(featureCollection.features[0].geometry)
-                const marker = L.marker([centroid.lng, centroid.lat]).addTo(markerLayer);
+                const p = featureCollection.features[0].properties
+                const popupContent = `
+                <div>
+                <h3>${p.Address}</h3>
+                <ul>
+                    <li>UnitsRes: ${p.UnitsRes}</li>
+                    <li>UnitsTotal: ${p.UnitsTotal}</li>
+                    <li>ResArea: ${p.ResArea}</li>
+                    <li>OwnerName: ${p.OwnerName}</li>
+                    <li>NumBldgs: ${p.NumBldgs}</li>
+                    <li>NumFloors: ${p.NumFloors}</li>
+                    <li>LotArea: ${p.LotArea}</li>
+                    <li>BldgClass: ${p.BldgClass}</li>
+                    <li>AssessLand: ${p.AssessLand}</li>
+                    <li>AssessTot: ${p.AssessTot}</li>
+                    <li>LotArea: ${p.LotArea}</li>
+                    </ul>
+                </div>
+                `
+
+                const marker = L.marker([centroid.lng, centroid.lat]).bindPopup(popupContent).addTo(markerLayer);
                 marker.on('click', onClickTableZoom)
 
                 // Store the marker in the markers object
