@@ -38,7 +38,7 @@ const boroughConfigDict = {
 
 let auctionLots = []
 let maxDate = new Date()
-maxDate.setDate(maxDate.getDate() + 30)
+maxDate.setDate(maxDate.getDate() + 21)
 maxDate = maxDate.toISOString().split('T')[0]
 for (const borough in boroughConfigDict) {
     try {

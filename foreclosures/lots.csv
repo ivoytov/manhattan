@@ -829,7 +829,6 @@ case_number,borough,block,lot,address,BBL
 708640/2017,Queens,9350,16,"91-24 Lefferts Boulevard, Richmond Hill, New York 11418",4093500016
 721820/2020,Queens,12204,127,"150-54 Foch Boulevard, Jamaica, New York 11434",4122040127
 700923/2014,Queens,10919,43,"20921 Hollis Ave AKA 209-21 Hollis Ave, Queens Village, NY 11429",4109190043
-158712/2022,Bronx,2872,116,"1367 CLAY AVE, BRONX, NY 10457",
 35036/2015E,Bronx,4676,37,"3724 Barnes Avenue, Bronx, NY 10467",2046760037
 16500/2007E,Bronx,5384,36,"1539 May ower Avenue, Bronx, NY 10461",2053840036
 11103/2013,Brooklyn,8269,28,"1227 East 104th Street, Brooklyn, NY 11236",3082690028
@@ -1080,7 +1079,6 @@ case_number,borough,block,lot,address,BBL
 380881/2011E,Bronx,5529,492,"No Number Dare Place, Bronx, New York",2055290492
 380881/2011E,Bronx,5529,500,"3093 Casler Place, f/k/a 3095 Casler Place, Bronx, New York",2055290500
 380099/2014E,Bronx,3798,66,"2041 Chatterton Avenue, Bronx, NY 10472",2037980066
-30358/2020E,Queens,4917,1,"16619 27th Avenue, Flushing, NY 11358",
 713725/2021,Queens,1289,29,"37-46 79th Street, Jackson Heights, NY 11372",4012890029
 711905/2021,Queens,9448,45,"94-23 132ND STREET, RICHMOND HILL, NY 11419",4094480045
 703394/2013,Queens,11626,59,"111-19 121 Street, South Ozone Park, NY 11420",4116260059
@@ -1172,5 +1170,10 @@ case_number,borough,block,lot,address,BBL
 533939/2022,Brooklyn,5627,3,"1115 48 Street, Brooklyn, NY 11219",3056270003
 537750/2022,Brooklyn,1342,18,"1698 Pacific Street, Brooklyn, NY 11213",3013420018
 130670/2011,Staten Island,17,106,"106 Montgomery Ave., Staten Island, (Town of Castleton) NY 10301",5000170106
-135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",
 518728/2020,Brooklyn,2168,1006,"20 Juliana Place, Unit 121, Brooklyn, New York",3021687501
+158712/2022,Bronx,2872,116,"1367 CLAY AVE, BRONX, NY 10457",2028720116
+30358/2020E,Queens,4917,1,"16619 27th Avenue, Flushing, NY 11358",4049170001
+135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",
+514668/2022,Brooklyn,4672,7,"1152 Lenox Road, Brooklyn, NY 11212",3046720007
+517067/2023,Brooklyn,1989,46,"446 FRANKLIN AVENUE a/k/a 145/147 PUTNAM AVENUE, BROOKLYN,  NY 11238",3019890046
+517450/2020,Brooklyn,1672,8,"267 Malcolm X Boulevard, Brooklyn",3016720008
