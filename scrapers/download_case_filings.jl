@@ -45,7 +45,8 @@ function download_pdf_links()
 	CSV.write(download_path, rows)
 
 	for row in eachrow(rows)
-		run(pipeline(`node scrapers/download_pdf.js $(row.url)`, stdout, stderr), wait=true)				
+		path = joinpath("saledocs", row.filename)
+		run(pipeline(`node scrapers/download_pdf.js $(row.url) $path`, stdout, stderr), wait=true)				
 	end
 end
 

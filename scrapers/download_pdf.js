@@ -5,8 +5,8 @@ import { open } from 'fs/promises'
 const SBR_WS_ENDPOINT = `wss://${process.env.BRIGHTDATA_AUTH}@brd.superproxy.io:9222`;
 const endpoint = process.env.WSS ?? SBR_WS_ENDPOINT;
 
-export async function download_pdf(url, fileName = null) { 
-    console.log(`In download_pdf with url: ${url} ${fileName.split('/').pop()}`); 
+export async function download_pdf(url, fileName) { 
+    console.log(`In download_pdf with url: ${url} ${fileName ? fileName.split('/').pop() : "no filename"}`); 
 
     const browser = await connect({ 
         browserWSEndpoint: endpoint, 
@@ -84,12 +84,23 @@ export async function download_pdf(url, fileName = null) {
 
     console.log('PDF downloaded successfully'); 
     await file.close()
+    console.log("closed file")
     await page.close()
+    console.log("closed page")
+    process.exit(0)
 } 
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-    download_pdf(process.argv[2]).catch(err => {
+    try {
+        await download_pdf(process.argv[2], process.argv.length >= 3 ? process.argv[3] : null)
+    } catch (err) {
         console.error(err.stack || err);
         process.exit(1);
-    });
+    } finally {
+        setTimeout(() => {
+            console.log('Active handles:', process._getActiveHandles());
+            console.log('Active requests:', process._getActiveRequests());
+            process.exit(0);
+          }, 1000); // Give it a second to complete all I/O operations
+    }
 }
