@@ -26,9 +26,9 @@ function main()
     lot_path = "foreclosures/lots.csv"
     auctions = read_csv(lot_path)
 
-    updated_auctions = filter(:BBL => ismissing, auctions)
-    transform!(updated_auctions, [:borough, :block, :lot] => ByRow(bbl) => :BBL)
-    dropmissing!(auctions, :BBL; disallowmissing=false)
+    updated_auctions = filter(row -> ismissing(row.BBL) || (row.lot > 1000 && ismissing(row.unit)), auctions)
+    transform!(updated_auctions, [:borough, :block, :lot] => ByRow(bbl) => [:BBL, :unit])
+    filter!(row -> !(ismissing(row.BBL) || (row.lot > 1000 && ismissing(row.unit))), auctions)
     auctions = vcat(auctions, updated_auctions)
     CSV.write(lot_path, auctions)
 
@@ -62,16 +62,23 @@ function main()
     CSV.write("foreclosures/auction_sales.csv", merged_df)
 end
 
+function replace_nothing_with_missing(value)
+    return value === nothing ? missing : value
+end
 
 function condo_base_bbl_key(borough, block, lot)
     lot < 1000 && throw(ArgumentError("Lot must be over 1000"))
-    outfields = "CONDO_BASE_BBL_KEY"
+    outfields = "CONDO_BASE_BBL_KEY, UNIT_DESIGNATION"
     url = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer/4"
-    # query = "Borough = 'MX' and Block = 459 and Lot = 1113"
+    # query = "UNIT_BORO = 1 and UNIT_BLOCK = 459 and UNIT_LOT = 1113"
     query = "UNIT_BORO = '$(borough_id_dict[borough])' and UNIT_BLOCK=$(block) and UNIT_LOT=$(lot)"
     result = esri_query(url, outfields, query)
-    isempty(result) && return missing
-    result[1]["attributes"]["CONDO_BASE_BBL_KEY"]
+    isempty(result) && return missing, missing
+
+    (
+        result[1]["attributes"]["CONDO_BASE_BBL_KEY"],
+        replace_nothing_with_missing(result[1]["attributes"]["UNIT_DESIGNATION"])
+    )
 end
 
 function esri_query(url, outfields, query; format="JSON")
@@ -86,7 +93,6 @@ end
 function condo_billing_bbl(condo_base_bbl_key)
     outfields = "CONDO_BILLING_BBL"
     url = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer/3"
-    # query = "Borough = 'MX' and Block = 459 and Lot = 1113"
     query = "CONDO_BASE_BBL_KEY = $condo_base_bbl_key"
     result = esri_query(url, outfields, query)
     isempty(result) && return missing
@@ -102,20 +108,18 @@ function pluto(bbl)
     attributes = result[1]["attributes"]
     # Replace `nothing` with `missing` in the attributes
     for key in keys(attributes)
-        if attributes[key] === nothing
-            attributes[key] = missing
-        end
+        attributes[key] = replace_nothing_with_missing(attributes[key])
     end
     return attributes
 end
 
 function bbl(borough, block, lot)
     if lot > 1000
-        key = condo_base_bbl_key(borough, block, lot)
-        !ismissing(key) && return condo_billing_bbl(key)
+        key, unit_name = condo_base_bbl_key(borough, block, lot)
+        !ismissing(key) && return (condo_billing_bbl(key), unit_name)
     end 
     
-    parse(Int, @sprintf("%s%05d%04d", borough_id_dict[borough], block, lot))
+    (parse(Int, @sprintf("%s%05d%04d", borough_id_dict[borough], block, lot)), missing)
 end
 
 main()

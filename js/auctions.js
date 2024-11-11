@@ -127,7 +127,8 @@ const columnDefs = [
     },
     {
         headerName: "Address",
-        field: "address",
+        field: "Address",
+        valueGetter: ({data}) => data.unit ? `${data.Address}, Unit ${data.unit}` : data.Address,
         cellRenderer: 'agGroupCellRenderer',
         minWidth: 400,
     },
@@ -444,9 +445,8 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids, pluto]) => {
 
         const plutoMatch = pluto.find(({ BBL }) => BBL == lot.BBL)
         if (plutoMatch) {
-            if (!lot.address) {
-                lot.address = plutoMatch.Address
-            }
+            lot.Address = toCapitalizedCase(plutoMatch.Address)
+            lot.ZipCode = plutoMatch.ZipCode
             //Address,Borough,Block,Lot,ZipCode,BldgClass,LandUse,BBL,YearBuilt,YearAlter1,YearAlter2,OwnerName,LotArea,BldgArea
             
             lot.LandUse = plutoMatch.LandUse
@@ -577,3 +577,10 @@ function startResize() {
     };
 }
 
+function toCapitalizedCase(str) {
+    return str
+      .toLowerCase() // Convert the entire string to lowercase first
+      .split(' ') // Split the string into words based on spaces
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+      .join(' '); // Join the words back into a single string
+  }
