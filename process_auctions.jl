@@ -46,7 +46,7 @@ function main()
             push!(pluto_data, [attributes[col] for col in columns]; promote=true)
         end
     end
-    CSV.write(pluto_path, pluto_data)
+    CSV.write(pluto_path, pluto_data; transform=(col, val) -> something(val, missing))
 
 
     # Merge auctions and sales DataFrames
@@ -62,10 +62,6 @@ function main()
     CSV.write("foreclosures/auction_sales.csv", merged_df)
 end
 
-function replace_nothing_with_missing(value)
-    return value === nothing ? missing : value
-end
-
 function condo_base_bbl_key(borough, block, lot)
     lot < 1000 && throw(ArgumentError("Lot must be over 1000"))
     outfields = "CONDO_BASE_BBL_KEY, UNIT_DESIGNATION"
@@ -77,7 +73,7 @@ function condo_base_bbl_key(borough, block, lot)
 
     (
         result[1]["attributes"]["CONDO_BASE_BBL_KEY"],
-        replace_nothing_with_missing(result[1]["attributes"]["UNIT_DESIGNATION"])
+        something(result[1]["attributes"]["UNIT_DESIGNATION"], missing)
     )
 end
 
@@ -105,12 +101,7 @@ function pluto(bbl)
     query = "BBL = $bbl"
     result = esri_query(url, outfields, query)
     isempty(result) && return missing
-    attributes = result[1]["attributes"]
-    # Replace `nothing` with `missing` in the attributes
-    for key in keys(attributes)
-        attributes[key] = replace_nothing_with_missing(attributes[key])
-    end
-    return attributes
+    result[1]["attributes"]
 end
 
 function bbl(borough, block, lot)
