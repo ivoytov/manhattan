@@ -1170,14 +1170,6 @@ case_number,borough,block,lot,address,BBL,unit
 135100/2019,Staten Island,2380,2036,"80 Country Drive North a/k/a 80 Country Drive North, Unit 10, Staten Island, NY 10314",5023807501,10
 32614/2017E,Bronx,5499,1003,"236 Meagher Avenue, Unit #3, Bronx, NY 10465",2054997501,3
 516787/2016,Brooklyn,4415,1367," 200 Cozine Avenue Apt 9K a/k/a 200 Cozine Avenue Unit # 9K a/k/a 200 Cozine Avenue 9K a/k/a 200 Cozine Avenue Unit 8 9K  Brooklyn, NY 11207",3044157501,8 9K
-706232/2018,Queens,14243,1115,,4142431115,
-130256/2010,Staten Island,1495,1125,,5014957502,
-103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
-135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
-513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
-521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
-705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
-135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
 135604/2019,Staten Island,1634,113,"127 East 106th Street, New York",5016340113,
 850027/2012,Manhattan,1634,113,"127 East 106th Street, New York",1016340113,
 704554/2021,Queens,14023,14,"160-14 86th Street, Howard Beach, NY 11414",4140230014,
@@ -1208,3 +1200,13 @@ case_number,borough,block,lot,address,BBL,unit
 536498/2022,Brooklyn,1462,3,"503 RALPH AVENUE, BROOKLYN, NY 11233",3014620003,
 532878/2023,Brooklyn,7761,33,"827 EAST 57TH STREET, BROOKLYN, NY 11234",3077610033,
 534897/2023,Brooklyn,5695,1601,"1044 57TH STREET, UNIT 1, BROOKLYN, NY 11219",3056957502,1
+706232/2018,Queens,14243,1115,,4142431115,
+130256/2010,Staten Island,1495,1125,,5014957502,
+103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
+135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
+513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
+521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
+705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
+135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
+503187/2018,Brooklyn,8004,59," 754 E 84"" Street a/k/a 754 East 84"" Street a/k/a 754 East 84 Street Brooklyn, NY 11236",3080040059,
+519057/2021,Brooklyn,3842,12,"645 VERMONT STREET, BROOKLYN, NY",3038420012,
