@@ -1169,6 +1169,7 @@ case_number,borough,block,lot,address,BBL,unit
 135457/2023,Staten Island,1644,1026,"1260 RICHMOND AVENUE, UNIT 114, STATEN ISLAND, NY 10314",5016447501,114
 135100/2019,Staten Island,2380,2036,"80 Country Drive North a/k/a 80 Country Drive North, Unit 10, Staten Island, NY 10314",5023807501,10
 32614/2017E,Bronx,5499,1003,"236 Meagher Avenue, Unit #3, Bronx, NY 10465",2054997501,3
+516787/2016,Brooklyn,4415,1367," 200 Cozine Avenue Apt 9K a/k/a 200 Cozine Avenue Unit # 9K a/k/a 200 Cozine Avenue 9K a/k/a 200 Cozine Avenue Unit 8 9K  Brooklyn, NY 11207",3044157501,8 9K
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -1177,7 +1178,33 @@ case_number,borough,block,lot,address,BBL,unit
 521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
 705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
 135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
-516787/2016,Brooklyn,4415,1367," 200 Cozine Avenue Apt 9K a/k/a 200 Cozine Avenue Unit # 9K a/k/a 200 Cozine Avenue 9K a/k/a 200 Cozine Avenue Unit 8 9K  Brooklyn, NY 11207",3044157501,8 9K
-135604/2019,Staten Island,1634,113,"127 East 106th Street, New York",,
-850027/2012,Manhattan,1634,113,"127 East 106th Street, New York",,
-704554/2021,Queens,14023,14,"160-14 86th Street, Howard Beach, NY 11414",,
+135604/2019,Staten Island,1634,113,"127 East 106th Street, New York",5016340113,
+850027/2012,Manhattan,1634,113,"127 East 106th Street, New York",1016340113,
+704554/2021,Queens,14023,14,"160-14 86th Street, Howard Beach, NY 11414",4140230014,
+135072/2013,Staten Island,2879,51,"524 Targee Street, Staten Island, NY 10304",5028790051,
+31250/2008,Brooklyn,1710,3,"860 Herkimer Street, Brooklyn, NY 11233",3017100003,
+14296/2008,Brooklyn,395,8,"14 St. Marks Place, Brooklyn, NY 11217",3003950008,
+29800/2009,Brooklyn,4858,23,"156 East 38th Street, Brooklyn, NY 11203",3048580023,
+30396/2009,Brooklyn,4518,124,"1397 Stanley Avenue, Brooklyn, NY 11208",3045180124,
+10000/2012,Brooklyn,7901,18,"1547 East 56th Street, Brooklyn, NY 11234",3079010018,
+8735/2013,Brooklyn,7890,17,"2125 Flatbush Avenue, Brooklyn, NY 11234",3078900017,
+501492/2014,Brooklyn,4901,21,"108 East 31st Street, Brooklyn, New York 11226",3049010021,
+502739/2015,Brooklyn,2027,9,"35 North Elliott Place, Brooklyn, NY 11205",3020270009,
+512612/2015,Brooklyn,2262,1502,"429 FLUSHING AVENUE, UNIT 1-B, BROOKLYN, NY 11205",3022627505,1B
+514518/2015,Brooklyn,4058,99,"453 Van Siclen Avenue, Brooklyn, NY 11207",3040580099,
+501174/2017,Brooklyn,4030,114,"632 Belmont Avenue, Brooklyn, NY 11207",3040300114,
+513923/2016,Brooklyn,4781,25,"826 East 51st Street, Brooklyn, NY 11203",3047810025,
+517283/2018,Brooklyn,1530,12,"1905 Fulton Street, Brooklyn, NY 11233",3015300012,
+521815/2019,Brooklyn,1708,59,"1781 Atlantic Avenue, Brooklyn, New York 11233",3017080059,
+505329/2020,Brooklyn,8430,33,"2117 East 70th Street, Brooklyn, NY 11234",3084300033,
+529028/2022,Brooklyn,7649,62,"1244 East 32nd Street, Brooklyn, NY 11210",3076490062,
+532794/2021,Brooklyn,4800,4,"559 Albany Avenue, Brooklyn, NY 11203",3048000004,
+502449/2023,Brooklyn,914,1016,"602 39th Street, Unit 106, Brooklyn, NY 11232",3009147501,106
+504850/2023,Brooklyn,3624,43,"580 Chester Street, Brooklyn, NY 11212",3036240043,
+516963/2023,Brooklyn,1498,1006,"723 Macdonough Street, #A4, Brooklyn, NY 11233",3014987501,A4
+522350/2023,Brooklyn,781,30,"258 49th Street, Brooklyn, NY 11220",3007810030,
+528867/2022,Brooklyn,1703,44,"849 Herkimer Street, Brooklyn, NY 11233",3017030044,
+529671/2022,Brooklyn,3402,1016,"1255 BUSHWICK AVENUE, PARKING UNIT P16, BROOKLYN, NY",3034027501,P16
+536498/2022,Brooklyn,1462,3,"503 RALPH AVENUE, BROOKLYN, NY 11233",3014620003,
+532878/2023,Brooklyn,7761,33,"827 EAST 57TH STREET, BROOKLYN, NY 11234",3077610033,
+534897/2023,Brooklyn,5695,1601,"1044 57TH STREET, UNIT 1, BROOKLYN, NY 11219",3056957502,1
