@@ -46,7 +46,7 @@ function download_pdf_links()
 
 	for row in eachrow(rows)
 		path = joinpath("saledocs", row.filename)
-		run(pipeline(`node scrapers/download_pdf.js $(row.url) $path`, stdout, stderr), wait=true)				
+		run(pipeline(ignorestatus(`node scrapers/download_pdf.js $(row.url) $path`), stdout, stderr), wait=true)				
 	end
 end
 
@@ -126,7 +126,7 @@ function process_data(rows, max_concurrent_tasks, show_progress_bar=false)
 		task = Task() do 
 			let row = row
                 args = [row.case_number, row.borough, row.auction_date, row.missing_filings...]
-                p = run(pipeline(`node scrapers/notice_of_sale.js $args`, out_stream, stderr), wait=true)				
+                p = run(pipeline(ignorestatus(`node scrapers/notice_of_sale.js $args`), out_stream, stderr), wait=true)
                 put!(channel, (row.case_number, p.exitcode))
 			end
 		end
