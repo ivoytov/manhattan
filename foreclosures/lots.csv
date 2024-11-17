@@ -1206,14 +1206,6 @@ case_number,borough,block,lot,address,BBL,unit
 509396/2021,Brooklyn,7900,5,"5515 Avenue O, Brooklyn, New York 11234",3079000005,
 29704/2009,Brooklyn,7890,16," 2127 Flatbush Avenue Brooklyn, NY 11234",3078900016,
 29704/2009,Brooklyn,7890,1," 2127 Flatbush Avenue Brooklyn, NY 11234",3078900001,
-706232/2018,Queens,14243,1115,,4142431115,
-130256/2010,Staten Island,1495,1125,,5014957502,
-103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
-135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
-513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
-521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
-705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
-135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
 135535/2015,Staten Island,1030,20,"45 Anderson Avenue, Staten Island, NY 10302",5010300020,
 31279/2010,Brooklyn,6958,58,"3745 Marple Avenue, Brooklyn, NY 11224",3069580058,
 4779/2014,Brooklyn,3264,124,"32 Stanhope Street, Brooklyn, NY 11221",3032640124,
@@ -1222,3 +1214,11 @@ case_number,borough,block,lot,address,BBL,unit
 525436/2018,Brooklyn,7131,24,"2214 East 5th Street, Brooklyn, NY 11223",3071310024,
 528980/2022,Brooklyn,1663,71,"697 Halsey Street, Brooklyn, NY",3016630071,
 536748/2022,Brooklyn,8331,1046,"9536 SCHENCK STREET- PS 19, BROOKLYN, NY 11236",3083317501,19
+706232/2018,Queens,14243,1115,,4142431115,
+130256/2010,Staten Island,1495,1125,,5014957502,
+103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
+135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
+513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
+521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
+705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
+135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
