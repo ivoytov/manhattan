@@ -17,7 +17,7 @@ function main()
 	println("Repo state: $urgent_row_count urgent cases, $sampled_row_count sampled rows outstanding")
 
 	if !is_local
-		max_docs = 200
+		max_docs = 100
 		urgent_rows = urgent_rows[1:min(nrow(urgent_rows), max_docs), :]
 		n = min(max_docs - nrow(urgent_rows), nrow(sampled_rows))
 		sampled_rows = sampled_rows[shuffle(1:nrow(sampled_rows))[1:n], :]
