@@ -1251,6 +1251,7 @@ case_number,borough,block,lot,address,BBL,unit
 509342/2024,Brooklyn,5612,13,"1420 44"" Street, Brooklyn, New York",3056120013,
 706918/2021,Queens,11655,34,"128-17 115th Ave, South Ozone Park, NY 11420",4116550034,
 709254/2014,Queens,1863,21," 9218 48 Avenue a/k/a 92-18 48 Avenue Elmhurst, NY 11373",4018630021,
+723640/2020,Queens,14145,50,"155-47 101st Street, Howard Beach, NY 11414",4141450050,
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -1260,4 +1261,3 @@ case_number,borough,block,lot,address,BBL,unit
 705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
 135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
 710637/2019,Queens,14246,1218,"99-77 163rd Road, Howard Beach, NY 11414",4142461218,
-723640/2020,Queens,14145,50,"155-47 101st Street, Howard Beach, NY 11414",4141450050,
