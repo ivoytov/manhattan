@@ -1312,17 +1312,6 @@ case_number,borough,block,lot,address,BBL,unit
 850223/2019,Manhattan,1247,1022,"340 West 86th Street, Unit 5A, New York",1012477501,5A
 850673/2023,Manhattan,1390,1022,"32 E 76TH STREET APT 804, NEW YORK",1013907502,804
 150121/2024,Staten Island,1077,37,"146 Port Richmond Avenue a/k/a 146-148 Port Richmond Avenue, Staten Island, NY.",5010770037,
-706232/2018,Queens,14243,1115,,4142431115,
-130256/2010,Staten Island,1495,1125,,5014957502,
-103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
-135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
-513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
-521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
-705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
-135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
-710637/2019,Queens,14246,1218,"99-77 163rd Road, Howard Beach, NY 11414",4142461218,
-135038/2016,Staten Island,2086,1006,"33 Dreyer Avenue, Staten Island, NY 10314",5020867501,
-850167/2022,Manhattan,130,1115,"330 East 109th Street, New York",1001301115,
 135076/2019,Staten Island,576,111,"7 BAYVIEW PLACE, STATEN ISLAND, NY 10304",5005760111,
 135356/2023,Staten Island,217,58,"555 Delafield Avenue, Staten Island, NY 10310",5002170058,
 704375/2017,Queens,1086,173,"23-01 92nd Street, East Elmhurst, NY 11369",4010860173,
@@ -1350,3 +1339,14 @@ case_number,borough,block,lot,address,BBL,unit
 526827/2022,Brooklyn,1533,69,"105 Hull Street, Brooklyn, NY 11233",3015330069,
 533653/2022,Brooklyn,6608,1054,"1620 EAST 2ND STREET, UNIT 6A, BROOKLYN, NY 11230",3066087501,6-A
 535795/2022,Brooklyn,7836,37,"1227E S6th St., Brooklyn, NY 11234",3078360037,
+706232/2018,Queens,14243,1115,,4142431115,
+130256/2010,Staten Island,1495,1125,,5014957502,
+103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
+135723/2018,Staten Island,3173,1001,"653 Britton Avenue, Staten Island, NY 10304",5031737501,
+513942/2015,Brooklyn,8470,2027,"64 Harbor Drive, Brooklyn, NY 11234",3084702027,
+521711/2018,Brooklyn,8845,1972,"29 Abbey Court, Brooklyn, NY 11229",3088451972,
+705162/2015,Queens,14240,1241,"162-21 102nd Street, Howard Beach, NY 11414",4142401241,
+135033/2014,Staten Island,2401,1302,"23A Gardenia Lane, A.K.A. 23A Gardenia Lane, Unit 22, Staten Island, New York 10314",,22
+710637/2019,Queens,14246,1218,"99-77 163rd Road, Howard Beach, NY 11414",4142461218,
+135038/2016,Staten Island,2086,1006,"33 Dreyer Avenue, Staten Island, NY 10314",5020867501,
+850167/2022,Manhattan,130,1115,"330 East 109th Street, New York",1001301115,
