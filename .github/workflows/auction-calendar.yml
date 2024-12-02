@@ -40,7 +40,7 @@ jobs:
         git rebase origin/master
         git stash pop || echo "No changes to apply from stash"
         git add .
-        git commit -m "Latest transaction data"  || echo "No changes to commit"
+        git commit -m "Latest auction calendar"  || echo "No changes to commit"
         git push --force-with-lease
           
         
