@@ -138,7 +138,8 @@ const columnDefs = [
         cellRenderer: function (params) {
             const filename = 'saledocs/noticeofsale/' + params.value.replace('/', '-') + '.pdf'
             return `<a href="${filename}" target="_blank">` + params.value + '</a>'
-        }
+        },
+        minWidth: 140,
     },
     {
         headerName: "Auction Date",
@@ -154,7 +155,7 @@ const columnDefs = [
         type: "rightAligned",
         valueGetter: p => `${p.data.block}-${p.data.lot}`,
         cellRenderer: (p) => `<a href="${propertyInfoMapUrl(p.data.borough, p.data.block, p.data.lot)}" target="_blank">` + p.value + `</a>`,
-        maxWidth: 100,
+        minWidth: 120,
     },
     {
         headerName: "Upset Price", field: "upset_price", type: ["currency", "rightAligned"],
