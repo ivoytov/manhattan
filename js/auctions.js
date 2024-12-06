@@ -160,6 +160,7 @@ const columnDefs = [
     {
         headerName: "Upset Price", field: "upset_price", type: ["currency", "rightAligned"],
         // valueFormatter: (params) => params.value || params.value == "" ? formattedCurrency.format(params.value) : null
+        minWidth: 150,
     },
     {
         headerName: "Sale Price", field: "winning_bid", type: ["currency", "rightAligned"],
@@ -169,7 +170,8 @@ const columnDefs = [
                 const filename = 'saledocs/surplusmoney/' + params.data.case_number.replace('/', '-') + '.pdf'
                 return `<a href="${filename}" target="_blank">` + formattedCurrency.format(params.value) + '</a>'
             }
-        }
+        },
+        minWidth: 150,
     }
 
 ]
@@ -211,7 +213,7 @@ function zoomToBlock(event) {
     let block = event.node.data.block;
     let lot = event.node.data.lot;
     const key = `${borough}-${block}-${lot}`;
-    map.fitBounds(markers[key][0].getBounds(), { maxZoom: 17 })
+    map.fitBounds(markers[key][0].getBounds(), { maxZoom: 15 })
 
 }
 
