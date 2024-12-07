@@ -2,6 +2,8 @@ using Dates, CSV, DataFrames, AlgebraOfGraphics, CairoMakie, Statistics
 set_aog_theme!()
 
 borough_dict = Dict("Manhattan" => "MN", "Bronx"=>"BX", "Brooklyn"=>"BK", "Queens" =>"QN", "Staten Island"=>"SI")
+building_class_dict = Dict('A' => "Single Family", 'B' => "Duplex", 'C' => "Walk up", 'O' => "Office", 'W' => "Schools", 'Q' => "Parks", 'M' => "Churches", 'E' => "Warehouses", 'D' => "Apartments", 'Z' => "Other", 'H' => "Hotels", 'F' => "Industrial", 'R' => "Condo", 'G' => "Garages", 'S' => "Mixed Use", 'V' => "Land")
+
 
 cases = CSV.read("foreclosures/cases.csv", DataFrame)
 lots = CSV.read("foreclosures/lots.csv", DataFrame)
@@ -19,7 +21,9 @@ auctions = innerjoin(cases, lots, on=[:case_number, :borough])
 auctions.boro_code = [borough_dict[id] for id in auctions.borough]
 
 leftjoin!(auctions, bids, on=[:case_number, :borough, :auction_date])
-leftjoin!(auctions, pluto, on=[:boro_code => :Borough, :block => :Block, :lot => :Lot]; makeunique=true)
+unique!(pluto, [:Borough, :Block, :Lot])
+leftjoin!(auctions, pluto, on=:BBL; makeunique=true)
+auctions.building_class = [ismissing(id) ? "Other" : building_class_dict[id[1]] for id in auctions.BldgClass]
 
 merged_df = innerjoin(sales, auctions, on=[:BOROUGH => :borough, :BLOCK => :block, :LOT => :lot])
 
@@ -51,7 +55,7 @@ axis = (width = 225, height = 225, xlabel = "Opening Bid (\$000s)", ylabel = "Wi
 result_overbid = data(sold_auctions) * mapping(
        :upset_price => (t-> t / 1000) => "Opening Bid (\$000s)", 
        :winning_bid => (t-> t / 1000) => "Winning Bid (\$000s)")
-plt = result_overbid * mapping(col=:borough, marker=:BldgClass)       
+plt = result_overbid * mapping(layout=:borough, marker=:building_class)       
 
 # Define the 45-degree line as a visual element
 maxy = ceil(max(sold_auctions.winning_bid...) / 5e5) * 500
