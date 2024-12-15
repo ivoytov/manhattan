@@ -1455,6 +1455,7 @@ case_number,borough,block,lot,address,BBL,unit
 524118/2019,Brooklyn,7563,8,"927 EAST 35TH STREET, BROOKLYN, NY 11210",3075630008,
 525258/2022,Brooklyn,6306,78,"1617 83rd Street, Brooklyn, NY 11214",3063060078,
 850020/2022,Manhattan,1451,30,"354 EAST 77TH STREET a/k/a 1475 FIRST AVENUE, NEW YORK",1014510030,
+38367/2005,Brooklyn,3359,43,"1123 Madison Street, Brooklyn, NY 11221",3033590043,
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -1467,4 +1468,5 @@ case_number,borough,block,lot,address,BBL,unit
 135038/2016,Staten Island,2086,1006,"33 Dreyer Avenue, Staten Island, NY 10314",5020867501,
 850167/2022,Manhattan,130,1115,"330 East 109th Street, New York",1001301115,
 703821/2021,Queens,14251,1669,"99-60 Calhoun Road a/k/a 99-60 164th Road, Howard Beach, NY 11414",4142511669,
-38367/2005,Brooklyn,3359,43,"1123 Madison Street, Brooklyn, NY 11221",3033590043,
+26319/2007,Brooklyn,1833,67,"189 Hancock Street, Brooklyn, NY 11216",3018330067,
+501783/2013,Brooklyn,8679,1110,"3111 Ocean Parkway Unit 12J, Brooklyn, NY 11235",3086797501,12J
