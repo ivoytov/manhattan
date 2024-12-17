@@ -52,6 +52,10 @@ end
 
 # Function to find missing filings
 function missing_filings(case_number, auction_date)
+	if auction_date < today() - Day(120)
+		return []
+	end
+
     filename = get_filename(case_number)
 
     res = []

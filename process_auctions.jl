@@ -26,9 +26,9 @@ function main()
     lot_path = "foreclosures/lots.csv"
     auctions = read_csv(lot_path)
 
-    updated_auctions = filter(row -> ismissing(row.BBL) || (row.lot > 1000 && ismissing(row.unit)), auctions)
+    updated_auctions = filter(row -> ismissing(row.BBL) || ((row.lot > 1000) && ismissing(row.unit)), auctions)
     transform!(updated_auctions, [:borough, :block, :lot] => ByRow(bbl) => [:BBL, :unit])
-    filter!(row -> !(ismissing(row.BBL) || (row.lot > 1000 && ismissing(row.unit))), auctions)
+    filter!(row -> !(ismissing(row.BBL) || ((row.lot > 1000) && ismissing(row.unit))), auctions)
     auctions = vcat(auctions, updated_auctions)
     CSV.write(lot_path, auctions)
 
@@ -43,7 +43,7 @@ function main()
     for bbl in new_lots.BBL
         attributes = pluto(bbl)
         if attributes !== missing
-            push!(pluto_data, [attributes[col] for col in columns]; promote=true)
+            push!(pluto_data, [col == "LandUse" ? parse(Int, attributes[col]) : attributes[col] for col in columns]; promote=true)
         end
     end
     CSV.write(pluto_path, pluto_data; transform=(col, val) -> something(val, missing))
