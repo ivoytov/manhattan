@@ -149,6 +149,13 @@ const columnDefs = [
         filter: 'agDateColumnFilter',
         sort: "asc",
         sortIndex: 0,
+        filterParams: {
+            minValidYear: 2024,
+            maxValidYear: 2025,
+            buttons: ["apply", "cancel"],
+            closeOnApply: true,
+            maxNumConditions: 1,
+        }
     },
     {
         headerName: "BBL",
@@ -490,8 +497,22 @@ const blockLotLayer = L.esri.featureLayer({
     where: "1 = 0"
 }).addTo(map);
 
-const markerLayer = L.layerGroup().addTo(map);
+const markerLayer = L.markerClusterGroup();
+map.addLayer(markerLayer)
 const outlineLayer = L.layerGroup().addTo(map);
+
+map.on("zoomend", function() {
+    if (map.getZoom() < 15) {
+        if (map.hasLayer(outlineLayer)) {
+            map.removeLayer(outlineLayer);
+        }
+    }
+    else {
+        if (!map.hasLayer(outlineLayer)) {
+            map.addLayer(outlineLayer);
+        }
+    }
+});
 
 
 // Add the custom control to the map
