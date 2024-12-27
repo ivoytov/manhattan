@@ -166,12 +166,10 @@ const columnDefs = [
     },
     {
         headerName: "Upset Price", field: "upset_price", type: ["currency", "rightAligned"],
-        // valueFormatter: (params) => params.value || params.value == "" ? formattedCurrency.format(params.value) : null
         minWidth: 150,
     },
     {
         headerName: "Sale Price", field: "winning_bid", type: ["currency", "rightAligned"],
-        // valueFormatter: (params) => params.value ? formattedCurrency.format(params.value) : null,
         cellRenderer: function (params) {
             if (params.value || params.value == "") {
                 const filename = 'saledocs/surplusmoney/' + params.data.case_number.replace('/', '-') + '.pdf'
@@ -179,8 +177,15 @@ const columnDefs = [
             }
         },
         minWidth: 150,
-    }
-
+    },
+    {
+        headerName: "Overbid", field: "over_bid", type: ["currency", "rightAligned"],
+        minWidth: 150,
+    },
+    {
+        headerName: "Discount", field: "price_change", type: ["percent", "rightAligned"],
+        minWidth: 150,
+    },
 ]
 
 const formattedCurrency = new Intl.NumberFormat('en-US', {
@@ -333,6 +338,11 @@ const gridOptions = {
             valueFormatter: ({ value }) => value ? formattedCurrency.format(value) : value,
             filter: 'agNumberColumnFilter',
         },
+        percent: {
+            width: 150,
+            valueFormatter: ({ value }) => value ? Number(value).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2}) : value,
+            filter: 'agNumberColumnFilter',
+        }
     },
 
     detailCellRendererParams: {
@@ -436,6 +446,8 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids, pluto]) => {
             lot.judgement = result.judgement
             lot.upset_price = result.upset_price
             lot.winning_bid = result.winning_bid
+
+            lot.over_bid = result.winning_bid > 100 ? result.winning_bid - result.upset_price : null
         }
 
         const transactions = getTransactions(lot)
@@ -446,6 +458,12 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids, pluto]) => {
                 const dayDifference = (t["SALE DATE"] - lot.auction_date) / millisecondsInADay
                 return dayDifference >= 0 && dayDifference <= 90 && t["SALE PRICE"] > minTransactionPrice
             }) : false
+            if (lot.winning_bid > 100) {
+                const last_sale = transactions[transactions.length - 1]
+                lot.price_change = lot.winning_bid / last_sale["SALE PRICE"] - 1
+            }
+            
+
         } else {
             lot.isSold = false
         }
