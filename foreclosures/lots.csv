@@ -1551,6 +1551,8 @@ case_number,borough,block,lot,address,BBL,unit
 710187/2020,Queens,12015,318,"117-55 142nd Place, Jamaica, NY 11436",4120150318,
 703667/2023,Queens,13657,66,"14963 253rd Street, Rosedale, (City of New York",4136570066,
 703068/2019,Queens,1174,55,"32-47 78th Street, Jackson Heights, (City of New York",4011740055,
+700179/2021,Queens,10231,116,"172-19 107th Avenue, St. Albans, NY 11433",4102310116,
+850016/2023,Manhattan,1006,1302,"57!” STREET VACATION SUITES located at 102 West 57"" Street, New York",1010067502,TIMES
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -1564,5 +1566,3 @@ case_number,borough,block,lot,address,BBL,unit
 850167/2022,Manhattan,130,1115,"330 East 109th Street, New York",1001301115,
 703821/2021,Queens,14251,1669,"99-60 Calhoun Road a/k/a 99-60 164th Road, Howard Beach, NY 11414",4142511669,
 135331/2018,Staten Island,4312,1008,"3160 B RICHMOND ROAD, STATEN ISLAND, NY 10306",5043127501,
-700179/2021,Queens,10231,116,"172-19 107th Avenue, St. Albans, NY 11433",4102310116,
-850016/2023,Manhattan,1006,1302,"57!” STREET VACATION SUITES located at 102 West 57"" Street, New York",1010067502,TIMES
