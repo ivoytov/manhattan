@@ -1572,6 +1572,7 @@ case_number,borough,block,lot,address,BBL,unit
 35230/2018E,Bronx,4672,32,"815 East 213 Street, Bronx, NY 10467",2046720032,
 36229/2020E,Bronx,2379,58,"3075 3rd Avenue, Bronx, NY 10451",2023790058,
 805435/2023E,Bronx,3944,1520,"apartment 6B in the building known as N-2 a/k/a 91, and by street address 1576 Unionport Road, Bronx, New York",2039447501,6B
+380909/2007E,Bronx,3785,10,"1765 WESTCHESTER AVE, BRONX, NY 10472",2037850010,
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -1585,4 +1586,3 @@ case_number,borough,block,lot,address,BBL,unit
 850167/2022,Manhattan,130,1115,"330 East 109th Street, New York",1001301115,
 703821/2021,Queens,14251,1669,"99-60 Calhoun Road a/k/a 99-60 164th Road, Howard Beach, NY 11414",4142511669,
 135331/2018,Staten Island,4312,1008,"3160 B RICHMOND ROAD, STATEN ISLAND, NY 10306",5043127501,
-380909/2007E,Bronx,3785,10,"1765 WESTCHESTER AVE, BRONX, NY 10472",2037850010,
