@@ -11,7 +11,7 @@ bids = CSV.read("foreclosures/bids.csv", DataFrame)
 sales = CSV.read("foreclosures/auction_sales.csv", DataFrame)
 pluto = CSV.read("foreclosures/pluto.csv", DataFrame)
 
-month = Date("2024-10-31")
+month = Date("2024-11-30")
 
 cases = cases[(month-Month(1)).<cases.auction_date.<=month, :]
 bids = bids[(month-Month(1)).<bids.auction_date.<=month, :]
