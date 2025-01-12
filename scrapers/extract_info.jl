@@ -248,6 +248,7 @@ function get_block_and_lot()
         if isnothing(values.block) || isnothing(values.lot)
             if "-i" ∈ ARGS || haskey(ENV, "WSS")
                 values = prompt_for_block_and_lot(pdf_path, values)
+                isnothing(values) && break
             else
                 continue
             end
