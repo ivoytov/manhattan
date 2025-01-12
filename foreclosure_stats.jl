@@ -2,7 +2,7 @@ using Dates, CSV, DataFrames, AlgebraOfGraphics, CairoMakie, Statistics
 set_aog_theme!()
 
 borough_dict = Dict("Manhattan" => "MN", "Bronx"=>"BX", "Brooklyn"=>"BK", "Queens" =>"QN", "Staten Island"=>"SI")
-building_class_dict = Dict('A' => "Single Family", 'B' => "Duplex", 'C' => "Walk up", 'O' => "Office", 'W' => "Schools", 'Q' => "Parks", 'M' => "Churches", 'E' => "Warehouses", 'D' => "Apartments", 'Z' => "Other", 'H' => "Hotels", 'F' => "Industrial", 'R' => "Condo", 'G' => "Garages", 'S' => "Mixed Use", 'V' => "Land")
+building_class_dict = Dict('A' => "Single Family", 'B' => "Duplex", 'C' => "Walk up", 'O' => "Office", 'W' => "Schools", 'Q' => "Parks", 'M' => "Churches", 'E' => "Warehouses", 'D' => "Apartments", 'Z' => "Other", 'H' => "Hotels", 'F' => "Industrial", 'R' => "Condo", 'G' => "Garages", 'S' => "Mixed Use", 'V' => "Land", 'K' => "Retail")
 
 
 cases = CSV.read("foreclosures/cases.csv", DataFrame)
@@ -22,6 +22,7 @@ auctions.boro_code = [borough_dict[id] for id in auctions.borough]
 
 leftjoin!(auctions, bids, on=[:case_number, :borough, :auction_date])
 unique!(pluto, [:Borough, :Block, :Lot])
+dropmissing!(auctions, :BBL)
 leftjoin!(auctions, pluto, on=:BBL; makeunique=true)
 auctions.building_class = [ismissing(id) ? "Other" : building_class_dict[id[1]] for id in auctions.BldgClass]
 
