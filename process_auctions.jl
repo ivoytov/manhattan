@@ -41,9 +41,19 @@ function main()
     columns = ["Address", "Borough", "Block", "Lot", "ZipCode", "BldgClass", "LandUse", "BBL", "YearBuilt", "YearAlter1", "YearAlter2", "OwnerName", "LotArea", "BldgArea"]
 
     for bbl in new_lots.BBL
+        @show bbl
         attributes = pluto(bbl)
         if attributes !== missing
-            push!(pluto_data, [col == "LandUse" ? parse(Int, attributes[col]) : attributes[col] for col in columns]; promote=true)
+            row = []
+            for col in columns
+                if col == "LandUse" && !isnothing(attributes[col])
+                    push!(row, parse(Int, attributes[col]))
+                    continue
+                end
+                push!(row, (attributes[col]))
+            end
+            
+            push!(pluto_data, row; promote=true)
         end
     end
     CSV.write(pluto_path, pluto_data; transform=(col, val) -> something(val, missing))
