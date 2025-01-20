@@ -41,7 +41,6 @@ function main()
     columns = ["Address", "Borough", "Block", "Lot", "ZipCode", "BldgClass", "LandUse", "BBL", "YearBuilt", "YearAlter1", "YearAlter2", "OwnerName", "LotArea", "BldgArea"]
 
     for bbl in new_lots.BBL
-        @show bbl
         attributes = pluto(bbl)
         if attributes !== missing
             row = []
