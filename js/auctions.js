@@ -69,7 +69,6 @@ function applyFiltersFromURL(params = null) {
         const currentDate = new Date();
         const futureDate = new Date();
         futureDate.setDate(currentDate.getDate() + 7);
-        gridApi.setFilterModel(null)
         gridApi.setColumnFilterModel('auction_date', {
             dateFrom: currentDate.toISOString(),
             dateTo: futureDate.toISOString(),
