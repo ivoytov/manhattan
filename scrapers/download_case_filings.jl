@@ -6,6 +6,7 @@ function main()
 	download_pdf_links()
 
     rows = get_data()
+	filter!(row -> row.auction_date < Date(2024,12,31), rows)
 	is_local = haskey(ENV, "WSS")
 	# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
 	urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
