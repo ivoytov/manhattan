@@ -9,7 +9,7 @@ function main()
 	# filter!(row -> row.auction_date < Date(2025,1,31), rows)
 	is_local = haskey(ENV, "WSS")
 	# Filter rows where :missing_filings contains FilingType[:NOTICE_OF_SALE]
-	urgent_rows = rows[in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings), :]
+	urgent_rows = rows[(in.(FilingType[:NOTICE_OF_SALE], rows.missing_filings)) .& (rows.auction_date .>= today()), :]
 	urgent_row_count = nrow(urgent_rows)
 
 	# Shuffle the remaining rows and select N at random
@@ -53,7 +53,7 @@ end
 
 # Function to find missing filings
 function missing_filings(case_number, auction_date)
-	if auction_date < today() - Day(120)
+	if auction_date < today() - Day(60)
 		return []
 	end
 
