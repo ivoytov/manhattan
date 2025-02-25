@@ -2182,6 +2182,8 @@ case_number,borough,block,lot,address,BBL,unit
 505705/2014,Brooklyn,3598,30,"110 Riverdale Avenue, Brooklyn, NY 11212",3035980030,
 506770/2015,Brooklyn,5366,1001,"3805 [5th Avenue, Brooklyn, NY 11218",3053667501,1
 521203/2020,Brooklyn,4456,68,"k/a 413 Montauk Avenue, Brooklyn, NY 11208",3044560068,
+850275/2024,Manhattan,1006,1302,"4877 STREET VACATION SUITES located at 12 East 48"""" Street, New York",1010067502,TIMES
+713365/2021,Queens,5537,143,"45-31 195th Street, Flushing, NY 11358",4055370143,
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -2201,5 +2203,3 @@ case_number,borough,block,lot,address,BBL,unit
 100523/2008,Staten Island,3005,1042,"110 NORTH DRIVE A/K/A 110 NORTH DRIVE, UNIT 42, STATEN ISLAND, NY 10305",5030057501,
 150642/2021,Staten Island,3024,1110,"73 Claradon Lane, Unit 110, Staten Island, New York 10305",5030247502,
 527812/2023,Brooklyn,2120,1033,"55 Greene Avenue, Suites 2D and 2E, Brooklyn, NY 11238",3021207501,
-850275/2024,Manhattan,1006,1302,"4877 STREET VACATION SUITES located at 12 East 48"""" Street, New York",1010067502,TIMES
-713365/2021,Queens,5537,143,"45-31 195th Street, Flushing, NY 11358",4055370143,
