@@ -1,4 +1,4 @@
-using CSV, DataFrames, ProgressMeter, OCReract, Dates, Printf
+using CSV, DataFrames, ProgressMeter, OCReract, Dates, Printf, OpenAI, Base64, JSON3
 
 # Function to prompt with a default answer
 function prompt(question, default_answer="")
@@ -58,6 +58,15 @@ function detect_multiple_lots(text)
     return extract_pattern(text, patterns)
 end
 
+
+function detect_time_share(text)
+    patterns = [
+        r"\bHNY CLUB SUITES\b"i,
+        r"\bVACATION SUITES\b"i,
+    ]
+    return extract_pattern(text, patterns)
+end
+
 # Extract text from PDF
 function extract_text_from_pdf(pdf_path)
     case_number = basename(pdf_path)[1:end-4]
@@ -73,6 +82,43 @@ function extract_text_from_pdf(pdf_path)
     rm(image_path)
     rm(text_path)
     return text
+end
+
+function extract_llm_values(pdf_path)
+    case_number = basename(pdf_path)[1:end-4]
+    image_path = case_number * ".png"
+
+    # Call the GraphicsMagick command
+    run(pipeline(`gm convert -append -density 330 $pdf_path $image_path`, stdout=devnull, stderr=devnull))
+    
+    # Read the image and encode it to Base64
+    image_data = read(image_path)
+    base64_image = base64encode(image_data)
+    
+    provider = OpenAI.OpenAIProvider(
+        api_key=ENV["OPENAI_API_KEY"],
+    )
+
+    
+    r = create_chat(
+        provider,
+        "gpt-4o-mini",
+        [Dict("role" => "user", "content" => [
+            Dict("type" => "text", "text" => "I need help extracting the judgment, upset price, and the sale price (winning bid) from this document. Return the answer in JSON format like this: { \"judgement\": 100000, \"upset_price\": 200000, \"winning_bid\": 300000 }"),
+            Dict("type" => "image_url", "image_url" => Dict("url" => "data:image/png;base64," * base64_image))
+        ])];
+        max_tokens = 300,
+        response_format = Dict("type" => "json_object")
+    )
+
+    parsed_response = r.response[:choices][1][:message][:content] |> JSON3.read
+
+    # Access structured data
+    judgement = parsed_response["judgement"]
+    upset_price = parsed_response["upset_price"]
+    winning_bid = parsed_response["winning_bid"]
+
+    return judgement, upset_price, winning_bid
 end
 
 # Prompt for winning bid
@@ -102,15 +148,23 @@ function prompt_for_winning_bid(cases, bids)
         # Extract text from PDF manually
         filename = replace(case_number, "/" => "-") * ".pdf"
         pdf_path = joinpath("saledocs/surplusmoney", filename)
+        
+        judgement, upset_price, winning_bid = missing, missing, missing
+
+        try
+            judgement, upset_price, winning_bid = extract_llm_values(pdf_path)
+        catch e
+            println("Error extracting values from $pdf_path: $e")
+        end
 
         # Open the PDF file with the default application on macOS
         run(`open "$pdf_path"`)
 
         values = (
             auction_date=foreclosure_case.auction_date,
-            judgement=missing,
-            upset_price=missing,
-            winning_bid=missing
+            judgement=round(judgement),
+            upset_price=round(upset_price),
+            winning_bid=round(winning_bid)
         )
 
         # check if this form is for the correct Date
@@ -192,6 +246,7 @@ function parse_notice_of_sale(pdf_path)
         lot=extract_lot(text),
         address=extract_address(text),
         is_combo=detect_multiple_lots(text),
+        is_timeshare=detect_time_share(text),
     )
     return values
 end
@@ -241,6 +296,19 @@ function get_block_and_lot()
         pdf_path = notice_of_sale_path(case.case_number)
         values = parse_notice_of_sale(pdf_path)
         ismissing(values) && continue
+
+        if !isnothing(values.is_timeshare)
+            println("$(case.case_number) Timeshare detected")
+            row = (
+                case_number=case.case_number, 
+                borough=case.borough, 
+                block=1006, 
+                lot=1302,
+                address= missing
+            )
+            push!(lots, row; cols=:subset)
+            continue
+        end
 
         if !isnothing(values.is_combo)
             println("$(case.case_number) Possible combo lot")

@@ -2,7 +2,7 @@
 
 julia_version = "1.10.5"
 manifest_format = "2.0"
-project_hash = "e3b56fb08eb3c27375bdbba796e8a09c716e7633"
+project_hash = "0d48d1af847e8221daf2b41f0453000e4e22d0f3"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -1033,6 +1033,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "887579a3eb005446d514ab7aeac5d1d027658b8f"
 uuid = "e7412a2a-1a6e-54c0-be00-318e2571c051"
 version = "1.3.5+1"
+
+[[deps.OpenAI]]
+deps = ["Dates", "HTTP", "JSON3"]
+git-tree-sha1 = "d69de972e2c9140a42afc83a9e3331826d73e27e"
+uuid = "e9f21f70-7185-4079-aca2-91159181367c"
+version = "0.10.1"
 
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
