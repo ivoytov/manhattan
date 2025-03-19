@@ -1,4 +1,6 @@
-using CSV, DataFrames, ProgressMeter, OCReract, Dates, Printf, OpenAI, Base64, JSON3
+using CSV, DataFrames, ProgressMeter, OCReract, Dates, Printf, OpenAI, Base64, JSON3, DotEnv
+
+DotEnv.load!()
 
 # Function to prompt with a default answer
 function prompt(question, default_answer="")
@@ -93,6 +95,7 @@ function extract_llm_values(pdf_path)
     
     # Read the image and encode it to Base64
     image_data = read(image_path)
+    rm(image_path)
     base64_image = base64encode(image_data)
     
     provider = OpenAI.OpenAIProvider(

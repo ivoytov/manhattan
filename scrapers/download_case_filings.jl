@@ -1,6 +1,5 @@
 using CSV, DataFrames, ProgressMeter, Base.Threads, Dates, Random
 
-
 # Get filings. If WSS is set then we are running locally, otherwise on git.
 function main()
 	download_pdf_links()
