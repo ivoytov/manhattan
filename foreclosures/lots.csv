@@ -2450,6 +2450,7 @@ case_number,borough,block,lot,address,BBL,unit
 135177/2022,Staten Island,1483,60,"130 VEDDER AVENUE, STATEN ISLAND, NY 10302",5014830060,
 850025/2022,Manhattan,1718,162,"68 West 120th Street, New York",1017180162,
 23269/2018E,Bronx,3768,5,"1210 White Plains Road, Bronx, NY",2037680005,
+706172/2014,Queens,16045,11,"69-45 Bayfield Avenue, Arverne, NY 11692",4160450011,
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -2469,7 +2470,6 @@ case_number,borough,block,lot,address,BBL,unit
 100523/2008,Staten Island,3005,1042,"110 NORTH DRIVE A/K/A 110 NORTH DRIVE, UNIT 42, STATEN ISLAND, NY 10305",5030057501,
 150642/2021,Staten Island,3024,1110,"73 Claradon Lane, Unit 110, Staten Island, New York 10305",5030247502,
 527812/2023,Brooklyn,2120,1033,"55 Greene Avenue, Suites 2D and 2E, Brooklyn, NY 11238",3021207501,
-706172/2014,Queens,16045,11,"69-45 Bayfield Avenue, Arverne, NY 11692",4160450011,
-712206/2022,Queens,6709,7," 150-63 78th Avenue Flushing, NY 11367",,
-704325/2018,Queens,12801,23,"120-11 218th Street, Cambria Heights, NY 11411",,
-850324/2024,Manhattan,1006,1302,,,
+712206/2022,Queens,6709,7," 150-63 78th Avenue Flushing, NY 11367",4067090007,
+704325/2018,Queens,12801,23,"120-11 218th Street, Cambria Heights, NY 11411",4128010023,
+850324/2024,Manhattan,1006,1302,,1010067502,TIMES
