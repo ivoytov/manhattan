@@ -11,7 +11,7 @@ bids = CSV.read("foreclosures/bids.csv", DataFrame)
 sales = CSV.read("foreclosures/auction_sales.csv", DataFrame)
 pluto = CSV.read("foreclosures/pluto.csv", DataFrame)
 
-month = Date("2024-11-30")
+month = Date("2025-02-28")
 
 cases = cases[(month-Month(1)).<cases.auction_date.<=month, :]
 bids = bids[(month-Month(1)).<bids.auction_date.<=month, :]
@@ -52,14 +52,14 @@ df = outerjoin(boro_auctions, boro_completes, boro_sales, on=:borough)
 df[:, r"mean|count"] = coalesce.(df[:, r"mean|count"], 0)
 
 filter!(:winning_bid => <=(4.0e6), sold_auctions)
-axis = (width = 225, height = 225, xlabel = "Opening Bid (\$000s)", ylabel = "Winning Bid (\$000s)")
+maxy = ceil(max(sold_auctions.winning_bid...) / 5e5) * 500
+axis = (width = 225, height = 225, xlabel = "Opening Bid (\$000s)", ylabel = "Winning Bid (\$000s)", limits = ((0, maxy), (0, maxy)))
 result_overbid = data(sold_auctions) * mapping(
        :upset_price => (t-> t / 1000) => "Opening Bid (\$000s)", 
        :winning_bid => (t-> t / 1000) => "Winning Bid (\$000s)")
 plt = result_overbid * mapping(layout=:borough, marker=:building_class)       
 
 # Define the 45-degree line as a visual element
-maxy = ceil(max(sold_auctions.winning_bid...) / 5e5) * 500
 line_data = DataFrame(x = [0, maxy])
 line_45 = data(line_data) * mapping(:x => identity, :x => identity) * visual(Lines,
     linestyle= :dash,
