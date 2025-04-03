@@ -135,10 +135,13 @@ export async function download_filing(index_number, county, auction_date, missin
                 for (const row of rows) {
                     const link = row.querySelector('td:nth-child(2) a');
                     const received = row.querySelector('td:nth-child(3) span');
+                    const subtitle = row.querySelector('td:nth-child(2) span');
+
                     if (link && received) {
                         out.push({
                             downloadUrl: link.href,
-                            receivedDate: received.innerText.split(" ")[1]
+                            receivedDate: received.innerText.split(" ")[1],
+                            subtitle: subtitle ? subtitle.innerText : null,
                         })
                     }
                 }
@@ -146,11 +149,13 @@ export async function download_filing(index_number, county, auction_date, missin
             })
             docs = docs.reverse()
 
+
             if (docs.length == 0) {
                 return { error: 'No valid document links available' };
             }
 
             const receivedDate = new Date(docs[0].receivedDate)
+            const subtitle = docs[0].subtitle
             const downloadUrl = docs[0].downloadUrl
 
             // if received date is before auction date, this is not the right surplus money form
@@ -164,6 +169,11 @@ export async function download_filing(index_number, county, auction_date, missin
             earliestDayForNoticeOfSale.setDate(earliestDayForNoticeOfSale.getDate() - 90)
             if (auction_date && filing == FilingType.NOTICE_OF_SALE && (receivedDate < earliestDayForNoticeOfSale || receivedDate > auction_date)) {
                 console.log(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, either after or more than 90 days before ${auction_date.toISOString().split('T')[0]} auction date; SKIPPING`)
+                continue
+            }
+
+            if(filing == FilingType.NOTICE_OF_SALE && subtitle == 'Notice of Cancellation of Sale') {
+                console.log(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, but is a cancellation; SKIPPING`)
                 continue
             }
 

@@ -151,6 +151,7 @@ function prompt_for_winning_bid(cases, bids)
         # Extract text from PDF manually
         filename = replace(case_number, "/" => "-") * ".pdf"
         pdf_path = joinpath("saledocs/surplusmoney", filename)
+        run(`open "$pdf_path"`)
         
         judgement, upset_price, winning_bid = missing, missing, missing
 
@@ -159,9 +160,6 @@ function prompt_for_winning_bid(cases, bids)
         catch e
             println("Error extracting values from $pdf_path: $e")
         end
-
-        # Open the PDF file with the default application on macOS
-        run(`open "$pdf_path"`)
 
         values = (
             auction_date=foreclosure_case.auction_date,
