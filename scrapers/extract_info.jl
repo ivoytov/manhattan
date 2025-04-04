@@ -258,30 +258,25 @@ function get_block_and_lot()
 
     sort!(cases, order(:auction_date, rev=true))
 
-    new_cases = antijoin(cases, lots, on=:case_number)
+    new_cases = antijoin(cases, lots, on=[:case_number, :borough])
 
     for case in eachrow(new_cases)
         pdf_path = notice_of_sale_path(case.case_number)
         values = parse_notice_of_sale(pdf_path)
         ismissing(values) && continue
 
+        if !isnothing(values.is_combo)
+            println("$(case.case_number) Possible combo lot")
+        end
+
         if !isnothing(values.is_timeshare)
             println("$(case.case_number) Timeshare detected")
-            row = (
-                case_number=case.case_number, 
-                borough=case.borough, 
+            values = (
                 block=1006, 
                 lot=1302,
                 address= missing
             )
-            push!(lots, row; cols=:subset)
-            continue
-        end
-
-        if !isnothing(values.is_combo)
-            println("$(case.case_number) Possible combo lot")
-        end
-        if isnothing(values.block) || isnothing(values.lot)
+        elseif isnothing(values.block) || isnothing(values.lot)
             if "-i" ∈ ARGS || haskey(ENV, "WSS")
                 values = prompt_for_block_and_lot(pdf_path, values)
                 isnothing(values) && break
@@ -289,89 +284,23 @@ function get_block_and_lot()
                 continue
             end
         end
+
         row = (
             case_number=case.case_number, 
             borough=case.borough, 
             block=parse(Int,values.block), 
             lot=parse(Int, values.lot), 
-            address=isnothing(values.address) ? missing : values.address
+            address=isnothing(values.address) ? missing : values.address,
+            bbl=missing,
+            unit=missing,
         )
         printstyled(@sprintf("%12s block %6d lot %5d address %s\n", row.case_number, row.block, row.lot, ismissing(row.address) ? "missing" : row.address), color=:light_green)
-        push!(lots, row; cols=:subset)
+
+        # append the row to the bids CSV file
+        CSV.write("foreclosures/lots.csv", DataFrame([row]); append=true, header=false)
     end
 
     # Convert updated rows back to CSV
-    CSV.write(lots_path, lots)
-    println("CSV file has been updated with missing block and lot values.")
-end
-
-function test_existing_data(start_case = nothing)
-    lots_path = "foreclosures/lots.csv"
-    lots = CSV.read(lots_path, DataFrame)
-
-    combo_cases = unique(lots[nonunique(lots, [:case_number]), :case_number])
-    # don't try to check cases with > 1 parcel as the regex will fail
-    filter!(:case_number => ∉(combo_cases), lots)
-
-    # Read in which files exist
-    files = readdir("saledocs/noticeofsale") .|> x -> replace(x[1:end-4], "-" => "/")
-    
-    start_idx = 1
-    if !isnothing(start_case)
-        printstyled("Starting with case $start_case \n", color=:blue, italic=true)
-        start_idx = findfirst(lots.case_number .== start_case) 
-    end 
-
-    total = nrow(lots)
-    for (idx, case) in enumerate(eachrow(lots[start_idx:end, :]))
-        case_number = case.case_number
-
-        if case_number ∉ files
-            continue
-        end
-        # Extract text from PDF
-        pdf_path = notice_of_sale_path(case_number)
-        values = parse_notice_of_sale(pdf_path)
-
-        println(@sprintf("%4d/%4d %12s block %5d-%4d %s", start_idx + idx - 1, total, case_number, case.block, case.lot, case.address))
-
-        ismissing(values) && continue
-        block = isnothing(values.block) ? 0 : parse(Int, values.block)
-        lot = isnothing(values.lot) ? 0 : parse(Int, values.lot)
-        address = isnothing(values.address) ? "" : values.address
-        is_combo = isnothing(values.is_combo) ? "" : "COMBO"
-
-        if (block == 0 || block == case.block) && 
-            (lot == 0 || lot == case.lot) && 
-            # (address == "" || ismissing(case.address) || address == case.address) &&
-            (is_combo != "COMBO")
-            continue
-        end
-
-        run(`open "$pdf_path"`)
-        # Open the PDF file with the default application on macOS
-        if is_combo == "COMBO"
-            printstyled("$case_number COMBO detected\n", bold=true, color=:yellow)
-            continue
-        end
-
-        printstyled(@sprintf("%12s EXISTING block %6d lot %5d address %s\n", case_number, case.block, case.lot, case.address), color=:light_magenta)
-        printstyled(@sprintf("%12s NEW      block %6d lot %5d address %s %s\n", case_number, block, lot, address, is_combo), color=:light_green)
-        
-        is_fix = prompt("Change EXISTING to NEW (y/n)?", "n")
-        if isnothing(is_fix)
-            break
-        elseif is_fix == "y"
-            lots.block[idx] = block
-            lots.lot[idx] = lot
-            lots.address[idx] = address
-        end
-        run(`osascript -e 'tell application "Preview" to close window 1'`)
-
-
-    end
-
-    CSV.write(lots_path, lots)
     println("CSV file has been updated with missing block and lot values.")
 end
 
@@ -385,4 +314,3 @@ function main()
 end
 
 main()
-# test_existing_data("722814/2021")
