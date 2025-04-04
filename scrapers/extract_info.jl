@@ -7,7 +7,7 @@ function prompt(question, default_answer="")
     print("$question [$default_answer]: ")
     input = readline()
     input == "q" && return nothing
-    return input == "" ? "$default_answer" : input
+    return input == "" ? default_answer : input
 end
 
 # Function to extract matches based on a pattern
@@ -126,10 +126,6 @@ function extract_llm_values(pdf_path)
         return nothing
     end
 
-    judgement = parse(Float64, judgement)
-    upset_price = parse(Float64, upset_price)
-    winning_bid = parse(Float64, winning_bid)
-
     return (judgement=judgement, upset_price=upset_price, winning_bid=winning_bid)
 end
 
@@ -162,12 +158,12 @@ function prompt_for_winning_bid(foreclosure_case)
     run(`osascript -e 'tell application "Preview" to close window 1'`)
 
     row = (
-        case_number=String(case_number), 
-        borough=String(foreclosure_case.borough), 
+        case_number=case_number, 
+        borough=foreclosure_case.borough, 
         auction_date=foreclosure_case.auction_date,
-        judgement=round(prices.judgement),
-        upset_price=round(prices.upset_price),
-        winning_bid=round(prices.winning_bid)
+        judgement=prices.judgement,
+        upset_price=prices.upset_price,
+        winning_bid=prices.winning_bid
     )
 
     # append the row to the bids CSV file
@@ -206,42 +202,47 @@ function parse_notice_of_sale(pdf_path)
         extract_text_from_pdf(pdf_path)
     catch e
         println("Error extracting text from $pdf_path: $e")
-        return missing
+        return nothing
     end
     text = replace(text, "\n" => " ")
-    values = (
-        block=extract_block(text),
-        lot=extract_lot(text),
-        address=extract_address(text),
-        is_combo=detect_multiple_lots(text),
-        is_timeshare=detect_time_share(text),
-    )
-    return values
-end
 
-# Prompt for block and lot
-function prompt_for_block_and_lot(pdf_path, values)
-    # Open the PDF file with the default application on macOS
-    run(`open "$pdf_path"`)
-    # Iterate through values and update them
-    res = Dict()
-    for (key, parsed_value) in pairs(values)
-        if parsed_value === nothing
-            prompt_value = ""
-        else
-            prompt_value = parsed_value
-        end
-
-        input = prompt("Enter $key:", prompt_value)
-        if isnothing(input) || ismissing(input) || input == "s" 
-            return nothing
-        end
-        res[key] = input
+    if !isnothing(detect_time_share(text))
+        return (
+            block=1006, 
+            lot=1302,
+            address= missing
+        )
     end
 
-    run(`osascript -e 'tell application "Preview" to close window 1'`)
-    res = (; (Symbol(k) => v for (k,v) in res)...)
-    return res
+    if !isnothing(detect_multiple_lots(text))
+        println("Multiple lots detected in $pdf_path")
+    end
+
+    block, lot = extract_block(text), extract_lot(text)
+
+    if ("-i" ∈ ARGS || haskey(ENV, "WSS")) && (isnothing(block) || isnothing(lot))
+        # Open the PDF file with the default application on macOS
+        run(`open "$pdf_path"`)
+
+        block = prompt("Enter block:", block)
+        lot = prompt("Enter lot:", lot)
+
+        run(`osascript -e 'tell application "Preview" to close window 1'`)
+    else
+        block = tryparse(Int, block)
+        lot = tryparse(Int, lot)
+    end
+
+    if isnothing(block) || isnothing(lot)
+        println("Error: Missing block or lot in $pdf_path")
+        return nothing
+    end
+
+    return (
+        block=block,
+        lot=lot,
+        address=extract_address(text),
+    )
 end
 
 # Get block and lot
@@ -263,34 +264,16 @@ function get_block_and_lot()
     for case in eachrow(new_cases)
         pdf_path = notice_of_sale_path(case.case_number)
         values = parse_notice_of_sale(pdf_path)
-        ismissing(values) && continue
-
-        if !isnothing(values.is_combo)
-            println("$(case.case_number) Possible combo lot")
-        end
-
-        if !isnothing(values.is_timeshare)
-            println("$(case.case_number) Timeshare detected")
-            values = (
-                block=1006, 
-                lot=1302,
-                address= missing
-            )
-        elseif isnothing(values.block) || isnothing(values.lot)
-            if "-i" ∈ ARGS || haskey(ENV, "WSS")
-                values = prompt_for_block_and_lot(pdf_path, values)
-                isnothing(values) && break
-            else
-                continue
-            end
+        if isnothing(values)
+            continue
         end
 
         row = (
             case_number=case.case_number, 
             borough=case.borough, 
-            block=parse(Int,values.block), 
-            lot=parse(Int, values.lot), 
-            address=isnothing(values.address) ? missing : values.address,
+            block=values.block, 
+            lot=values.lot, 
+            address=values.address,
             bbl=missing,
             unit=missing,
         )
