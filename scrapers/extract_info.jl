@@ -117,96 +117,61 @@ function extract_llm_values(pdf_path)
     parsed_response = r.response[:choices][1][:message][:content] |> JSON3.read
 
     # Access structured data
-    judgement = parsed_response["judgement"]
-    upset_price = parsed_response["upset_price"]
-    winning_bid = parsed_response["winning_bid"]
+    judgement = prompt("Enter judgement:", parsed_response["judgement"])
+    upset_price = prompt("Enter upset price:", parsed_response["upset_price"])
+    winning_bid = prompt("Enter winning bid:", parsed_response["winning_bid"])
 
-    return judgement, upset_price, winning_bid
+    if isnothing(judgement) || judgement == "" || isnothing(winning_bid) || winning_bid == "" || isnothing(upset_price) || upset_price == ""
+        println("Error: Missing values in the response.")
+        return nothing
+    end
+
+    judgement = parse(Float64, judgement)
+    upset_price = parse(Float64, upset_price)
+    winning_bid = parse(Float64, winning_bid)
+
+    return (judgement=judgement, upset_price=upset_price, winning_bid=winning_bid)
 end
 
 # Prompt for winning bid
-function prompt_for_winning_bid(cases, bids)
-    # p = Progress(nrow(cases))
-    for foreclosure_case in eachrow(cases)
-        case_number = foreclosure_case.case_number
-        if foreclosure_case.auction_date > today()
-            continue
-        end
+function prompt_for_winning_bid(foreclosure_case)
+    case_number = foreclosure_case.case_number
+
+    # Extract text from PDF manually
+    filename = replace(case_number, "/" => "-") * ".pdf"
+    pdf_path = joinpath("saledocs/surplusmoney", filename)
+    run(`open "$pdf_path"`)
         
-        if isnothing(findfirst(bids.case_number .== case_number .&& bids.auction_date .== foreclosure_case.auction_date))
-            row = (
-                case_number=case_number, 
-                borough=foreclosure_case.borough, 
-                auction_date=foreclosure_case.auction_date,
-            )
-            push!(bids, row; promote=true, cols=:subset)
-        end 
-
-        # modifying row from here on will alter the DataFrame
-        row = bids[findfirst(bids.case_number .== case_number .&& bids.auction_date .== foreclosure_case.auction_date), :]
-        if  (row.judgement, row.upset_price, row.winning_bid) .|> !ismissing |> all
-            continue
-        end
-
-        # Extract text from PDF manually
-        filename = replace(case_number, "/" => "-") * ".pdf"
-        pdf_path = joinpath("saledocs/surplusmoney", filename)
-        run(`open "$pdf_path"`)
-        
-        judgement, upset_price, winning_bid = missing, missing, missing
-
-        try
-            judgement, upset_price, winning_bid = extract_llm_values(pdf_path)
-        catch e
-            println("Error extracting values from $pdf_path: $e")
-        end
-
-        values = (
-            auction_date=foreclosure_case.auction_date,
-            judgement=round(judgement),
-            upset_price=round(upset_price),
-            winning_bid=round(winning_bid)
-        )
-
-        # check if this form is for the correct Date
-        is_right_date = prompt("Is this form for the auction held on $(foreclosure_case.auction_date) (y/n)?", "n")
-        if is_right_date == "n"
-            # move the file to a new name
-            run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
-            rm(pdf_path)
-            continue
-        elseif isnothing(is_right_date) 
-            run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
-            return bids
-        end
-
-        # Iterate through values and update them
-        for (key, parsed_value) in pairs(values)
-            key == :auction_date && continue
-
-            if !ismissing(row[key])
-                prompt_value = row[key]
-            elseif isnothing(parsed_value) || ismissing(parsed_value)
-                prompt_value = ""
-            else
-                prompt_value = parsed_value
-            end
-
-            input = prompt("Enter $key:", prompt_value)
-            if input === nothing
-                run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
-                return bids
-            end
-            if input == "s"
-                run(`osascript -e 'tell application "Preview" to close (every document whose name is "$filename")'`)
-                continue
-            end
-            row[key] = key == :auction_date ? Date(input, "yyyy-mm-dd") : parse(Float64, input)
-        end
-
-        run(`osascript -e 'tell application "Preview" to close window 1'`)
+    
+    # check if this form is for the correct Date
+    is_right_date = prompt("Is this form for the auction held on $(foreclosure_case.auction_date) (y/n)?", "n")
+    if is_right_date == "n" 
+        # move the file to a new name
+        rm(pdf_path)
+        return
+    elseif isnothing(is_right_date) 
+        return
     end
-    return bids
+
+    prices = extract_llm_values(pdf_path)
+    if isnothing(prices)
+        println("Error extracting values from $pdf_path")
+        return
+    end
+
+    run(`osascript -e 'tell application "Preview" to close window 1'`)
+
+    row = (
+        case_number=String(case_number), 
+        borough=String(foreclosure_case.borough), 
+        auction_date=foreclosure_case.auction_date,
+        judgement=round(prices.judgement),
+        upset_price=round(prices.upset_price),
+        winning_bid=round(prices.winning_bid)
+    )
+
+    # append the row to the bids CSV file
+    CSV.write("foreclosures/bids.csv", DataFrame([row]); append=true, header=false)
 end
 
 # Get auction results
@@ -219,13 +184,15 @@ function get_auction_results()
     # Read in which files exist
     files = readdir("saledocs/surplusmoney") .|> x -> replace(x[1:end-4], "-" => "/")
 
+    filter!(row -> row.auction_date < today(), cases)
     filter!(row -> row.case_number in files, cases)
+
+    cases = antijoin(cases, bids, on=[:case_number, :borough])
     sort!(cases, order(:auction_date, rev=true))
 
-    updated_bids = prompt_for_winning_bid(cases, bids)
 
-    # Convert updated rows back to CSV
-    CSV.write(bids_path, updated_bids)
+    prompt_for_winning_bid.(eachrow(cases))
+
 
     println("CSV file bids.csv has been updated with missing bid results values.")
 end
