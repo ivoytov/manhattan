@@ -172,8 +172,8 @@ export async function download_filing(index_number, county, auction_date, missin
                 continue
             }
 
-            if(filing == FilingType.NOTICE_OF_SALE && subtitle == 'Notice of Cancellation of Sale') {
-                console.log(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, but is a cancellation; SKIPPING`)
+            if (filing == FilingType.NOTICE_OF_SALE && subtitle && subtitle.toLowerCase().includes('cancellation')) {
+                console.log(index_number, `Found NOS with received date ${receivedDate.toISOString().split('T')[0]}, but subtitle indicates cancellation; SKIPPING`)
                 continue
             }
 

@@ -3,11 +3,12 @@ using CSV, DataFrames, ProgressMeter, OCReract, Dates, Printf, OpenAI, Base64, J
 DotEnv.load!()
 
 # Function to prompt with a default answer
-function prompt(question, default_answer="")
+function prompt(question, default_answer)
     print("$question [$default_answer]: ")
     input = readline()
     input == "q" && return nothing
-    return input == "" ? default_answer : input
+    input == "" && return string(default_answer)
+    return string(input)
 end
 
 # Function to extract matches based on a pattern
@@ -126,7 +127,11 @@ function extract_llm_values(pdf_path)
         return nothing
     end
 
-    return (judgement=judgement, upset_price=upset_price, winning_bid=winning_bid)
+    return (
+        judgement=parse(Float64, judgement), 
+        upset_price=parse(Float64,upset_price), 
+        winning_bid=parse(Float64, winning_bid)
+    )
 end
 
 # Prompt for winning bid
@@ -228,10 +233,8 @@ function parse_notice_of_sale(pdf_path)
         lot = prompt("Enter lot:", lot)
 
         run(`osascript -e 'tell application "Preview" to close window 1'`)
-    else
-        block = tryparse(Int, block)
-        lot = tryparse(Int, lot)
     end
+    
 
     if isnothing(block) || isnothing(lot)
         println("Error: Missing block or lot in $pdf_path")
@@ -239,8 +242,8 @@ function parse_notice_of_sale(pdf_path)
     end
 
     return (
-        block=block,
-        lot=lot,
+        block=parse(Int, block),
+        lot=parse(Int, lot),
         address=extract_address(text),
     )
 end
@@ -277,7 +280,7 @@ function get_block_and_lot()
             bbl=missing,
             unit=missing,
         )
-        printstyled(@sprintf("%12s block %6d lot %5d address %s\n", row.case_number, row.block, row.lot, ismissing(row.address) ? "missing" : row.address), color=:light_green)
+        printstyled(@sprintf("%12s block %6d lot %5d address %s\n", row.case_number, row.block, row.lot, row.address), color=:light_green)
 
         # append the row to the bids CSV file
         CSV.write("foreclosures/lots.csv", DataFrame([row]); append=true, header=false)
