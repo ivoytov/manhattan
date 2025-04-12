@@ -97,7 +97,12 @@ function extract_llm_values(pdf_path)
     image_path = case_number * ".png"
 
     # Call the GraphicsMagick command
-    run(pipeline(`gm convert -append -density 330 $pdf_path $image_path`, stdout=devnull, stderr=devnull))
+    try
+        run(pipeline(`gm convert -append -density 330 $pdf_path $image_path`, stdout=devnull, stderr=devnull))
+    catch e
+        println("Error running gm convert: $e")
+        return nothing
+    end
     
     # Read the image and encode it to Base64
     image_data = read(image_path)
