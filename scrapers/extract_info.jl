@@ -7,7 +7,12 @@ function prompt(question, default_answer)
     print("$question [$default_answer]: ")
     input = readline()
     input == "q" && return nothing
-    input == "" && return string(default_answer)
+    if input == ""
+        if isnothing(default_answer)
+            return nothing
+        end
+        return string(default_answer)
+    end
     return string(input)
 end
 
