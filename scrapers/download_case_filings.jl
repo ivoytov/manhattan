@@ -53,7 +53,7 @@ end
 
 # Function to find missing filings
 function missing_filings(case_number, auction_date)
-	if auction_date < today() - Day(60)
+	if auction_date < today() - Day(30)
 		return []
 	end
 
