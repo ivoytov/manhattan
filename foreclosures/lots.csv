@@ -2661,6 +2661,7 @@ case_number,borough,block,lot,address,BBL,unit
 706878/2019,Queens,9012,13,"95 16 82nd Street, Ozone Park, (City of New York",4090120013,
 715281/2021,Queens,5386,19,"NA Beech Avenue, Queens, New York 11355",4053860019,
 135277/2016,Staten Island,2832,240,"58 COURTNEY LOOP, STATEN ISLAND, NY 10305",5028320240,
+35150/2020E,Bronx,2763,352,"741 Whittier Street, Bronx, NY 10474",2027630352,
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -2681,4 +2682,3 @@ case_number,borough,block,lot,address,BBL,unit
 150642/2021,Staten Island,3024,1110,"73 Claradon Lane, Unit 110, Staten Island, New York 10305",5030247502,
 527812/2023,Brooklyn,2120,1033,"55 Greene Avenue, Suites 2D and 2E, Brooklyn, NY 11238",3021207501,
 135193/2023,Staten Island,2401,1366,"132A Lamped Loop, Unit 84, Staten Island, NY 10314",,86
-35150/2020E,Bronx,2763,352,"741 Whittier Street, Bronx, NY 10474",2027630352,
