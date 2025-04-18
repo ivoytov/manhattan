@@ -69,7 +69,7 @@ function missing_filings(case_number, auction_date)
     
 
     # For auctions in the last 5 days, don't look for a surplus money form
-    earliestDayForMoneyForm = today() - Day(5)
+    earliestDayForMoneyForm = today() - Day(1)
 
     # For auctions more than 35 days in the future, don't look for a notice of sale
     latestDayForNoticeOfSale = today() + Day(35)
@@ -88,14 +88,9 @@ function missing_filings(case_number, auction_date)
 end
 
 function get_data()
-    log_path = "foreclosures/cases.log"
-    not_in_cef = readlines(log_path) |> 
-                x -> filter(y -> endswith(y, "Not in CEF") || endswith(y, "Discontinued") || endswith(y, "No PDF version"), x) |> 
-                x -> map(y -> split(y, " ")[1], x)
     
     cases_path = "foreclosures/cases.csv"
     rows = CSV.read(cases_path, DataFrame)
-    filter!(row -> !(row.case_number in not_in_cef), rows)
     
     sort!(rows, order(:auction_date), rev=true)
 
