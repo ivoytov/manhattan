@@ -286,7 +286,7 @@ function get_block_and_lot()
             borough=case.borough, 
             block=values.block, 
             lot=values.lot, 
-            address=values.address,
+            address=isnothing(values.address) ? missing : values.address,
             bbl=missing,
             unit=missing,
         )
