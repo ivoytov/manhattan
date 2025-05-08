@@ -2814,6 +2814,7 @@ case_number,borough,block,lot,address,BBL,unit
 1231/2017,Brooklyn,5036,44,,3050360044,
 521615/2021,Brooklyn,8343,1122,,3083437501,85
 521615/2021,Brooklyn,8343,1164,,3083437501,61
+705283/2023,Queens,1559,40,"4429 Ketcham Street, Elmhurst, NY 11373",4015590040,
 706232/2018,Queens,14243,1115,,4142431115,
 130256/2010,Staten Island,1495,1125,,5014957502,
 103572/2008,Staten Island,1651,1128,"47 Regal Walk, Staten Island, NY 10303",5016517501,
@@ -2834,4 +2835,3 @@ case_number,borough,block,lot,address,BBL,unit
 150642/2021,Staten Island,3024,1110,"73 Claradon Lane, Unit 110, Staten Island, New York 10305",5030247502,
 527812/2023,Brooklyn,2120,1033,"55 Greene Avenue, Suites 2D and 2E, Brooklyn, NY 11238",3021207501,
 135193/2023,Staten Island,2401,1366,"132A Lamped Loop, Unit 84, Staten Island, NY 10314",,86
-705283/2023,Queens,1559,40,"4429 Ketcham Street, Elmhurst, NY 11373",4015590040,
