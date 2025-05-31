@@ -430,7 +430,7 @@ Promise.all(csvPromises).then(([sales, auctions, lots, bids, pluto]) => {
     for (const lot of lots) {
         const auctionMatches = auctions.filter(({ case_number }) => case_number == lot.case_number)
         if (!auctionMatches.length) {
-            console.log("Couldn't find a match for lot", lot.case_number)
+            console.warn("Couldn't find a match for lot", lot.case_number)
             continue
         }
 
