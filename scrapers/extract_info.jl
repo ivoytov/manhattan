@@ -153,18 +153,8 @@ function prompt_for_winning_bid(foreclosure_case)
     pdf_path = joinpath("saledocs/surplusmoney", filename)
     run(`open "$pdf_path"`)
         
-    
-    # check if this form is for the correct Date
-    is_right_date = prompt("Is this form for the auction held on $(foreclosure_case.auction_date) (y/n)?", "n")
-    if is_right_date == "n" 
-        # move the file to a new name
-        rm(pdf_path)
-        return
-    elseif isnothing(is_right_date) 
-        return
-    end
-
     prices = extract_llm_values(pdf_path)
+
     if isnothing(prices)
         println("Error extracting values from $pdf_path")
         return
