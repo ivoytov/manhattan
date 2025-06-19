@@ -1,13 +1,10 @@
 [deps]
-AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DotEnv = "4dc1fcf4-5e3b-5448-94ab-0c38ec0385c1"
 GLM = "38e38edf-8417-5370-95a0-9cbb8c7f171a"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
 OCReract = "c9880795-194d-450c-832d-1e8a03a8ecd1"
-OpenAI = "e9f21f70-7185-4079-aca2-91159181367c"
 ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
 XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
