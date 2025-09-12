@@ -1,269 +1,270 @@
 borough,house_class,period,home_price_index
 Bronx,Condo,2003-01-31,100.0
-Bronx,Condo,2003-02-28,44.8
-Bronx,Condo,2003-03-31,43.3
-Bronx,Condo,2003-04-30,52.3
-Bronx,Condo,2003-05-31,41.8
-Bronx,Condo,2003-06-30,52.0
-Bronx,Condo,2003-07-31,56.8
-Bronx,Condo,2003-08-31,44.2
-Bronx,Condo,2003-10-31,55.7
-Bronx,Condo,2003-12-31,43.1
-Bronx,Condo,2004-01-31,41.8
+Bronx,Condo,2003-02-28,45.1
+Bronx,Condo,2003-03-31,43.5
+Bronx,Condo,2003-04-30,52.6
+Bronx,Condo,2003-05-31,42.0
+Bronx,Condo,2003-06-30,52.3
+Bronx,Condo,2003-07-31,57.1
+Bronx,Condo,2003-08-31,44.4
+Bronx,Condo,2003-10-31,56.1
+Bronx,Condo,2003-12-31,43.4
+Bronx,Condo,2004-01-31,42.1
 Bronx,Condo,2004-02-29,100.0
-Bronx,Condo,2004-03-31,60.7
+Bronx,Condo,2004-03-31,61.0
 Bronx,Condo,2004-04-30,100.0
-Bronx,Condo,2004-05-31,47.1
-Bronx,Condo,2004-06-30,58.9
-Bronx,Condo,2004-07-31,49.4
-Bronx,Condo,2004-08-31,47.5
-Bronx,Condo,2004-09-30,47.7
-Bronx,Condo,2004-10-31,46.6
+Bronx,Condo,2004-05-31,47.4
+Bronx,Condo,2004-06-30,59.2
+Bronx,Condo,2004-07-31,49.6
+Bronx,Condo,2004-08-31,47.6
+Bronx,Condo,2004-09-30,48.0
+Bronx,Condo,2004-10-31,47.0
 Bronx,Condo,2004-11-30,100.0
-Bronx,Condo,2004-12-31,53.3
-Bronx,Condo,2005-01-31,61.2
-Bronx,Condo,2005-02-28,53.0
-Bronx,Condo,2005-03-31,61.6
+Bronx,Condo,2004-12-31,53.4
+Bronx,Condo,2005-01-31,60.0
+Bronx,Condo,2005-02-28,53.3
+Bronx,Condo,2005-03-31,61.9
 Bronx,Condo,2005-04-30,100.0
-Bronx,Condo,2005-05-31,60.3
-Bronx,Condo,2005-06-30,53.6
-Bronx,Condo,2005-07-31,58.9
-Bronx,Condo,2005-08-31,63.9
-Bronx,Condo,2005-09-30,51.1
-Bronx,Condo,2005-10-31,53.9
+Bronx,Condo,2005-05-31,60.6
+Bronx,Condo,2005-06-30,53.8
+Bronx,Condo,2005-07-31,59.1
+Bronx,Condo,2005-08-31,64.3
+Bronx,Condo,2005-09-30,51.4
+Bronx,Condo,2005-10-31,54.2
 Bronx,Condo,2005-11-30,100.0
 Bronx,Condo,2005-12-31,100.0
 Bronx,Condo,2006-02-28,94.4
-Bronx,Condo,2006-03-31,56.8
-Bronx,Condo,2006-04-30,48.8
-Bronx,Condo,2006-05-31,49.4
-Bronx,Condo,2006-06-30,66.5
-Bronx,Condo,2006-07-31,58.1
-Bronx,Condo,2006-08-31,59.7
-Bronx,Condo,2006-09-30,83.0
-Bronx,Condo,2006-10-31,75.0
-Bronx,Condo,2006-11-30,56.1
-Bronx,Condo,2006-12-31,56.7
-Bronx,Condo,2007-01-31,71.5
-Bronx,Condo,2007-02-28,60.4
-Bronx,Condo,2007-03-31,66.3
-Bronx,Condo,2007-04-30,64.7
-Bronx,Condo,2007-05-31,67.4
-Bronx,Condo,2007-06-30,60.6
-Bronx,Condo,2007-07-31,58.5
-Bronx,Condo,2007-08-31,62.8
-Bronx,Condo,2007-09-30,60.8
-Bronx,Condo,2007-10-31,66.1
-Bronx,Condo,2007-11-30,56.4
-Bronx,Condo,2007-12-31,59.2
-Bronx,Condo,2008-01-31,51.5
-Bronx,Condo,2008-02-29,72.2
-Bronx,Condo,2008-03-31,65.2
-Bronx,Condo,2008-04-30,52.0
-Bronx,Condo,2008-05-31,56.6
-Bronx,Condo,2008-06-30,53.6
-Bronx,Condo,2008-07-31,56.9
-Bronx,Condo,2008-08-31,50.2
-Bronx,Condo,2008-09-30,64.5
-Bronx,Condo,2008-10-31,71.4
-Bronx,Condo,2008-11-30,67.4
-Bronx,Condo,2008-12-31,59.6
-Bronx,Condo,2009-01-31,58.2
-Bronx,Condo,2009-02-28,55.1
-Bronx,Condo,2009-03-31,56.7
-Bronx,Condo,2009-04-30,50.4
-Bronx,Condo,2009-05-31,62.2
-Bronx,Condo,2009-06-30,55.4
-Bronx,Condo,2009-07-31,59.0
-Bronx,Condo,2009-08-31,79.8
-Bronx,Condo,2009-09-30,72.6
-Bronx,Condo,2009-10-31,73.1
-Bronx,Condo,2009-11-30,70.6
-Bronx,Condo,2009-12-31,56.8
-Bronx,Condo,2010-01-31,66.8
-Bronx,Condo,2010-02-28,58.7
-Bronx,Condo,2010-03-31,77.8
-Bronx,Condo,2010-04-30,59.1
-Bronx,Condo,2010-06-30,65.4
+Bronx,Condo,2006-03-31,57.1
+Bronx,Condo,2006-04-30,49.1
+Bronx,Condo,2006-05-31,49.7
+Bronx,Condo,2006-06-30,66.9
+Bronx,Condo,2006-07-31,59.9
+Bronx,Condo,2006-08-31,60.0
+Bronx,Condo,2006-09-30,83.4
+Bronx,Condo,2006-10-31,75.4
+Bronx,Condo,2006-11-30,56.5
+Bronx,Condo,2006-12-31,57.0
+Bronx,Condo,2007-01-31,71.8
+Bronx,Condo,2007-02-28,60.7
+Bronx,Condo,2007-03-31,66.7
+Bronx,Condo,2007-04-30,65.0
+Bronx,Condo,2007-05-31,67.8
+Bronx,Condo,2007-06-30,61.0
+Bronx,Condo,2007-07-31,58.7
+Bronx,Condo,2007-08-31,63.2
+Bronx,Condo,2007-09-30,61.1
+Bronx,Condo,2007-10-31,66.6
+Bronx,Condo,2007-11-30,56.7
+Bronx,Condo,2007-12-31,59.5
+Bronx,Condo,2008-01-31,51.8
+Bronx,Condo,2008-02-29,72.5
+Bronx,Condo,2008-03-31,65.6
+Bronx,Condo,2008-04-30,52.3
+Bronx,Condo,2008-05-31,56.9
+Bronx,Condo,2008-06-30,53.9
+Bronx,Condo,2008-07-31,57.1
+Bronx,Condo,2008-08-31,50.5
+Bronx,Condo,2008-09-30,64.7
+Bronx,Condo,2008-10-31,71.7
+Bronx,Condo,2008-11-30,67.7
+Bronx,Condo,2008-12-31,57.2
+Bronx,Condo,2009-01-31,58.5
+Bronx,Condo,2009-02-28,55.5
+Bronx,Condo,2009-03-31,57.0
+Bronx,Condo,2009-04-30,50.7
+Bronx,Condo,2009-05-31,62.6
+Bronx,Condo,2009-06-30,57.9
+Bronx,Condo,2009-07-31,59.3
+Bronx,Condo,2009-08-31,80.1
+Bronx,Condo,2009-09-30,73.0
+Bronx,Condo,2009-10-31,73.4
+Bronx,Condo,2009-11-30,70.7
+Bronx,Condo,2009-12-31,57.2
+Bronx,Condo,2010-01-31,67.1
+Bronx,Condo,2010-02-28,58.9
+Bronx,Condo,2010-03-31,78.4
+Bronx,Condo,2010-04-30,59.4
+Bronx,Condo,2010-06-30,65.7
 Bronx,Condo,2010-07-31,141.0
-Bronx,Condo,2010-08-31,62.3
-Bronx,Condo,2010-09-30,41.7
-Bronx,Condo,2010-11-30,50.2
-Bronx,Condo,2010-12-31,55.4
-Bronx,Condo,2011-01-31,62.7
-Bronx,Condo,2011-02-28,60.6
+Bronx,Condo,2010-08-31,62.9
+Bronx,Condo,2010-09-30,41.9
+Bronx,Condo,2010-11-30,50.5
+Bronx,Condo,2010-12-31,56.0
+Bronx,Condo,2011-01-31,63.1
+Bronx,Condo,2011-02-28,60.9
 Bronx,Condo,2011-03-31,100.0
-Bronx,Condo,2011-04-30,50.5
-Bronx,Condo,2011-05-31,48.1
-Bronx,Condo,2011-06-30,58.8
-Bronx,Condo,2011-07-31,39.2
-Bronx,Condo,2011-08-31,58.8
-Bronx,Condo,2011-09-30,52.8
-Bronx,Condo,2011-10-31,61.4
-Bronx,Condo,2011-11-30,55.4
+Bronx,Condo,2011-04-30,50.7
+Bronx,Condo,2011-05-31,48.3
+Bronx,Condo,2011-06-30,59.3
+Bronx,Condo,2011-07-31,39.4
+Bronx,Condo,2011-08-31,59.1
+Bronx,Condo,2011-09-30,53.2
+Bronx,Condo,2011-10-31,61.8
+Bronx,Condo,2011-11-30,55.8
 Bronx,Condo,2011-12-31,51.3
-Bronx,Condo,2012-02-29,52.8
-Bronx,Condo,2012-03-31,48.4
-Bronx,Condo,2012-04-30,61.0
-Bronx,Condo,2012-05-31,49.2
-Bronx,Condo,2012-06-30,56.6
-Bronx,Condo,2012-07-31,58.3
-Bronx,Condo,2012-08-31,75.8
+Bronx,Condo,2012-02-29,53.0
+Bronx,Condo,2012-03-31,48.7
+Bronx,Condo,2012-04-30,61.4
+Bronx,Condo,2012-05-31,49.6
+Bronx,Condo,2012-06-30,57.0
+Bronx,Condo,2012-07-31,58.6
+Bronx,Condo,2012-08-31,76.2
 Bronx,Condo,2012-09-30,100.0
-Bronx,Condo,2012-10-31,60.3
-Bronx,Condo,2012-11-30,48.2
-Bronx,Condo,2012-12-31,61.0
-Bronx,Condo,2013-01-31,71.4
-Bronx,Condo,2013-02-28,62.5
-Bronx,Condo,2013-03-31,54.2
-Bronx,Condo,2013-04-30,103.4
-Bronx,Condo,2013-05-31,50.6
-Bronx,Condo,2013-06-30,53.5
-Bronx,Condo,2013-07-31,60.3
-Bronx,Condo,2013-08-31,43.5
-Bronx,Condo,2013-09-30,56.2
-Bronx,Condo,2013-10-31,59.9
+Bronx,Condo,2012-10-31,60.6
+Bronx,Condo,2012-11-30,48.4
+Bronx,Condo,2012-12-31,61.2
+Bronx,Condo,2013-01-31,71.7
+Bronx,Condo,2013-02-28,62.9
+Bronx,Condo,2013-03-31,54.4
+Bronx,Condo,2013-04-30,103.9
+Bronx,Condo,2013-05-31,50.9
+Bronx,Condo,2013-06-30,53.8
+Bronx,Condo,2013-07-31,60.7
+Bronx,Condo,2013-08-31,43.7
+Bronx,Condo,2013-09-30,56.4
+Bronx,Condo,2013-10-31,60.2
 Bronx,Condo,2013-11-30,100.0
-Bronx,Condo,2013-12-31,53.7
-Bronx,Condo,2014-01-31,62.1
-Bronx,Condo,2014-02-28,50.7
-Bronx,Condo,2014-03-31,57.2
-Bronx,Condo,2014-04-30,73.5
-Bronx,Condo,2014-05-31,65.9
-Bronx,Condo,2014-06-30,60.6
-Bronx,Condo,2014-07-31,53.0
-Bronx,Condo,2014-08-31,58.6
-Bronx,Condo,2014-09-30,58.2
+Bronx,Condo,2013-12-31,53.5
+Bronx,Condo,2014-01-31,62.5
+Bronx,Condo,2014-02-28,50.8
+Bronx,Condo,2014-03-31,57.5
+Bronx,Condo,2014-04-30,73.9
+Bronx,Condo,2014-05-31,66.2
+Bronx,Condo,2014-06-30,60.8
+Bronx,Condo,2014-07-31,53.3
+Bronx,Condo,2014-08-31,59.2
+Bronx,Condo,2014-09-30,58.6
 Bronx,Condo,2014-10-31,100.0
-Bronx,Condo,2014-11-30,63.2
-Bronx,Condo,2014-12-31,61.8
-Bronx,Condo,2015-01-31,62.3
-Bronx,Condo,2015-02-28,61.6
-Bronx,Condo,2015-03-31,59.7
+Bronx,Condo,2014-11-30,63.6
+Bronx,Condo,2014-12-31,62.1
+Bronx,Condo,2015-01-31,62.6
+Bronx,Condo,2015-02-28,62.0
+Bronx,Condo,2015-03-31,60.1
 Bronx,Condo,2015-04-30,100.0
-Bronx,Condo,2015-05-31,62.5
-Bronx,Condo,2015-06-30,58.6
-Bronx,Condo,2015-07-31,63.6
-Bronx,Condo,2015-08-31,63.4
-Bronx,Condo,2015-09-30,63.4
-Bronx,Condo,2015-10-31,87.3
-Bronx,Condo,2015-11-30,55.0
-Bronx,Condo,2015-12-31,51.9
-Bronx,Condo,2016-01-31,83.7
-Bronx,Condo,2016-02-29,56.2
-Bronx,Condo,2016-03-31,59.1
-Bronx,Condo,2016-04-30,77.0
-Bronx,Condo,2016-05-31,69.5
-Bronx,Condo,2016-06-30,58.5
-Bronx,Condo,2016-07-31,55.3
-Bronx,Condo,2016-08-31,44.9
-Bronx,Condo,2016-09-30,52.4
-Bronx,Condo,2016-10-31,66.5
-Bronx,Condo,2016-11-30,52.5
-Bronx,Condo,2016-12-31,55.6
-Bronx,Condo,2017-01-31,58.6
-Bronx,Condo,2017-02-28,57.9
-Bronx,Condo,2017-03-31,77.4
+Bronx,Condo,2015-05-31,62.7
+Bronx,Condo,2015-06-30,58.8
+Bronx,Condo,2015-07-31,63.8
+Bronx,Condo,2015-08-31,63.9
+Bronx,Condo,2015-09-30,63.7
+Bronx,Condo,2015-10-31,89.0
+Bronx,Condo,2015-11-30,55.4
+Bronx,Condo,2015-12-31,52.2
+Bronx,Condo,2016-01-31,84.1
+Bronx,Condo,2016-02-29,56.4
+Bronx,Condo,2016-03-31,59.4
+Bronx,Condo,2016-04-30,77.3
+Bronx,Condo,2016-05-31,69.8
+Bronx,Condo,2016-06-30,58.8
+Bronx,Condo,2016-07-31,55.7
+Bronx,Condo,2016-08-31,45.2
+Bronx,Condo,2016-09-30,52.7
+Bronx,Condo,2016-10-31,66.9
+Bronx,Condo,2016-11-30,52.8
+Bronx,Condo,2016-12-31,56.0
+Bronx,Condo,2017-01-31,58.8
+Bronx,Condo,2017-02-28,58.3
+Bronx,Condo,2017-03-31,77.9
 Bronx,Condo,2017-04-30,100.0
-Bronx,Condo,2017-05-31,63.8
-Bronx,Condo,2017-06-30,66.7
-Bronx,Condo,2017-07-31,71.8
-Bronx,Condo,2017-08-31,73.8
-Bronx,Condo,2017-09-30,55.4
-Bronx,Condo,2017-10-31,59.0
+Bronx,Condo,2017-05-31,64.1
+Bronx,Condo,2017-06-30,67.0
+Bronx,Condo,2017-07-31,72.1
+Bronx,Condo,2017-08-31,74.1
+Bronx,Condo,2017-09-30,55.7
+Bronx,Condo,2017-10-31,59.2
 Bronx,Condo,2017-11-30,61.3
-Bronx,Condo,2017-12-31,62.7
-Bronx,Condo,2018-01-31,56.5
-Bronx,Condo,2018-02-28,69.4
-Bronx,Condo,2018-03-31,64.8
-Bronx,Condo,2018-04-30,63.7
-Bronx,Condo,2018-05-31,57.2
-Bronx,Condo,2018-06-30,58.7
-Bronx,Condo,2018-07-31,66.5
-Bronx,Condo,2018-08-31,70.1
-Bronx,Condo,2018-09-30,55.5
-Bronx,Condo,2018-10-31,64.9
+Bronx,Condo,2017-12-31,63.1
+Bronx,Condo,2018-01-31,56.7
+Bronx,Condo,2018-02-28,69.2
+Bronx,Condo,2018-03-31,65.2
+Bronx,Condo,2018-04-30,64.0
+Bronx,Condo,2018-05-31,57.6
+Bronx,Condo,2018-06-30,59.2
+Bronx,Condo,2018-07-31,66.8
+Bronx,Condo,2018-08-31,70.4
+Bronx,Condo,2018-09-30,56.9
+Bronx,Condo,2018-10-31,65.2
 Bronx,Condo,2018-11-30,100.0
-Bronx,Condo,2018-12-31,53.6
-Bronx,Condo,2019-01-31,69.4
-Bronx,Condo,2019-02-28,80.7
-Bronx,Condo,2019-03-31,43.6
+Bronx,Condo,2018-12-31,53.9
+Bronx,Condo,2019-01-31,69.7
+Bronx,Condo,2019-02-28,81.1
+Bronx,Condo,2019-03-31,44.0
 Bronx,Condo,2019-04-30,100.0
-Bronx,Condo,2019-05-31,74.7
-Bronx,Condo,2019-06-30,76.5
-Bronx,Condo,2019-07-31,65.3
+Bronx,Condo,2019-05-31,75.1
+Bronx,Condo,2019-06-30,76.8
+Bronx,Condo,2019-07-31,65.5
 Bronx,Condo,2019-08-31,68.9
-Bronx,Condo,2019-09-30,79.2
-Bronx,Condo,2019-10-31,76.1
-Bronx,Condo,2019-11-30,53.8
+Bronx,Condo,2019-09-30,79.3
+Bronx,Condo,2019-10-31,76.5
+Bronx,Condo,2019-11-30,54.0
 Bronx,Condo,2019-12-31,100.0
-Bronx,Condo,2020-01-31,66.4
-Bronx,Condo,2020-02-29,52.8
-Bronx,Condo,2020-03-31,62.7
-Bronx,Condo,2020-04-30,75.2
-Bronx,Condo,2020-05-31,80.9
-Bronx,Condo,2020-06-30,63.5
-Bronx,Condo,2020-07-31,81.0
-Bronx,Condo,2020-08-31,61.3
-Bronx,Condo,2020-09-30,70.6
-Bronx,Condo,2020-10-31,65.5
-Bronx,Condo,2020-11-30,72.3
-Bronx,Condo,2020-12-31,91.2
-Bronx,Condo,2021-01-31,69.2
-Bronx,Condo,2021-02-28,69.7
-Bronx,Condo,2021-03-31,74.6
-Bronx,Condo,2021-04-30,67.0
-Bronx,Condo,2021-05-31,62.9
-Bronx,Condo,2021-06-30,50.1
-Bronx,Condo,2021-07-31,68.5
-Bronx,Condo,2021-08-31,65.1
-Bronx,Condo,2021-09-30,94.1
-Bronx,Condo,2021-10-31,73.0
-Bronx,Condo,2021-11-30,76.8
-Bronx,Condo,2021-12-31,70.9
-Bronx,Condo,2022-01-31,72.2
-Bronx,Condo,2022-02-28,92.0
-Bronx,Condo,2022-03-31,77.3
-Bronx,Condo,2022-04-30,67.1
-Bronx,Condo,2022-05-31,74.6
-Bronx,Condo,2022-06-30,81.8
-Bronx,Condo,2022-07-31,57.0
-Bronx,Condo,2022-08-31,65.6
-Bronx,Condo,2022-09-30,69.9
-Bronx,Condo,2022-10-31,61.5
-Bronx,Condo,2022-11-30,73.8
-Bronx,Condo,2022-12-31,86.2
-Bronx,Condo,2023-01-31,98.1
-Bronx,Condo,2023-02-28,52.1
-Bronx,Condo,2023-03-31,69.5
-Bronx,Condo,2023-04-30,61.8
-Bronx,Condo,2023-05-31,63.7
-Bronx,Condo,2023-06-30,68.5
-Bronx,Condo,2023-07-31,62.9
-Bronx,Condo,2023-08-31,59.0
-Bronx,Condo,2023-09-30,77.4
-Bronx,Condo,2023-10-31,22.1
-Bronx,Condo,2023-11-30,69.5
-Bronx,Condo,2023-12-31,73.5
-Bronx,Condo,2024-01-31,85.1
-Bronx,Condo,2024-02-29,66.2
-Bronx,Condo,2024-03-31,85.1
-Bronx,Condo,2024-04-30,71.3
-Bronx,Condo,2024-05-31,66.5
-Bronx,Condo,2024-06-30,55.5
-Bronx,Condo,2024-07-31,70.0
-Bronx,Condo,2024-08-31,64.9
-Bronx,Condo,2024-09-30,63.7
-Bronx,Condo,2024-10-31,58.1
-Bronx,Condo,2024-11-30,77.5
+Bronx,Condo,2020-01-31,66.8
+Bronx,Condo,2020-02-29,52.9
+Bronx,Condo,2020-03-31,62.8
+Bronx,Condo,2020-04-30,75.6
+Bronx,Condo,2020-05-31,81.4
+Bronx,Condo,2020-06-30,63.9
+Bronx,Condo,2020-07-31,81.5
+Bronx,Condo,2020-08-31,61.6
+Bronx,Condo,2020-09-30,71.0
+Bronx,Condo,2020-10-31,65.6
+Bronx,Condo,2020-11-30,72.7
+Bronx,Condo,2020-12-31,91.7
+Bronx,Condo,2021-01-31,69.5
+Bronx,Condo,2021-02-28,70.1
+Bronx,Condo,2021-03-31,74.5
+Bronx,Condo,2021-04-30,67.8
+Bronx,Condo,2021-05-31,63.1
+Bronx,Condo,2021-06-30,53.9
+Bronx,Condo,2021-07-31,68.9
+Bronx,Condo,2021-08-31,65.4
+Bronx,Condo,2021-09-30,94.6
+Bronx,Condo,2021-10-31,73.2
+Bronx,Condo,2021-11-30,77.2
+Bronx,Condo,2021-12-31,71.1
+Bronx,Condo,2022-01-31,72.6
+Bronx,Condo,2022-02-28,92.1
+Bronx,Condo,2022-03-31,77.7
+Bronx,Condo,2022-04-30,67.4
+Bronx,Condo,2022-05-31,75.0
+Bronx,Condo,2022-06-30,82.3
+Bronx,Condo,2022-07-31,57.6
+Bronx,Condo,2022-08-31,65.9
+Bronx,Condo,2022-09-30,70.1
+Bronx,Condo,2022-10-31,61.8
+Bronx,Condo,2022-11-30,74.2
+Bronx,Condo,2022-12-31,86.7
+Bronx,Condo,2023-01-31,98.7
+Bronx,Condo,2023-02-28,52.5
+Bronx,Condo,2023-03-31,69.9
+Bronx,Condo,2023-04-30,62.1
+Bronx,Condo,2023-05-31,64.1
+Bronx,Condo,2023-06-30,69.0
+Bronx,Condo,2023-07-31,63.3
+Bronx,Condo,2023-08-31,59.2
+Bronx,Condo,2023-09-30,77.8
+Bronx,Condo,2023-10-31,22.4
+Bronx,Condo,2023-11-30,69.9
+Bronx,Condo,2023-12-31,73.8
+Bronx,Condo,2024-01-31,85.3
+Bronx,Condo,2024-02-29,67.9
+Bronx,Condo,2024-03-31,85.5
+Bronx,Condo,2024-04-30,71.5
+Bronx,Condo,2024-05-31,66.8
+Bronx,Condo,2024-06-30,55.7
+Bronx,Condo,2024-07-31,70.4
+Bronx,Condo,2024-08-31,64.8
+Bronx,Condo,2024-09-30,64.0
+Bronx,Condo,2024-10-31,58.8
+Bronx,Condo,2024-11-30,77.9
 Bronx,Condo,2024-12-31,100.0
-Bronx,Condo,2025-01-31,81.1
+Bronx,Condo,2025-01-31,81.5
 Bronx,Condo,2025-02-28,100.0
-Bronx,Condo,2025-03-31,72.0
-Bronx,Condo,2025-04-30,65.4
-Bronx,Condo,2025-05-31,79.3
+Bronx,Condo,2025-03-31,72.3
+Bronx,Condo,2025-04-30,65.7
+Bronx,Condo,2025-05-31,79.6
 Bronx,Condo,2025-06-30,100.0
-Bronx,Condo,2025-07-31,66.3
+Bronx,Condo,2025-07-31,67.1
+Bronx,Condo,2025-08-31,71.8
 Bronx,Coop,2003-06-30,100.0
 Bronx,Coop,2003-08-31,211.5
 Bronx,Coop,2004-05-31,179.3
@@ -394,33 +395,33 @@ Bronx,SFH,2003-04-30,102.5
 Bronx,SFH,2003-05-31,100.6
 Bronx,SFH,2003-06-30,99.7
 Bronx,SFH,2003-07-31,105.7
-Bronx,SFH,2003-08-31,107.3
-Bronx,SFH,2003-09-30,106.3
+Bronx,SFH,2003-08-31,107.4
+Bronx,SFH,2003-09-30,106.4
 Bronx,SFH,2003-10-31,104.9
 Bronx,SFH,2003-11-30,106.9
-Bronx,SFH,2003-12-31,107.1
+Bronx,SFH,2003-12-31,107.0
 Bronx,SFH,2004-01-31,104.5
 Bronx,SFH,2004-02-29,115.0
 Bronx,SFH,2004-03-31,107.9
 Bronx,SFH,2004-04-30,104.2
 Bronx,SFH,2004-05-31,117.9
 Bronx,SFH,2004-06-30,119.0
-Bronx,SFH,2004-07-31,117.1
+Bronx,SFH,2004-07-31,117.2
 Bronx,SFH,2004-08-31,115.5
 Bronx,SFH,2004-09-30,115.7
 Bronx,SFH,2004-10-31,116.1
-Bronx,SFH,2004-11-30,115.7
+Bronx,SFH,2004-11-30,115.6
 Bronx,SFH,2004-12-31,122.0
 Bronx,SFH,2005-01-31,127.1
-Bronx,SFH,2005-02-28,114.8
+Bronx,SFH,2005-02-28,114.7
 Bronx,SFH,2005-03-31,121.0
-Bronx,SFH,2005-04-30,129.3
+Bronx,SFH,2005-04-30,129.4
 Bronx,SFH,2005-05-31,125.2
 Bronx,SFH,2005-06-30,123.1
-Bronx,SFH,2005-07-31,129.0
-Bronx,SFH,2005-08-31,137.9
+Bronx,SFH,2005-07-31,128.9
+Bronx,SFH,2005-08-31,137.8
 Bronx,SFH,2005-09-30,136.9
-Bronx,SFH,2005-10-31,140.0
+Bronx,SFH,2005-10-31,138.9
 Bronx,SFH,2005-11-30,135.0
 Bronx,SFH,2005-12-31,144.9
 Bronx,SFH,2006-01-31,130.1
@@ -433,34 +434,34 @@ Bronx,SFH,2006-07-31,144.3
 Bronx,SFH,2006-08-31,149.5
 Bronx,SFH,2006-09-30,142.1
 Bronx,SFH,2006-10-31,146.7
-Bronx,SFH,2006-11-30,150.4
+Bronx,SFH,2006-11-30,150.5
 Bronx,SFH,2006-12-31,143.0
 Bronx,SFH,2007-01-31,153.2
 Bronx,SFH,2007-02-28,157.5
 Bronx,SFH,2007-03-31,158.7
 Bronx,SFH,2007-04-30,153.1
-Bronx,SFH,2007-05-31,150.4
+Bronx,SFH,2007-05-31,150.2
 Bronx,SFH,2007-06-30,141.6
 Bronx,SFH,2007-07-31,150.9
 Bronx,SFH,2007-08-31,150.2
 Bronx,SFH,2007-09-30,160.5
-Bronx,SFH,2007-10-31,149.7
-Bronx,SFH,2007-11-30,142.7
-Bronx,SFH,2007-12-31,145.0
-Bronx,SFH,2008-01-31,151.7
-Bronx,SFH,2008-02-29,141.0
+Bronx,SFH,2007-10-31,149.6
+Bronx,SFH,2007-11-30,143.0
+Bronx,SFH,2007-12-31,145.1
+Bronx,SFH,2008-01-31,151.8
+Bronx,SFH,2008-02-29,140.9
 Bronx,SFH,2008-03-31,129.1
 Bronx,SFH,2008-04-30,137.4
 Bronx,SFH,2008-05-31,132.6
 Bronx,SFH,2008-06-30,139.7
 Bronx,SFH,2008-07-31,151.5
-Bronx,SFH,2008-08-31,136.7
+Bronx,SFH,2008-08-31,136.5
 Bronx,SFH,2008-09-30,137.4
-Bronx,SFH,2008-10-31,144.7
+Bronx,SFH,2008-10-31,144.8
 Bronx,SFH,2008-11-30,127.8
-Bronx,SFH,2008-12-31,133.7
+Bronx,SFH,2008-12-31,133.3
 Bronx,SFH,2009-01-31,125.9
-Bronx,SFH,2009-02-28,137.5
+Bronx,SFH,2009-02-28,137.6
 Bronx,SFH,2009-03-31,159.5
 Bronx,SFH,2009-04-30,133.4
 Bronx,SFH,2009-05-31,130.6
@@ -468,7 +469,7 @@ Bronx,SFH,2009-06-30,136.7
 Bronx,SFH,2009-07-31,127.4
 Bronx,SFH,2009-08-31,133.2
 Bronx,SFH,2009-09-30,124.8
-Bronx,SFH,2009-10-31,131.6
+Bronx,SFH,2009-10-31,131.5
 Bronx,SFH,2009-11-30,130.7
 Bronx,SFH,2009-12-31,122.9
 Bronx,SFH,2010-01-31,137.7
@@ -476,188 +477,189 @@ Bronx,SFH,2010-02-28,143.0
 Bronx,SFH,2010-03-31,112.8
 Bronx,SFH,2010-04-30,136.3
 Bronx,SFH,2010-05-31,136.5
-Bronx,SFH,2010-06-30,131.5
+Bronx,SFH,2010-06-30,131.6
 Bronx,SFH,2010-07-31,137.1
-Bronx,SFH,2010-08-31,124.9
-Bronx,SFH,2010-09-30,131.8
+Bronx,SFH,2010-08-31,124.8
+Bronx,SFH,2010-09-30,131.9
 Bronx,SFH,2010-10-31,113.4
 Bronx,SFH,2010-11-30,131.6
 Bronx,SFH,2010-12-31,132.6
-Bronx,SFH,2011-01-31,126.1
-Bronx,SFH,2011-02-28,132.6
+Bronx,SFH,2011-01-31,126.0
+Bronx,SFH,2011-02-28,132.7
 Bronx,SFH,2011-03-31,122.6
 Bronx,SFH,2011-04-30,117.4
 Bronx,SFH,2011-05-31,126.5
-Bronx,SFH,2011-06-30,126.5
+Bronx,SFH,2011-06-30,126.6
 Bronx,SFH,2011-07-31,118.3
 Bronx,SFH,2011-08-31,123.5
 Bronx,SFH,2011-09-30,122.9
-Bronx,SFH,2011-10-31,130.8
+Bronx,SFH,2011-10-31,130.9
 Bronx,SFH,2011-11-30,117.0
-Bronx,SFH,2011-12-31,120.5
-Bronx,SFH,2012-01-31,123.3
-Bronx,SFH,2012-02-29,121.1
+Bronx,SFH,2011-12-31,120.6
+Bronx,SFH,2012-01-31,123.4
+Bronx,SFH,2012-02-29,118.4
 Bronx,SFH,2012-03-31,130.2
 Bronx,SFH,2012-04-30,127.9
-Bronx,SFH,2012-05-31,126.8
+Bronx,SFH,2012-05-31,127.4
 Bronx,SFH,2012-06-30,119.7
 Bronx,SFH,2012-07-31,110.9
 Bronx,SFH,2012-08-31,114.5
 Bronx,SFH,2012-09-30,126.0
 Bronx,SFH,2012-10-31,124.5
-Bronx,SFH,2012-11-30,129.4
+Bronx,SFH,2012-11-30,129.6
 Bronx,SFH,2012-12-31,127.9
-Bronx,SFH,2013-01-31,133.4
+Bronx,SFH,2013-01-31,133.3
 Bronx,SFH,2013-02-28,110.3
-Bronx,SFH,2013-03-31,122.2
-Bronx,SFH,2013-04-30,119.9
+Bronx,SFH,2013-03-31,121.6
+Bronx,SFH,2013-04-30,120.0
 Bronx,SFH,2013-05-31,133.0
 Bronx,SFH,2013-06-30,128.7
-Bronx,SFH,2013-07-31,131.4
+Bronx,SFH,2013-07-31,131.3
 Bronx,SFH,2013-08-31,126.7
 Bronx,SFH,2013-09-30,122.5
 Bronx,SFH,2013-10-31,123.7
-Bronx,SFH,2013-11-30,129.3
+Bronx,SFH,2013-11-30,129.4
 Bronx,SFH,2013-12-31,116.6
 Bronx,SFH,2014-01-31,119.2
-Bronx,SFH,2014-02-28,120.1
+Bronx,SFH,2014-02-28,120.2
 Bronx,SFH,2014-03-31,127.4
-Bronx,SFH,2014-04-30,123.6
+Bronx,SFH,2014-04-30,126.1
 Bronx,SFH,2014-05-31,131.3
-Bronx,SFH,2014-06-30,128.2
+Bronx,SFH,2014-06-30,128.3
 Bronx,SFH,2014-07-31,138.1
-Bronx,SFH,2014-08-31,126.0
-Bronx,SFH,2014-09-30,126.3
-Bronx,SFH,2014-10-31,138.3
-Bronx,SFH,2014-11-30,131.5
-Bronx,SFH,2014-12-31,127.9
-Bronx,SFH,2015-01-31,133.9
+Bronx,SFH,2014-08-31,126.1
+Bronx,SFH,2014-09-30,126.4
+Bronx,SFH,2014-10-31,138.2
+Bronx,SFH,2014-11-30,131.7
+Bronx,SFH,2014-12-31,127.8
+Bronx,SFH,2015-01-31,134.2
 Bronx,SFH,2015-02-28,133.3
 Bronx,SFH,2015-03-31,131.8
-Bronx,SFH,2015-04-30,131.6
-Bronx,SFH,2015-05-31,127.8
-Bronx,SFH,2015-06-30,134.8
-Bronx,SFH,2015-07-31,137.3
-Bronx,SFH,2015-08-31,135.2
-Bronx,SFH,2015-09-30,134.5
-Bronx,SFH,2015-10-31,137.8
-Bronx,SFH,2015-11-30,142.5
+Bronx,SFH,2015-04-30,131.7
+Bronx,SFH,2015-05-31,128.8
+Bronx,SFH,2015-06-30,134.9
+Bronx,SFH,2015-07-31,137.4
+Bronx,SFH,2015-08-31,135.3
+Bronx,SFH,2015-09-30,134.4
+Bronx,SFH,2015-10-31,138.2
+Bronx,SFH,2015-11-30,141.8
 Bronx,SFH,2015-12-31,137.3
 Bronx,SFH,2016-01-31,141.7
-Bronx,SFH,2016-02-29,140.7
+Bronx,SFH,2016-02-29,140.8
 Bronx,SFH,2016-03-31,139.8
 Bronx,SFH,2016-04-30,153.9
 Bronx,SFH,2016-05-31,148.4
 Bronx,SFH,2016-06-30,145.8
 Bronx,SFH,2016-07-31,136.2
 Bronx,SFH,2016-08-31,157.8
-Bronx,SFH,2016-09-30,142.8
+Bronx,SFH,2016-09-30,142.9
 Bronx,SFH,2016-10-31,141.2
-Bronx,SFH,2016-11-30,141.8
+Bronx,SFH,2016-11-30,141.7
 Bronx,SFH,2016-12-31,150.5
-Bronx,SFH,2017-01-31,143.7
-Bronx,SFH,2017-02-28,154.4
+Bronx,SFH,2017-01-31,143.9
+Bronx,SFH,2017-02-28,154.5
 Bronx,SFH,2017-03-31,141.5
 Bronx,SFH,2017-04-30,138.3
-Bronx,SFH,2017-05-31,146.2
-Bronx,SFH,2017-06-30,160.0
-Bronx,SFH,2017-07-31,147.1
+Bronx,SFH,2017-05-31,146.3
+Bronx,SFH,2017-06-30,159.9
+Bronx,SFH,2017-07-31,147.2
 Bronx,SFH,2017-08-31,145.9
 Bronx,SFH,2017-09-30,155.2
 Bronx,SFH,2017-10-31,151.6
-Bronx,SFH,2017-11-30,151.9
-Bronx,SFH,2017-12-31,155.0
-Bronx,SFH,2018-01-31,156.3
-Bronx,SFH,2018-02-28,165.9
-Bronx,SFH,2018-03-31,151.2
-Bronx,SFH,2018-04-30,165.9
+Bronx,SFH,2017-11-30,152.0
+Bronx,SFH,2017-12-31,155.1
+Bronx,SFH,2018-01-31,156.4
+Bronx,SFH,2018-02-28,166.0
+Bronx,SFH,2018-03-31,151.1
+Bronx,SFH,2018-04-30,165.5
 Bronx,SFH,2018-05-31,155.9
-Bronx,SFH,2018-06-30,152.5
-Bronx,SFH,2018-07-31,161.1
-Bronx,SFH,2018-08-31,160.6
-Bronx,SFH,2018-09-30,170.4
-Bronx,SFH,2018-10-31,166.8
-Bronx,SFH,2018-11-30,155.1
-Bronx,SFH,2018-12-31,164.1
+Bronx,SFH,2018-06-30,152.6
+Bronx,SFH,2018-07-31,161.3
+Bronx,SFH,2018-08-31,160.7
+Bronx,SFH,2018-09-30,170.5
+Bronx,SFH,2018-10-31,166.9
+Bronx,SFH,2018-11-30,155.0
+Bronx,SFH,2018-12-31,164.2
 Bronx,SFH,2019-01-31,171.6
 Bronx,SFH,2019-02-28,170.6
 Bronx,SFH,2019-03-31,167.6
 Bronx,SFH,2019-04-30,168.8
-Bronx,SFH,2019-05-31,158.0
+Bronx,SFH,2019-05-31,157.8
 Bronx,SFH,2019-06-30,173.9
-Bronx,SFH,2019-07-31,179.5
+Bronx,SFH,2019-07-31,179.3
 Bronx,SFH,2019-08-31,173.4
-Bronx,SFH,2019-09-30,174.7
+Bronx,SFH,2019-09-30,174.8
 Bronx,SFH,2019-10-31,175.9
-Bronx,SFH,2019-11-30,173.1
+Bronx,SFH,2019-11-30,173.2
 Bronx,SFH,2019-12-31,170.5
-Bronx,SFH,2020-01-31,175.3
+Bronx,SFH,2020-01-31,175.4
 Bronx,SFH,2020-02-29,168.1
-Bronx,SFH,2020-03-31,174.2
-Bronx,SFH,2020-04-30,179.3
+Bronx,SFH,2020-03-31,174.3
+Bronx,SFH,2020-04-30,179.4
 Bronx,SFH,2020-05-31,196.2
 Bronx,SFH,2020-06-30,188.2
 Bronx,SFH,2020-07-31,177.9
-Bronx,SFH,2020-08-31,171.8
-Bronx,SFH,2020-09-30,191.1
-Bronx,SFH,2020-10-31,199.5
-Bronx,SFH,2020-11-30,183.5
-Bronx,SFH,2020-12-31,198.6
-Bronx,SFH,2021-01-31,195.5
+Bronx,SFH,2020-08-31,171.9
+Bronx,SFH,2020-09-30,191.2
+Bronx,SFH,2020-10-31,199.0
+Bronx,SFH,2020-11-30,183.6
+Bronx,SFH,2020-12-31,198.7
+Bronx,SFH,2021-01-31,195.6
 Bronx,SFH,2021-02-28,194.0
-Bronx,SFH,2021-03-31,186.9
+Bronx,SFH,2021-03-31,187.0
 Bronx,SFH,2021-04-30,192.8
-Bronx,SFH,2021-05-31,198.3
+Bronx,SFH,2021-05-31,198.1
 Bronx,SFH,2021-06-30,208.1
 Bronx,SFH,2021-07-31,211.7
-Bronx,SFH,2021-08-31,200.8
+Bronx,SFH,2021-08-31,201.0
 Bronx,SFH,2021-09-30,210.8
 Bronx,SFH,2021-10-31,191.8
-Bronx,SFH,2021-11-30,208.9
-Bronx,SFH,2021-12-31,201.0
-Bronx,SFH,2022-01-31,231.4
-Bronx,SFH,2022-02-28,215.5
-Bronx,SFH,2022-03-31,210.7
-Bronx,SFH,2022-04-30,201.6
+Bronx,SFH,2021-11-30,209.0
+Bronx,SFH,2021-12-31,201.1
+Bronx,SFH,2022-01-31,231.5
+Bronx,SFH,2022-02-28,215.9
+Bronx,SFH,2022-03-31,210.9
+Bronx,SFH,2022-04-30,201.5
 Bronx,SFH,2022-05-31,224.6
 Bronx,SFH,2022-06-30,222.9
-Bronx,SFH,2022-07-31,208.1
-Bronx,SFH,2022-08-31,210.5
-Bronx,SFH,2022-09-30,224.2
-Bronx,SFH,2022-10-31,215.3
-Bronx,SFH,2022-11-30,225.5
-Bronx,SFH,2022-12-31,218.2
-Bronx,SFH,2023-01-31,209.5
-Bronx,SFH,2023-02-28,197.3
-Bronx,SFH,2023-03-31,210.5
-Bronx,SFH,2023-04-30,217.0
-Bronx,SFH,2023-05-31,227.7
-Bronx,SFH,2023-06-30,215.5
-Bronx,SFH,2023-07-31,236.2
-Bronx,SFH,2023-08-31,213.3
-Bronx,SFH,2023-09-30,213.0
-Bronx,SFH,2023-10-31,244.6
-Bronx,SFH,2023-11-30,228.6
-Bronx,SFH,2023-12-31,200.3
-Bronx,SFH,2024-01-31,263.7
-Bronx,SFH,2024-02-29,214.5
-Bronx,SFH,2024-03-31,210.6
-Bronx,SFH,2024-04-30,205.5
+Bronx,SFH,2022-07-31,208.4
+Bronx,SFH,2022-08-31,210.7
+Bronx,SFH,2022-09-30,225.0
+Bronx,SFH,2022-10-31,218.6
+Bronx,SFH,2022-11-30,225.8
+Bronx,SFH,2022-12-31,215.1
+Bronx,SFH,2023-01-31,209.6
+Bronx,SFH,2023-02-28,197.1
+Bronx,SFH,2023-03-31,209.8
+Bronx,SFH,2023-04-30,217.6
+Bronx,SFH,2023-05-31,228.3
+Bronx,SFH,2023-06-30,215.6
+Bronx,SFH,2023-07-31,236.5
+Bronx,SFH,2023-08-31,213.4
+Bronx,SFH,2023-09-30,213.1
+Bronx,SFH,2023-10-31,244.5
+Bronx,SFH,2023-11-30,228.7
+Bronx,SFH,2023-12-31,200.6
+Bronx,SFH,2024-01-31,263.6
+Bronx,SFH,2024-02-29,214.6
+Bronx,SFH,2024-03-31,210.7
+Bronx,SFH,2024-04-30,208.5
 Bronx,SFH,2024-05-31,202.4
-Bronx,SFH,2024-06-30,225.3
-Bronx,SFH,2024-07-31,244.5
-Bronx,SFH,2024-08-31,232.2
+Bronx,SFH,2024-06-30,225.4
+Bronx,SFH,2024-07-31,245.3
+Bronx,SFH,2024-08-31,232.7
 Bronx,SFH,2024-09-30,229.7
-Bronx,SFH,2024-10-31,215.7
-Bronx,SFH,2024-11-30,214.1
-Bronx,SFH,2024-12-31,241.3
-Bronx,SFH,2025-01-31,216.3
-Bronx,SFH,2025-02-28,206.9
-Bronx,SFH,2025-03-31,207.8
-Bronx,SFH,2025-04-30,237.7
-Bronx,SFH,2025-05-31,221.5
-Bronx,SFH,2025-06-30,252.6
-Bronx,SFH,2025-07-31,241.3
+Bronx,SFH,2024-10-31,216.1
+Bronx,SFH,2024-11-30,214.0
+Bronx,SFH,2024-12-31,241.5
+Bronx,SFH,2025-01-31,216.4
+Bronx,SFH,2025-02-28,207.1
+Bronx,SFH,2025-03-31,207.9
+Bronx,SFH,2025-04-30,237.8
+Bronx,SFH,2025-05-31,221.6
+Bronx,SFH,2025-06-30,253.4
+Bronx,SFH,2025-07-31,241.4
+Bronx,SFH,2025-08-31,226.3
 Brooklyn,Condo,2003-01-31,100.0
 Brooklyn,Condo,2003-02-28,98.3
 Brooklyn,Condo,2003-03-31,99.5
@@ -668,7 +670,7 @@ Brooklyn,Condo,2003-07-31,109.3
 Brooklyn,Condo,2003-08-31,100.9
 Brooklyn,Condo,2003-09-30,103.0
 Brooklyn,Condo,2003-10-31,115.5
-Brooklyn,Condo,2003-11-30,106.8
+Brooklyn,Condo,2003-11-30,106.7
 Brooklyn,Condo,2003-12-31,104.6
 Brooklyn,Condo,2004-01-31,113.0
 Brooklyn,Condo,2004-02-29,119.6
@@ -677,10 +679,10 @@ Brooklyn,Condo,2004-04-30,113.0
 Brooklyn,Condo,2004-05-31,106.6
 Brooklyn,Condo,2004-06-30,120.4
 Brooklyn,Condo,2004-07-31,117.6
-Brooklyn,Condo,2004-08-31,130.1
+Brooklyn,Condo,2004-08-31,130.0
 Brooklyn,Condo,2004-09-30,126.3
 Brooklyn,Condo,2004-10-31,128.3
-Brooklyn,Condo,2004-11-30,125.8
+Brooklyn,Condo,2004-11-30,125.7
 Brooklyn,Condo,2004-12-31,123.8
 Brooklyn,Condo,2005-01-31,129.8
 Brooklyn,Condo,2005-02-28,125.1
@@ -689,32 +691,32 @@ Brooklyn,Condo,2005-04-30,132.7
 Brooklyn,Condo,2005-05-31,136.5
 Brooklyn,Condo,2005-06-30,134.1
 Brooklyn,Condo,2005-07-31,138.9
-Brooklyn,Condo,2005-08-31,146.2
+Brooklyn,Condo,2005-08-31,146.1
 Brooklyn,Condo,2005-09-30,148.0
 Brooklyn,Condo,2005-10-31,146.0
-Brooklyn,Condo,2005-11-30,143.3
+Brooklyn,Condo,2005-11-30,143.2
 Brooklyn,Condo,2005-12-31,150.0
 Brooklyn,Condo,2006-01-31,146.0
 Brooklyn,Condo,2006-02-28,139.0
 Brooklyn,Condo,2006-03-31,145.4
 Brooklyn,Condo,2006-04-30,153.5
 Brooklyn,Condo,2006-05-31,153.4
-Brooklyn,Condo,2006-06-30,153.4
+Brooklyn,Condo,2006-06-30,153.3
 Brooklyn,Condo,2006-07-31,154.6
 Brooklyn,Condo,2006-08-31,153.2
 Brooklyn,Condo,2006-09-30,158.6
 Brooklyn,Condo,2006-10-31,155.9
 Brooklyn,Condo,2006-11-30,162.2
 Brooklyn,Condo,2006-12-31,154.3
-Brooklyn,Condo,2007-01-31,155.4
-Brooklyn,Condo,2007-02-28,150.9
+Brooklyn,Condo,2007-01-31,155.6
+Brooklyn,Condo,2007-02-28,150.8
 Brooklyn,Condo,2007-03-31,154.3
 Brooklyn,Condo,2007-04-30,155.5
 Brooklyn,Condo,2007-05-31,159.2
 Brooklyn,Condo,2007-06-30,148.8
-Brooklyn,Condo,2007-07-31,149.6
+Brooklyn,Condo,2007-07-31,149.7
 Brooklyn,Condo,2007-08-31,161.7
-Brooklyn,Condo,2007-09-30,161.2
+Brooklyn,Condo,2007-09-30,161.1
 Brooklyn,Condo,2007-10-31,156.9
 Brooklyn,Condo,2007-11-30,161.8
 Brooklyn,Condo,2007-12-31,163.9
@@ -723,19 +725,19 @@ Brooklyn,Condo,2008-02-29,159.1
 Brooklyn,Condo,2008-03-31,157.0
 Brooklyn,Condo,2008-04-30,159.9
 Brooklyn,Condo,2008-05-31,165.3
-Brooklyn,Condo,2008-06-30,165.4
+Brooklyn,Condo,2008-06-30,165.3
 Brooklyn,Condo,2008-07-31,162.0
-Brooklyn,Condo,2008-08-31,159.8
-Brooklyn,Condo,2008-09-30,160.0
+Brooklyn,Condo,2008-08-31,159.7
+Brooklyn,Condo,2008-09-30,160.2
 Brooklyn,Condo,2008-10-31,161.9
 Brooklyn,Condo,2008-11-30,157.9
-Brooklyn,Condo,2008-12-31,150.0
-Brooklyn,Condo,2009-01-31,147.1
+Brooklyn,Condo,2008-12-31,149.9
+Brooklyn,Condo,2009-01-31,147.4
 Brooklyn,Condo,2009-02-28,157.9
-Brooklyn,Condo,2009-03-31,151.3
+Brooklyn,Condo,2009-03-31,151.4
 Brooklyn,Condo,2009-04-30,145.1
 Brooklyn,Condo,2009-05-31,151.7
-Brooklyn,Condo,2009-06-30,145.8
+Brooklyn,Condo,2009-06-30,145.7
 Brooklyn,Condo,2009-07-31,146.9
 Brooklyn,Condo,2009-08-31,146.4
 Brooklyn,Condo,2009-09-30,138.8
@@ -743,7 +745,7 @@ Brooklyn,Condo,2009-10-31,147.4
 Brooklyn,Condo,2009-11-30,143.1
 Brooklyn,Condo,2009-12-31,144.1
 Brooklyn,Condo,2010-01-31,146.9
-Brooklyn,Condo,2010-02-28,144.3
+Brooklyn,Condo,2010-02-28,144.2
 Brooklyn,Condo,2010-03-31,140.3
 Brooklyn,Condo,2010-04-30,146.7
 Brooklyn,Condo,2010-05-31,145.4
@@ -751,9 +753,9 @@ Brooklyn,Condo,2010-06-30,144.0
 Brooklyn,Condo,2010-07-31,147.6
 Brooklyn,Condo,2010-08-31,148.2
 Brooklyn,Condo,2010-09-30,137.9
-Brooklyn,Condo,2010-10-31,140.3
+Brooklyn,Condo,2010-10-31,140.4
 Brooklyn,Condo,2010-11-30,143.2
-Brooklyn,Condo,2010-12-31,143.3
+Brooklyn,Condo,2010-12-31,143.2
 Brooklyn,Condo,2011-01-31,138.0
 Brooklyn,Condo,2011-02-28,143.4
 Brooklyn,Condo,2011-03-31,145.9
@@ -761,14 +763,14 @@ Brooklyn,Condo,2011-04-30,140.3
 Brooklyn,Condo,2011-05-31,144.8
 Brooklyn,Condo,2011-06-30,147.8
 Brooklyn,Condo,2011-07-31,145.3
-Brooklyn,Condo,2011-08-31,152.7
+Brooklyn,Condo,2011-08-31,152.6
 Brooklyn,Condo,2011-09-30,149.4
 Brooklyn,Condo,2011-10-31,146.3
 Brooklyn,Condo,2011-11-30,149.9
 Brooklyn,Condo,2011-12-31,152.4
 Brooklyn,Condo,2012-01-31,153.5
 Brooklyn,Condo,2012-02-29,156.2
-Brooklyn,Condo,2012-03-31,155.4
+Brooklyn,Condo,2012-03-31,155.3
 Brooklyn,Condo,2012-04-30,153.9
 Brooklyn,Condo,2012-05-31,156.0
 Brooklyn,Condo,2012-06-30,154.2
@@ -777,11 +779,11 @@ Brooklyn,Condo,2012-08-31,160.7
 Brooklyn,Condo,2012-09-30,161.5
 Brooklyn,Condo,2012-10-31,171.6
 Brooklyn,Condo,2012-11-30,163.7
-Brooklyn,Condo,2012-12-31,169.6
+Brooklyn,Condo,2012-12-31,169.8
 Brooklyn,Condo,2013-01-31,173.9
 Brooklyn,Condo,2013-02-28,174.2
 Brooklyn,Condo,2013-03-31,177.5
-Brooklyn,Condo,2013-04-30,186.0
+Brooklyn,Condo,2013-04-30,185.9
 Brooklyn,Condo,2013-05-31,190.1
 Brooklyn,Condo,2013-06-30,188.1
 Brooklyn,Condo,2013-07-31,192.0
@@ -795,185 +797,186 @@ Brooklyn,Condo,2014-02-28,197.3
 Brooklyn,Condo,2014-03-31,201.7
 Brooklyn,Condo,2014-04-30,213.9
 Brooklyn,Condo,2014-05-31,205.2
-Brooklyn,Condo,2014-06-30,210.3
-Brooklyn,Condo,2014-07-31,207.5
+Brooklyn,Condo,2014-06-30,210.1
+Brooklyn,Condo,2014-07-31,207.2
 Brooklyn,Condo,2014-08-31,218.6
 Brooklyn,Condo,2014-09-30,218.8
-Brooklyn,Condo,2014-10-31,213.4
-Brooklyn,Condo,2014-11-30,223.3
+Brooklyn,Condo,2014-10-31,213.5
+Brooklyn,Condo,2014-11-30,223.2
 Brooklyn,Condo,2014-12-31,218.1
 Brooklyn,Condo,2015-01-31,228.6
-Brooklyn,Condo,2015-02-28,221.0
+Brooklyn,Condo,2015-02-28,220.9
 Brooklyn,Condo,2015-03-31,226.7
-Brooklyn,Condo,2015-04-30,223.4
-Brooklyn,Condo,2015-05-31,235.3
+Brooklyn,Condo,2015-04-30,223.6
+Brooklyn,Condo,2015-05-31,235.0
 Brooklyn,Condo,2015-06-30,235.2
 Brooklyn,Condo,2015-07-31,237.7
-Brooklyn,Condo,2015-08-31,242.3
-Brooklyn,Condo,2015-09-30,236.6
+Brooklyn,Condo,2015-08-31,242.2
+Brooklyn,Condo,2015-09-30,236.7
 Brooklyn,Condo,2015-10-31,229.6
-Brooklyn,Condo,2015-11-30,216.7
+Brooklyn,Condo,2015-11-30,217.2
 Brooklyn,Condo,2015-12-31,235.4
 Brooklyn,Condo,2016-01-31,227.8
 Brooklyn,Condo,2016-02-29,243.5
 Brooklyn,Condo,2016-03-31,224.0
-Brooklyn,Condo,2016-04-30,241.4
-Brooklyn,Condo,2016-05-31,247.0
-Brooklyn,Condo,2016-06-30,237.9
-Brooklyn,Condo,2016-07-31,236.9
-Brooklyn,Condo,2016-08-31,243.5
+Brooklyn,Condo,2016-04-30,241.3
+Brooklyn,Condo,2016-05-31,246.7
+Brooklyn,Condo,2016-06-30,237.8
+Brooklyn,Condo,2016-07-31,236.8
+Brooklyn,Condo,2016-08-31,243.4
 Brooklyn,Condo,2016-09-30,238.9
 Brooklyn,Condo,2016-10-31,246.6
-Brooklyn,Condo,2016-11-30,244.4
+Brooklyn,Condo,2016-11-30,244.7
 Brooklyn,Condo,2016-12-31,251.9
 Brooklyn,Condo,2017-01-31,248.5
-Brooklyn,Condo,2017-02-28,244.3
+Brooklyn,Condo,2017-02-28,244.2
 Brooklyn,Condo,2017-03-31,243.6
-Brooklyn,Condo,2017-04-30,245.1
+Brooklyn,Condo,2017-04-30,245.0
 Brooklyn,Condo,2017-05-31,251.0
 Brooklyn,Condo,2017-06-30,250.7
-Brooklyn,Condo,2017-07-31,254.1
+Brooklyn,Condo,2017-07-31,254.0
 Brooklyn,Condo,2017-08-31,248.3
 Brooklyn,Condo,2017-09-30,246.6
 Brooklyn,Condo,2017-10-31,248.9
-Brooklyn,Condo,2017-11-30,242.1
+Brooklyn,Condo,2017-11-30,242.3
 Brooklyn,Condo,2017-12-31,260.3
 Brooklyn,Condo,2018-01-31,252.7
-Brooklyn,Condo,2018-02-28,251.7
-Brooklyn,Condo,2018-03-31,243.1
+Brooklyn,Condo,2018-02-28,251.5
+Brooklyn,Condo,2018-03-31,243.3
 Brooklyn,Condo,2018-04-30,255.2
 Brooklyn,Condo,2018-05-31,250.0
-Brooklyn,Condo,2018-06-30,260.7
+Brooklyn,Condo,2018-06-30,260.9
 Brooklyn,Condo,2018-07-31,247.1
-Brooklyn,Condo,2018-08-31,259.1
-Brooklyn,Condo,2018-09-30,257.1
-Brooklyn,Condo,2018-10-31,256.3
+Brooklyn,Condo,2018-08-31,259.0
+Brooklyn,Condo,2018-09-30,257.0
+Brooklyn,Condo,2018-10-31,256.2
 Brooklyn,Condo,2018-11-30,264.4
-Brooklyn,Condo,2018-12-31,248.3
+Brooklyn,Condo,2018-12-31,248.2
 Brooklyn,Condo,2019-01-31,260.3
 Brooklyn,Condo,2019-02-28,252.9
 Brooklyn,Condo,2019-03-31,256.5
-Brooklyn,Condo,2019-04-30,252.1
-Brooklyn,Condo,2019-05-31,251.4
-Brooklyn,Condo,2019-06-30,256.2
-Brooklyn,Condo,2019-07-31,263.8
-Brooklyn,Condo,2019-08-31,257.2
-Brooklyn,Condo,2019-09-30,263.4
+Brooklyn,Condo,2019-04-30,252.2
+Brooklyn,Condo,2019-05-31,251.3
+Brooklyn,Condo,2019-06-30,256.1
+Brooklyn,Condo,2019-07-31,261.8
+Brooklyn,Condo,2019-08-31,257.1
+Brooklyn,Condo,2019-09-30,263.3
 Brooklyn,Condo,2019-10-31,249.9
 Brooklyn,Condo,2019-11-30,259.3
-Brooklyn,Condo,2019-12-31,248.5
+Brooklyn,Condo,2019-12-31,248.3
 Brooklyn,Condo,2020-01-31,247.5
 Brooklyn,Condo,2020-02-29,245.8
-Brooklyn,Condo,2020-03-31,242.2
+Brooklyn,Condo,2020-03-31,242.0
 Brooklyn,Condo,2020-04-30,257.2
 Brooklyn,Condo,2020-05-31,263.8
 Brooklyn,Condo,2020-06-30,251.0
-Brooklyn,Condo,2020-07-31,244.9
-Brooklyn,Condo,2020-08-31,246.5
-Brooklyn,Condo,2020-09-30,263.2
-Brooklyn,Condo,2020-10-31,257.1
-Brooklyn,Condo,2020-11-30,247.8
+Brooklyn,Condo,2020-07-31,244.8
+Brooklyn,Condo,2020-08-31,246.4
+Brooklyn,Condo,2020-09-30,263.1
+Brooklyn,Condo,2020-10-31,257.4
+Brooklyn,Condo,2020-11-30,247.7
 Brooklyn,Condo,2020-12-31,241.5
 Brooklyn,Condo,2021-01-31,251.8
 Brooklyn,Condo,2021-02-28,264.1
-Brooklyn,Condo,2021-03-31,259.2
-Brooklyn,Condo,2021-04-30,262.8
+Brooklyn,Condo,2021-03-31,259.1
+Brooklyn,Condo,2021-04-30,262.7
 Brooklyn,Condo,2021-05-31,256.4
 Brooklyn,Condo,2021-06-30,256.8
 Brooklyn,Condo,2021-07-31,265.0
-Brooklyn,Condo,2021-08-31,271.7
+Brooklyn,Condo,2021-08-31,271.6
 Brooklyn,Condo,2021-09-30,281.6
 Brooklyn,Condo,2021-10-31,270.5
 Brooklyn,Condo,2021-11-30,263.6
-Brooklyn,Condo,2021-12-31,272.3
-Brooklyn,Condo,2022-01-31,273.4
+Brooklyn,Condo,2021-12-31,272.4
+Brooklyn,Condo,2022-01-31,273.3
 Brooklyn,Condo,2022-02-28,271.6
 Brooklyn,Condo,2022-03-31,270.9
-Brooklyn,Condo,2022-04-30,277.4
-Brooklyn,Condo,2022-05-31,278.9
+Brooklyn,Condo,2022-04-30,277.1
+Brooklyn,Condo,2022-05-31,278.8
 Brooklyn,Condo,2022-06-30,281.2
-Brooklyn,Condo,2022-07-31,289.9
+Brooklyn,Condo,2022-07-31,289.8
 Brooklyn,Condo,2022-08-31,279.6
 Brooklyn,Condo,2022-09-30,283.4
-Brooklyn,Condo,2022-10-31,279.3
+Brooklyn,Condo,2022-10-31,279.2
 Brooklyn,Condo,2022-11-30,284.8
-Brooklyn,Condo,2022-12-31,269.6
-Brooklyn,Condo,2023-01-31,287.9
-Brooklyn,Condo,2023-02-28,243.6
-Brooklyn,Condo,2023-03-31,271.2
-Brooklyn,Condo,2023-04-30,264.8
-Brooklyn,Condo,2023-05-31,287.2
+Brooklyn,Condo,2022-12-31,269.5
+Brooklyn,Condo,2023-01-31,287.8
+Brooklyn,Condo,2023-02-28,244.1
+Brooklyn,Condo,2023-03-31,271.1
+Brooklyn,Condo,2023-04-30,264.7
+Brooklyn,Condo,2023-05-31,287.1
 Brooklyn,Condo,2023-06-30,281.5
 Brooklyn,Condo,2023-07-31,285.2
-Brooklyn,Condo,2023-08-31,276.4
-Brooklyn,Condo,2023-09-30,287.5
-Brooklyn,Condo,2023-10-31,276.1
-Brooklyn,Condo,2023-11-30,276.9
+Brooklyn,Condo,2023-08-31,276.3
+Brooklyn,Condo,2023-09-30,286.3
+Brooklyn,Condo,2023-10-31,276.0
+Brooklyn,Condo,2023-11-30,276.8
 Brooklyn,Condo,2023-12-31,282.6
 Brooklyn,Condo,2024-01-31,286.4
 Brooklyn,Condo,2024-02-29,290.5
 Brooklyn,Condo,2024-03-31,280.5
-Brooklyn,Condo,2024-04-30,299.7
-Brooklyn,Condo,2024-05-31,282.4
+Brooklyn,Condo,2024-04-30,299.6
+Brooklyn,Condo,2024-05-31,282.3
 Brooklyn,Condo,2024-06-30,281.0
 Brooklyn,Condo,2024-07-31,287.1
-Brooklyn,Condo,2024-08-31,296.1
-Brooklyn,Condo,2024-09-30,294.3
-Brooklyn,Condo,2024-10-31,279.5
+Brooklyn,Condo,2024-08-31,296.0
+Brooklyn,Condo,2024-09-30,294.2
+Brooklyn,Condo,2024-10-31,279.4
 Brooklyn,Condo,2024-11-30,292.2
 Brooklyn,Condo,2024-12-31,282.1
 Brooklyn,Condo,2025-01-31,281.9
 Brooklyn,Condo,2025-02-28,256.2
 Brooklyn,Condo,2025-03-31,282.1
-Brooklyn,Condo,2025-04-30,295.8
+Brooklyn,Condo,2025-04-30,295.7
 Brooklyn,Condo,2025-05-31,300.4
 Brooklyn,Condo,2025-06-30,290.6
 Brooklyn,Condo,2025-07-31,289.4
+Brooklyn,Condo,2025-08-31,287.5
 Brooklyn,Coop,2003-01-31,100.0
-Brooklyn,Coop,2003-02-28,110.6
+Brooklyn,Coop,2003-02-28,110.5
 Brooklyn,Coop,2003-03-31,109.6
 Brooklyn,Coop,2003-04-30,101.5
 Brooklyn,Coop,2003-05-31,101.4
 Brooklyn,Coop,2003-06-30,107.4
-Brooklyn,Coop,2003-07-31,111.3
+Brooklyn,Coop,2003-07-31,111.1
 Brooklyn,Coop,2003-08-31,104.1
-Brooklyn,Coop,2003-09-30,113.2
-Brooklyn,Coop,2003-10-31,103.9
-Brooklyn,Coop,2003-11-30,110.6
-Brooklyn,Coop,2003-12-31,124.8
+Brooklyn,Coop,2003-09-30,113.1
+Brooklyn,Coop,2003-10-31,103.8
+Brooklyn,Coop,2003-11-30,110.5
+Brooklyn,Coop,2003-12-31,124.7
 Brooklyn,Coop,2004-01-31,109.3
 Brooklyn,Coop,2004-03-31,111.0
 Brooklyn,Coop,2004-04-30,112.2
-Brooklyn,Coop,2004-05-31,128.9
+Brooklyn,Coop,2004-05-31,128.8
 Brooklyn,Coop,2004-06-30,125.7
 Brooklyn,Coop,2004-07-31,129.2
 Brooklyn,Coop,2004-08-31,131.1
-Brooklyn,Coop,2004-09-30,130.3
+Brooklyn,Coop,2004-09-30,130.2
 Brooklyn,Coop,2004-10-31,135.8
 Brooklyn,Coop,2004-11-30,148.3
 Brooklyn,Coop,2004-12-31,136.8
 Brooklyn,Coop,2005-01-31,132.8
-Brooklyn,Coop,2005-02-28,136.5
+Brooklyn,Coop,2005-02-28,136.4
 Brooklyn,Coop,2005-03-31,144.3
-Brooklyn,Coop,2005-04-30,138.5
+Brooklyn,Coop,2005-04-30,138.4
 Brooklyn,Coop,2005-05-31,142.1
 Brooklyn,Coop,2005-06-30,157.2
 Brooklyn,Coop,2005-07-31,152.2
 Brooklyn,Coop,2005-08-31,156.8
 Brooklyn,Coop,2005-09-30,157.8
-Brooklyn,Coop,2005-10-31,156.8
-Brooklyn,Coop,2005-11-30,165.7
-Brooklyn,Coop,2005-12-31,161.5
-Brooklyn,Coop,2006-01-31,153.0
+Brooklyn,Coop,2005-10-31,156.9
+Brooklyn,Coop,2005-11-30,165.6
+Brooklyn,Coop,2005-12-31,161.3
+Brooklyn,Coop,2006-01-31,152.9
 Brooklyn,Coop,2006-02-28,154.7
 Brooklyn,Coop,2006-03-31,152.5
 Brooklyn,Coop,2006-04-30,151.2
 Brooklyn,Coop,2006-05-31,166.5
 Brooklyn,Coop,2006-06-30,166.9
-Brooklyn,Coop,2006-07-31,171.8
-Brooklyn,Coop,2006-08-31,167.9
+Brooklyn,Coop,2006-07-31,171.7
+Brooklyn,Coop,2006-08-31,167.8
 Brooklyn,Coop,2006-09-30,156.0
-Brooklyn,Coop,2006-10-31,171.6
+Brooklyn,Coop,2006-10-31,171.5
 Brooklyn,Coop,2006-11-30,164.5
 Brooklyn,Coop,2006-12-31,169.0
 Brooklyn,Coop,2007-01-31,169.8
@@ -983,57 +986,57 @@ Brooklyn,Coop,2007-04-30,164.4
 Brooklyn,Coop,2007-05-31,176.5
 Brooklyn,Coop,2007-06-30,179.9
 Brooklyn,Coop,2007-07-31,179.0
-Brooklyn,Coop,2007-08-31,181.8
+Brooklyn,Coop,2007-08-31,181.9
 Brooklyn,Coop,2007-09-30,178.4
-Brooklyn,Coop,2007-10-31,183.6
+Brooklyn,Coop,2007-10-31,184.1
 Brooklyn,Coop,2007-11-30,184.5
 Brooklyn,Coop,2007-12-31,182.0
 Brooklyn,Coop,2008-01-31,184.3
 Brooklyn,Coop,2008-02-29,178.4
 Brooklyn,Coop,2008-03-31,190.6
 Brooklyn,Coop,2008-04-30,183.7
-Brooklyn,Coop,2008-05-31,184.6
+Brooklyn,Coop,2008-05-31,184.5
 Brooklyn,Coop,2008-06-30,175.0
 Brooklyn,Coop,2008-07-31,178.9
 Brooklyn,Coop,2008-08-31,181.2
 Brooklyn,Coop,2008-09-30,168.0
 Brooklyn,Coop,2008-10-31,173.1
 Brooklyn,Coop,2008-11-30,177.7
-Brooklyn,Coop,2008-12-31,171.3
-Brooklyn,Coop,2009-01-31,179.3
+Brooklyn,Coop,2008-12-31,167.8
+Brooklyn,Coop,2009-01-31,177.8
 Brooklyn,Coop,2009-02-28,172.3
 Brooklyn,Coop,2009-03-31,183.3
-Brooklyn,Coop,2009-04-30,169.8
+Brooklyn,Coop,2009-04-30,169.9
 Brooklyn,Coop,2009-05-31,163.3
 Brooklyn,Coop,2009-06-30,159.9
 Brooklyn,Coop,2009-07-31,164.0
-Brooklyn,Coop,2009-08-31,175.2
+Brooklyn,Coop,2009-08-31,175.1
 Brooklyn,Coop,2009-09-30,161.6
 Brooklyn,Coop,2009-10-31,161.1
 Brooklyn,Coop,2009-11-30,158.9
 Brooklyn,Coop,2009-12-31,161.7
-Brooklyn,Coop,2010-01-31,162.9
+Brooklyn,Coop,2010-01-31,163.0
 Brooklyn,Coop,2010-02-28,168.7
 Brooklyn,Coop,2010-03-31,160.6
-Brooklyn,Coop,2010-04-30,166.7
-Brooklyn,Coop,2010-05-31,175.7
+Brooklyn,Coop,2010-04-30,166.6
+Brooklyn,Coop,2010-05-31,175.6
 Brooklyn,Coop,2011-01-31,165.5
 Brooklyn,Coop,2011-02-28,170.1
 Brooklyn,Coop,2011-03-31,165.9
 Brooklyn,Coop,2011-04-30,178.5
-Brooklyn,Coop,2011-05-31,164.3
-Brooklyn,Coop,2011-06-30,165.6
-Brooklyn,Coop,2011-07-31,185.2
+Brooklyn,Coop,2011-05-31,164.4
+Brooklyn,Coop,2011-06-30,165.7
+Brooklyn,Coop,2011-07-31,185.4
 Brooklyn,Coop,2011-08-31,183.9
 Brooklyn,Coop,2011-09-30,172.5
 Brooklyn,Coop,2011-10-31,157.5
-Brooklyn,Coop,2011-11-30,164.7
+Brooklyn,Coop,2011-11-30,164.6
 Brooklyn,Coop,2011-12-31,182.9
 Brooklyn,Coop,2012-01-31,165.4
 Brooklyn,Coop,2012-02-29,174.5
-Brooklyn,Coop,2012-03-31,168.9
-Brooklyn,Coop,2012-04-30,154.6
-Brooklyn,Coop,2012-05-31,175.8
+Brooklyn,Coop,2012-03-31,169.0
+Brooklyn,Coop,2012-04-30,154.4
+Brooklyn,Coop,2012-05-31,175.7
 Brooklyn,Coop,2012-06-30,176.8
 Brooklyn,Coop,2012-07-31,185.0
 Brooklyn,Coop,2012-08-31,174.7
@@ -1042,158 +1045,159 @@ Brooklyn,Coop,2012-10-31,192.6
 Brooklyn,Coop,2012-11-30,190.1
 Brooklyn,Coop,2012-12-31,175.0
 Brooklyn,Coop,2013-01-31,192.9
-Brooklyn,Coop,2013-02-28,182.1
+Brooklyn,Coop,2013-02-28,182.2
 Brooklyn,Coop,2013-03-31,187.1
 Brooklyn,Coop,2013-04-30,195.8
 Brooklyn,Coop,2013-05-31,193.3
 Brooklyn,Coop,2013-06-30,204.1
-Brooklyn,Coop,2013-07-31,216.7
-Brooklyn,Coop,2013-08-31,198.8
+Brooklyn,Coop,2013-07-31,216.8
+Brooklyn,Coop,2013-08-31,198.7
 Brooklyn,Coop,2013-09-30,209.8
 Brooklyn,Coop,2013-10-31,201.1
-Brooklyn,Coop,2013-11-30,225.4
+Brooklyn,Coop,2013-11-30,225.3
 Brooklyn,Coop,2013-12-31,208.9
 Brooklyn,Coop,2014-01-31,214.8
-Brooklyn,Coop,2014-02-28,203.5
+Brooklyn,Coop,2014-02-28,203.6
 Brooklyn,Coop,2014-03-31,220.0
-Brooklyn,Coop,2014-04-30,210.7
-Brooklyn,Coop,2014-05-31,238.2
-Brooklyn,Coop,2014-06-30,224.1
+Brooklyn,Coop,2014-04-30,210.6
+Brooklyn,Coop,2014-05-31,238.3
+Brooklyn,Coop,2014-06-30,224.2
 Brooklyn,Coop,2014-07-31,228.8
-Brooklyn,Coop,2014-08-31,236.7
+Brooklyn,Coop,2014-08-31,236.8
 Brooklyn,Coop,2014-09-30,231.4
 Brooklyn,Coop,2014-10-31,224.4
-Brooklyn,Coop,2014-11-30,223.7
+Brooklyn,Coop,2014-11-30,223.8
 Brooklyn,Coop,2014-12-31,241.8
-Brooklyn,Coop,2015-01-31,240.6
+Brooklyn,Coop,2015-01-31,240.5
 Brooklyn,Coop,2015-02-28,225.5
 Brooklyn,Coop,2015-03-31,230.6
-Brooklyn,Coop,2015-04-30,247.9
-Brooklyn,Coop,2015-05-31,246.8
+Brooklyn,Coop,2015-04-30,248.0
+Brooklyn,Coop,2015-05-31,246.7
 Brooklyn,Coop,2015-06-30,253.4
 Brooklyn,Coop,2015-07-31,246.7
 Brooklyn,Coop,2015-08-31,247.6
 Brooklyn,Coop,2015-09-30,255.0
-Brooklyn,Coop,2015-10-31,257.8
+Brooklyn,Coop,2015-10-31,257.7
 Brooklyn,Coop,2015-11-30,261.4
-Brooklyn,Coop,2015-12-31,253.7
+Brooklyn,Coop,2015-12-31,253.6
 Brooklyn,Coop,2016-01-31,272.1
-Brooklyn,Coop,2016-02-29,240.1
-Brooklyn,Coop,2016-03-31,250.7
+Brooklyn,Coop,2016-02-29,239.9
+Brooklyn,Coop,2016-03-31,250.8
 Brooklyn,Coop,2016-04-30,257.4
 Brooklyn,Coop,2016-05-31,258.6
 Brooklyn,Coop,2016-06-30,274.1
 Brooklyn,Coop,2016-07-31,266.2
-Brooklyn,Coop,2016-08-31,270.3
+Brooklyn,Coop,2016-08-31,270.6
 Brooklyn,Coop,2016-09-30,253.9
 Brooklyn,Coop,2016-10-31,279.2
 Brooklyn,Coop,2016-11-30,264.1
 Brooklyn,Coop,2016-12-31,265.8
 Brooklyn,Coop,2017-01-31,277.7
-Brooklyn,Coop,2017-02-28,270.0
+Brooklyn,Coop,2017-02-28,269.8
 Brooklyn,Coop,2017-03-31,264.2
 Brooklyn,Coop,2017-04-30,268.3
-Brooklyn,Coop,2017-05-31,254.7
-Brooklyn,Coop,2017-06-30,281.9
+Brooklyn,Coop,2017-05-31,255.0
+Brooklyn,Coop,2017-06-30,282.9
 Brooklyn,Coop,2017-07-31,265.3
 Brooklyn,Coop,2017-08-31,278.4
-Brooklyn,Coop,2017-09-30,264.4
-Brooklyn,Coop,2017-10-31,274.5
+Brooklyn,Coop,2017-09-30,265.2
+Brooklyn,Coop,2017-10-31,274.8
 Brooklyn,Coop,2017-11-30,274.6
 Brooklyn,Coop,2017-12-31,283.5
 Brooklyn,Coop,2018-01-31,269.3
-Brooklyn,Coop,2018-02-28,273.6
-Brooklyn,Coop,2018-03-31,266.1
+Brooklyn,Coop,2018-02-28,273.7
+Brooklyn,Coop,2018-03-31,266.0
 Brooklyn,Coop,2018-04-30,276.1
-Brooklyn,Coop,2018-05-31,291.3
+Brooklyn,Coop,2018-05-31,291.2
 Brooklyn,Coop,2018-06-30,277.6
-Brooklyn,Coop,2018-07-31,292.0
+Brooklyn,Coop,2018-07-31,292.5
 Brooklyn,Coop,2018-08-31,294.1
 Brooklyn,Coop,2018-09-30,271.9
-Brooklyn,Coop,2018-10-31,275.4
-Brooklyn,Coop,2018-11-30,277.4
-Brooklyn,Coop,2018-12-31,282.5
+Brooklyn,Coop,2018-10-31,275.5
+Brooklyn,Coop,2018-11-30,277.2
+Brooklyn,Coop,2018-12-31,282.3
 Brooklyn,Coop,2019-01-31,290.5
-Brooklyn,Coop,2019-02-28,267.7
-Brooklyn,Coop,2019-03-31,276.5
-Brooklyn,Coop,2019-04-30,288.1
+Brooklyn,Coop,2019-02-28,267.6
+Brooklyn,Coop,2019-03-31,276.4
+Brooklyn,Coop,2019-04-30,288.0
 Brooklyn,Coop,2019-05-31,284.3
 Brooklyn,Coop,2019-06-30,292.1
-Brooklyn,Coop,2019-07-31,282.7
-Brooklyn,Coop,2019-08-31,289.6
+Brooklyn,Coop,2019-07-31,283.8
+Brooklyn,Coop,2019-08-31,289.5
 Brooklyn,Coop,2019-09-30,277.2
-Brooklyn,Coop,2019-10-31,282.3
-Brooklyn,Coop,2019-11-30,271.8
+Brooklyn,Coop,2019-10-31,282.2
+Brooklyn,Coop,2019-11-30,271.7
 Brooklyn,Coop,2019-12-31,278.5
-Brooklyn,Coop,2020-01-31,276.1
-Brooklyn,Coop,2020-02-29,289.6
-Brooklyn,Coop,2020-03-31,273.8
+Brooklyn,Coop,2020-01-31,276.0
+Brooklyn,Coop,2020-02-29,289.4
+Brooklyn,Coop,2020-03-31,273.5
 Brooklyn,Coop,2020-04-30,298.2
-Brooklyn,Coop,2020-05-31,300.3
+Brooklyn,Coop,2020-05-31,300.4
 Brooklyn,Coop,2020-06-30,283.2
-Brooklyn,Coop,2020-07-31,286.8
-Brooklyn,Coop,2020-08-31,310.7
-Brooklyn,Coop,2020-09-30,282.2
-Brooklyn,Coop,2020-10-31,286.2
-Brooklyn,Coop,2020-11-30,286.9
+Brooklyn,Coop,2020-07-31,286.6
+Brooklyn,Coop,2020-08-31,310.8
+Brooklyn,Coop,2020-09-30,282.1
+Brooklyn,Coop,2020-10-31,286.1
+Brooklyn,Coop,2020-11-30,287.0
 Brooklyn,Coop,2020-12-31,281.3
 Brooklyn,Coop,2021-01-31,278.9
-Brooklyn,Coop,2021-02-28,291.7
-Brooklyn,Coop,2021-03-31,284.0
+Brooklyn,Coop,2021-02-28,291.6
+Brooklyn,Coop,2021-03-31,285.0
 Brooklyn,Coop,2021-04-30,308.8
 Brooklyn,Coop,2021-05-31,298.1
 Brooklyn,Coop,2021-06-30,301.1
-Brooklyn,Coop,2021-07-31,308.5
-Brooklyn,Coop,2021-08-31,294.6
+Brooklyn,Coop,2021-07-31,308.4
+Brooklyn,Coop,2021-08-31,294.7
 Brooklyn,Coop,2021-09-30,315.6
 Brooklyn,Coop,2021-10-31,303.4
 Brooklyn,Coop,2021-11-30,303.9
-Brooklyn,Coop,2021-12-31,299.6
-Brooklyn,Coop,2022-01-31,299.1
-Brooklyn,Coop,2022-02-28,314.0
+Brooklyn,Coop,2021-12-31,299.4
+Brooklyn,Coop,2022-01-31,299.2
+Brooklyn,Coop,2022-02-28,313.9
 Brooklyn,Coop,2022-03-31,307.7
 Brooklyn,Coop,2022-04-30,309.0
-Brooklyn,Coop,2022-05-31,328.0
-Brooklyn,Coop,2022-06-30,341.7
+Brooklyn,Coop,2022-05-31,328.2
+Brooklyn,Coop,2022-06-30,341.3
 Brooklyn,Coop,2022-07-31,319.9
-Brooklyn,Coop,2022-08-31,324.7
-Brooklyn,Coop,2022-09-30,336.1
+Brooklyn,Coop,2022-08-31,324.4
+Brooklyn,Coop,2022-09-30,336.0
 Brooklyn,Coop,2022-10-31,316.2
-Brooklyn,Coop,2022-11-30,284.9
+Brooklyn,Coop,2022-11-30,284.7
 Brooklyn,Coop,2022-12-31,281.4
 Brooklyn,Coop,2023-01-31,329.1
-Brooklyn,Coop,2023-02-28,297.1
+Brooklyn,Coop,2023-02-28,297.0
 Brooklyn,Coop,2023-03-31,287.3
 Brooklyn,Coop,2023-04-30,331.1
-Brooklyn,Coop,2023-05-31,312.2
+Brooklyn,Coop,2023-05-31,312.3
 Brooklyn,Coop,2023-06-30,333.9
-Brooklyn,Coop,2023-07-31,324.4
-Brooklyn,Coop,2023-08-31,324.2
+Brooklyn,Coop,2023-07-31,324.5
+Brooklyn,Coop,2023-08-31,322.9
 Brooklyn,Coop,2023-09-30,289.9
 Brooklyn,Coop,2023-10-31,320.1
 Brooklyn,Coop,2023-11-30,321.0
-Brooklyn,Coop,2023-12-31,346.5
-Brooklyn,Coop,2024-01-31,319.9
+Brooklyn,Coop,2023-12-31,346.2
+Brooklyn,Coop,2024-01-31,319.7
 Brooklyn,Coop,2024-02-29,308.5
-Brooklyn,Coop,2024-03-31,364.3
+Brooklyn,Coop,2024-03-31,363.9
 Brooklyn,Coop,2024-04-30,337.1
 Brooklyn,Coop,2024-05-31,351.3
 Brooklyn,Coop,2024-06-30,350.1
-Brooklyn,Coop,2024-07-31,344.4
-Brooklyn,Coop,2024-08-31,318.4
-Brooklyn,Coop,2024-09-30,340.7
-Brooklyn,Coop,2024-10-31,326.3
+Brooklyn,Coop,2024-07-31,344.3
+Brooklyn,Coop,2024-08-31,318.5
+Brooklyn,Coop,2024-09-30,340.4
+Brooklyn,Coop,2024-10-31,326.4
 Brooklyn,Coop,2024-11-30,337.3
 Brooklyn,Coop,2024-12-31,338.5
-Brooklyn,Coop,2025-01-31,333.4
-Brooklyn,Coop,2025-02-28,329.0
+Brooklyn,Coop,2025-01-31,332.4
+Brooklyn,Coop,2025-02-28,326.4
 Brooklyn,Coop,2025-03-31,318.5
 Brooklyn,Coop,2025-04-30,324.4
 Brooklyn,Coop,2025-05-31,391.1
-Brooklyn,Coop,2025-06-30,346.0
-Brooklyn,Coop,2025-07-31,341.0
+Brooklyn,Coop,2025-06-30,345.5
+Brooklyn,Coop,2025-07-31,339.7
+Brooklyn,Coop,2025-08-31,367.2
 Brooklyn,SFH,2003-01-31,100.0
-Brooklyn,SFH,2003-02-28,101.8
+Brooklyn,SFH,2003-02-28,101.9
 Brooklyn,SFH,2003-03-31,99.9
 Brooklyn,SFH,2003-04-30,104.8
 Brooklyn,SFH,2003-05-31,103.7
@@ -1211,10 +1215,10 @@ Brooklyn,SFH,2004-04-30,117.3
 Brooklyn,SFH,2004-05-31,118.4
 Brooklyn,SFH,2004-06-30,122.5
 Brooklyn,SFH,2004-07-31,128.1
-Brooklyn,SFH,2004-08-31,125.3
-Brooklyn,SFH,2004-09-30,126.7
-Brooklyn,SFH,2004-10-31,130.8
-Brooklyn,SFH,2004-11-30,130.2
+Brooklyn,SFH,2004-08-31,125.5
+Brooklyn,SFH,2004-09-30,126.8
+Brooklyn,SFH,2004-10-31,130.7
+Brooklyn,SFH,2004-11-30,130.3
 Brooklyn,SFH,2004-12-31,129.0
 Brooklyn,SFH,2005-01-31,131.7
 Brooklyn,SFH,2005-02-28,135.1
@@ -1222,9 +1226,9 @@ Brooklyn,SFH,2005-03-31,135.1
 Brooklyn,SFH,2005-04-30,139.4
 Brooklyn,SFH,2005-05-31,135.9
 Brooklyn,SFH,2005-06-30,140.5
-Brooklyn,SFH,2005-07-31,137.6
+Brooklyn,SFH,2005-07-31,137.8
 Brooklyn,SFH,2005-08-31,146.5
-Brooklyn,SFH,2005-09-30,145.1
+Brooklyn,SFH,2005-09-30,145.2
 Brooklyn,SFH,2005-10-31,141.1
 Brooklyn,SFH,2005-11-30,149.9
 Brooklyn,SFH,2005-12-31,155.1
@@ -1232,7 +1236,7 @@ Brooklyn,SFH,2006-01-31,152.5
 Brooklyn,SFH,2006-02-28,153.0
 Brooklyn,SFH,2006-03-31,155.5
 Brooklyn,SFH,2006-04-30,153.2
-Brooklyn,SFH,2006-05-31,154.2
+Brooklyn,SFH,2006-05-31,154.4
 Brooklyn,SFH,2006-06-30,157.3
 Brooklyn,SFH,2006-07-31,155.3
 Brooklyn,SFH,2006-08-31,157.8
@@ -1240,62 +1244,62 @@ Brooklyn,SFH,2006-09-30,166.4
 Brooklyn,SFH,2006-10-31,160.6
 Brooklyn,SFH,2006-11-30,147.2
 Brooklyn,SFH,2006-12-31,159.1
-Brooklyn,SFH,2007-01-31,162.9
-Brooklyn,SFH,2007-02-28,163.1
+Brooklyn,SFH,2007-01-31,162.7
+Brooklyn,SFH,2007-02-28,162.8
 Brooklyn,SFH,2007-03-31,157.2
 Brooklyn,SFH,2007-04-30,159.0
 Brooklyn,SFH,2007-05-31,163.8
 Brooklyn,SFH,2007-06-30,154.5
 Brooklyn,SFH,2007-07-31,165.7
-Brooklyn,SFH,2007-08-31,166.0
+Brooklyn,SFH,2007-08-31,165.9
 Brooklyn,SFH,2007-09-30,155.3
-Brooklyn,SFH,2007-10-31,160.5
+Brooklyn,SFH,2007-10-31,160.7
 Brooklyn,SFH,2007-11-30,154.5
-Brooklyn,SFH,2007-12-31,159.4
-Brooklyn,SFH,2008-01-31,151.8
+Brooklyn,SFH,2007-12-31,159.3
+Brooklyn,SFH,2008-01-31,151.9
 Brooklyn,SFH,2008-02-29,159.5
 Brooklyn,SFH,2008-03-31,156.9
 Brooklyn,SFH,2008-04-30,150.4
 Brooklyn,SFH,2008-05-31,155.8
 Brooklyn,SFH,2008-06-30,160.4
-Brooklyn,SFH,2008-07-31,148.7
-Brooklyn,SFH,2008-08-31,153.4
+Brooklyn,SFH,2008-07-31,148.5
+Brooklyn,SFH,2008-08-31,153.3
 Brooklyn,SFH,2008-09-30,150.3
-Brooklyn,SFH,2008-10-31,153.2
-Brooklyn,SFH,2008-11-30,154.2
-Brooklyn,SFH,2008-12-31,156.8
+Brooklyn,SFH,2008-10-31,153.1
+Brooklyn,SFH,2008-11-30,154.1
+Brooklyn,SFH,2008-12-31,156.7
 Brooklyn,SFH,2009-01-31,161.1
-Brooklyn,SFH,2009-02-28,137.8
-Brooklyn,SFH,2009-03-31,140.5
+Brooklyn,SFH,2009-02-28,138.5
+Brooklyn,SFH,2009-03-31,140.4
 Brooklyn,SFH,2009-04-30,146.5
-Brooklyn,SFH,2009-05-31,144.9
+Brooklyn,SFH,2009-05-31,145.4
 Brooklyn,SFH,2009-06-30,139.5
 Brooklyn,SFH,2009-07-31,144.3
 Brooklyn,SFH,2009-08-31,137.3
 Brooklyn,SFH,2009-09-30,151.9
 Brooklyn,SFH,2009-10-31,135.3
 Brooklyn,SFH,2009-11-30,147.9
-Brooklyn,SFH,2009-12-31,151.8
+Brooklyn,SFH,2009-12-31,151.7
 Brooklyn,SFH,2010-01-31,139.6
 Brooklyn,SFH,2010-02-28,139.5
-Brooklyn,SFH,2010-03-31,143.6
-Brooklyn,SFH,2010-04-30,142.5
+Brooklyn,SFH,2010-03-31,143.7
+Brooklyn,SFH,2010-04-30,142.4
 Brooklyn,SFH,2010-05-31,130.3
 Brooklyn,SFH,2010-06-30,140.7
-Brooklyn,SFH,2010-07-31,140.3
+Brooklyn,SFH,2010-07-31,140.4
 Brooklyn,SFH,2010-08-31,125.7
-Brooklyn,SFH,2010-09-30,140.9
-Brooklyn,SFH,2010-10-31,141.5
+Brooklyn,SFH,2010-09-30,141.0
+Brooklyn,SFH,2010-10-31,141.4
 Brooklyn,SFH,2010-11-30,139.5
 Brooklyn,SFH,2010-12-31,143.2
 Brooklyn,SFH,2011-01-31,140.3
 Brooklyn,SFH,2011-02-28,140.3
 Brooklyn,SFH,2011-03-31,139.1
-Brooklyn,SFH,2011-04-30,145.8
-Brooklyn,SFH,2011-05-31,141.0
+Brooklyn,SFH,2011-04-30,145.7
+Brooklyn,SFH,2011-05-31,140.9
 Brooklyn,SFH,2011-06-30,144.1
 Brooklyn,SFH,2011-07-31,145.2
-Brooklyn,SFH,2011-08-31,147.5
+Brooklyn,SFH,2011-08-31,148.0
 Brooklyn,SFH,2011-09-30,146.2
 Brooklyn,SFH,2011-10-31,129.4
 Brooklyn,SFH,2011-11-30,131.2
@@ -1303,166 +1307,167 @@ Brooklyn,SFH,2011-12-31,135.1
 Brooklyn,SFH,2012-01-31,134.5
 Brooklyn,SFH,2012-02-29,139.0
 Brooklyn,SFH,2012-03-31,141.5
-Brooklyn,SFH,2012-04-30,142.9
+Brooklyn,SFH,2012-04-30,144.1
 Brooklyn,SFH,2012-05-31,148.2
-Brooklyn,SFH,2012-06-30,138.5
+Brooklyn,SFH,2012-06-30,138.4
 Brooklyn,SFH,2012-07-31,141.5
-Brooklyn,SFH,2012-08-31,146.8
-Brooklyn,SFH,2012-09-30,142.9
-Brooklyn,SFH,2012-10-31,143.3
+Brooklyn,SFH,2012-08-31,147.1
+Brooklyn,SFH,2012-09-30,142.8
+Brooklyn,SFH,2012-10-31,143.9
 Brooklyn,SFH,2012-11-30,153.0
 Brooklyn,SFH,2012-12-31,149.2
 Brooklyn,SFH,2013-01-31,151.6
 Brooklyn,SFH,2013-02-28,147.5
-Brooklyn,SFH,2013-03-31,144.4
+Brooklyn,SFH,2013-03-31,144.3
 Brooklyn,SFH,2013-04-30,143.3
 Brooklyn,SFH,2013-05-31,146.6
 Brooklyn,SFH,2013-06-30,148.4
 Brooklyn,SFH,2013-07-31,155.0
 Brooklyn,SFH,2013-08-31,149.9
-Brooklyn,SFH,2013-09-30,156.0
+Brooklyn,SFH,2013-09-30,156.4
 Brooklyn,SFH,2013-10-31,142.7
-Brooklyn,SFH,2013-11-30,149.3
+Brooklyn,SFH,2013-11-30,149.2
 Brooklyn,SFH,2013-12-31,151.5
 Brooklyn,SFH,2014-01-31,151.1
 Brooklyn,SFH,2014-02-28,156.2
-Brooklyn,SFH,2014-03-31,167.0
-Brooklyn,SFH,2014-04-30,151.3
+Brooklyn,SFH,2014-03-31,166.9
+Brooklyn,SFH,2014-04-30,151.2
 Brooklyn,SFH,2014-05-31,152.6
 Brooklyn,SFH,2014-06-30,172.2
-Brooklyn,SFH,2014-07-31,162.7
-Brooklyn,SFH,2014-08-31,174.5
+Brooklyn,SFH,2014-07-31,162.6
+Brooklyn,SFH,2014-08-31,174.4
 Brooklyn,SFH,2014-09-30,176.7
 Brooklyn,SFH,2014-10-31,177.8
-Brooklyn,SFH,2014-11-30,167.5
-Brooklyn,SFH,2014-12-31,164.3
-Brooklyn,SFH,2015-01-31,186.2
+Brooklyn,SFH,2014-11-30,167.4
+Brooklyn,SFH,2014-12-31,164.5
+Brooklyn,SFH,2015-01-31,186.0
 Brooklyn,SFH,2015-02-28,175.4
 Brooklyn,SFH,2015-03-31,170.9
-Brooklyn,SFH,2015-04-30,178.1
+Brooklyn,SFH,2015-04-30,176.9
 Brooklyn,SFH,2015-05-31,178.0
-Brooklyn,SFH,2015-06-30,188.1
+Brooklyn,SFH,2015-06-30,188.0
 Brooklyn,SFH,2015-07-31,174.7
 Brooklyn,SFH,2015-08-31,180.8
-Brooklyn,SFH,2015-09-30,182.7
-Brooklyn,SFH,2015-10-31,188.7
-Brooklyn,SFH,2015-11-30,181.6
+Brooklyn,SFH,2015-09-30,182.6
+Brooklyn,SFH,2015-10-31,188.6
+Brooklyn,SFH,2015-11-30,181.5
 Brooklyn,SFH,2015-12-31,188.8
-Brooklyn,SFH,2016-01-31,181.7
-Brooklyn,SFH,2016-02-29,193.2
+Brooklyn,SFH,2016-01-31,181.5
+Brooklyn,SFH,2016-02-29,193.1
 Brooklyn,SFH,2016-03-31,200.7
 Brooklyn,SFH,2016-04-30,195.0
-Brooklyn,SFH,2016-05-31,176.0
+Brooklyn,SFH,2016-05-31,175.9
 Brooklyn,SFH,2016-06-30,181.9
-Brooklyn,SFH,2016-07-31,196.2
+Brooklyn,SFH,2016-07-31,196.3
 Brooklyn,SFH,2016-08-31,190.2
-Brooklyn,SFH,2016-09-30,197.1
+Brooklyn,SFH,2016-09-30,196.7
 Brooklyn,SFH,2016-10-31,198.3
-Brooklyn,SFH,2016-11-30,193.7
-Brooklyn,SFH,2016-12-31,200.3
-Brooklyn,SFH,2017-01-31,186.2
+Brooklyn,SFH,2016-11-30,193.6
+Brooklyn,SFH,2016-12-31,200.2
+Brooklyn,SFH,2017-01-31,186.0
 Brooklyn,SFH,2017-02-28,201.5
-Brooklyn,SFH,2017-03-31,204.9
-Brooklyn,SFH,2017-04-30,200.1
-Brooklyn,SFH,2017-05-31,204.4
-Brooklyn,SFH,2017-06-30,211.4
+Brooklyn,SFH,2017-03-31,204.8
+Brooklyn,SFH,2017-04-30,199.9
+Brooklyn,SFH,2017-05-31,204.8
+Brooklyn,SFH,2017-06-30,211.1
 Brooklyn,SFH,2017-07-31,217.2
-Brooklyn,SFH,2017-08-31,214.0
-Brooklyn,SFH,2017-09-30,214.3
+Brooklyn,SFH,2017-08-31,214.6
+Brooklyn,SFH,2017-09-30,214.2
 Brooklyn,SFH,2017-10-31,206.6
-Brooklyn,SFH,2017-11-30,219.4
-Brooklyn,SFH,2017-12-31,215.7
-Brooklyn,SFH,2018-01-31,224.3
+Brooklyn,SFH,2017-11-30,220.0
+Brooklyn,SFH,2017-12-31,215.6
+Brooklyn,SFH,2018-01-31,224.2
 Brooklyn,SFH,2018-02-28,222.4
-Brooklyn,SFH,2018-03-31,222.0
+Brooklyn,SFH,2018-03-31,221.9
 Brooklyn,SFH,2018-04-30,206.0
-Brooklyn,SFH,2018-05-31,209.7
-Brooklyn,SFH,2018-06-30,210.0
+Brooklyn,SFH,2018-05-31,209.6
+Brooklyn,SFH,2018-06-30,209.9
 Brooklyn,SFH,2018-07-31,220.0
-Brooklyn,SFH,2018-08-31,229.3
-Brooklyn,SFH,2018-09-30,228.3
-Brooklyn,SFH,2018-10-31,238.5
-Brooklyn,SFH,2018-11-30,221.1
-Brooklyn,SFH,2018-12-31,240.6
+Brooklyn,SFH,2018-08-31,229.5
+Brooklyn,SFH,2018-09-30,228.1
+Brooklyn,SFH,2018-10-31,238.4
+Brooklyn,SFH,2018-11-30,221.5
+Brooklyn,SFH,2018-12-31,240.5
 Brooklyn,SFH,2019-01-31,222.1
 Brooklyn,SFH,2019-02-28,214.3
-Brooklyn,SFH,2019-03-31,236.5
-Brooklyn,SFH,2019-04-30,221.7
-Brooklyn,SFH,2019-05-31,243.0
-Brooklyn,SFH,2019-06-30,224.6
-Brooklyn,SFH,2019-07-31,226.5
-Brooklyn,SFH,2019-08-31,227.5
-Brooklyn,SFH,2019-09-30,229.5
+Brooklyn,SFH,2019-03-31,236.4
+Brooklyn,SFH,2019-04-30,221.6
+Brooklyn,SFH,2019-05-31,242.9
+Brooklyn,SFH,2019-06-30,223.6
+Brooklyn,SFH,2019-07-31,226.8
+Brooklyn,SFH,2019-08-31,227.4
+Brooklyn,SFH,2019-09-30,229.4
 Brooklyn,SFH,2019-10-31,242.3
-Brooklyn,SFH,2019-11-30,238.3
+Brooklyn,SFH,2019-11-30,238.1
 Brooklyn,SFH,2019-12-31,244.1
-Brooklyn,SFH,2020-01-31,225.4
-Brooklyn,SFH,2020-02-29,253.8
+Brooklyn,SFH,2020-01-31,225.2
+Brooklyn,SFH,2020-02-29,253.7
 Brooklyn,SFH,2020-03-31,240.8
 Brooklyn,SFH,2020-04-30,214.1
 Brooklyn,SFH,2020-05-31,234.3
 Brooklyn,SFH,2020-06-30,228.8
-Brooklyn,SFH,2020-07-31,229.7
-Brooklyn,SFH,2020-08-31,233.1
+Brooklyn,SFH,2020-07-31,229.6
+Brooklyn,SFH,2020-08-31,229.7
 Brooklyn,SFH,2020-09-30,246.1
-Brooklyn,SFH,2020-10-31,242.4
+Brooklyn,SFH,2020-10-31,242.3
 Brooklyn,SFH,2020-11-30,250.7
 Brooklyn,SFH,2020-12-31,246.0
-Brooklyn,SFH,2021-01-31,249.6
+Brooklyn,SFH,2021-01-31,245.8
 Brooklyn,SFH,2021-02-28,239.5
-Brooklyn,SFH,2021-03-31,253.8
-Brooklyn,SFH,2021-04-30,263.7
-Brooklyn,SFH,2021-05-31,253.4
+Brooklyn,SFH,2021-03-31,253.7
+Brooklyn,SFH,2021-04-30,263.5
+Brooklyn,SFH,2021-05-31,253.1
 Brooklyn,SFH,2021-06-30,272.3
-Brooklyn,SFH,2021-07-31,268.5
-Brooklyn,SFH,2021-08-31,269.6
-Brooklyn,SFH,2021-09-30,267.8
-Brooklyn,SFH,2021-10-31,263.8
-Brooklyn,SFH,2021-11-30,264.0
-Brooklyn,SFH,2021-12-31,255.6
-Brooklyn,SFH,2022-01-31,274.9
-Brooklyn,SFH,2022-02-28,263.4
-Brooklyn,SFH,2022-03-31,269.6
-Brooklyn,SFH,2022-04-30,259.8
+Brooklyn,SFH,2021-07-31,268.3
+Brooklyn,SFH,2021-08-31,270.0
+Brooklyn,SFH,2021-09-30,267.7
+Brooklyn,SFH,2021-10-31,263.7
+Brooklyn,SFH,2021-11-30,263.2
+Brooklyn,SFH,2021-12-31,255.5
+Brooklyn,SFH,2022-01-31,275.0
+Brooklyn,SFH,2022-02-28,263.5
+Brooklyn,SFH,2022-03-31,269.5
+Brooklyn,SFH,2022-04-30,259.7
 Brooklyn,SFH,2022-05-31,286.6
 Brooklyn,SFH,2022-06-30,286.3
-Brooklyn,SFH,2022-07-31,288.4
+Brooklyn,SFH,2022-07-31,288.1
 Brooklyn,SFH,2022-08-31,285.5
-Brooklyn,SFH,2022-09-30,275.1
-Brooklyn,SFH,2022-10-31,282.5
-Brooklyn,SFH,2022-11-30,272.7
-Brooklyn,SFH,2022-12-31,270.9
-Brooklyn,SFH,2023-01-31,293.1
-Brooklyn,SFH,2023-02-28,282.7
-Brooklyn,SFH,2023-03-31,273.0
-Brooklyn,SFH,2023-04-30,260.5
-Brooklyn,SFH,2023-05-31,280.0
-Brooklyn,SFH,2023-06-30,282.4
-Brooklyn,SFH,2023-07-31,285.5
-Brooklyn,SFH,2023-08-31,292.8
+Brooklyn,SFH,2022-09-30,274.8
+Brooklyn,SFH,2022-10-31,279.8
+Brooklyn,SFH,2022-11-30,272.4
+Brooklyn,SFH,2022-12-31,270.8
+Brooklyn,SFH,2023-01-31,292.9
+Brooklyn,SFH,2023-02-28,282.3
+Brooklyn,SFH,2023-03-31,272.9
+Brooklyn,SFH,2023-04-30,259.3
+Brooklyn,SFH,2023-05-31,280.1
+Brooklyn,SFH,2023-06-30,282.1
+Brooklyn,SFH,2023-07-31,285.3
+Brooklyn,SFH,2023-08-31,292.7
 Brooklyn,SFH,2023-09-30,274.5
-Brooklyn,SFH,2023-10-31,281.6
-Brooklyn,SFH,2023-11-30,259.8
-Brooklyn,SFH,2023-12-31,270.2
-Brooklyn,SFH,2024-01-31,278.8
-Brooklyn,SFH,2024-02-29,293.7
-Brooklyn,SFH,2024-03-31,285.4
+Brooklyn,SFH,2023-10-31,281.5
+Brooklyn,SFH,2023-11-30,259.1
+Brooklyn,SFH,2023-12-31,270.1
+Brooklyn,SFH,2024-01-31,278.5
+Brooklyn,SFH,2024-02-29,293.6
+Brooklyn,SFH,2024-03-31,280.8
 Brooklyn,SFH,2024-04-30,311.8
-Brooklyn,SFH,2024-05-31,268.3
-Brooklyn,SFH,2024-06-30,283.2
-Brooklyn,SFH,2024-07-31,296.5
-Brooklyn,SFH,2024-08-31,298.7
-Brooklyn,SFH,2024-09-30,316.4
-Brooklyn,SFH,2024-10-31,294.7
-Brooklyn,SFH,2024-11-30,304.8
-Brooklyn,SFH,2024-12-31,291.7
-Brooklyn,SFH,2025-01-31,291.6
-Brooklyn,SFH,2025-02-28,304.3
-Brooklyn,SFH,2025-03-31,276.1
-Brooklyn,SFH,2025-04-30,332.2
-Brooklyn,SFH,2025-05-31,324.0
+Brooklyn,SFH,2024-05-31,268.2
+Brooklyn,SFH,2024-06-30,283.0
+Brooklyn,SFH,2024-07-31,296.3
+Brooklyn,SFH,2024-08-31,300.9
+Brooklyn,SFH,2024-09-30,316.3
+Brooklyn,SFH,2024-10-31,294.4
+Brooklyn,SFH,2024-11-30,304.7
+Brooklyn,SFH,2024-12-31,291.4
+Brooklyn,SFH,2025-01-31,291.5
+Brooklyn,SFH,2025-02-28,304.2
+Brooklyn,SFH,2025-03-31,276.0
+Brooklyn,SFH,2025-04-30,332.0
+Brooklyn,SFH,2025-05-31,323.9
 Brooklyn,SFH,2025-06-30,315.1
-Brooklyn,SFH,2025-07-31,293.7
+Brooklyn,SFH,2025-07-31,293.4
+Brooklyn,SFH,2025-08-31,339.9
 Manhattan,Condo,2003-01-31,100.0
 Manhattan,Condo,2003-02-28,83.8
 Manhattan,Condo,2003-03-31,95.7
@@ -1471,7 +1476,7 @@ Manhattan,Condo,2003-05-31,105.1
 Manhattan,Condo,2003-06-30,100.9
 Manhattan,Condo,2003-07-31,100.2
 Manhattan,Condo,2003-08-31,99.3
-Manhattan,Condo,2003-09-30,104.7
+Manhattan,Condo,2003-09-30,104.8
 Manhattan,Condo,2003-10-31,105.8
 Manhattan,Condo,2003-11-30,105.5
 Manhattan,Condo,2003-12-31,106.3
@@ -1487,13 +1492,13 @@ Manhattan,Condo,2004-09-30,126.0
 Manhattan,Condo,2004-10-31,124.8
 Manhattan,Condo,2004-11-30,126.0
 Manhattan,Condo,2004-12-31,128.8
-Manhattan,Condo,2005-01-31,132.1
+Manhattan,Condo,2005-01-31,132.2
 Manhattan,Condo,2005-02-28,136.6
 Manhattan,Condo,2005-03-31,131.8
 Manhattan,Condo,2005-04-30,138.8
 Manhattan,Condo,2005-05-31,143.2
 Manhattan,Condo,2005-06-30,146.2
-Manhattan,Condo,2005-07-31,147.4
+Manhattan,Condo,2005-07-31,147.5
 Manhattan,Condo,2005-08-31,151.1
 Manhattan,Condo,2005-09-30,154.4
 Manhattan,Condo,2005-10-31,152.3
@@ -1504,7 +1509,7 @@ Manhattan,Condo,2006-02-28,149.8
 Manhattan,Condo,2006-03-31,156.0
 Manhattan,Condo,2006-04-30,155.8
 Manhattan,Condo,2006-05-31,153.3
-Manhattan,Condo,2006-06-30,157.7
+Manhattan,Condo,2006-06-30,157.6
 Manhattan,Condo,2006-07-31,160.0
 Manhattan,Condo,2006-08-31,161.0
 Manhattan,Condo,2006-09-30,163.0
@@ -1514,31 +1519,31 @@ Manhattan,Condo,2006-12-31,162.2
 Manhattan,Condo,2007-01-31,160.1
 Manhattan,Condo,2007-02-28,158.7
 Manhattan,Condo,2007-03-31,163.2
-Manhattan,Condo,2007-04-30,166.8
+Manhattan,Condo,2007-04-30,166.7
 Manhattan,Condo,2007-05-31,169.0
 Manhattan,Condo,2007-06-30,175.9
-Manhattan,Condo,2007-07-31,173.9
-Manhattan,Condo,2007-08-31,176.7
-Manhattan,Condo,2007-09-30,178.1
+Manhattan,Condo,2007-07-31,173.8
+Manhattan,Condo,2007-08-31,176.8
+Manhattan,Condo,2007-09-30,178.2
 Manhattan,Condo,2007-10-31,177.7
 Manhattan,Condo,2007-11-30,175.4
 Manhattan,Condo,2007-12-31,177.7
-Manhattan,Condo,2008-01-31,177.1
+Manhattan,Condo,2008-01-31,176.7
 Manhattan,Condo,2008-02-29,179.5
 Manhattan,Condo,2008-03-31,177.8
-Manhattan,Condo,2008-04-30,176.6
+Manhattan,Condo,2008-04-30,176.7
 Manhattan,Condo,2008-05-31,182.2
 Manhattan,Condo,2008-06-30,178.0
 Manhattan,Condo,2008-07-31,171.7
 Manhattan,Condo,2008-08-31,176.4
 Manhattan,Condo,2008-09-30,178.0
 Manhattan,Condo,2008-10-31,171.9
-Manhattan,Condo,2008-11-30,174.1
+Manhattan,Condo,2008-11-30,174.0
 Manhattan,Condo,2008-12-31,173.4
 Manhattan,Condo,2009-01-31,165.6
 Manhattan,Condo,2009-02-28,165.8
-Manhattan,Condo,2009-03-31,163.8
-Manhattan,Condo,2009-04-30,166.2
+Manhattan,Condo,2009-03-31,163.9
+Manhattan,Condo,2009-04-30,166.3
 Manhattan,Condo,2009-05-31,159.7
 Manhattan,Condo,2009-06-30,154.8
 Manhattan,Condo,2009-07-31,153.6
@@ -1546,31 +1551,31 @@ Manhattan,Condo,2009-08-31,157.5
 Manhattan,Condo,2009-09-30,157.1
 Manhattan,Condo,2009-10-31,158.2
 Manhattan,Condo,2009-11-30,153.2
-Manhattan,Condo,2009-12-31,157.9
+Manhattan,Condo,2009-12-31,157.8
 Manhattan,Condo,2010-01-31,156.5
-Manhattan,Condo,2010-02-28,160.3
+Manhattan,Condo,2010-02-28,160.2
 Manhattan,Condo,2010-03-31,160.8
 Manhattan,Condo,2010-04-30,160.9
 Manhattan,Condo,2010-05-31,158.2
-Manhattan,Condo,2010-06-30,164.8
+Manhattan,Condo,2010-06-30,164.7
 Manhattan,Condo,2010-07-31,162.0
-Manhattan,Condo,2010-08-31,165.3
+Manhattan,Condo,2010-08-31,165.4
 Manhattan,Condo,2010-09-30,165.6
 Manhattan,Condo,2010-10-31,157.7
-Manhattan,Condo,2010-11-30,162.3
+Manhattan,Condo,2010-11-30,162.2
 Manhattan,Condo,2010-12-31,163.9
 Manhattan,Condo,2011-01-31,160.8
 Manhattan,Condo,2011-02-28,164.0
-Manhattan,Condo,2011-03-31,160.7
+Manhattan,Condo,2011-03-31,160.8
 Manhattan,Condo,2011-04-30,166.6
-Manhattan,Condo,2011-05-31,164.3
-Manhattan,Condo,2011-06-30,163.8
-Manhattan,Condo,2011-07-31,167.8
+Manhattan,Condo,2011-05-31,164.2
+Manhattan,Condo,2011-06-30,163.9
+Manhattan,Condo,2011-07-31,167.7
 Manhattan,Condo,2011-08-31,168.9
 Manhattan,Condo,2011-09-30,164.8
 Manhattan,Condo,2011-10-31,170.6
 Manhattan,Condo,2011-11-30,167.0
-Manhattan,Condo,2011-12-31,167.3
+Manhattan,Condo,2011-12-31,167.4
 Manhattan,Condo,2012-01-31,165.7
 Manhattan,Condo,2012-02-29,168.2
 Manhattan,Condo,2012-03-31,171.0
@@ -1590,150 +1595,151 @@ Manhattan,Condo,2013-04-30,186.7
 Manhattan,Condo,2013-05-31,191.5
 Manhattan,Condo,2013-06-30,188.0
 Manhattan,Condo,2013-07-31,195.0
-Manhattan,Condo,2013-08-31,197.5
+Manhattan,Condo,2013-08-31,197.4
 Manhattan,Condo,2013-09-30,195.4
-Manhattan,Condo,2013-10-31,194.6
+Manhattan,Condo,2013-10-31,194.5
 Manhattan,Condo,2013-11-30,200.0
 Manhattan,Condo,2013-12-31,204.1
 Manhattan,Condo,2014-01-31,206.1
 Manhattan,Condo,2014-02-28,209.8
-Manhattan,Condo,2014-03-31,203.1
+Manhattan,Condo,2014-03-31,203.2
 Manhattan,Condo,2014-04-30,210.1
-Manhattan,Condo,2014-05-31,206.0
-Manhattan,Condo,2014-06-30,212.8
+Manhattan,Condo,2014-05-31,206.1
+Manhattan,Condo,2014-06-30,212.7
 Manhattan,Condo,2014-07-31,209.8
 Manhattan,Condo,2014-08-31,213.4
 Manhattan,Condo,2014-09-30,213.9
-Manhattan,Condo,2014-10-31,218.4
+Manhattan,Condo,2014-10-31,218.3
 Manhattan,Condo,2014-11-30,215.4
 Manhattan,Condo,2014-12-31,215.2
-Manhattan,Condo,2015-01-31,224.1
+Manhattan,Condo,2015-01-31,223.9
 Manhattan,Condo,2015-02-28,213.3
-Manhattan,Condo,2015-03-31,218.3
+Manhattan,Condo,2015-03-31,218.5
 Manhattan,Condo,2015-04-30,224.4
-Manhattan,Condo,2015-05-31,226.1
-Manhattan,Condo,2015-06-30,227.7
-Manhattan,Condo,2015-07-31,223.2
+Manhattan,Condo,2015-05-31,226.0
+Manhattan,Condo,2015-06-30,227.8
+Manhattan,Condo,2015-07-31,223.3
 Manhattan,Condo,2015-08-31,226.9
-Manhattan,Condo,2015-09-30,227.2
-Manhattan,Condo,2015-10-31,225.2
+Manhattan,Condo,2015-09-30,227.3
+Manhattan,Condo,2015-10-31,225.1
 Manhattan,Condo,2015-11-30,230.9
 Manhattan,Condo,2015-12-31,225.0
-Manhattan,Condo,2016-01-31,221.0
-Manhattan,Condo,2016-02-29,221.8
+Manhattan,Condo,2016-01-31,221.2
+Manhattan,Condo,2016-02-29,221.9
 Manhattan,Condo,2016-03-31,221.3
-Manhattan,Condo,2016-04-30,226.7
+Manhattan,Condo,2016-04-30,226.8
 Manhattan,Condo,2016-05-31,228.4
-Manhattan,Condo,2016-06-30,228.2
-Manhattan,Condo,2016-07-31,228.9
+Manhattan,Condo,2016-06-30,228.1
+Manhattan,Condo,2016-07-31,228.7
 Manhattan,Condo,2016-08-31,225.5
 Manhattan,Condo,2016-09-30,228.1
-Manhattan,Condo,2016-10-31,233.0
+Manhattan,Condo,2016-10-31,232.9
 Manhattan,Condo,2016-11-30,229.3
 Manhattan,Condo,2016-12-31,222.6
 Manhattan,Condo,2017-01-31,230.2
 Manhattan,Condo,2017-02-28,230.6
-Manhattan,Condo,2017-03-31,228.1
-Manhattan,Condo,2017-04-30,230.2
-Manhattan,Condo,2017-05-31,233.7
-Manhattan,Condo,2017-06-30,233.9
-Manhattan,Condo,2017-07-31,225.5
-Manhattan,Condo,2017-08-31,231.0
+Manhattan,Condo,2017-03-31,228.2
+Manhattan,Condo,2017-04-30,230.0
+Manhattan,Condo,2017-05-31,233.6
+Manhattan,Condo,2017-06-30,234.2
+Manhattan,Condo,2017-07-31,225.7
+Manhattan,Condo,2017-08-31,231.1
 Manhattan,Condo,2017-09-30,230.2
 Manhattan,Condo,2017-10-31,236.9
 Manhattan,Condo,2017-11-30,227.8
-Manhattan,Condo,2017-12-31,230.7
+Manhattan,Condo,2017-12-31,230.6
 Manhattan,Condo,2018-01-31,232.0
 Manhattan,Condo,2018-02-28,226.6
-Manhattan,Condo,2018-03-31,222.4
-Manhattan,Condo,2018-04-30,225.1
+Manhattan,Condo,2018-03-31,222.2
+Manhattan,Condo,2018-04-30,224.9
 Manhattan,Condo,2018-05-31,230.4
-Manhattan,Condo,2018-06-30,231.7
-Manhattan,Condo,2018-07-31,229.7
+Manhattan,Condo,2018-06-30,231.3
+Manhattan,Condo,2018-07-31,229.5
 Manhattan,Condo,2018-08-31,227.3
 Manhattan,Condo,2018-09-30,227.8
-Manhattan,Condo,2018-10-31,225.1
-Manhattan,Condo,2018-11-30,225.4
+Manhattan,Condo,2018-10-31,224.9
+Manhattan,Condo,2018-11-30,225.5
 Manhattan,Condo,2018-12-31,217.4
 Manhattan,Condo,2019-01-31,221.0
 Manhattan,Condo,2019-02-28,226.5
 Manhattan,Condo,2019-03-31,219.6
-Manhattan,Condo,2019-04-30,214.7
-Manhattan,Condo,2019-05-31,222.6
+Manhattan,Condo,2019-04-30,214.6
+Manhattan,Condo,2019-05-31,222.5
 Manhattan,Condo,2019-06-30,221.2
 Manhattan,Condo,2019-07-31,214.1
-Manhattan,Condo,2019-08-31,218.1
+Manhattan,Condo,2019-08-31,218.3
 Manhattan,Condo,2019-09-30,217.4
 Manhattan,Condo,2019-10-31,213.4
-Manhattan,Condo,2019-11-30,217.0
-Manhattan,Condo,2019-12-31,221.3
-Manhattan,Condo,2020-01-31,214.4
+Manhattan,Condo,2019-11-30,217.1
+Manhattan,Condo,2019-12-31,221.1
+Manhattan,Condo,2020-01-31,214.3
 Manhattan,Condo,2020-02-29,212.9
-Manhattan,Condo,2020-03-31,221.7
-Manhattan,Condo,2020-04-30,218.2
+Manhattan,Condo,2020-03-31,221.4
+Manhattan,Condo,2020-04-30,217.7
 Manhattan,Condo,2020-05-31,210.7
-Manhattan,Condo,2020-06-30,202.0
-Manhattan,Condo,2020-07-31,209.7
+Manhattan,Condo,2020-06-30,201.8
+Manhattan,Condo,2020-07-31,209.9
 Manhattan,Condo,2020-08-31,208.4
 Manhattan,Condo,2020-09-30,203.8
 Manhattan,Condo,2020-10-31,202.0
 Manhattan,Condo,2020-11-30,201.3
-Manhattan,Condo,2020-12-31,197.6
+Manhattan,Condo,2020-12-31,197.7
 Manhattan,Condo,2021-01-31,199.7
 Manhattan,Condo,2021-02-28,198.1
 Manhattan,Condo,2021-03-31,202.0
 Manhattan,Condo,2021-04-30,209.5
 Manhattan,Condo,2021-05-31,209.4
-Manhattan,Condo,2021-06-30,210.9
-Manhattan,Condo,2021-07-31,219.3
-Manhattan,Condo,2021-08-31,217.9
+Manhattan,Condo,2021-06-30,210.8
+Manhattan,Condo,2021-07-31,219.0
+Manhattan,Condo,2021-08-31,217.7
 Manhattan,Condo,2021-09-30,218.5
-Manhattan,Condo,2021-10-31,217.4
+Manhattan,Condo,2021-10-31,217.7
 Manhattan,Condo,2021-11-30,221.5
 Manhattan,Condo,2021-12-31,236.1
 Manhattan,Condo,2022-01-31,221.1
 Manhattan,Condo,2022-02-28,228.2
 Manhattan,Condo,2022-03-31,224.5
-Manhattan,Condo,2022-04-30,221.6
+Manhattan,Condo,2022-04-30,221.5
 Manhattan,Condo,2022-05-31,221.9
-Manhattan,Condo,2022-06-30,230.0
-Manhattan,Condo,2022-07-31,236.4
-Manhattan,Condo,2022-08-31,223.9
+Manhattan,Condo,2022-06-30,229.9
+Manhattan,Condo,2022-07-31,236.3
+Manhattan,Condo,2022-08-31,223.8
 Manhattan,Condo,2022-09-30,218.7
-Manhattan,Condo,2022-10-31,237.8
-Manhattan,Condo,2022-11-30,213.6
+Manhattan,Condo,2022-10-31,237.6
+Manhattan,Condo,2022-11-30,213.2
 Manhattan,Condo,2022-12-31,217.0
 Manhattan,Condo,2023-01-31,217.5
-Manhattan,Condo,2023-02-28,217.8
+Manhattan,Condo,2023-02-28,217.5
 Manhattan,Condo,2023-03-31,216.8
 Manhattan,Condo,2023-04-30,210.1
-Manhattan,Condo,2023-05-31,216.2
+Manhattan,Condo,2023-05-31,215.8
 Manhattan,Condo,2023-06-30,217.2
-Manhattan,Condo,2023-07-31,224.5
+Manhattan,Condo,2023-07-31,224.3
 Manhattan,Condo,2023-08-31,217.9
-Manhattan,Condo,2023-09-30,224.6
+Manhattan,Condo,2023-09-30,224.5
 Manhattan,Condo,2023-10-31,215.2
-Manhattan,Condo,2023-11-30,221.5
+Manhattan,Condo,2023-11-30,221.2
 Manhattan,Condo,2023-12-31,213.6
 Manhattan,Condo,2024-01-31,209.3
-Manhattan,Condo,2024-02-29,211.2
-Manhattan,Condo,2024-03-31,213.5
-Manhattan,Condo,2024-04-30,204.3
-Manhattan,Condo,2024-05-31,226.2
-Manhattan,Condo,2024-06-30,216.8
-Manhattan,Condo,2024-07-31,218.3
-Manhattan,Condo,2024-08-31,229.2
+Manhattan,Condo,2024-02-29,211.3
+Manhattan,Condo,2024-03-31,213.4
+Manhattan,Condo,2024-04-30,204.1
+Manhattan,Condo,2024-05-31,226.1
+Manhattan,Condo,2024-06-30,216.7
+Manhattan,Condo,2024-07-31,218.2
+Manhattan,Condo,2024-08-31,229.1
 Manhattan,Condo,2024-09-30,217.9
-Manhattan,Condo,2024-10-31,214.8
-Manhattan,Condo,2024-11-30,221.7
-Manhattan,Condo,2024-12-31,215.2
-Manhattan,Condo,2025-01-31,215.9
+Manhattan,Condo,2024-10-31,214.7
+Manhattan,Condo,2024-11-30,221.6
+Manhattan,Condo,2024-12-31,215.1
+Manhattan,Condo,2025-01-31,215.8
 Manhattan,Condo,2025-02-28,236.0
-Manhattan,Condo,2025-03-31,214.0
+Manhattan,Condo,2025-03-31,213.7
 Manhattan,Condo,2025-04-30,213.3
 Manhattan,Condo,2025-05-31,217.1
 Manhattan,Condo,2025-06-30,214.8
 Manhattan,Condo,2025-07-31,215.9
+Manhattan,Condo,2025-08-31,220.1
 Manhattan,Coop,2003-01-31,100.0
 Manhattan,Coop,2003-02-28,114.9
 Manhattan,Coop,2003-03-31,100.6
@@ -1743,7 +1749,7 @@ Manhattan,Coop,2003-06-30,96.8
 Manhattan,Coop,2003-07-31,105.7
 Manhattan,Coop,2003-08-31,108.4
 Manhattan,Coop,2003-09-30,108.9
-Manhattan,Coop,2003-10-31,112.7
+Manhattan,Coop,2003-10-31,112.8
 Manhattan,Coop,2003-11-30,109.1
 Manhattan,Coop,2003-12-31,108.1
 Manhattan,Coop,2004-01-31,121.2
@@ -1751,19 +1757,19 @@ Manhattan,Coop,2004-02-29,115.7
 Manhattan,Coop,2004-03-31,127.8
 Manhattan,Coop,2004-04-30,142.7
 Manhattan,Coop,2004-05-31,132.4
-Manhattan,Coop,2004-06-30,129.1
+Manhattan,Coop,2004-06-30,129.2
 Manhattan,Coop,2004-07-31,131.3
 Manhattan,Coop,2004-08-31,128.1
-Manhattan,Coop,2004-09-30,130.0
+Manhattan,Coop,2004-09-30,130.1
 Manhattan,Coop,2004-10-31,129.4
 Manhattan,Coop,2004-11-30,133.6
-Manhattan,Coop,2004-12-31,146.3
+Manhattan,Coop,2004-12-31,146.4
 Manhattan,Coop,2005-01-31,137.9
 Manhattan,Coop,2005-02-28,137.6
 Manhattan,Coop,2005-03-31,145.4
 Manhattan,Coop,2005-04-30,143.1
 Manhattan,Coop,2005-05-31,134.5
-Manhattan,Coop,2005-06-30,147.6
+Manhattan,Coop,2005-06-30,147.7
 Manhattan,Coop,2005-07-31,151.6
 Manhattan,Coop,2005-08-31,167.2
 Manhattan,Coop,2005-09-30,157.3
@@ -1774,26 +1780,26 @@ Manhattan,Coop,2006-01-31,173.6
 Manhattan,Coop,2006-02-28,154.0
 Manhattan,Coop,2006-03-31,145.6
 Manhattan,Coop,2006-04-30,161.6
-Manhattan,Coop,2006-05-31,159.5
+Manhattan,Coop,2006-05-31,159.6
 Manhattan,Coop,2006-06-30,155.2
 Manhattan,Coop,2006-07-31,154.5
-Manhattan,Coop,2006-08-31,154.5
+Manhattan,Coop,2006-08-31,154.6
 Manhattan,Coop,2006-09-30,161.6
-Manhattan,Coop,2006-10-31,163.9
-Manhattan,Coop,2006-11-30,158.4
+Manhattan,Coop,2006-10-31,164.0
+Manhattan,Coop,2006-11-30,158.5
 Manhattan,Coop,2006-12-31,157.8
 Manhattan,Coop,2007-01-31,162.4
 Manhattan,Coop,2007-02-28,170.6
-Manhattan,Coop,2007-03-31,174.9
-Manhattan,Coop,2007-04-30,171.2
-Manhattan,Coop,2007-05-31,166.6
-Manhattan,Coop,2007-06-30,170.0
-Manhattan,Coop,2007-07-31,177.6
+Manhattan,Coop,2007-03-31,175.0
+Manhattan,Coop,2007-04-30,171.3
+Manhattan,Coop,2007-05-31,166.7
+Manhattan,Coop,2007-06-30,170.2
+Manhattan,Coop,2007-07-31,177.7
 Manhattan,Coop,2007-08-31,177.6
 Manhattan,Coop,2007-09-30,169.2
 Manhattan,Coop,2007-10-31,179.3
 Manhattan,Coop,2007-11-30,191.6
-Manhattan,Coop,2007-12-31,176.7
+Manhattan,Coop,2007-12-31,176.8
 Manhattan,Coop,2008-01-31,169.2
 Manhattan,Coop,2008-02-29,185.9
 Manhattan,Coop,2008-03-31,184.9
@@ -1802,25 +1808,25 @@ Manhattan,Coop,2008-05-31,179.5
 Manhattan,Coop,2008-06-30,183.6
 Manhattan,Coop,2008-07-31,179.8
 Manhattan,Coop,2008-08-31,176.7
-Manhattan,Coop,2008-09-30,168.0
+Manhattan,Coop,2008-09-30,168.1
 Manhattan,Coop,2008-10-31,178.5
-Manhattan,Coop,2008-11-30,177.4
+Manhattan,Coop,2008-11-30,177.5
 Manhattan,Coop,2008-12-31,170.0
-Manhattan,Coop,2009-01-31,189.7
-Manhattan,Coop,2009-02-28,157.9
-Manhattan,Coop,2009-03-31,158.5
+Manhattan,Coop,2009-01-31,189.8
+Manhattan,Coop,2009-02-28,158.0
+Manhattan,Coop,2009-03-31,158.7
 Manhattan,Coop,2009-04-30,154.9
-Manhattan,Coop,2009-05-31,151.9
-Manhattan,Coop,2009-06-30,158.9
+Manhattan,Coop,2009-05-31,152.0
+Manhattan,Coop,2009-06-30,159.0
 Manhattan,Coop,2009-07-31,158.2
-Manhattan,Coop,2009-08-31,153.7
+Manhattan,Coop,2009-08-31,153.8
 Manhattan,Coop,2009-09-30,149.1
 Manhattan,Coop,2009-10-31,166.9
-Manhattan,Coop,2009-11-30,165.5
-Manhattan,Coop,2009-12-31,156.5
+Manhattan,Coop,2009-11-30,165.6
+Manhattan,Coop,2009-12-31,156.4
 Manhattan,Coop,2010-01-31,158.5
 Manhattan,Coop,2010-02-28,158.5
-Manhattan,Coop,2010-03-31,161.1
+Manhattan,Coop,2010-03-31,161.3
 Manhattan,Coop,2010-04-30,165.7
 Manhattan,Coop,2010-05-31,152.2
 Manhattan,Coop,2011-01-31,158.0
@@ -1829,32 +1835,32 @@ Manhattan,Coop,2011-03-31,148.3
 Manhattan,Coop,2011-04-30,167.8
 Manhattan,Coop,2011-05-31,158.3
 Manhattan,Coop,2011-06-30,154.8
-Manhattan,Coop,2011-07-31,159.9
-Manhattan,Coop,2011-08-31,161.7
-Manhattan,Coop,2011-09-30,158.8
+Manhattan,Coop,2011-07-31,159.8
+Manhattan,Coop,2011-08-31,161.8
+Manhattan,Coop,2011-09-30,158.9
 Manhattan,Coop,2011-10-31,150.2
 Manhattan,Coop,2011-11-30,156.2
 Manhattan,Coop,2011-12-31,165.3
 Manhattan,Coop,2012-01-31,171.8
 Manhattan,Coop,2012-02-29,164.2
 Manhattan,Coop,2012-03-31,156.8
-Manhattan,Coop,2012-04-30,168.7
-Manhattan,Coop,2012-05-31,166.5
+Manhattan,Coop,2012-04-30,169.0
+Manhattan,Coop,2012-05-31,166.7
 Manhattan,Coop,2012-06-30,161.7
-Manhattan,Coop,2012-07-31,161.9
-Manhattan,Coop,2012-08-31,156.9
+Manhattan,Coop,2012-07-31,161.8
+Manhattan,Coop,2012-08-31,157.0
 Manhattan,Coop,2012-09-30,162.0
 Manhattan,Coop,2012-10-31,166.9
 Manhattan,Coop,2012-11-30,169.3
 Manhattan,Coop,2012-12-31,170.5
 Manhattan,Coop,2013-01-31,174.3
 Manhattan,Coop,2013-02-28,171.8
-Manhattan,Coop,2013-03-31,168.1
+Manhattan,Coop,2013-03-31,168.7
 Manhattan,Coop,2013-04-30,170.3
 Manhattan,Coop,2013-05-31,181.7
 Manhattan,Coop,2013-06-30,180.0
 Manhattan,Coop,2013-07-31,181.7
-Manhattan,Coop,2013-08-31,175.3
+Manhattan,Coop,2013-08-31,175.6
 Manhattan,Coop,2013-09-30,192.2
 Manhattan,Coop,2013-10-31,176.8
 Manhattan,Coop,2013-11-30,188.2
@@ -1865,35 +1871,35 @@ Manhattan,Coop,2014-03-31,188.9
 Manhattan,Coop,2014-04-30,189.9
 Manhattan,Coop,2014-05-31,195.4
 Manhattan,Coop,2014-06-30,203.3
-Manhattan,Coop,2014-07-31,195.1
+Manhattan,Coop,2014-07-31,195.0
 Manhattan,Coop,2014-08-31,198.3
 Manhattan,Coop,2014-09-30,198.0
-Manhattan,Coop,2014-10-31,199.3
-Manhattan,Coop,2014-11-30,195.1
-Manhattan,Coop,2014-12-31,198.1
+Manhattan,Coop,2014-10-31,199.0
+Manhattan,Coop,2014-11-30,195.2
+Manhattan,Coop,2014-12-31,198.3
 Manhattan,Coop,2015-01-31,209.1
 Manhattan,Coop,2015-02-28,196.4
 Manhattan,Coop,2015-03-31,203.7
-Manhattan,Coop,2015-04-30,200.0
+Manhattan,Coop,2015-04-30,200.1
 Manhattan,Coop,2015-05-31,210.6
-Manhattan,Coop,2015-06-30,226.0
+Manhattan,Coop,2015-06-30,225.9
 Manhattan,Coop,2015-07-31,218.1
 Manhattan,Coop,2015-08-31,216.8
 Manhattan,Coop,2015-09-30,206.1
 Manhattan,Coop,2015-10-31,209.5
 Manhattan,Coop,2015-11-30,203.6
 Manhattan,Coop,2015-12-31,209.8
-Manhattan,Coop,2016-01-31,208.5
-Manhattan,Coop,2016-02-29,204.9
-Manhattan,Coop,2016-03-31,203.4
+Manhattan,Coop,2016-01-31,208.2
+Manhattan,Coop,2016-02-29,205.0
+Manhattan,Coop,2016-03-31,203.6
 Manhattan,Coop,2016-04-30,212.0
-Manhattan,Coop,2016-05-31,220.1
-Manhattan,Coop,2016-06-30,217.9
-Manhattan,Coop,2016-07-31,214.5
-Manhattan,Coop,2016-08-31,228.6
-Manhattan,Coop,2016-09-30,227.5
-Manhattan,Coop,2016-10-31,216.1
-Manhattan,Coop,2016-11-30,221.5
+Manhattan,Coop,2016-05-31,220.4
+Manhattan,Coop,2016-06-30,218.0
+Manhattan,Coop,2016-07-31,214.4
+Manhattan,Coop,2016-08-31,228.5
+Manhattan,Coop,2016-09-30,227.4
+Manhattan,Coop,2016-10-31,216.0
+Manhattan,Coop,2016-11-30,221.6
 Manhattan,Coop,2016-12-31,219.5
 Manhattan,Coop,2017-01-31,227.0
 Manhattan,Coop,2017-02-28,223.2
@@ -1901,393 +1907,395 @@ Manhattan,Coop,2017-03-31,228.3
 Manhattan,Coop,2017-04-30,224.2
 Manhattan,Coop,2017-05-31,225.6
 Manhattan,Coop,2017-06-30,227.3
-Manhattan,Coop,2017-07-31,231.9
+Manhattan,Coop,2017-07-31,232.1
 Manhattan,Coop,2017-08-31,222.6
-Manhattan,Coop,2017-09-30,224.1
+Manhattan,Coop,2017-09-30,224.0
 Manhattan,Coop,2017-10-31,223.7
 Manhattan,Coop,2017-11-30,219.6
-Manhattan,Coop,2017-12-31,225.8
+Manhattan,Coop,2017-12-31,226.0
 Manhattan,Coop,2018-01-31,222.1
-Manhattan,Coop,2018-02-28,218.9
+Manhattan,Coop,2018-02-28,219.0
 Manhattan,Coop,2018-03-31,232.7
 Manhattan,Coop,2018-04-30,219.6
 Manhattan,Coop,2018-05-31,221.4
 Manhattan,Coop,2018-06-30,224.3
 Manhattan,Coop,2018-07-31,228.4
 Manhattan,Coop,2018-08-31,235.7
-Manhattan,Coop,2018-09-30,219.2
-Manhattan,Coop,2018-10-31,226.3
-Manhattan,Coop,2018-11-30,232.7
+Manhattan,Coop,2018-09-30,219.1
+Manhattan,Coop,2018-10-31,226.2
+Manhattan,Coop,2018-11-30,232.5
 Manhattan,Coop,2018-12-31,217.8
 Manhattan,Coop,2019-01-31,219.2
 Manhattan,Coop,2019-02-28,221.6
 Manhattan,Coop,2019-03-31,228.4
 Manhattan,Coop,2019-04-30,222.4
-Manhattan,Coop,2019-05-31,230.8
-Manhattan,Coop,2019-06-30,235.8
-Manhattan,Coop,2019-07-31,222.9
-Manhattan,Coop,2019-08-31,208.4
+Manhattan,Coop,2019-05-31,230.6
+Manhattan,Coop,2019-06-30,235.7
+Manhattan,Coop,2019-07-31,222.4
+Manhattan,Coop,2019-08-31,208.3
 Manhattan,Coop,2019-09-30,224.4
 Manhattan,Coop,2019-10-31,233.9
 Manhattan,Coop,2019-11-30,225.7
 Manhattan,Coop,2019-12-31,218.2
 Manhattan,Coop,2020-01-31,215.7
 Manhattan,Coop,2020-02-29,224.6
-Manhattan,Coop,2020-03-31,232.9
+Manhattan,Coop,2020-03-31,232.8
 Manhattan,Coop,2020-04-30,231.9
 Manhattan,Coop,2020-05-31,216.2
 Manhattan,Coop,2020-06-30,222.6
-Manhattan,Coop,2020-07-31,212.0
+Manhattan,Coop,2020-07-31,212.4
 Manhattan,Coop,2020-08-31,209.8
-Manhattan,Coop,2020-09-30,216.7
-Manhattan,Coop,2020-10-31,212.0
-Manhattan,Coop,2020-11-30,238.3
+Manhattan,Coop,2020-09-30,216.6
+Manhattan,Coop,2020-10-31,212.2
+Manhattan,Coop,2020-11-30,238.0
 Manhattan,Coop,2020-12-31,215.4
-Manhattan,Coop,2021-01-31,212.4
+Manhattan,Coop,2021-01-31,212.5
 Manhattan,Coop,2021-02-28,224.6
 Manhattan,Coop,2021-03-31,209.0
 Manhattan,Coop,2021-04-30,211.8
 Manhattan,Coop,2021-05-31,233.0
-Manhattan,Coop,2021-06-30,218.1
+Manhattan,Coop,2021-06-30,218.2
 Manhattan,Coop,2021-07-31,225.6
 Manhattan,Coop,2021-08-31,220.2
 Manhattan,Coop,2021-09-30,221.4
-Manhattan,Coop,2021-10-31,224.0
-Manhattan,Coop,2021-11-30,225.4
-Manhattan,Coop,2021-12-31,225.0
-Manhattan,Coop,2022-01-31,229.8
-Manhattan,Coop,2022-02-28,237.7
-Manhattan,Coop,2022-03-31,227.2
-Manhattan,Coop,2022-04-30,242.1
-Manhattan,Coop,2022-05-31,236.3
-Manhattan,Coop,2022-06-30,236.0
-Manhattan,Coop,2022-07-31,228.9
-Manhattan,Coop,2022-08-31,245.3
+Manhattan,Coop,2021-10-31,224.1
+Manhattan,Coop,2021-11-30,225.6
+Manhattan,Coop,2021-12-31,224.6
+Manhattan,Coop,2022-01-31,228.9
+Manhattan,Coop,2022-02-28,237.8
+Manhattan,Coop,2022-03-31,227.5
+Manhattan,Coop,2022-04-30,241.4
+Manhattan,Coop,2022-05-31,236.1
+Manhattan,Coop,2022-06-30,236.1
+Manhattan,Coop,2022-07-31,227.5
+Manhattan,Coop,2022-08-31,243.7
 Manhattan,Coop,2022-09-30,230.1
 Manhattan,Coop,2022-10-31,230.3
 Manhattan,Coop,2022-11-30,236.0
 Manhattan,Coop,2022-12-31,227.9
-Manhattan,Coop,2023-01-31,226.9
+Manhattan,Coop,2023-01-31,229.1
 Manhattan,Coop,2023-02-28,220.7
-Manhattan,Coop,2023-03-31,226.6
+Manhattan,Coop,2023-03-31,227.2
 Manhattan,Coop,2023-04-30,226.0
 Manhattan,Coop,2023-05-31,222.1
 Manhattan,Coop,2023-06-30,237.0
-Manhattan,Coop,2023-07-31,233.1
-Manhattan,Coop,2023-08-31,229.2
-Manhattan,Coop,2023-09-30,239.6
+Manhattan,Coop,2023-07-31,233.0
+Manhattan,Coop,2023-08-31,229.1
+Manhattan,Coop,2023-09-30,239.5
 Manhattan,Coop,2023-10-31,239.1
-Manhattan,Coop,2023-11-30,234.1
+Manhattan,Coop,2023-11-30,234.3
 Manhattan,Coop,2023-12-31,235.4
 Manhattan,Coop,2024-01-31,239.7
-Manhattan,Coop,2024-02-29,236.0
-Manhattan,Coop,2024-03-31,229.9
-Manhattan,Coop,2024-04-30,233.8
+Manhattan,Coop,2024-02-29,236.1
+Manhattan,Coop,2024-03-31,230.1
+Manhattan,Coop,2024-04-30,233.7
 Manhattan,Coop,2024-05-31,226.7
 Manhattan,Coop,2024-06-30,237.0
-Manhattan,Coop,2024-07-31,235.2
-Manhattan,Coop,2024-08-31,231.8
-Manhattan,Coop,2024-09-30,235.2
+Manhattan,Coop,2024-07-31,235.3
+Manhattan,Coop,2024-08-31,231.7
+Manhattan,Coop,2024-09-30,235.1
 Manhattan,Coop,2024-10-31,222.9
 Manhattan,Coop,2024-11-30,237.0
-Manhattan,Coop,2024-12-31,243.7
+Manhattan,Coop,2024-12-31,243.5
 Manhattan,Coop,2025-01-31,224.8
 Manhattan,Coop,2025-02-28,234.7
-Manhattan,Coop,2025-03-31,242.7
-Manhattan,Coop,2025-04-30,234.2
+Manhattan,Coop,2025-03-31,242.6
+Manhattan,Coop,2025-04-30,234.1
 Manhattan,Coop,2025-05-31,232.2
-Manhattan,Coop,2025-06-30,235.2
+Manhattan,Coop,2025-06-30,235.1
 Manhattan,Coop,2025-07-31,253.7
+Manhattan,Coop,2025-08-31,243.6
 Manhattan,SFH,2003-01-31,100.0
-Manhattan,SFH,2003-02-28,74.4
-Manhattan,SFH,2003-03-31,51.1
-Manhattan,SFH,2003-04-30,26.7
-Manhattan,SFH,2003-05-31,16.5
+Manhattan,SFH,2003-02-28,74.5
+Manhattan,SFH,2003-03-31,51.6
+Manhattan,SFH,2003-04-30,141.7
+Manhattan,SFH,2003-05-31,141.7
 Manhattan,SFH,2003-06-30,62.6
 Manhattan,SFH,2003-07-31,41.3
 Manhattan,SFH,2003-08-31,55.1
 Manhattan,SFH,2003-09-30,38.6
 Manhattan,SFH,2003-10-31,92.5
-Manhattan,SFH,2003-11-30,26.7
-Manhattan,SFH,2003-12-31,62.7
+Manhattan,SFH,2003-11-30,141.7
+Manhattan,SFH,2003-12-31,62.3
 Manhattan,SFH,2004-01-31,42.4
 Manhattan,SFH,2004-02-29,47.0
 Manhattan,SFH,2004-03-31,68.4
-Manhattan,SFH,2004-04-30,48.8
+Manhattan,SFH,2004-04-30,49.0
 Manhattan,SFH,2004-05-31,40.2
 Manhattan,SFH,2004-06-30,99.7
 Manhattan,SFH,2004-07-31,58.7
-Manhattan,SFH,2004-08-31,55.5
+Manhattan,SFH,2004-08-31,55.6
 Manhattan,SFH,2004-09-30,71.5
 Manhattan,SFH,2004-10-31,60.3
 Manhattan,SFH,2004-11-30,72.1
 Manhattan,SFH,2004-12-31,121.4
 Manhattan,SFH,2005-01-31,69.4
-Manhattan,SFH,2005-02-28,94.8
-Manhattan,SFH,2005-03-31,54.7
+Manhattan,SFH,2005-02-28,94.9
+Manhattan,SFH,2005-03-31,53.7
 Manhattan,SFH,2005-04-30,70.2
-Manhattan,SFH,2005-05-31,48.6
+Manhattan,SFH,2005-05-31,48.7
 Manhattan,SFH,2005-06-30,76.6
-Manhattan,SFH,2005-07-31,64.9
-Manhattan,SFH,2005-08-31,68.7
+Manhattan,SFH,2005-07-31,65.1
+Manhattan,SFH,2005-08-31,68.5
 Manhattan,SFH,2005-09-30,45.1
-Manhattan,SFH,2005-10-31,111.0
-Manhattan,SFH,2005-11-30,47.8
-Manhattan,SFH,2005-12-31,80.6
-Manhattan,SFH,2006-01-31,73.2
-Manhattan,SFH,2006-02-28,93.3
+Manhattan,SFH,2005-10-31,111.1
+Manhattan,SFH,2005-11-30,47.9
+Manhattan,SFH,2005-12-31,80.5
+Manhattan,SFH,2006-01-31,73.3
+Manhattan,SFH,2006-02-28,93.4
 Manhattan,SFH,2006-03-31,122.1
-Manhattan,SFH,2006-04-30,75.5
-Manhattan,SFH,2006-05-31,73.9
+Manhattan,SFH,2006-04-30,75.6
+Manhattan,SFH,2006-05-31,74.0
 Manhattan,SFH,2006-06-30,78.8
 Manhattan,SFH,2006-07-31,107.7
-Manhattan,SFH,2006-08-31,73.7
-Manhattan,SFH,2006-09-30,169.7
-Manhattan,SFH,2006-10-31,73.5
+Manhattan,SFH,2006-08-31,73.8
+Manhattan,SFH,2006-09-30,168.5
+Manhattan,SFH,2006-10-31,72.5
 Manhattan,SFH,2006-11-30,73.5
 Manhattan,SFH,2006-12-31,123.1
 Manhattan,SFH,2007-01-31,82.9
-Manhattan,SFH,2007-02-28,70.4
-Manhattan,SFH,2007-03-31,76.4
-Manhattan,SFH,2007-04-30,152.9
-Manhattan,SFH,2007-05-31,91.2
+Manhattan,SFH,2007-02-28,70.5
+Manhattan,SFH,2007-03-31,76.5
+Manhattan,SFH,2007-04-30,152.4
+Manhattan,SFH,2007-05-31,91.4
 Manhattan,SFH,2007-06-30,133.1
-Manhattan,SFH,2007-07-31,93.6
-Manhattan,SFH,2007-08-31,63.3
-Manhattan,SFH,2007-09-30,69.9
-Manhattan,SFH,2007-10-31,92.0
-Manhattan,SFH,2007-11-30,26.7
-Manhattan,SFH,2007-12-31,104.6
-Manhattan,SFH,2008-01-31,65.8
+Manhattan,SFH,2007-07-31,93.9
+Manhattan,SFH,2007-08-31,62.8
+Manhattan,SFH,2007-09-30,70.0
+Manhattan,SFH,2007-10-31,91.9
+Manhattan,SFH,2007-11-30,141.7
+Manhattan,SFH,2007-12-31,104.7
+Manhattan,SFH,2008-01-31,65.7
 Manhattan,SFH,2008-02-29,65.4
-Manhattan,SFH,2008-03-31,95.3
-Manhattan,SFH,2008-04-30,100.5
+Manhattan,SFH,2008-03-31,95.4
+Manhattan,SFH,2008-04-30,100.6
 Manhattan,SFH,2008-05-31,98.8
-Manhattan,SFH,2008-06-30,26.7
-Manhattan,SFH,2008-07-31,100.1
+Manhattan,SFH,2008-06-30,26.5
+Manhattan,SFH,2008-07-31,100.2
 Manhattan,SFH,2008-08-31,116.9
-Manhattan,SFH,2008-09-30,75.0
-Manhattan,SFH,2008-10-31,77.2
-Manhattan,SFH,2008-11-30,26.7
+Manhattan,SFH,2008-09-30,75.1
+Manhattan,SFH,2008-10-31,77.0
+Manhattan,SFH,2008-11-30,230.0
 Manhattan,SFH,2008-12-31,102.5
 Manhattan,SFH,2009-01-31,115.6
 Manhattan,SFH,2009-02-28,100.4
 Manhattan,SFH,2009-03-31,71.5
-Manhattan,SFH,2009-04-30,45.3
-Manhattan,SFH,2009-05-31,91.6
-Manhattan,SFH,2009-06-30,26.7
+Manhattan,SFH,2009-04-30,45.2
+Manhattan,SFH,2009-05-31,91.5
+Manhattan,SFH,2009-06-30,141.7
 Manhattan,SFH,2009-07-31,81.1
-Manhattan,SFH,2009-08-31,121.9
+Manhattan,SFH,2009-08-31,122.1
 Manhattan,SFH,2009-09-30,68.2
-Manhattan,SFH,2009-10-31,26.7
+Manhattan,SFH,2009-10-31,141.7
 Manhattan,SFH,2009-11-30,66.1
-Manhattan,SFH,2009-12-31,70.4
-Manhattan,SFH,2010-01-31,80.7
-Manhattan,SFH,2010-02-28,26.7
-Manhattan,SFH,2010-03-31,26.7
+Manhattan,SFH,2009-12-31,70.5
+Manhattan,SFH,2010-01-31,80.5
+Manhattan,SFH,2010-02-28,141.7
+Manhattan,SFH,2010-03-31,141.7
 Manhattan,SFH,2010-04-30,81.4
-Manhattan,SFH,2010-05-31,88.2
+Manhattan,SFH,2010-05-31,89.0
 Manhattan,SFH,2010-06-30,81.7
-Manhattan,SFH,2010-07-31,93.6
+Manhattan,SFH,2010-07-31,93.7
 Manhattan,SFH,2010-08-31,109.8
 Manhattan,SFH,2010-09-30,82.9
-Manhattan,SFH,2010-10-31,131.4
-Manhattan,SFH,2010-11-30,65.7
+Manhattan,SFH,2010-10-31,131.5
+Manhattan,SFH,2010-11-30,63.1
 Manhattan,SFH,2010-12-31,83.8
 Manhattan,SFH,2011-01-31,43.9
 Manhattan,SFH,2011-02-28,75.1
-Manhattan,SFH,2011-03-31,61.2
-Manhattan,SFH,2011-04-30,83.3
-Manhattan,SFH,2011-05-31,69.2
-Manhattan,SFH,2011-06-30,68.2
-Manhattan,SFH,2011-07-31,26.7
+Manhattan,SFH,2011-03-31,60.9
+Manhattan,SFH,2011-04-30,83.2
+Manhattan,SFH,2011-05-31,69.0
+Manhattan,SFH,2011-06-30,67.7
+Manhattan,SFH,2011-07-31,141.7
 Manhattan,SFH,2011-08-31,80.0
 Manhattan,SFH,2011-09-30,75.7
 Manhattan,SFH,2011-10-31,173.9
-Manhattan,SFH,2011-11-30,83.0
+Manhattan,SFH,2011-11-30,82.9
 Manhattan,SFH,2011-12-31,75.7
-Manhattan,SFH,2012-01-31,67.9
-Manhattan,SFH,2012-02-29,26.7
-Manhattan,SFH,2012-03-31,53.2
-Manhattan,SFH,2012-04-30,53.1
-Manhattan,SFH,2012-05-31,145.2
-Manhattan,SFH,2012-06-30,65.6
+Manhattan,SFH,2012-01-31,68.2
+Manhattan,SFH,2012-02-29,141.7
+Manhattan,SFH,2012-03-31,53.1
+Manhattan,SFH,2012-04-30,53.3
+Manhattan,SFH,2012-05-31,145.3
+Manhattan,SFH,2012-06-30,64.8
 Manhattan,SFH,2012-07-31,101.3
-Manhattan,SFH,2012-08-31,77.9
-Manhattan,SFH,2012-09-30,26.7
+Manhattan,SFH,2012-08-31,77.8
+Manhattan,SFH,2012-09-30,141.7
 Manhattan,SFH,2012-10-31,86.6
-Manhattan,SFH,2012-11-30,68.6
-Manhattan,SFH,2012-12-31,91.8
-Manhattan,SFH,2013-01-31,107.3
-Manhattan,SFH,2013-02-28,116.9
+Manhattan,SFH,2012-11-30,68.5
+Manhattan,SFH,2012-12-31,91.9
+Manhattan,SFH,2013-01-31,107.2
+Manhattan,SFH,2013-02-28,117.0
 Manhattan,SFH,2013-03-31,93.8
 Manhattan,SFH,2013-04-30,141.1
 Manhattan,SFH,2013-05-31,87.8
-Manhattan,SFH,2013-06-30,107.7
-Manhattan,SFH,2013-07-31,100.4
-Manhattan,SFH,2013-08-31,105.5
-Manhattan,SFH,2013-09-30,96.5
-Manhattan,SFH,2013-10-31,73.5
-Manhattan,SFH,2013-11-30,79.5
-Manhattan,SFH,2013-12-31,94.3
-Manhattan,SFH,2014-01-31,83.1
-Manhattan,SFH,2014-02-28,133.6
+Manhattan,SFH,2013-06-30,108.0
+Manhattan,SFH,2013-07-31,100.6
+Manhattan,SFH,2013-08-31,105.6
+Manhattan,SFH,2013-09-30,96.6
+Manhattan,SFH,2013-10-31,73.2
+Manhattan,SFH,2013-11-30,79.4
+Manhattan,SFH,2013-12-31,93.6
+Manhattan,SFH,2014-01-31,83.3
+Manhattan,SFH,2014-02-28,133.7
 Manhattan,SFH,2014-03-31,89.1
-Manhattan,SFH,2014-04-30,114.1
-Manhattan,SFH,2014-05-31,80.1
-Manhattan,SFH,2014-06-30,115.9
+Manhattan,SFH,2014-04-30,115.0
+Manhattan,SFH,2014-05-31,80.0
+Manhattan,SFH,2014-06-30,115.6
 Manhattan,SFH,2014-07-31,127.0
-Manhattan,SFH,2014-08-31,94.0
+Manhattan,SFH,2014-08-31,94.1
 Manhattan,SFH,2014-09-30,112.2
-Manhattan,SFH,2014-10-31,115.6
-Manhattan,SFH,2014-11-30,27.5
-Manhattan,SFH,2014-12-31,166.5
-Manhattan,SFH,2015-01-31,130.1
-Manhattan,SFH,2015-02-28,184.0
+Manhattan,SFH,2014-10-31,115.7
+Manhattan,SFH,2014-11-30,27.6
+Manhattan,SFH,2014-12-31,166.6
+Manhattan,SFH,2015-01-31,130.0
+Manhattan,SFH,2015-02-28,183.9
 Manhattan,SFH,2015-03-31,136.5
-Manhattan,SFH,2015-04-30,115.7
-Manhattan,SFH,2015-05-31,110.5
-Manhattan,SFH,2015-06-30,233.6
+Manhattan,SFH,2015-04-30,115.8
+Manhattan,SFH,2015-05-31,110.6
+Manhattan,SFH,2015-06-30,233.7
 Manhattan,SFH,2015-07-31,162.3
-Manhattan,SFH,2015-08-31,181.0
-Manhattan,SFH,2015-09-30,26.7
-Manhattan,SFH,2015-10-31,102.0
-Manhattan,SFH,2015-11-30,155.2
-Manhattan,SFH,2015-12-31,102.5
-Manhattan,SFH,2016-01-31,67.2
-Manhattan,SFH,2016-02-29,132.4
+Manhattan,SFH,2015-08-31,181.1
+Manhattan,SFH,2015-09-30,141.7
+Manhattan,SFH,2015-10-31,101.9
+Manhattan,SFH,2015-11-30,155.3
+Manhattan,SFH,2015-12-31,103.3
+Manhattan,SFH,2016-01-31,67.3
+Manhattan,SFH,2016-02-29,134.5
 Manhattan,SFH,2016-03-31,168.8
-Manhattan,SFH,2016-04-30,88.3
-Manhattan,SFH,2016-05-31,107.3
-Manhattan,SFH,2016-06-30,141.1
-Manhattan,SFH,2016-07-31,152.0
-Manhattan,SFH,2016-08-31,115.1
+Manhattan,SFH,2016-04-30,87.9
+Manhattan,SFH,2016-05-31,107.4
+Manhattan,SFH,2016-06-30,141.2
+Manhattan,SFH,2016-07-31,152.2
+Manhattan,SFH,2016-08-31,115.2
 Manhattan,SFH,2016-09-30,93.7
-Manhattan,SFH,2016-10-31,120.1
+Manhattan,SFH,2016-10-31,120.4
 Manhattan,SFH,2016-11-30,107.0
-Manhattan,SFH,2016-12-31,87.1
-Manhattan,SFH,2017-01-31,143.4
-Manhattan,SFH,2017-02-28,86.1
+Manhattan,SFH,2016-12-31,88.6
+Manhattan,SFH,2017-01-31,143.6
+Manhattan,SFH,2017-02-28,86.0
 Manhattan,SFH,2017-03-31,189.7
-Manhattan,SFH,2017-04-30,26.7
-Manhattan,SFH,2017-05-31,122.0
-Manhattan,SFH,2017-06-30,137.5
-Manhattan,SFH,2017-07-31,97.8
+Manhattan,SFH,2017-04-30,141.7
+Manhattan,SFH,2017-05-31,123.0
+Manhattan,SFH,2017-06-30,137.6
+Manhattan,SFH,2017-07-31,97.2
 Manhattan,SFH,2017-08-31,111.9
 Manhattan,SFH,2017-09-30,150.4
 Manhattan,SFH,2017-10-31,145.5
-Manhattan,SFH,2017-11-30,103.9
-Manhattan,SFH,2017-12-31,137.6
-Manhattan,SFH,2018-01-31,168.0
-Manhattan,SFH,2018-02-28,135.2
-Manhattan,SFH,2018-03-31,156.7
+Manhattan,SFH,2017-11-30,103.7
+Manhattan,SFH,2017-12-31,138.2
+Manhattan,SFH,2018-01-31,168.1
+Manhattan,SFH,2018-02-28,135.3
+Manhattan,SFH,2018-03-31,156.8
 Manhattan,SFH,2018-04-30,147.3
 Manhattan,SFH,2018-05-31,54.2
 Manhattan,SFH,2018-06-30,187.1
-Manhattan,SFH,2018-07-31,148.6
+Manhattan,SFH,2018-07-31,147.8
 Manhattan,SFH,2018-08-31,373.5
-Manhattan,SFH,2018-09-30,91.5
-Manhattan,SFH,2018-10-31,173.4
-Manhattan,SFH,2018-11-30,161.4
-Manhattan,SFH,2018-12-31,147.4
+Manhattan,SFH,2018-09-30,91.2
+Manhattan,SFH,2018-10-31,173.3
+Manhattan,SFH,2018-11-30,161.2
+Manhattan,SFH,2018-12-31,147.5
 Manhattan,SFH,2019-01-31,115.3
-Manhattan,SFH,2019-02-28,140.5
-Manhattan,SFH,2019-03-31,128.7
-Manhattan,SFH,2019-04-30,114.9
-Manhattan,SFH,2019-05-31,143.2
-Manhattan,SFH,2019-06-30,124.4
-Manhattan,SFH,2019-07-31,26.7
-Manhattan,SFH,2019-08-31,165.4
-Manhattan,SFH,2019-09-30,90.8
-Manhattan,SFH,2019-10-31,164.6
-Manhattan,SFH,2019-11-30,97.9
+Manhattan,SFH,2019-02-28,140.6
+Manhattan,SFH,2019-03-31,128.6
+Manhattan,SFH,2019-04-30,115.0
+Manhattan,SFH,2019-05-31,143.1
+Manhattan,SFH,2019-06-30,124.5
+Manhattan,SFH,2019-07-31,141.7
+Manhattan,SFH,2019-08-31,165.3
+Manhattan,SFH,2019-09-30,90.9
+Manhattan,SFH,2019-10-31,164.7
+Manhattan,SFH,2019-11-30,98.0
 Manhattan,SFH,2019-12-31,100.9
-Manhattan,SFH,2020-01-31,110.7
-Manhattan,SFH,2020-02-29,35.7
+Manhattan,SFH,2020-01-31,109.9
+Manhattan,SFH,2020-02-29,35.5
 Manhattan,SFH,2020-03-31,127.5
-Manhattan,SFH,2020-04-30,101.7
-Manhattan,SFH,2020-05-31,127.4
-Manhattan,SFH,2020-06-30,98.3
-Manhattan,SFH,2020-07-31,26.7
-Manhattan,SFH,2020-08-31,138.8
-Manhattan,SFH,2020-09-30,131.6
-Manhattan,SFH,2020-10-31,124.6
-Manhattan,SFH,2020-11-30,109.9
-Manhattan,SFH,2020-12-31,121.4
-Manhattan,SFH,2021-01-31,234.5
-Manhattan,SFH,2021-02-28,125.6
-Manhattan,SFH,2021-03-31,348.6
+Manhattan,SFH,2020-04-30,101.9
+Manhattan,SFH,2020-05-31,127.6
+Manhattan,SFH,2020-06-30,98.5
+Manhattan,SFH,2020-07-31,141.7
+Manhattan,SFH,2020-08-31,138.9
+Manhattan,SFH,2020-09-30,131.4
+Manhattan,SFH,2020-10-31,124.7
+Manhattan,SFH,2020-11-30,110.0
+Manhattan,SFH,2020-12-31,121.6
+Manhattan,SFH,2021-01-31,234.6
+Manhattan,SFH,2021-02-28,125.7
+Manhattan,SFH,2021-03-31,348.3
 Manhattan,SFH,2021-04-30,102.3
-Manhattan,SFH,2021-05-31,91.3
-Manhattan,SFH,2021-06-30,113.4
+Manhattan,SFH,2021-05-31,91.2
+Manhattan,SFH,2021-06-30,112.8
 Manhattan,SFH,2021-07-31,164.6
-Manhattan,SFH,2021-08-31,110.7
+Manhattan,SFH,2021-08-31,110.8
 Manhattan,SFH,2021-09-30,153.4
-Manhattan,SFH,2021-10-31,114.2
+Manhattan,SFH,2021-10-31,114.4
 Manhattan,SFH,2021-11-30,154.5
-Manhattan,SFH,2021-12-31,152.9
+Manhattan,SFH,2021-12-31,153.2
 Manhattan,SFH,2022-01-31,135.8
 Manhattan,SFH,2022-02-28,139.3
-Manhattan,SFH,2022-03-31,144.7
-Manhattan,SFH,2022-04-30,38.1
-Manhattan,SFH,2022-05-31,177.3
-Manhattan,SFH,2022-06-30,122.1
-Manhattan,SFH,2022-07-31,131.3
-Manhattan,SFH,2022-08-31,115.9
-Manhattan,SFH,2022-09-30,132.8
+Manhattan,SFH,2022-03-31,144.8
+Manhattan,SFH,2022-04-30,202.0
+Manhattan,SFH,2022-05-31,177.7
+Manhattan,SFH,2022-06-30,122.3
+Manhattan,SFH,2022-07-31,131.2
+Manhattan,SFH,2022-08-31,116.1
+Manhattan,SFH,2022-09-30,132.5
 Manhattan,SFH,2022-10-31,119.3
-Manhattan,SFH,2022-11-30,135.2
-Manhattan,SFH,2022-12-31,109.2
-Manhattan,SFH,2023-01-31,110.8
-Manhattan,SFH,2023-02-28,191.2
-Manhattan,SFH,2023-03-31,26.7
-Manhattan,SFH,2023-04-30,58.4
-Manhattan,SFH,2023-05-31,112.4
+Manhattan,SFH,2022-11-30,135.4
+Manhattan,SFH,2022-12-31,109.4
+Manhattan,SFH,2023-01-31,111.1
+Manhattan,SFH,2023-02-28,191.4
+Manhattan,SFH,2023-03-31,141.7
+Manhattan,SFH,2023-04-30,58.5
+Manhattan,SFH,2023-05-31,112.5
 Manhattan,SFH,2023-06-30,126.0
-Manhattan,SFH,2023-07-31,152.4
-Manhattan,SFH,2023-08-31,211.6
-Manhattan,SFH,2023-09-30,134.9
-Manhattan,SFH,2023-10-31,72.6
-Manhattan,SFH,2023-11-30,170.4
-Manhattan,SFH,2023-12-31,141.6
+Manhattan,SFH,2023-07-31,152.6
+Manhattan,SFH,2023-08-31,211.7
+Manhattan,SFH,2023-09-30,135.0
+Manhattan,SFH,2023-10-31,72.7
+Manhattan,SFH,2023-11-30,170.5
+Manhattan,SFH,2023-12-31,141.7
 Manhattan,SFH,2024-01-31,120.7
-Manhattan,SFH,2024-03-31,120.6
-Manhattan,SFH,2024-04-30,98.5
-Manhattan,SFH,2024-05-31,205.7
+Manhattan,SFH,2024-03-31,120.7
+Manhattan,SFH,2024-04-30,98.0
+Manhattan,SFH,2024-05-31,206.0
 Manhattan,SFH,2024-06-30,113.2
-Manhattan,SFH,2024-07-31,194.1
-Manhattan,SFH,2024-08-31,94.3
-Manhattan,SFH,2024-09-30,146.8
+Manhattan,SFH,2024-07-31,195.1
+Manhattan,SFH,2024-08-31,92.9
+Manhattan,SFH,2024-09-30,146.7
 Manhattan,SFH,2024-10-31,123.8
-Manhattan,SFH,2024-11-30,91.6
+Manhattan,SFH,2024-11-30,91.7
 Manhattan,SFH,2024-12-31,134.5
-Manhattan,SFH,2025-01-31,82.5
-Manhattan,SFH,2025-02-28,194.4
-Manhattan,SFH,2025-03-31,118.2
+Manhattan,SFH,2025-01-31,83.4
+Manhattan,SFH,2025-02-28,194.5
+Manhattan,SFH,2025-03-31,118.1
 Manhattan,SFH,2025-04-30,155.3
 Manhattan,SFH,2025-05-31,137.9
 Manhattan,SFH,2025-06-30,165.7
-Manhattan,SFH,2025-07-31,156.7
+Manhattan,SFH,2025-07-31,156.6
+Manhattan,SFH,2025-08-31,133.0
 Queens,Condo,2003-01-31,100.0
 Queens,Condo,2003-02-28,162.3
 Queens,Condo,2003-03-31,102.1
 Queens,Condo,2003-04-30,97.7
-Queens,Condo,2003-05-31,101.0
+Queens,Condo,2003-05-31,101.1
 Queens,Condo,2003-06-30,108.9
-Queens,Condo,2003-07-31,106.6
+Queens,Condo,2003-07-31,106.5
 Queens,Condo,2003-08-31,96.1
 Queens,Condo,2003-09-30,103.0
 Queens,Condo,2003-10-31,105.5
-Queens,Condo,2003-11-30,107.1
-Queens,Condo,2003-12-31,103.0
+Queens,Condo,2003-11-30,107.2
+Queens,Condo,2003-12-31,103.2
 Queens,Condo,2004-01-31,109.0
-Queens,Condo,2004-02-29,110.9
+Queens,Condo,2004-02-29,111.0
 Queens,Condo,2004-03-31,113.4
 Queens,Condo,2004-04-30,115.2
 Queens,Condo,2004-05-31,113.3
 Queens,Condo,2004-06-30,116.0
 Queens,Condo,2004-07-31,111.2
-Queens,Condo,2004-08-31,114.1
+Queens,Condo,2004-08-31,113.9
 Queens,Condo,2004-09-30,116.6
 Queens,Condo,2004-10-31,122.0
 Queens,Condo,2004-11-30,119.5
@@ -2308,7 +2316,7 @@ Queens,Condo,2006-01-31,142.4
 Queens,Condo,2006-02-28,147.0
 Queens,Condo,2006-03-31,138.8
 Queens,Condo,2006-04-30,139.9
-Queens,Condo,2006-05-31,139.8
+Queens,Condo,2006-05-31,139.9
 Queens,Condo,2006-06-30,143.2
 Queens,Condo,2006-07-31,145.3
 Queens,Condo,2006-08-31,147.9
@@ -2319,20 +2327,20 @@ Queens,Condo,2006-12-31,132.1
 Queens,Condo,2007-01-31,132.9
 Queens,Condo,2007-02-28,143.6
 Queens,Condo,2007-03-31,136.8
-Queens,Condo,2007-04-30,142.8
+Queens,Condo,2007-04-30,142.9
 Queens,Condo,2007-05-31,147.3
-Queens,Condo,2007-06-30,148.6
+Queens,Condo,2007-06-30,148.9
 Queens,Condo,2007-07-31,148.0
-Queens,Condo,2007-08-31,143.6
+Queens,Condo,2007-08-31,143.4
 Queens,Condo,2007-09-30,152.5
 Queens,Condo,2007-10-31,147.0
 Queens,Condo,2007-11-30,145.0
 Queens,Condo,2007-12-31,141.0
 Queens,Condo,2008-01-31,143.3
-Queens,Condo,2008-02-29,130.3
+Queens,Condo,2008-02-29,130.4
 Queens,Condo,2008-03-31,146.8
 Queens,Condo,2008-04-30,143.7
-Queens,Condo,2008-05-31,148.3
+Queens,Condo,2008-05-31,148.4
 Queens,Condo,2008-06-30,142.7
 Queens,Condo,2008-07-31,141.7
 Queens,Condo,2008-08-31,145.9
@@ -2340,7 +2348,7 @@ Queens,Condo,2008-09-30,148.1
 Queens,Condo,2008-10-31,147.5
 Queens,Condo,2008-11-30,138.1
 Queens,Condo,2008-12-31,133.9
-Queens,Condo,2009-01-31,131.6
+Queens,Condo,2009-01-31,131.9
 Queens,Condo,2009-02-28,133.2
 Queens,Condo,2009-03-31,127.4
 Queens,Condo,2009-04-30,138.4
@@ -2352,35 +2360,35 @@ Queens,Condo,2009-09-30,135.5
 Queens,Condo,2009-10-31,124.3
 Queens,Condo,2009-11-30,135.7
 Queens,Condo,2009-12-31,132.2
-Queens,Condo,2010-01-31,139.2
-Queens,Condo,2010-02-28,122.6
+Queens,Condo,2010-01-31,139.1
+Queens,Condo,2010-02-28,122.5
 Queens,Condo,2010-03-31,130.0
 Queens,Condo,2010-04-30,124.5
 Queens,Condo,2010-05-31,123.3
 Queens,Condo,2010-06-30,132.2
 Queens,Condo,2010-07-31,127.5
-Queens,Condo,2010-08-31,132.7
+Queens,Condo,2010-08-31,132.8
 Queens,Condo,2010-09-30,126.6
-Queens,Condo,2010-10-31,129.6
+Queens,Condo,2010-10-31,129.7
 Queens,Condo,2010-11-30,128.7
 Queens,Condo,2010-12-31,126.3
 Queens,Condo,2011-01-31,130.8
-Queens,Condo,2011-02-28,129.3
-Queens,Condo,2011-03-31,127.9
+Queens,Condo,2011-02-28,129.2
+Queens,Condo,2011-03-31,128.0
 Queens,Condo,2011-04-30,130.2
 Queens,Condo,2011-05-31,128.9
 Queens,Condo,2011-06-30,125.9
-Queens,Condo,2011-07-31,131.1
+Queens,Condo,2011-07-31,131.2
 Queens,Condo,2011-08-31,123.0
 Queens,Condo,2011-09-30,132.7
 Queens,Condo,2011-10-31,127.3
-Queens,Condo,2011-11-30,124.5
+Queens,Condo,2011-11-30,124.6
 Queens,Condo,2011-12-31,134.3
 Queens,Condo,2012-01-31,129.3
 Queens,Condo,2012-02-29,134.1
 Queens,Condo,2012-03-31,128.2
 Queens,Condo,2012-04-30,132.3
-Queens,Condo,2012-05-31,128.0
+Queens,Condo,2012-05-31,128.1
 Queens,Condo,2012-06-30,137.0
 Queens,Condo,2012-07-31,133.9
 Queens,Condo,2012-08-31,132.1
@@ -2408,19 +2416,19 @@ Queens,Condo,2014-05-31,155.9
 Queens,Condo,2014-06-30,155.2
 Queens,Condo,2014-07-31,163.5
 Queens,Condo,2014-08-31,154.8
-Queens,Condo,2014-09-30,155.6
+Queens,Condo,2014-09-30,155.8
 Queens,Condo,2014-10-31,160.2
 Queens,Condo,2014-11-30,158.6
 Queens,Condo,2014-12-31,161.9
 Queens,Condo,2015-01-31,165.1
-Queens,Condo,2015-02-28,164.5
+Queens,Condo,2015-02-28,164.3
 Queens,Condo,2015-03-31,167.9
 Queens,Condo,2015-04-30,171.3
 Queens,Condo,2015-05-31,165.5
 Queens,Condo,2015-06-30,177.4
 Queens,Condo,2015-07-31,176.9
-Queens,Condo,2015-08-31,169.9
-Queens,Condo,2015-09-30,174.9
+Queens,Condo,2015-08-31,169.8
+Queens,Condo,2015-09-30,175.1
 Queens,Condo,2015-10-31,175.1
 Queens,Condo,2015-11-30,175.1
 Queens,Condo,2015-12-31,175.8
@@ -2431,31 +2439,31 @@ Queens,Condo,2016-04-30,184.5
 Queens,Condo,2016-05-31,179.8
 Queens,Condo,2016-06-30,186.5
 Queens,Condo,2016-07-31,189.0
-Queens,Condo,2016-08-31,190.1
-Queens,Condo,2016-09-30,187.8
+Queens,Condo,2016-08-31,189.9
+Queens,Condo,2016-09-30,187.7
 Queens,Condo,2016-10-31,180.3
 Queens,Condo,2016-11-30,191.1
 Queens,Condo,2016-12-31,192.4
-Queens,Condo,2017-01-31,188.5
-Queens,Condo,2017-02-28,199.6
-Queens,Condo,2017-03-31,190.2
+Queens,Condo,2017-01-31,189.0
+Queens,Condo,2017-02-28,199.5
+Queens,Condo,2017-03-31,190.1
 Queens,Condo,2017-04-30,202.1
-Queens,Condo,2017-05-31,191.4
-Queens,Condo,2017-06-30,195.1
+Queens,Condo,2017-05-31,191.3
+Queens,Condo,2017-06-30,195.3
 Queens,Condo,2017-07-31,198.1
 Queens,Condo,2017-08-31,201.2
-Queens,Condo,2017-09-30,203.0
-Queens,Condo,2017-10-31,201.1
+Queens,Condo,2017-09-30,203.2
+Queens,Condo,2017-10-31,201.3
 Queens,Condo,2017-11-30,199.0
 Queens,Condo,2017-12-31,203.5
-Queens,Condo,2018-01-31,198.9
-Queens,Condo,2018-02-28,203.2
+Queens,Condo,2018-01-31,198.8
+Queens,Condo,2018-02-28,203.1
 Queens,Condo,2018-03-31,199.3
-Queens,Condo,2018-04-30,208.8
+Queens,Condo,2018-04-30,209.2
 Queens,Condo,2018-05-31,206.9
 Queens,Condo,2018-06-30,204.1
 Queens,Condo,2018-07-31,205.0
-Queens,Condo,2018-08-31,201.5
+Queens,Condo,2018-08-31,201.4
 Queens,Condo,2018-09-30,200.5
 Queens,Condo,2018-10-31,204.7
 Queens,Condo,2018-11-30,215.5
@@ -2465,151 +2473,152 @@ Queens,Condo,2019-02-28,190.1
 Queens,Condo,2019-03-31,188.4
 Queens,Condo,2019-04-30,195.3
 Queens,Condo,2019-05-31,201.7
-Queens,Condo,2019-06-30,204.2
+Queens,Condo,2019-06-30,204.4
 Queens,Condo,2019-07-31,211.1
-Queens,Condo,2019-08-31,210.2
-Queens,Condo,2019-09-30,207.7
-Queens,Condo,2019-10-31,205.0
+Queens,Condo,2019-08-31,210.5
+Queens,Condo,2019-09-30,207.6
+Queens,Condo,2019-10-31,204.9
 Queens,Condo,2019-11-30,199.4
 Queens,Condo,2019-12-31,199.1
 Queens,Condo,2020-01-31,201.6
 Queens,Condo,2020-02-29,210.9
 Queens,Condo,2020-03-31,208.0
-Queens,Condo,2020-04-30,202.8
+Queens,Condo,2020-04-30,201.6
 Queens,Condo,2020-05-31,201.7
 Queens,Condo,2020-06-30,208.5
 Queens,Condo,2020-07-31,196.1
-Queens,Condo,2020-08-31,210.2
-Queens,Condo,2020-09-30,211.7
+Queens,Condo,2020-08-31,210.8
+Queens,Condo,2020-09-30,211.6
 Queens,Condo,2020-10-31,196.6
 Queens,Condo,2020-11-30,208.1
 Queens,Condo,2020-12-31,197.1
 Queens,Condo,2021-01-31,191.3
 Queens,Condo,2021-02-28,199.8
 Queens,Condo,2021-03-31,195.5
-Queens,Condo,2021-04-30,205.7
+Queens,Condo,2021-04-30,205.8
 Queens,Condo,2021-05-31,196.5
 Queens,Condo,2021-06-30,205.9
-Queens,Condo,2021-07-31,201.8
-Queens,Condo,2021-08-31,206.6
+Queens,Condo,2021-07-31,201.9
+Queens,Condo,2021-08-31,205.8
 Queens,Condo,2021-09-30,205.6
 Queens,Condo,2021-10-31,201.9
 Queens,Condo,2021-11-30,210.6
-Queens,Condo,2021-12-31,201.5
-Queens,Condo,2022-01-31,207.3
-Queens,Condo,2022-02-28,206.3
+Queens,Condo,2021-12-31,201.4
+Queens,Condo,2022-01-31,207.0
+Queens,Condo,2022-02-28,206.6
 Queens,Condo,2022-03-31,200.2
 Queens,Condo,2022-04-30,217.4
 Queens,Condo,2022-05-31,206.9
-Queens,Condo,2022-06-30,216.4
+Queens,Condo,2022-06-30,215.8
 Queens,Condo,2022-07-31,216.5
 Queens,Condo,2022-08-31,214.4
-Queens,Condo,2022-09-30,211.4
+Queens,Condo,2022-09-30,211.3
 Queens,Condo,2022-10-31,213.9
-Queens,Condo,2022-11-30,218.1
+Queens,Condo,2022-11-30,218.0
 Queens,Condo,2022-12-31,219.7
 Queens,Condo,2023-01-31,195.7
-Queens,Condo,2023-02-28,209.6
-Queens,Condo,2023-03-31,200.2
-Queens,Condo,2023-04-30,219.8
-Queens,Condo,2023-05-31,213.2
+Queens,Condo,2023-02-28,209.5
+Queens,Condo,2023-03-31,199.7
+Queens,Condo,2023-04-30,219.7
+Queens,Condo,2023-05-31,213.1
 Queens,Condo,2023-06-30,213.3
 Queens,Condo,2023-07-31,213.8
 Queens,Condo,2023-08-31,209.2
-Queens,Condo,2023-09-30,205.1
+Queens,Condo,2023-09-30,205.0
 Queens,Condo,2023-10-31,203.2
-Queens,Condo,2023-11-30,221.8
+Queens,Condo,2023-11-30,221.6
 Queens,Condo,2023-12-31,213.0
 Queens,Condo,2024-01-31,214.9
 Queens,Condo,2024-02-29,217.3
 Queens,Condo,2024-03-31,206.8
 Queens,Condo,2024-04-30,211.1
 Queens,Condo,2024-05-31,209.4
-Queens,Condo,2024-06-30,214.6
-Queens,Condo,2024-07-31,220.4
+Queens,Condo,2024-06-30,214.7
+Queens,Condo,2024-07-31,220.3
 Queens,Condo,2024-08-31,217.4
-Queens,Condo,2024-09-30,215.2
+Queens,Condo,2024-09-30,215.1
 Queens,Condo,2024-10-31,213.7
-Queens,Condo,2024-11-30,217.9
+Queens,Condo,2024-11-30,218.0
 Queens,Condo,2024-12-31,212.6
 Queens,Condo,2025-01-31,214.3
 Queens,Condo,2025-02-28,207.2
-Queens,Condo,2025-03-31,212.3
+Queens,Condo,2025-03-31,212.2
 Queens,Condo,2025-04-30,225.7
-Queens,Condo,2025-05-31,219.0
+Queens,Condo,2025-05-31,218.9
 Queens,Condo,2025-06-30,218.2
 Queens,Condo,2025-07-31,207.5
+Queens,Condo,2025-08-31,215.4
 Queens,Coop,2003-03-31,100.0
 Queens,Coop,2003-04-30,73.9
 Queens,Coop,2003-05-31,61.4
-Queens,Coop,2003-06-30,97.4
-Queens,Coop,2003-07-31,97.4
-Queens,Coop,2003-10-31,97.4
-Queens,Coop,2003-11-30,97.4
-Queens,Coop,2004-01-31,97.4
-Queens,Coop,2004-05-31,226.5
+Queens,Coop,2003-06-30,148.3
+Queens,Coop,2003-07-31,148.3
+Queens,Coop,2003-10-31,148.3
+Queens,Coop,2003-11-30,148.3
+Queens,Coop,2004-01-31,97.5
+Queens,Coop,2004-05-31,226.0
 Queens,Coop,2004-06-30,140.0
 Queens,Coop,2004-07-31,128.5
-Queens,Coop,2004-08-31,136.9
-Queens,Coop,2004-09-30,127.3
-Queens,Coop,2004-10-31,125.1
-Queens,Coop,2004-11-30,146.9
+Queens,Coop,2004-08-31,137.0
+Queens,Coop,2004-09-30,127.5
+Queens,Coop,2004-10-31,125.2
+Queens,Coop,2004-11-30,147.0
 Queens,Coop,2004-12-31,140.4
-Queens,Coop,2005-01-31,132.1
+Queens,Coop,2005-01-31,132.5
 Queens,Coop,2005-02-28,116.6
-Queens,Coop,2005-03-31,158.7
+Queens,Coop,2005-03-31,158.8
 Queens,Coop,2005-04-30,125.2
 Queens,Coop,2005-05-31,142.3
-Queens,Coop,2005-06-30,134.2
-Queens,Coop,2005-07-31,146.7
-Queens,Coop,2005-08-31,158.7
+Queens,Coop,2005-06-30,134.3
+Queens,Coop,2005-07-31,148.6
+Queens,Coop,2005-08-31,158.8
 Queens,Coop,2005-09-30,149.2
 Queens,Coop,2005-10-31,170.8
 Queens,Coop,2005-11-30,155.1
-Queens,Coop,2005-12-31,159.6
+Queens,Coop,2005-12-31,159.9
 Queens,Coop,2006-01-31,152.2
 Queens,Coop,2006-02-28,170.4
 Queens,Coop,2006-03-31,168.2
 Queens,Coop,2006-04-30,159.2
-Queens,Coop,2006-05-31,146.7
-Queens,Coop,2006-06-30,163.2
+Queens,Coop,2006-05-31,146.8
+Queens,Coop,2006-06-30,163.3
 Queens,Coop,2006-07-31,159.0
-Queens,Coop,2006-08-31,150.7
+Queens,Coop,2006-08-31,150.8
 Queens,Coop,2006-09-30,154.0
 Queens,Coop,2006-10-31,154.0
 Queens,Coop,2006-11-30,158.9
-Queens,Coop,2006-12-31,158.7
-Queens,Coop,2007-01-31,149.5
-Queens,Coop,2007-02-28,142.0
-Queens,Coop,2007-03-31,153.9
-Queens,Coop,2007-04-30,153.5
+Queens,Coop,2006-12-31,158.8
+Queens,Coop,2007-01-31,149.6
+Queens,Coop,2007-02-28,142.2
+Queens,Coop,2007-03-31,154.0
+Queens,Coop,2007-04-30,153.4
 Queens,Coop,2007-05-31,161.6
-Queens,Coop,2007-06-30,159.3
-Queens,Coop,2007-07-31,155.0
-Queens,Coop,2007-08-31,157.5
+Queens,Coop,2007-06-30,159.4
+Queens,Coop,2007-07-31,154.9
+Queens,Coop,2007-08-31,157.6
 Queens,Coop,2007-09-30,150.2
-Queens,Coop,2007-10-31,143.9
-Queens,Coop,2007-11-30,160.3
-Queens,Coop,2007-12-31,163.2
+Queens,Coop,2007-10-31,144.0
+Queens,Coop,2007-11-30,160.4
+Queens,Coop,2007-12-31,161.6
 Queens,Coop,2008-01-31,170.5
 Queens,Coop,2008-02-29,143.8
 Queens,Coop,2008-03-31,159.9
 Queens,Coop,2008-04-30,147.6
 Queens,Coop,2008-05-31,156.4
-Queens,Coop,2008-06-30,169.3
-Queens,Coop,2008-07-31,149.0
-Queens,Coop,2008-08-31,156.0
+Queens,Coop,2008-06-30,169.4
+Queens,Coop,2008-07-31,148.9
+Queens,Coop,2008-08-31,156.1
 Queens,Coop,2008-09-30,165.0
-Queens,Coop,2008-10-31,158.4
+Queens,Coop,2008-10-31,158.5
 Queens,Coop,2008-11-30,143.9
 Queens,Coop,2008-12-31,161.3
 Queens,Coop,2009-01-31,152.2
-Queens,Coop,2009-02-28,148.4
+Queens,Coop,2009-02-28,148.5
 Queens,Coop,2009-03-31,147.9
 Queens,Coop,2009-04-30,146.5
-Queens,Coop,2009-05-31,179.8
-Queens,Coop,2009-06-30,178.9
-Queens,Coop,2009-07-31,137.9
+Queens,Coop,2009-05-31,179.9
+Queens,Coop,2009-06-30,179.2
+Queens,Coop,2009-07-31,137.8
 Queens,Coop,2009-08-31,152.4
 Queens,Coop,2009-09-30,153.9
 Queens,Coop,2009-10-31,153.6
@@ -2617,187 +2626,188 @@ Queens,Coop,2009-11-30,154.0
 Queens,Coop,2009-12-31,252.9
 Queens,Coop,2010-01-31,151.7
 Queens,Coop,2010-02-28,148.0
-Queens,Coop,2010-03-31,165.2
+Queens,Coop,2010-03-31,165.1
 Queens,Coop,2010-04-30,140.2
 Queens,Coop,2010-05-31,143.2
 Queens,Coop,2011-01-31,148.3
-Queens,Coop,2011-02-28,133.4
+Queens,Coop,2011-02-28,133.5
 Queens,Coop,2011-03-31,135.0
 Queens,Coop,2011-04-30,139.3
 Queens,Coop,2011-05-31,153.6
-Queens,Coop,2011-06-30,155.6
+Queens,Coop,2011-06-30,155.7
 Queens,Coop,2011-07-31,173.7
 Queens,Coop,2011-08-31,140.2
 Queens,Coop,2011-09-30,143.0
-Queens,Coop,2011-10-31,151.5
+Queens,Coop,2011-10-31,151.8
 Queens,Coop,2011-11-30,148.5
 Queens,Coop,2011-12-31,154.0
-Queens,Coop,2012-01-31,270.2
-Queens,Coop,2012-02-29,162.5
+Queens,Coop,2012-01-31,270.1
+Queens,Coop,2012-02-29,163.1
 Queens,Coop,2012-03-31,136.8
 Queens,Coop,2012-04-30,142.4
 Queens,Coop,2012-05-31,160.2
-Queens,Coop,2012-06-30,141.3
-Queens,Coop,2012-07-31,184.4
+Queens,Coop,2012-06-30,141.4
+Queens,Coop,2012-07-31,184.2
 Queens,Coop,2012-08-31,150.2
-Queens,Coop,2012-09-30,139.9
-Queens,Coop,2012-10-31,150.2
+Queens,Coop,2012-09-30,139.8
+Queens,Coop,2012-10-31,150.3
 Queens,Coop,2012-11-30,138.5
 Queens,Coop,2012-12-31,135.5
-Queens,Coop,2013-01-31,144.3
+Queens,Coop,2013-01-31,144.4
 Queens,Coop,2013-02-28,131.0
-Queens,Coop,2013-03-31,137.6
+Queens,Coop,2013-03-31,138.1
 Queens,Coop,2013-04-30,142.9
-Queens,Coop,2013-05-31,157.8
+Queens,Coop,2013-05-31,157.9
 Queens,Coop,2013-06-30,155.2
-Queens,Coop,2013-07-31,157.0
-Queens,Coop,2013-08-31,149.1
+Queens,Coop,2013-07-31,156.9
+Queens,Coop,2013-08-31,148.8
 Queens,Coop,2013-09-30,153.5
 Queens,Coop,2013-10-31,138.1
 Queens,Coop,2013-11-30,145.1
 Queens,Coop,2013-12-31,158.3
 Queens,Coop,2014-01-31,166.3
-Queens,Coop,2014-02-28,153.3
+Queens,Coop,2014-02-28,153.1
 Queens,Coop,2014-03-31,154.2
-Queens,Coop,2014-04-30,151.2
-Queens,Coop,2014-05-31,153.6
+Queens,Coop,2014-04-30,151.3
+Queens,Coop,2014-05-31,154.0
 Queens,Coop,2014-06-30,148.0
 Queens,Coop,2014-07-31,152.5
-Queens,Coop,2014-08-31,156.8
+Queens,Coop,2014-08-31,156.9
 Queens,Coop,2014-09-30,131.4
-Queens,Coop,2014-10-31,165.0
-Queens,Coop,2014-11-30,163.7
-Queens,Coop,2014-12-31,154.8
+Queens,Coop,2014-10-31,165.1
+Queens,Coop,2014-11-30,163.8
+Queens,Coop,2014-12-31,154.9
 Queens,Coop,2015-01-31,152.5
 Queens,Coop,2015-02-28,156.9
 Queens,Coop,2015-03-31,171.0
-Queens,Coop,2015-04-30,145.4
+Queens,Coop,2015-04-30,145.3
 Queens,Coop,2015-05-31,163.9
 Queens,Coop,2015-06-30,167.8
 Queens,Coop,2015-07-31,177.9
-Queens,Coop,2015-08-31,167.8
+Queens,Coop,2015-08-31,167.7
 Queens,Coop,2015-09-30,178.9
 Queens,Coop,2015-10-31,169.1
-Queens,Coop,2015-11-30,165.6
+Queens,Coop,2015-11-30,165.5
 Queens,Coop,2015-12-31,173.7
-Queens,Coop,2016-01-31,169.3
-Queens,Coop,2016-02-29,169.5
+Queens,Coop,2016-01-31,169.2
+Queens,Coop,2016-02-29,169.4
 Queens,Coop,2016-03-31,174.9
-Queens,Coop,2016-04-30,192.3
+Queens,Coop,2016-04-30,192.4
 Queens,Coop,2016-05-31,191.1
-Queens,Coop,2016-06-30,186.1
-Queens,Coop,2016-07-31,178.0
+Queens,Coop,2016-06-30,186.0
+Queens,Coop,2016-07-31,178.1
 Queens,Coop,2016-08-31,186.5
-Queens,Coop,2016-09-30,181.3
-Queens,Coop,2016-10-31,173.8
-Queens,Coop,2016-11-30,184.4
+Queens,Coop,2016-09-30,181.4
+Queens,Coop,2016-10-31,173.9
+Queens,Coop,2016-11-30,184.3
 Queens,Coop,2016-12-31,187.5
 Queens,Coop,2017-01-31,181.2
 Queens,Coop,2017-02-28,182.0
-Queens,Coop,2017-03-31,188.8
+Queens,Coop,2017-03-31,188.9
 Queens,Coop,2017-04-30,179.1
 Queens,Coop,2017-05-31,191.4
 Queens,Coop,2017-06-30,187.6
 Queens,Coop,2017-07-31,189.5
 Queens,Coop,2017-08-31,196.4
 Queens,Coop,2017-09-30,198.9
-Queens,Coop,2017-10-31,195.2
+Queens,Coop,2017-10-31,195.1
 Queens,Coop,2017-11-30,194.7
-Queens,Coop,2017-12-31,184.5
-Queens,Coop,2018-01-31,203.7
-Queens,Coop,2018-02-28,194.9
+Queens,Coop,2017-12-31,184.4
+Queens,Coop,2018-01-31,203.6
+Queens,Coop,2018-02-28,194.8
 Queens,Coop,2018-03-31,200.2
-Queens,Coop,2018-04-30,204.5
+Queens,Coop,2018-04-30,204.4
 Queens,Coop,2018-05-31,206.0
-Queens,Coop,2018-06-30,198.2
-Queens,Coop,2018-07-31,206.8
+Queens,Coop,2018-06-30,198.1
+Queens,Coop,2018-07-31,206.7
 Queens,Coop,2018-08-31,219.2
-Queens,Coop,2018-09-30,220.9
+Queens,Coop,2018-09-30,220.8
 Queens,Coop,2018-10-31,195.0
 Queens,Coop,2018-11-30,215.4
 Queens,Coop,2018-12-31,199.8
-Queens,Coop,2019-01-31,207.7
+Queens,Coop,2019-01-31,207.9
 Queens,Coop,2019-02-28,214.6
 Queens,Coop,2019-03-31,211.4
 Queens,Coop,2019-04-30,216.5
-Queens,Coop,2019-05-31,216.6
-Queens,Coop,2019-06-30,189.0
+Queens,Coop,2019-05-31,217.1
+Queens,Coop,2019-06-30,192.2
 Queens,Coop,2019-07-31,214.5
-Queens,Coop,2019-08-31,200.6
-Queens,Coop,2019-09-30,206.0
+Queens,Coop,2019-08-31,200.4
+Queens,Coop,2019-09-30,205.9
 Queens,Coop,2019-10-31,210.1
-Queens,Coop,2019-11-30,200.3
+Queens,Coop,2019-11-30,200.4
 Queens,Coop,2019-12-31,203.9
-Queens,Coop,2020-01-31,221.6
-Queens,Coop,2020-02-29,208.2
-Queens,Coop,2020-03-31,216.5
+Queens,Coop,2020-01-31,221.7
+Queens,Coop,2020-02-29,208.4
+Queens,Coop,2020-03-31,216.6
 Queens,Coop,2020-04-30,212.1
 Queens,Coop,2020-05-31,207.6
-Queens,Coop,2020-06-30,212.9
-Queens,Coop,2020-07-31,199.9
-Queens,Coop,2020-08-31,220.1
+Queens,Coop,2020-06-30,212.8
+Queens,Coop,2020-07-31,199.8
+Queens,Coop,2020-08-31,220.2
 Queens,Coop,2020-09-30,206.5
-Queens,Coop,2020-10-31,217.5
+Queens,Coop,2020-10-31,217.6
 Queens,Coop,2020-11-30,222.5
-Queens,Coop,2020-12-31,221.9
+Queens,Coop,2020-12-31,221.8
 Queens,Coop,2021-01-31,203.6
-Queens,Coop,2021-02-28,206.3
-Queens,Coop,2021-03-31,219.4
-Queens,Coop,2021-04-30,214.2
-Queens,Coop,2021-05-31,209.2
+Queens,Coop,2021-02-28,206.2
+Queens,Coop,2021-03-31,219.5
+Queens,Coop,2021-04-30,214.3
+Queens,Coop,2021-05-31,209.1
 Queens,Coop,2021-06-30,215.9
-Queens,Coop,2021-07-31,220.7
+Queens,Coop,2021-07-31,220.6
 Queens,Coop,2021-08-31,230.8
-Queens,Coop,2021-09-30,215.2
-Queens,Coop,2021-10-31,220.7
-Queens,Coop,2021-11-30,214.6
-Queens,Coop,2021-12-31,221.7
-Queens,Coop,2022-01-31,221.9
-Queens,Coop,2022-02-28,206.8
-Queens,Coop,2022-03-31,213.6
-Queens,Coop,2022-04-30,217.0
-Queens,Coop,2022-05-31,233.4
-Queens,Coop,2022-06-30,229.7
+Queens,Coop,2021-09-30,215.1
+Queens,Coop,2021-10-31,220.6
+Queens,Coop,2021-11-30,214.5
+Queens,Coop,2021-12-31,221.6
+Queens,Coop,2022-01-31,221.7
+Queens,Coop,2022-02-28,206.6
+Queens,Coop,2022-03-31,213.4
+Queens,Coop,2022-04-30,216.9
+Queens,Coop,2022-05-31,231.9
+Queens,Coop,2022-06-30,229.4
 Queens,Coop,2022-07-31,215.1
-Queens,Coop,2022-08-31,227.7
-Queens,Coop,2022-09-30,234.0
-Queens,Coop,2022-10-31,227.4
+Queens,Coop,2022-08-31,227.3
+Queens,Coop,2022-09-30,232.9
+Queens,Coop,2022-10-31,227.0
 Queens,Coop,2022-11-30,222.0
-Queens,Coop,2022-12-31,229.1
-Queens,Coop,2023-01-31,219.0
-Queens,Coop,2023-02-28,236.1
-Queens,Coop,2023-03-31,209.9
+Queens,Coop,2022-12-31,228.9
+Queens,Coop,2023-01-31,218.9
+Queens,Coop,2023-02-28,235.9
+Queens,Coop,2023-03-31,209.8
 Queens,Coop,2023-04-30,221.8
-Queens,Coop,2023-05-31,301.7
-Queens,Coop,2023-06-30,216.2
-Queens,Coop,2023-07-31,224.2
-Queens,Coop,2023-08-31,233.4
-Queens,Coop,2023-09-30,241.7
-Queens,Coop,2023-10-31,226.3
-Queens,Coop,2023-11-30,236.7
+Queens,Coop,2023-05-31,304.7
+Queens,Coop,2023-06-30,216.3
+Queens,Coop,2023-07-31,224.4
+Queens,Coop,2023-08-31,233.9
+Queens,Coop,2023-09-30,240.0
+Queens,Coop,2023-10-31,228.1
+Queens,Coop,2023-11-30,236.4
 Queens,Coop,2023-12-31,229.4
-Queens,Coop,2024-01-31,225.4
-Queens,Coop,2024-02-29,245.9
-Queens,Coop,2024-03-31,225.6
-Queens,Coop,2024-04-30,234.1
-Queens,Coop,2024-05-31,236.0
+Queens,Coop,2024-01-31,223.7
+Queens,Coop,2024-02-29,245.8
+Queens,Coop,2024-03-31,226.2
+Queens,Coop,2024-04-30,234.0
+Queens,Coop,2024-05-31,236.1
 Queens,Coop,2024-06-30,221.3
 Queens,Coop,2024-07-31,226.1
-Queens,Coop,2024-08-31,233.2
+Queens,Coop,2024-08-31,233.1
 Queens,Coop,2024-09-30,222.8
 Queens,Coop,2024-10-31,236.9
-Queens,Coop,2024-11-30,235.7
-Queens,Coop,2024-12-31,227.3
-Queens,Coop,2025-01-31,235.2
-Queens,Coop,2025-02-28,244.6
-Queens,Coop,2025-03-31,222.3
+Queens,Coop,2024-11-30,235.8
+Queens,Coop,2024-12-31,227.1
+Queens,Coop,2025-01-31,235.3
+Queens,Coop,2025-02-28,244.5
+Queens,Coop,2025-03-31,222.0
 Queens,Coop,2025-04-30,242.8
 Queens,Coop,2025-05-31,229.4
-Queens,Coop,2025-06-30,238.1
-Queens,Coop,2025-07-31,233.2
+Queens,Coop,2025-06-30,237.9
+Queens,Coop,2025-07-31,229.6
+Queens,Coop,2025-08-31,231.1
 Queens,SFH,2003-01-31,100.0
-Queens,SFH,2003-02-28,104.6
-Queens,SFH,2003-03-31,106.2
+Queens,SFH,2003-02-28,104.7
+Queens,SFH,2003-03-31,106.1
 Queens,SFH,2003-04-30,104.4
 Queens,SFH,2003-05-31,108.7
 Queens,SFH,2003-06-30,106.4
@@ -2808,7 +2818,7 @@ Queens,SFH,2003-10-31,113.2
 Queens,SFH,2003-11-30,113.0
 Queens,SFH,2003-12-31,114.4
 Queens,SFH,2004-01-31,114.0
-Queens,SFH,2004-02-29,115.7
+Queens,SFH,2004-02-29,115.8
 Queens,SFH,2004-03-31,115.0
 Queens,SFH,2004-04-30,118.0
 Queens,SFH,2004-05-31,118.2
@@ -2822,8 +2832,8 @@ Queens,SFH,2004-12-31,131.1
 Queens,SFH,2005-01-31,133.7
 Queens,SFH,2005-02-28,135.2
 Queens,SFH,2005-03-31,135.9
-Queens,SFH,2005-04-30,137.9
-Queens,SFH,2005-05-31,138.2
+Queens,SFH,2005-04-30,137.8
+Queens,SFH,2005-05-31,138.3
 Queens,SFH,2005-06-30,141.7
 Queens,SFH,2005-07-31,144.2
 Queens,SFH,2005-08-31,145.4
@@ -2837,10 +2847,10 @@ Queens,SFH,2006-03-31,157.4
 Queens,SFH,2006-04-30,159.2
 Queens,SFH,2006-05-31,158.7
 Queens,SFH,2006-06-30,155.8
-Queens,SFH,2006-07-31,161.4
+Queens,SFH,2006-07-31,161.5
 Queens,SFH,2006-08-31,163.9
 Queens,SFH,2006-09-30,165.2
-Queens,SFH,2006-10-31,163.6
+Queens,SFH,2006-10-31,163.7
 Queens,SFH,2006-11-30,166.8
 Queens,SFH,2006-12-31,166.6
 Queens,SFH,2007-01-31,162.2
@@ -2848,7 +2858,7 @@ Queens,SFH,2007-02-28,164.0
 Queens,SFH,2007-03-31,160.2
 Queens,SFH,2007-04-30,163.4
 Queens,SFH,2007-05-31,159.9
-Queens,SFH,2007-06-30,163.0
+Queens,SFH,2007-06-30,163.1
 Queens,SFH,2007-07-31,161.2
 Queens,SFH,2007-08-31,160.1
 Queens,SFH,2007-09-30,155.7
@@ -2856,18 +2866,18 @@ Queens,SFH,2007-10-31,156.7
 Queens,SFH,2007-11-30,158.0
 Queens,SFH,2007-12-31,161.6
 Queens,SFH,2008-01-31,157.3
-Queens,SFH,2008-02-29,152.8
+Queens,SFH,2008-02-29,152.9
 Queens,SFH,2008-03-31,154.3
 Queens,SFH,2008-04-30,151.7
-Queens,SFH,2008-05-31,151.2
+Queens,SFH,2008-05-31,151.3
 Queens,SFH,2008-06-30,150.4
 Queens,SFH,2008-07-31,146.5
-Queens,SFH,2008-08-31,150.7
+Queens,SFH,2008-08-31,150.6
 Queens,SFH,2008-09-30,146.5
 Queens,SFH,2008-10-31,145.4
-Queens,SFH,2008-11-30,145.2
+Queens,SFH,2008-11-30,145.3
 Queens,SFH,2008-12-31,145.6
-Queens,SFH,2009-01-31,142.1
+Queens,SFH,2009-01-31,142.2
 Queens,SFH,2009-02-28,142.6
 Queens,SFH,2009-03-31,135.4
 Queens,SFH,2009-04-30,139.8
@@ -2875,39 +2885,39 @@ Queens,SFH,2009-05-31,140.8
 Queens,SFH,2009-06-30,137.2
 Queens,SFH,2009-07-31,143.9
 Queens,SFH,2009-08-31,141.0
-Queens,SFH,2009-09-30,142.1
+Queens,SFH,2009-09-30,142.4
 Queens,SFH,2009-10-31,141.8
 Queens,SFH,2009-11-30,138.6
 Queens,SFH,2009-12-31,140.0
 Queens,SFH,2010-01-31,137.3
-Queens,SFH,2010-02-28,140.1
+Queens,SFH,2010-02-28,140.2
 Queens,SFH,2010-03-31,137.8
-Queens,SFH,2010-04-30,138.7
+Queens,SFH,2010-04-30,138.8
 Queens,SFH,2010-05-31,137.5
 Queens,SFH,2010-06-30,134.2
-Queens,SFH,2010-07-31,144.5
+Queens,SFH,2010-07-31,144.4
 Queens,SFH,2010-08-31,135.4
 Queens,SFH,2010-09-30,134.6
-Queens,SFH,2010-10-31,131.9
+Queens,SFH,2010-10-31,132.1
 Queens,SFH,2010-11-30,133.1
 Queens,SFH,2010-12-31,131.0
 Queens,SFH,2011-01-31,133.4
 Queens,SFH,2011-02-28,128.6
 Queens,SFH,2011-03-31,130.3
 Queens,SFH,2011-04-30,131.3
-Queens,SFH,2011-05-31,131.6
-Queens,SFH,2011-06-30,131.9
-Queens,SFH,2011-07-31,135.3
-Queens,SFH,2011-08-31,136.2
+Queens,SFH,2011-05-31,131.8
+Queens,SFH,2011-06-30,131.8
+Queens,SFH,2011-07-31,135.5
+Queens,SFH,2011-08-31,136.3
 Queens,SFH,2011-09-30,136.7
 Queens,SFH,2011-10-31,131.1
-Queens,SFH,2011-11-30,121.2
+Queens,SFH,2011-11-30,121.1
 Queens,SFH,2011-12-31,133.9
-Queens,SFH,2012-01-31,123.1
+Queens,SFH,2012-01-31,123.2
 Queens,SFH,2012-02-29,133.0
 Queens,SFH,2012-03-31,132.2
 Queens,SFH,2012-04-30,129.5
-Queens,SFH,2012-05-31,135.7
+Queens,SFH,2012-05-31,135.6
 Queens,SFH,2012-06-30,139.0
 Queens,SFH,2012-07-31,136.1
 Queens,SFH,2012-08-31,133.1
@@ -2919,7 +2929,7 @@ Queens,SFH,2013-01-31,135.6
 Queens,SFH,2013-02-28,136.9
 Queens,SFH,2013-03-31,138.0
 Queens,SFH,2013-04-30,143.0
-Queens,SFH,2013-05-31,139.6
+Queens,SFH,2013-05-31,139.5
 Queens,SFH,2013-06-30,141.8
 Queens,SFH,2013-07-31,145.0
 Queens,SFH,2013-08-31,143.2
@@ -2927,403 +2937,405 @@ Queens,SFH,2013-09-30,144.1
 Queens,SFH,2013-10-31,148.7
 Queens,SFH,2013-11-30,146.9
 Queens,SFH,2013-12-31,149.5
-Queens,SFH,2014-01-31,146.4
-Queens,SFH,2014-02-28,152.6
-Queens,SFH,2014-03-31,151.5
+Queens,SFH,2014-01-31,146.6
+Queens,SFH,2014-02-28,152.4
+Queens,SFH,2014-03-31,151.6
 Queens,SFH,2014-04-30,142.4
-Queens,SFH,2014-05-31,145.9
+Queens,SFH,2014-05-31,145.7
 Queens,SFH,2014-06-30,148.9
-Queens,SFH,2014-07-31,156.0
+Queens,SFH,2014-07-31,156.1
 Queens,SFH,2014-08-31,150.5
 Queens,SFH,2014-09-30,154.7
-Queens,SFH,2014-10-31,162.7
+Queens,SFH,2014-10-31,162.6
 Queens,SFH,2014-11-30,152.2
-Queens,SFH,2014-12-31,161.5
-Queens,SFH,2015-01-31,160.2
+Queens,SFH,2014-12-31,161.7
+Queens,SFH,2015-01-31,160.1
 Queens,SFH,2015-02-28,151.1
-Queens,SFH,2015-03-31,156.7
+Queens,SFH,2015-03-31,156.9
 Queens,SFH,2015-04-30,151.8
-Queens,SFH,2015-05-31,156.2
+Queens,SFH,2015-05-31,156.4
 Queens,SFH,2015-06-30,160.5
-Queens,SFH,2015-07-31,167.2
+Queens,SFH,2015-07-31,166.9
 Queens,SFH,2015-08-31,160.3
-Queens,SFH,2015-09-30,160.1
-Queens,SFH,2015-10-31,165.0
+Queens,SFH,2015-09-30,160.5
+Queens,SFH,2015-10-31,165.1
 Queens,SFH,2015-11-30,165.6
-Queens,SFH,2015-12-31,160.3
-Queens,SFH,2016-01-31,173.4
+Queens,SFH,2015-12-31,160.5
+Queens,SFH,2016-01-31,173.5
 Queens,SFH,2016-02-29,167.7
 Queens,SFH,2016-03-31,167.2
 Queens,SFH,2016-04-30,164.1
 Queens,SFH,2016-05-31,169.3
-Queens,SFH,2016-06-30,170.5
+Queens,SFH,2016-06-30,170.7
 Queens,SFH,2016-07-31,173.1
 Queens,SFH,2016-08-31,177.9
 Queens,SFH,2016-09-30,177.8
 Queens,SFH,2016-10-31,175.2
 Queens,SFH,2016-11-30,181.4
-Queens,SFH,2016-12-31,175.7
-Queens,SFH,2017-01-31,176.1
-Queens,SFH,2017-02-28,184.3
+Queens,SFH,2016-12-31,175.6
+Queens,SFH,2017-01-31,176.0
+Queens,SFH,2017-02-28,184.2
 Queens,SFH,2017-03-31,184.1
 Queens,SFH,2017-04-30,176.3
-Queens,SFH,2017-05-31,178.9
-Queens,SFH,2017-06-30,183.3
+Queens,SFH,2017-05-31,178.6
+Queens,SFH,2017-06-30,183.6
 Queens,SFH,2017-07-31,185.6
 Queens,SFH,2017-08-31,183.4
-Queens,SFH,2017-09-30,183.6
-Queens,SFH,2017-10-31,193.5
-Queens,SFH,2017-11-30,182.9
+Queens,SFH,2017-09-30,183.7
+Queens,SFH,2017-10-31,193.4
+Queens,SFH,2017-11-30,182.7
 Queens,SFH,2017-12-31,195.1
 Queens,SFH,2018-01-31,197.9
-Queens,SFH,2018-02-28,185.1
+Queens,SFH,2018-02-28,185.0
 Queens,SFH,2018-03-31,188.3
 Queens,SFH,2018-04-30,189.0
 Queens,SFH,2018-05-31,192.2
-Queens,SFH,2018-06-30,195.7
+Queens,SFH,2018-06-30,195.6
 Queens,SFH,2018-07-31,192.5
-Queens,SFH,2018-08-31,201.3
+Queens,SFH,2018-08-31,201.2
 Queens,SFH,2018-09-30,200.0
-Queens,SFH,2018-10-31,194.5
-Queens,SFH,2018-11-30,195.8
-Queens,SFH,2018-12-31,200.5
-Queens,SFH,2019-01-31,196.6
+Queens,SFH,2018-10-31,194.4
+Queens,SFH,2018-11-30,195.7
+Queens,SFH,2018-12-31,200.2
+Queens,SFH,2019-01-31,196.8
 Queens,SFH,2019-02-28,201.3
 Queens,SFH,2019-03-31,197.1
-Queens,SFH,2019-04-30,200.6
-Queens,SFH,2019-05-31,201.7
-Queens,SFH,2019-06-30,197.2
-Queens,SFH,2019-07-31,205.9
-Queens,SFH,2019-08-31,206.1
-Queens,SFH,2019-09-30,205.5
+Queens,SFH,2019-04-30,200.5
+Queens,SFH,2019-05-31,201.6
+Queens,SFH,2019-06-30,196.9
+Queens,SFH,2019-07-31,205.8
+Queens,SFH,2019-08-31,206.0
+Queens,SFH,2019-09-30,205.4
 Queens,SFH,2019-10-31,204.5
-Queens,SFH,2019-11-30,210.3
-Queens,SFH,2019-12-31,207.9
-Queens,SFH,2020-01-31,206.4
-Queens,SFH,2020-02-29,212.5
-Queens,SFH,2020-03-31,209.0
+Queens,SFH,2019-11-30,210.2
+Queens,SFH,2019-12-31,207.6
+Queens,SFH,2020-01-31,206.3
+Queens,SFH,2020-02-29,212.4
+Queens,SFH,2020-03-31,208.6
 Queens,SFH,2020-04-30,221.9
-Queens,SFH,2020-05-31,199.7
-Queens,SFH,2020-06-30,222.1
+Queens,SFH,2020-05-31,199.6
+Queens,SFH,2020-06-30,222.0
 Queens,SFH,2020-07-31,214.7
-Queens,SFH,2020-08-31,216.0
+Queens,SFH,2020-08-31,215.9
 Queens,SFH,2020-09-30,219.4
-Queens,SFH,2020-10-31,226.0
-Queens,SFH,2020-11-30,213.4
-Queens,SFH,2020-12-31,224.3
-Queens,SFH,2021-01-31,223.9
-Queens,SFH,2021-02-28,215.2
-Queens,SFH,2021-03-31,234.7
+Queens,SFH,2020-10-31,225.7
+Queens,SFH,2020-11-30,213.3
+Queens,SFH,2020-12-31,224.2
+Queens,SFH,2021-01-31,223.7
+Queens,SFH,2021-02-28,215.1
+Queens,SFH,2021-03-31,234.9
 Queens,SFH,2021-04-30,219.0
-Queens,SFH,2021-05-31,234.9
+Queens,SFH,2021-05-31,234.8
 Queens,SFH,2021-06-30,220.0
-Queens,SFH,2021-07-31,234.2
+Queens,SFH,2021-07-31,234.1
 Queens,SFH,2021-08-31,233.5
-Queens,SFH,2021-09-30,245.6
-Queens,SFH,2021-10-31,237.2
-Queens,SFH,2021-11-30,239.1
-Queens,SFH,2021-12-31,239.0
-Queens,SFH,2022-01-31,236.2
-Queens,SFH,2022-02-28,232.5
-Queens,SFH,2022-03-31,244.2
-Queens,SFH,2022-04-30,246.9
-Queens,SFH,2022-05-31,251.2
-Queens,SFH,2022-06-30,244.5
-Queens,SFH,2022-07-31,248.0
-Queens,SFH,2022-08-31,249.7
-Queens,SFH,2022-09-30,255.5
+Queens,SFH,2021-09-30,244.4
+Queens,SFH,2021-10-31,237.1
+Queens,SFH,2021-11-30,239.0
+Queens,SFH,2021-12-31,238.9
+Queens,SFH,2022-01-31,236.1
+Queens,SFH,2022-02-28,232.4
+Queens,SFH,2022-03-31,244.1
+Queens,SFH,2022-04-30,246.8
+Queens,SFH,2022-05-31,250.6
+Queens,SFH,2022-06-30,244.4
+Queens,SFH,2022-07-31,247.8
+Queens,SFH,2022-08-31,249.3
+Queens,SFH,2022-09-30,255.2
 Queens,SFH,2022-10-31,251.6
-Queens,SFH,2022-11-30,244.9
-Queens,SFH,2022-12-31,241.4
-Queens,SFH,2023-01-31,247.9
-Queens,SFH,2023-02-28,251.3
-Queens,SFH,2023-03-31,245.9
-Queens,SFH,2023-04-30,249.4
-Queens,SFH,2023-05-31,239.0
-Queens,SFH,2023-06-30,256.6
-Queens,SFH,2023-07-31,248.0
-Queens,SFH,2023-08-31,254.9
+Queens,SFH,2022-11-30,244.8
+Queens,SFH,2022-12-31,240.2
+Queens,SFH,2023-01-31,248.0
+Queens,SFH,2023-02-28,251.2
+Queens,SFH,2023-03-31,245.8
+Queens,SFH,2023-04-30,249.3
+Queens,SFH,2023-05-31,238.9
+Queens,SFH,2023-06-30,256.5
+Queens,SFH,2023-07-31,247.9
+Queens,SFH,2023-08-31,254.8
 Queens,SFH,2023-09-30,254.6
-Queens,SFH,2023-10-31,229.5
-Queens,SFH,2023-11-30,259.1
-Queens,SFH,2023-12-31,255.5
-Queens,SFH,2024-01-31,244.7
-Queens,SFH,2024-02-29,257.6
-Queens,SFH,2024-03-31,260.1
-Queens,SFH,2024-04-30,250.1
-Queens,SFH,2024-05-31,255.1
-Queens,SFH,2024-06-30,257.5
-Queens,SFH,2024-07-31,255.2
-Queens,SFH,2024-08-31,263.3
-Queens,SFH,2024-09-30,257.0
-Queens,SFH,2024-10-31,264.0
-Queens,SFH,2024-11-30,266.1
-Queens,SFH,2024-12-31,267.4
-Queens,SFH,2025-01-31,255.9
-Queens,SFH,2025-02-28,275.6
-Queens,SFH,2025-03-31,255.2
-Queens,SFH,2025-04-30,284.1
-Queens,SFH,2025-05-31,295.4
-Queens,SFH,2025-06-30,273.7
+Queens,SFH,2023-10-31,229.4
+Queens,SFH,2023-11-30,259.0
+Queens,SFH,2023-12-31,255.4
+Queens,SFH,2024-01-31,244.6
+Queens,SFH,2024-02-29,257.4
+Queens,SFH,2024-03-31,260.0
+Queens,SFH,2024-04-30,249.8
+Queens,SFH,2024-05-31,254.9
+Queens,SFH,2024-06-30,257.4
+Queens,SFH,2024-07-31,255.1
+Queens,SFH,2024-08-31,263.2
+Queens,SFH,2024-09-30,256.9
+Queens,SFH,2024-10-31,263.4
+Queens,SFH,2024-11-30,265.9
+Queens,SFH,2024-12-31,267.1
+Queens,SFH,2025-01-31,255.5
+Queens,SFH,2025-02-28,274.4
+Queens,SFH,2025-03-31,253.2
+Queens,SFH,2025-04-30,283.7
+Queens,SFH,2025-05-31,291.9
+Queens,SFH,2025-06-30,273.5
 Queens,SFH,2025-07-31,277.3
+Queens,SFH,2025-08-31,295.4
 Staten Island,Condo,2003-01-31,100.0
-Staten Island,Condo,2003-02-28,68.1
+Staten Island,Condo,2003-02-28,67.7
 Staten Island,Condo,2003-05-31,76.0
-Staten Island,Condo,2003-06-30,83.2
-Staten Island,Condo,2003-07-31,107.3
-Staten Island,Condo,2003-08-31,83.4
-Staten Island,Condo,2003-09-30,99.8
-Staten Island,Condo,2003-10-31,70.2
-Staten Island,Condo,2003-11-30,107.4
-Staten Island,Condo,2003-12-31,102.6
-Staten Island,Condo,2004-02-29,125.6
-Staten Island,Condo,2004-03-31,103.7
-Staten Island,Condo,2004-04-30,143.6
-Staten Island,Condo,2004-05-31,87.1
-Staten Island,Condo,2004-06-30,102.8
-Staten Island,Condo,2004-07-31,121.1
-Staten Island,Condo,2004-08-31,83.4
-Staten Island,Condo,2004-09-30,231.1
-Staten Island,Condo,2004-10-31,115.0
-Staten Island,Condo,2004-11-30,106.9
-Staten Island,Condo,2004-12-31,142.4
-Staten Island,Condo,2005-01-31,119.9
-Staten Island,Condo,2005-02-28,99.2
+Staten Island,Condo,2003-06-30,82.7
+Staten Island,Condo,2003-07-31,106.7
+Staten Island,Condo,2003-08-31,82.9
+Staten Island,Condo,2003-09-30,100.8
+Staten Island,Condo,2003-10-31,70.0
+Staten Island,Condo,2003-11-30,106.9
+Staten Island,Condo,2003-12-31,101.8
+Staten Island,Condo,2004-02-29,125.1
+Staten Island,Condo,2004-03-31,103.4
+Staten Island,Condo,2004-04-30,142.9
+Staten Island,Condo,2004-05-31,86.1
+Staten Island,Condo,2004-06-30,105.5
+Staten Island,Condo,2004-07-31,120.6
+Staten Island,Condo,2004-08-31,82.9
+Staten Island,Condo,2004-09-30,229.6
+Staten Island,Condo,2004-10-31,114.5
+Staten Island,Condo,2004-11-30,107.0
+Staten Island,Condo,2004-12-31,142.3
+Staten Island,Condo,2005-01-31,119.8
+Staten Island,Condo,2005-02-28,98.4
 Staten Island,Condo,2005-03-31,124.7
-Staten Island,Condo,2005-04-30,83.4
-Staten Island,Condo,2005-05-31,127.2
-Staten Island,Condo,2005-06-30,111.5
-Staten Island,Condo,2005-07-31,126.0
-Staten Island,Condo,2005-08-31,125.9
-Staten Island,Condo,2005-09-30,134.3
-Staten Island,Condo,2005-10-31,128.1
-Staten Island,Condo,2005-11-30,144.3
-Staten Island,Condo,2005-12-31,132.9
-Staten Island,Condo,2006-01-31,125.9
-Staten Island,Condo,2006-02-28,94.7
-Staten Island,Condo,2006-03-31,112.4
-Staten Island,Condo,2006-04-30,119.5
-Staten Island,Condo,2006-05-31,175.1
-Staten Island,Condo,2006-06-30,97.4
-Staten Island,Condo,2006-07-31,133.0
-Staten Island,Condo,2006-08-31,83.4
-Staten Island,Condo,2006-09-30,137.9
-Staten Island,Condo,2006-10-31,114.6
-Staten Island,Condo,2006-11-30,119.7
-Staten Island,Condo,2006-12-31,137.6
-Staten Island,Condo,2007-01-31,116.2
-Staten Island,Condo,2007-02-28,120.5
-Staten Island,Condo,2007-03-31,101.6
-Staten Island,Condo,2007-04-30,131.9
-Staten Island,Condo,2007-05-31,130.4
-Staten Island,Condo,2007-06-30,157.5
-Staten Island,Condo,2007-07-31,104.7
-Staten Island,Condo,2007-08-31,124.5
-Staten Island,Condo,2007-09-30,145.1
+Staten Island,Condo,2005-04-30,82.9
+Staten Island,Condo,2005-05-31,127.1
+Staten Island,Condo,2005-06-30,110.5
+Staten Island,Condo,2005-07-31,125.9
+Staten Island,Condo,2005-08-31,125.5
+Staten Island,Condo,2005-09-30,133.6
+Staten Island,Condo,2005-10-31,127.7
+Staten Island,Condo,2005-11-30,127.0
+Staten Island,Condo,2005-12-31,132.6
+Staten Island,Condo,2006-01-31,124.8
+Staten Island,Condo,2006-02-28,94.3
+Staten Island,Condo,2006-03-31,112.0
+Staten Island,Condo,2006-04-30,118.5
+Staten Island,Condo,2006-05-31,174.6
+Staten Island,Condo,2006-06-30,97.1
+Staten Island,Condo,2006-07-31,131.8
+Staten Island,Condo,2006-08-31,82.9
+Staten Island,Condo,2006-09-30,137.2
+Staten Island,Condo,2006-10-31,117.6
+Staten Island,Condo,2006-11-30,118.8
+Staten Island,Condo,2006-12-31,137.0
+Staten Island,Condo,2007-01-31,115.8
+Staten Island,Condo,2007-02-28,119.6
+Staten Island,Condo,2007-03-31,100.9
+Staten Island,Condo,2007-04-30,131.7
+Staten Island,Condo,2007-05-31,129.5
+Staten Island,Condo,2007-06-30,156.6
+Staten Island,Condo,2007-07-31,104.4
+Staten Island,Condo,2007-08-31,122.5
+Staten Island,Condo,2007-09-30,143.2
 Staten Island,Condo,2007-10-31,138.7
-Staten Island,Condo,2007-11-30,129.7
-Staten Island,Condo,2007-12-31,118.3
-Staten Island,Condo,2008-01-31,143.9
-Staten Island,Condo,2008-02-29,123.9
-Staten Island,Condo,2008-03-31,124.2
-Staten Island,Condo,2008-04-30,51.2
-Staten Island,Condo,2008-05-31,121.9
-Staten Island,Condo,2008-06-30,141.7
-Staten Island,Condo,2008-07-31,121.4
-Staten Island,Condo,2008-08-31,127.0
-Staten Island,Condo,2008-09-30,83.4
-Staten Island,Condo,2008-10-31,83.4
-Staten Island,Condo,2008-11-30,123.5
-Staten Island,Condo,2008-12-31,138.3
-Staten Island,Condo,2009-01-31,83.4
-Staten Island,Condo,2009-03-31,130.9
-Staten Island,Condo,2009-04-30,95.9
-Staten Island,Condo,2009-06-30,114.6
-Staten Island,Condo,2009-08-31,93.8
-Staten Island,Condo,2009-09-30,106.3
+Staten Island,Condo,2007-11-30,129.8
+Staten Island,Condo,2007-12-31,117.2
+Staten Island,Condo,2008-01-31,143.5
+Staten Island,Condo,2008-02-29,121.9
+Staten Island,Condo,2008-03-31,123.8
+Staten Island,Condo,2008-04-30,50.9
+Staten Island,Condo,2008-05-31,122.5
+Staten Island,Condo,2008-06-30,138.1
+Staten Island,Condo,2008-07-31,121.1
+Staten Island,Condo,2008-08-31,125.5
+Staten Island,Condo,2008-09-30,82.9
+Staten Island,Condo,2008-10-31,82.9
+Staten Island,Condo,2008-11-30,123.0
+Staten Island,Condo,2008-12-31,138.5
+Staten Island,Condo,2009-01-31,82.9
+Staten Island,Condo,2009-03-31,129.8
+Staten Island,Condo,2009-04-30,95.3
+Staten Island,Condo,2009-06-30,113.4
+Staten Island,Condo,2009-08-31,93.0
+Staten Island,Condo,2009-09-30,105.7
 Staten Island,Condo,2009-10-31,122.2
-Staten Island,Condo,2009-12-31,131.2
-Staten Island,Condo,2010-01-31,133.0
-Staten Island,Condo,2010-02-28,83.4
-Staten Island,Condo,2010-03-31,114.4
-Staten Island,Condo,2010-04-30,83.4
-Staten Island,Condo,2010-05-31,111.0
-Staten Island,Condo,2010-06-30,118.5
-Staten Island,Condo,2010-07-31,83.4
-Staten Island,Condo,2010-08-31,129.7
-Staten Island,Condo,2010-09-30,87.7
+Staten Island,Condo,2009-12-31,130.8
+Staten Island,Condo,2010-01-31,132.7
+Staten Island,Condo,2010-02-28,82.9
+Staten Island,Condo,2010-03-31,113.8
+Staten Island,Condo,2010-04-30,82.9
+Staten Island,Condo,2010-05-31,112.4
+Staten Island,Condo,2010-06-30,117.6
+Staten Island,Condo,2010-07-31,82.9
+Staten Island,Condo,2010-08-31,127.2
+Staten Island,Condo,2010-09-30,86.9
 Staten Island,Condo,2010-11-30,120.3
-Staten Island,Condo,2010-12-31,83.4
-Staten Island,Condo,2011-01-31,123.1
-Staten Island,Condo,2011-02-28,108.9
-Staten Island,Condo,2011-03-31,83.4
-Staten Island,Condo,2011-04-30,83.4
-Staten Island,Condo,2011-05-31,83.4
-Staten Island,Condo,2011-06-30,112.1
-Staten Island,Condo,2011-08-31,122.2
-Staten Island,Condo,2011-09-30,103.8
-Staten Island,Condo,2011-11-30,123.7
-Staten Island,Condo,2012-01-31,83.4
-Staten Island,Condo,2012-02-29,154.1
-Staten Island,Condo,2012-03-31,82.6
-Staten Island,Condo,2012-04-30,98.0
-Staten Island,Condo,2012-05-31,82.3
-Staten Island,Condo,2012-06-30,102.8
-Staten Island,Condo,2012-07-31,100.7
-Staten Island,Condo,2012-08-31,95.5
-Staten Island,Condo,2012-09-30,131.6
-Staten Island,Condo,2012-11-30,412.0
-Staten Island,Condo,2012-12-31,106.6
-Staten Island,Condo,2013-01-31,134.7
-Staten Island,Condo,2013-02-28,127.3
-Staten Island,Condo,2013-03-31,112.6
-Staten Island,Condo,2013-04-30,106.4
-Staten Island,Condo,2013-05-31,116.0
-Staten Island,Condo,2013-06-30,126.9
-Staten Island,Condo,2013-07-31,128.0
-Staten Island,Condo,2013-08-31,117.5
-Staten Island,Condo,2013-09-30,83.4
-Staten Island,Condo,2013-10-31,104.9
-Staten Island,Condo,2013-11-30,138.9
-Staten Island,Condo,2013-12-31,93.5
-Staten Island,Condo,2014-01-31,122.6
-Staten Island,Condo,2014-02-28,32.1
-Staten Island,Condo,2014-03-31,150.9
-Staten Island,Condo,2014-04-30,83.4
-Staten Island,Condo,2014-05-31,140.4
-Staten Island,Condo,2014-06-30,83.4
-Staten Island,Condo,2014-07-31,113.9
-Staten Island,Condo,2014-08-31,124.1
-Staten Island,Condo,2014-09-30,116.9
-Staten Island,Condo,2014-10-31,83.4
-Staten Island,Condo,2014-11-30,117.8
-Staten Island,Condo,2014-12-31,129.7
-Staten Island,Condo,2015-01-31,127.1
-Staten Island,Condo,2015-02-28,103.2
-Staten Island,Condo,2015-03-31,108.3
-Staten Island,Condo,2015-04-30,104.0
-Staten Island,Condo,2015-05-31,128.5
-Staten Island,Condo,2015-06-30,118.5
-Staten Island,Condo,2015-07-31,108.7
-Staten Island,Condo,2015-08-31,131.7
-Staten Island,Condo,2015-09-30,140.2
-Staten Island,Condo,2015-10-31,111.5
-Staten Island,Condo,2015-11-30,117.1
-Staten Island,Condo,2015-12-31,116.3
-Staten Island,Condo,2016-01-31,109.7
-Staten Island,Condo,2016-02-29,119.3
-Staten Island,Condo,2016-03-31,81.8
-Staten Island,Condo,2016-04-30,129.7
-Staten Island,Condo,2016-05-31,131.0
-Staten Island,Condo,2016-06-30,151.1
-Staten Island,Condo,2016-07-31,125.6
-Staten Island,Condo,2016-08-31,114.4
-Staten Island,Condo,2016-09-30,140.2
-Staten Island,Condo,2016-10-31,106.9
-Staten Island,Condo,2016-11-30,115.8
-Staten Island,Condo,2016-12-31,83.4
-Staten Island,Condo,2017-01-31,144.7
-Staten Island,Condo,2017-02-28,142.6
+Staten Island,Condo,2010-12-31,82.9
+Staten Island,Condo,2011-01-31,122.3
+Staten Island,Condo,2011-02-28,108.6
+Staten Island,Condo,2011-03-31,82.9
+Staten Island,Condo,2011-04-30,82.9
+Staten Island,Condo,2011-05-31,82.9
+Staten Island,Condo,2011-06-30,111.8
+Staten Island,Condo,2011-08-31,122.0
+Staten Island,Condo,2011-09-30,105.5
+Staten Island,Condo,2011-11-30,123.2
+Staten Island,Condo,2012-01-31,82.9
+Staten Island,Condo,2012-02-29,153.5
+Staten Island,Condo,2012-03-31,82.0
+Staten Island,Condo,2012-04-30,97.3
+Staten Island,Condo,2012-05-31,81.7
+Staten Island,Condo,2012-06-30,102.6
+Staten Island,Condo,2012-07-31,100.5
+Staten Island,Condo,2012-08-31,95.2
+Staten Island,Condo,2012-09-30,131.5
+Staten Island,Condo,2012-11-30,409.3
+Staten Island,Condo,2012-12-31,106.7
+Staten Island,Condo,2013-01-31,134.1
+Staten Island,Condo,2013-02-28,126.7
+Staten Island,Condo,2013-03-31,112.4
+Staten Island,Condo,2013-04-30,105.6
+Staten Island,Condo,2013-05-31,115.9
+Staten Island,Condo,2013-06-30,126.7
+Staten Island,Condo,2013-07-31,127.8
+Staten Island,Condo,2013-08-31,116.8
+Staten Island,Condo,2013-09-30,82.9
+Staten Island,Condo,2013-10-31,104.7
+Staten Island,Condo,2013-11-30,138.1
+Staten Island,Condo,2013-12-31,98.1
+Staten Island,Condo,2014-01-31,122.1
+Staten Island,Condo,2014-02-28,32.2
+Staten Island,Condo,2014-03-31,150.6
+Staten Island,Condo,2014-04-30,82.9
+Staten Island,Condo,2014-05-31,140.2
+Staten Island,Condo,2014-06-30,82.9
+Staten Island,Condo,2014-07-31,113.2
+Staten Island,Condo,2014-08-31,123.1
+Staten Island,Condo,2014-09-30,116.6
+Staten Island,Condo,2014-10-31,84.5
+Staten Island,Condo,2014-11-30,117.2
+Staten Island,Condo,2014-12-31,127.2
+Staten Island,Condo,2015-01-31,127.2
+Staten Island,Condo,2015-02-28,102.9
+Staten Island,Condo,2015-03-31,108.6
+Staten Island,Condo,2015-04-30,104.7
+Staten Island,Condo,2015-05-31,128.0
+Staten Island,Condo,2015-06-30,118.2
+Staten Island,Condo,2015-07-31,108.4
+Staten Island,Condo,2015-08-31,131.0
+Staten Island,Condo,2015-09-30,140.0
+Staten Island,Condo,2015-10-31,111.3
+Staten Island,Condo,2015-11-30,117.3
+Staten Island,Condo,2015-12-31,115.3
+Staten Island,Condo,2016-01-31,109.5
+Staten Island,Condo,2016-02-29,116.5
+Staten Island,Condo,2016-03-31,82.9
+Staten Island,Condo,2016-04-30,129.3
+Staten Island,Condo,2016-05-31,130.3
+Staten Island,Condo,2016-06-30,150.3
+Staten Island,Condo,2016-07-31,125.5
+Staten Island,Condo,2016-08-31,114.2
+Staten Island,Condo,2016-09-30,137.6
+Staten Island,Condo,2016-10-31,106.8
+Staten Island,Condo,2016-11-30,115.7
+Staten Island,Condo,2016-12-31,82.9
+Staten Island,Condo,2017-01-31,144.6
+Staten Island,Condo,2017-02-28,140.8
 Staten Island,Condo,2017-03-31,130.9
-Staten Island,Condo,2017-04-30,164.0
-Staten Island,Condo,2017-05-31,136.7
-Staten Island,Condo,2017-06-30,138.2
-Staten Island,Condo,2017-07-31,126.9
-Staten Island,Condo,2017-08-31,151.7
-Staten Island,Condo,2017-09-30,136.7
-Staten Island,Condo,2017-10-31,152.3
-Staten Island,Condo,2017-11-30,156.1
-Staten Island,Condo,2017-12-31,133.9
-Staten Island,Condo,2018-01-31,160.5
-Staten Island,Condo,2018-02-28,153.9
-Staten Island,Condo,2018-03-31,145.6
-Staten Island,Condo,2018-04-30,147.4
-Staten Island,Condo,2018-05-31,193.3
-Staten Island,Condo,2018-06-30,153.9
-Staten Island,Condo,2018-07-31,146.7
-Staten Island,Condo,2018-08-31,156.8
-Staten Island,Condo,2018-09-30,142.9
-Staten Island,Condo,2018-10-31,160.0
-Staten Island,Condo,2018-11-30,149.1
-Staten Island,Condo,2018-12-31,144.8
-Staten Island,Condo,2019-01-31,162.2
-Staten Island,Condo,2019-02-28,118.0
-Staten Island,Condo,2019-03-31,83.4
-Staten Island,Condo,2019-04-30,152.9
-Staten Island,Condo,2019-05-31,160.4
-Staten Island,Condo,2019-06-30,148.9
-Staten Island,Condo,2019-07-31,152.3
-Staten Island,Condo,2019-08-31,212.6
-Staten Island,Condo,2019-09-30,139.4
-Staten Island,Condo,2019-10-31,152.1
-Staten Island,Condo,2019-11-30,202.4
-Staten Island,Condo,2019-12-31,158.9
-Staten Island,Condo,2020-01-31,118.0
-Staten Island,Condo,2020-02-29,130.4
+Staten Island,Condo,2017-04-30,163.9
+Staten Island,Condo,2017-05-31,136.2
+Staten Island,Condo,2017-06-30,137.8
+Staten Island,Condo,2017-07-31,128.0
+Staten Island,Condo,2017-08-31,150.7
+Staten Island,Condo,2017-09-30,136.4
+Staten Island,Condo,2017-10-31,152.2
+Staten Island,Condo,2017-11-30,155.9
+Staten Island,Condo,2017-12-31,132.9
+Staten Island,Condo,2018-01-31,160.1
+Staten Island,Condo,2018-02-28,152.8
+Staten Island,Condo,2018-03-31,144.8
+Staten Island,Condo,2018-04-30,147.1
+Staten Island,Condo,2018-05-31,192.7
+Staten Island,Condo,2018-06-30,153.7
+Staten Island,Condo,2018-07-31,146.6
+Staten Island,Condo,2018-08-31,156.7
+Staten Island,Condo,2018-09-30,150.0
+Staten Island,Condo,2018-10-31,159.9
+Staten Island,Condo,2018-11-30,147.0
+Staten Island,Condo,2018-12-31,144.3
+Staten Island,Condo,2019-01-31,158.1
+Staten Island,Condo,2019-02-28,117.3
+Staten Island,Condo,2019-03-31,82.9
+Staten Island,Condo,2019-04-30,151.7
+Staten Island,Condo,2019-05-31,159.8
+Staten Island,Condo,2019-06-30,152.3
+Staten Island,Condo,2019-07-31,152.1
+Staten Island,Condo,2019-08-31,208.4
+Staten Island,Condo,2019-09-30,138.2
+Staten Island,Condo,2019-10-31,151.9
+Staten Island,Condo,2019-11-30,201.3
+Staten Island,Condo,2019-12-31,158.5
+Staten Island,Condo,2020-01-31,117.3
+Staten Island,Condo,2020-02-29,130.2
 Staten Island,Condo,2020-03-31,138.1
-Staten Island,Condo,2020-04-30,136.5
-Staten Island,Condo,2020-05-31,163.8
-Staten Island,Condo,2020-06-30,147.8
-Staten Island,Condo,2020-07-31,130.2
-Staten Island,Condo,2020-08-31,175.3
-Staten Island,Condo,2020-09-30,159.8
-Staten Island,Condo,2020-10-31,164.9
-Staten Island,Condo,2020-11-30,176.0
-Staten Island,Condo,2020-12-31,148.5
-Staten Island,Condo,2021-01-31,158.9
-Staten Island,Condo,2021-02-28,144.7
-Staten Island,Condo,2021-03-31,136.7
-Staten Island,Condo,2021-04-30,158.3
-Staten Island,Condo,2021-05-31,136.4
-Staten Island,Condo,2021-06-30,156.4
-Staten Island,Condo,2021-07-31,160.0
-Staten Island,Condo,2021-08-31,188.7
-Staten Island,Condo,2021-09-30,203.0
-Staten Island,Condo,2021-10-31,171.1
-Staten Island,Condo,2021-11-30,140.4
+Staten Island,Condo,2020-04-30,135.8
+Staten Island,Condo,2020-05-31,163.6
+Staten Island,Condo,2020-06-30,145.3
+Staten Island,Condo,2020-07-31,129.4
+Staten Island,Condo,2020-08-31,174.3
+Staten Island,Condo,2020-09-30,156.6
+Staten Island,Condo,2020-10-31,164.8
+Staten Island,Condo,2020-11-30,175.1
+Staten Island,Condo,2020-12-31,149.0
+Staten Island,Condo,2021-01-31,155.9
+Staten Island,Condo,2021-02-28,144.5
+Staten Island,Condo,2021-03-31,136.4
+Staten Island,Condo,2021-04-30,157.0
+Staten Island,Condo,2021-05-31,136.6
+Staten Island,Condo,2021-06-30,156.0
+Staten Island,Condo,2021-07-31,158.6
+Staten Island,Condo,2021-08-31,187.8
+Staten Island,Condo,2021-09-30,200.5
+Staten Island,Condo,2021-10-31,172.4
+Staten Island,Condo,2021-11-30,139.2
 Staten Island,Condo,2021-12-31,140.9
-Staten Island,Condo,2022-01-31,136.5
-Staten Island,Condo,2022-02-28,164.3
-Staten Island,Condo,2022-03-31,170.7
-Staten Island,Condo,2022-04-30,157.2
-Staten Island,Condo,2022-05-31,161.0
+Staten Island,Condo,2022-01-31,137.1
+Staten Island,Condo,2022-02-28,163.8
+Staten Island,Condo,2022-03-31,170.5
+Staten Island,Condo,2022-04-30,156.7
+Staten Island,Condo,2022-05-31,160.9
 Staten Island,Condo,2022-06-30,155.6
-Staten Island,Condo,2022-07-31,168.3
-Staten Island,Condo,2022-08-31,159.4
-Staten Island,Condo,2022-09-30,200.8
-Staten Island,Condo,2022-10-31,207.4
-Staten Island,Condo,2022-11-30,165.9
-Staten Island,Condo,2022-12-31,169.6
-Staten Island,Condo,2023-01-31,166.0
-Staten Island,Condo,2023-02-28,167.9
-Staten Island,Condo,2023-03-31,153.1
-Staten Island,Condo,2023-04-30,183.0
-Staten Island,Condo,2023-05-31,174.6
-Staten Island,Condo,2023-06-30,182.4
-Staten Island,Condo,2023-07-31,128.0
-Staten Island,Condo,2023-08-31,83.4
-Staten Island,Condo,2023-09-30,197.0
-Staten Island,Condo,2023-10-31,180.9
-Staten Island,Condo,2023-11-30,210.4
-Staten Island,Condo,2023-12-31,199.6
-Staten Island,Condo,2024-01-31,83.4
-Staten Island,Condo,2024-02-29,127.3
-Staten Island,Condo,2024-03-31,83.4
-Staten Island,Condo,2024-04-30,83.4
-Staten Island,Condo,2024-05-31,177.9
-Staten Island,Condo,2024-06-30,151.8
-Staten Island,Condo,2024-07-31,210.9
-Staten Island,Condo,2024-09-30,170.0
-Staten Island,Condo,2024-10-31,150.4
-Staten Island,Condo,2024-11-30,83.4
-Staten Island,Condo,2024-12-31,188.6
-Staten Island,Condo,2025-01-31,175.6
-Staten Island,Condo,2025-02-28,128.5
-Staten Island,Condo,2025-03-31,138.3
-Staten Island,Condo,2025-04-30,132.5
-Staten Island,Condo,2025-05-31,111.4
-Staten Island,Condo,2025-06-30,177.2
-Staten Island,Condo,2025-07-31,179.6
+Staten Island,Condo,2022-07-31,168.7
+Staten Island,Condo,2022-08-31,158.1
+Staten Island,Condo,2022-09-30,200.5
+Staten Island,Condo,2022-10-31,206.4
+Staten Island,Condo,2022-11-30,165.6
+Staten Island,Condo,2022-12-31,168.6
+Staten Island,Condo,2023-01-31,164.3
+Staten Island,Condo,2023-02-28,166.5
+Staten Island,Condo,2023-03-31,153.2
+Staten Island,Condo,2023-04-30,182.5
+Staten Island,Condo,2023-05-31,173.9
+Staten Island,Condo,2023-06-30,182.1
+Staten Island,Condo,2023-07-31,128.3
+Staten Island,Condo,2023-08-31,82.9
+Staten Island,Condo,2023-09-30,196.3
+Staten Island,Condo,2023-10-31,180.7
+Staten Island,Condo,2023-11-30,210.1
+Staten Island,Condo,2023-12-31,199.2
+Staten Island,Condo,2024-01-31,82.9
+Staten Island,Condo,2024-02-29,125.8
+Staten Island,Condo,2024-03-31,82.9
+Staten Island,Condo,2024-04-30,82.9
+Staten Island,Condo,2024-05-31,174.5
+Staten Island,Condo,2024-06-30,151.4
+Staten Island,Condo,2024-07-31,216.1
+Staten Island,Condo,2024-09-30,178.4
+Staten Island,Condo,2024-10-31,149.7
+Staten Island,Condo,2024-11-30,82.9
+Staten Island,Condo,2024-12-31,188.5
+Staten Island,Condo,2025-01-31,175.3
+Staten Island,Condo,2025-02-28,129.2
+Staten Island,Condo,2025-03-31,138.2
+Staten Island,Condo,2025-04-30,132.2
+Staten Island,Condo,2025-05-31,110.2
+Staten Island,Condo,2025-06-30,176.6
+Staten Island,Condo,2025-07-31,178.2
+Staten Island,Condo,2025-08-31,166.0
 Staten Island,Coop,2004-09-30,100.0
 Staten Island,Coop,2008-08-31,112.9
 Staten Island,Coop,2016-05-31,112.9
@@ -3375,7 +3387,7 @@ Staten Island,Coop,2025-05-31,112.9
 Staten Island,Coop,2025-07-31,112.9
 Staten Island,SFH,2003-01-31,100.0
 Staten Island,SFH,2003-02-28,100.3
-Staten Island,SFH,2003-03-31,104.8
+Staten Island,SFH,2003-03-31,104.7
 Staten Island,SFH,2003-04-30,107.0
 Staten Island,SFH,2003-05-31,104.7
 Staten Island,SFH,2003-06-30,108.0
@@ -3391,7 +3403,7 @@ Staten Island,SFH,2004-03-31,114.1
 Staten Island,SFH,2004-04-30,117.7
 Staten Island,SFH,2004-05-31,116.8
 Staten Island,SFH,2004-06-30,117.3
-Staten Island,SFH,2004-07-31,120.4
+Staten Island,SFH,2004-07-31,120.3
 Staten Island,SFH,2004-08-31,120.1
 Staten Island,SFH,2004-09-30,123.4
 Staten Island,SFH,2004-10-31,121.0
@@ -3403,16 +3415,16 @@ Staten Island,SFH,2005-03-31,124.9
 Staten Island,SFH,2005-04-30,130.1
 Staten Island,SFH,2005-05-31,132.8
 Staten Island,SFH,2005-06-30,136.8
-Staten Island,SFH,2005-07-31,135.1
+Staten Island,SFH,2005-07-31,134.9
 Staten Island,SFH,2005-08-31,135.9
 Staten Island,SFH,2005-09-30,133.9
 Staten Island,SFH,2005-10-31,137.0
 Staten Island,SFH,2005-11-30,137.2
 Staten Island,SFH,2005-12-31,139.3
-Staten Island,SFH,2006-01-31,142.3
-Staten Island,SFH,2006-02-28,144.5
-Staten Island,SFH,2006-03-31,141.9
-Staten Island,SFH,2006-04-30,140.0
+Staten Island,SFH,2006-01-31,142.2
+Staten Island,SFH,2006-02-28,144.4
+Staten Island,SFH,2006-03-31,141.8
+Staten Island,SFH,2006-04-30,140.1
 Staten Island,SFH,2006-05-31,141.8
 Staten Island,SFH,2006-06-30,145.1
 Staten Island,SFH,2006-07-31,141.9
@@ -3427,7 +3439,7 @@ Staten Island,SFH,2007-03-31,144.1
 Staten Island,SFH,2007-04-30,138.0
 Staten Island,SFH,2007-05-31,143.1
 Staten Island,SFH,2007-06-30,140.0
-Staten Island,SFH,2007-07-31,141.5
+Staten Island,SFH,2007-07-31,141.4
 Staten Island,SFH,2007-08-31,141.9
 Staten Island,SFH,2007-09-30,143.4
 Staten Island,SFH,2007-10-31,144.4
@@ -3437,11 +3449,11 @@ Staten Island,SFH,2008-01-31,136.5
 Staten Island,SFH,2008-02-29,132.8
 Staten Island,SFH,2008-03-31,133.2
 Staten Island,SFH,2008-04-30,133.9
-Staten Island,SFH,2008-05-31,133.7
+Staten Island,SFH,2008-05-31,134.0
 Staten Island,SFH,2008-06-30,133.6
 Staten Island,SFH,2008-07-31,136.0
 Staten Island,SFH,2008-08-31,133.3
-Staten Island,SFH,2008-09-30,133.0
+Staten Island,SFH,2008-09-30,133.1
 Staten Island,SFH,2008-10-31,131.1
 Staten Island,SFH,2008-11-30,130.6
 Staten Island,SFH,2008-12-31,125.7
@@ -3459,7 +3471,7 @@ Staten Island,SFH,2009-11-30,126.8
 Staten Island,SFH,2009-12-31,128.3
 Staten Island,SFH,2010-01-31,131.4
 Staten Island,SFH,2010-02-28,131.7
-Staten Island,SFH,2010-03-31,133.6
+Staten Island,SFH,2010-03-31,133.5
 Staten Island,SFH,2010-04-30,122.5
 Staten Island,SFH,2010-05-31,128.9
 Staten Island,SFH,2010-06-30,130.7
@@ -3468,15 +3480,15 @@ Staten Island,SFH,2010-08-31,131.1
 Staten Island,SFH,2010-09-30,124.7
 Staten Island,SFH,2010-10-31,125.3
 Staten Island,SFH,2010-11-30,127.7
-Staten Island,SFH,2010-12-31,127.4
+Staten Island,SFH,2010-12-31,127.3
 Staten Island,SFH,2011-01-31,127.0
-Staten Island,SFH,2011-02-28,126.3
+Staten Island,SFH,2011-02-28,126.2
 Staten Island,SFH,2011-03-31,132.1
 Staten Island,SFH,2011-04-30,120.6
 Staten Island,SFH,2011-05-31,125.7
 Staten Island,SFH,2011-06-30,128.2
 Staten Island,SFH,2011-07-31,131.0
-Staten Island,SFH,2011-08-31,125.9
+Staten Island,SFH,2011-08-31,125.8
 Staten Island,SFH,2011-09-30,125.1
 Staten Island,SFH,2011-10-31,122.0
 Staten Island,SFH,2011-11-30,130.7
@@ -3487,7 +3499,7 @@ Staten Island,SFH,2012-03-31,126.7
 Staten Island,SFH,2012-04-30,121.9
 Staten Island,SFH,2012-05-31,121.6
 Staten Island,SFH,2012-06-30,122.0
-Staten Island,SFH,2012-07-31,127.2
+Staten Island,SFH,2012-07-31,127.1
 Staten Island,SFH,2012-08-31,126.9
 Staten Island,SFH,2012-09-30,121.9
 Staten Island,SFH,2012-10-31,121.7
@@ -3495,11 +3507,11 @@ Staten Island,SFH,2012-11-30,121.6
 Staten Island,SFH,2012-12-31,118.4
 Staten Island,SFH,2013-01-31,124.2
 Staten Island,SFH,2013-02-28,126.8
-Staten Island,SFH,2013-03-31,124.8
+Staten Island,SFH,2013-03-31,124.7
 Staten Island,SFH,2013-04-30,124.9
 Staten Island,SFH,2013-05-31,126.0
 Staten Island,SFH,2013-06-30,123.4
-Staten Island,SFH,2013-07-31,128.5
+Staten Island,SFH,2013-07-31,128.4
 Staten Island,SFH,2013-08-31,129.1
 Staten Island,SFH,2013-09-30,129.9
 Staten Island,SFH,2013-10-31,128.3
@@ -3507,20 +3519,20 @@ Staten Island,SFH,2013-11-30,124.6
 Staten Island,SFH,2013-12-31,128.4
 Staten Island,SFH,2014-01-31,124.7
 Staten Island,SFH,2014-02-28,132.3
-Staten Island,SFH,2014-03-31,129.5
+Staten Island,SFH,2014-03-31,129.4
 Staten Island,SFH,2014-04-30,126.2
-Staten Island,SFH,2014-05-31,123.4
+Staten Island,SFH,2014-05-31,123.3
 Staten Island,SFH,2014-06-30,130.9
 Staten Island,SFH,2014-07-31,135.3
 Staten Island,SFH,2014-08-31,133.9
 Staten Island,SFH,2014-09-30,132.0
-Staten Island,SFH,2014-10-31,127.9
+Staten Island,SFH,2014-10-31,128.0
 Staten Island,SFH,2014-11-30,132.7
-Staten Island,SFH,2014-12-31,129.8
-Staten Island,SFH,2015-01-31,135.1
+Staten Island,SFH,2014-12-31,129.7
+Staten Island,SFH,2015-01-31,135.2
 Staten Island,SFH,2015-02-28,124.1
 Staten Island,SFH,2015-03-31,135.6
-Staten Island,SFH,2015-04-30,136.1
+Staten Island,SFH,2015-04-30,136.0
 Staten Island,SFH,2015-05-31,138.1
 Staten Island,SFH,2015-06-30,134.6
 Staten Island,SFH,2015-07-31,135.3
@@ -3529,31 +3541,31 @@ Staten Island,SFH,2015-09-30,140.4
 Staten Island,SFH,2015-10-31,137.6
 Staten Island,SFH,2015-11-30,138.9
 Staten Island,SFH,2015-12-31,139.8
-Staten Island,SFH,2016-01-31,138.1
+Staten Island,SFH,2016-01-31,138.5
 Staten Island,SFH,2016-02-29,138.4
 Staten Island,SFH,2016-03-31,137.6
-Staten Island,SFH,2016-04-30,141.7
+Staten Island,SFH,2016-04-30,141.6
 Staten Island,SFH,2016-05-31,137.0
 Staten Island,SFH,2016-06-30,143.3
 Staten Island,SFH,2016-07-31,148.7
 Staten Island,SFH,2016-08-31,145.5
 Staten Island,SFH,2016-09-30,153.2
 Staten Island,SFH,2016-10-31,156.9
-Staten Island,SFH,2016-11-30,155.0
+Staten Island,SFH,2016-11-30,155.1
 Staten Island,SFH,2016-12-31,154.5
 Staten Island,SFH,2017-01-31,158.7
 Staten Island,SFH,2017-02-28,153.7
 Staten Island,SFH,2017-03-31,153.9
-Staten Island,SFH,2017-04-30,155.6
+Staten Island,SFH,2017-04-30,155.8
 Staten Island,SFH,2017-05-31,158.9
-Staten Island,SFH,2017-06-30,153.8
+Staten Island,SFH,2017-06-30,153.9
 Staten Island,SFH,2017-07-31,161.6
 Staten Island,SFH,2017-08-31,160.2
 Staten Island,SFH,2017-09-30,163.9
-Staten Island,SFH,2017-10-31,160.2
+Staten Island,SFH,2017-10-31,160.1
 Staten Island,SFH,2017-11-30,165.1
 Staten Island,SFH,2017-12-31,164.4
-Staten Island,SFH,2018-01-31,175.7
+Staten Island,SFH,2018-01-31,175.8
 Staten Island,SFH,2018-02-28,167.7
 Staten Island,SFH,2018-03-31,166.5
 Staten Island,SFH,2018-04-30,167.4
@@ -3562,74 +3574,74 @@ Staten Island,SFH,2018-06-30,165.9
 Staten Island,SFH,2018-07-31,174.0
 Staten Island,SFH,2018-08-31,170.4
 Staten Island,SFH,2018-09-30,173.4
-Staten Island,SFH,2018-10-31,174.9
+Staten Island,SFH,2018-10-31,175.0
 Staten Island,SFH,2018-11-30,180.0
-Staten Island,SFH,2018-12-31,180.2
+Staten Island,SFH,2018-12-31,180.1
 Staten Island,SFH,2019-01-31,179.7
-Staten Island,SFH,2019-02-28,170.3
+Staten Island,SFH,2019-02-28,170.2
 Staten Island,SFH,2019-03-31,173.2
 Staten Island,SFH,2019-04-30,176.1
 Staten Island,SFH,2019-05-31,176.0
-Staten Island,SFH,2019-06-30,177.2
+Staten Island,SFH,2019-06-30,177.1
 Staten Island,SFH,2019-07-31,180.8
 Staten Island,SFH,2019-08-31,179.8
 Staten Island,SFH,2019-09-30,176.8
 Staten Island,SFH,2019-10-31,182.4
 Staten Island,SFH,2019-11-30,176.9
 Staten Island,SFH,2019-12-31,185.0
-Staten Island,SFH,2020-01-31,179.7
+Staten Island,SFH,2020-01-31,179.6
 Staten Island,SFH,2020-02-29,176.8
 Staten Island,SFH,2020-03-31,185.2
-Staten Island,SFH,2020-04-30,183.7
+Staten Island,SFH,2020-04-30,183.6
 Staten Island,SFH,2020-05-31,174.0
-Staten Island,SFH,2020-06-30,187.0
+Staten Island,SFH,2020-06-30,187.1
 Staten Island,SFH,2020-07-31,180.2
 Staten Island,SFH,2020-08-31,180.2
-Staten Island,SFH,2020-09-30,177.4
+Staten Island,SFH,2020-09-30,177.1
 Staten Island,SFH,2020-10-31,184.9
 Staten Island,SFH,2020-11-30,183.8
-Staten Island,SFH,2020-12-31,184.3
+Staten Island,SFH,2020-12-31,184.1
 Staten Island,SFH,2021-01-31,183.8
 Staten Island,SFH,2021-02-28,186.8
 Staten Island,SFH,2021-03-31,189.8
-Staten Island,SFH,2021-04-30,193.0
-Staten Island,SFH,2021-05-31,196.6
-Staten Island,SFH,2021-06-30,198.7
+Staten Island,SFH,2021-04-30,192.9
+Staten Island,SFH,2021-05-31,196.4
+Staten Island,SFH,2021-06-30,198.6
 Staten Island,SFH,2021-07-31,194.8
 Staten Island,SFH,2021-08-31,199.5
-Staten Island,SFH,2021-09-30,195.1
-Staten Island,SFH,2021-10-31,204.6
+Staten Island,SFH,2021-09-30,195.0
+Staten Island,SFH,2021-10-31,204.7
 Staten Island,SFH,2021-11-30,202.7
 Staten Island,SFH,2021-12-31,203.8
 Staten Island,SFH,2022-01-31,206.7
 Staten Island,SFH,2022-02-28,213.2
-Staten Island,SFH,2022-03-31,220.1
+Staten Island,SFH,2022-03-31,220.0
 Staten Island,SFH,2022-04-30,210.2
 Staten Island,SFH,2022-05-31,220.1
 Staten Island,SFH,2022-06-30,222.3
-Staten Island,SFH,2022-07-31,218.2
+Staten Island,SFH,2022-07-31,218.1
 Staten Island,SFH,2022-08-31,214.6
 Staten Island,SFH,2022-09-30,217.0
 Staten Island,SFH,2022-10-31,221.7
-Staten Island,SFH,2022-11-30,211.7
-Staten Island,SFH,2022-12-31,216.5
+Staten Island,SFH,2022-11-30,211.5
+Staten Island,SFH,2022-12-31,216.2
 Staten Island,SFH,2023-01-31,214.6
-Staten Island,SFH,2023-02-28,216.1
-Staten Island,SFH,2023-03-31,207.1
+Staten Island,SFH,2023-02-28,216.0
+Staten Island,SFH,2023-03-31,207.0
 Staten Island,SFH,2023-04-30,218.9
-Staten Island,SFH,2023-05-31,222.2
-Staten Island,SFH,2023-06-30,222.4
+Staten Island,SFH,2023-05-31,222.1
+Staten Island,SFH,2023-06-30,222.2
 Staten Island,SFH,2023-07-31,217.8
-Staten Island,SFH,2023-08-31,220.2
+Staten Island,SFH,2023-08-31,220.1
 Staten Island,SFH,2023-09-30,220.8
 Staten Island,SFH,2023-10-31,225.2
-Staten Island,SFH,2023-11-30,217.5
-Staten Island,SFH,2023-12-31,221.1
+Staten Island,SFH,2023-11-30,217.3
+Staten Island,SFH,2023-12-31,220.9
 Staten Island,SFH,2024-01-31,215.7
 Staten Island,SFH,2024-02-29,193.0
 Staten Island,SFH,2024-03-31,228.9
 Staten Island,SFH,2024-04-30,228.2
-Staten Island,SFH,2024-05-31,238.5
+Staten Island,SFH,2024-05-31,236.8
 Staten Island,SFH,2024-06-30,228.3
 Staten Island,SFH,2024-07-31,228.4
 Staten Island,SFH,2024-08-31,240.4
@@ -3640,7 +3652,8 @@ Staten Island,SFH,2024-12-31,216.1
 Staten Island,SFH,2025-01-31,237.1
 Staten Island,SFH,2025-02-28,227.5
 Staten Island,SFH,2025-03-31,231.7
-Staten Island,SFH,2025-04-30,238.5
-Staten Island,SFH,2025-05-31,235.1
+Staten Island,SFH,2025-04-30,231.1
+Staten Island,SFH,2025-05-31,240.9
 Staten Island,SFH,2025-06-30,243.4
 Staten Island,SFH,2025-07-31,245.4
+Staten Island,SFH,2025-08-31,230.3
