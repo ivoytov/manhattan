@@ -37,6 +37,7 @@ jobs:
         if [[ `git status --porcelain` ]]; then
           git status
           julia repeat_sales_index.jl
+          python3 scripts/build_sqlite.py
         else
           echo "No new files created"
         fi

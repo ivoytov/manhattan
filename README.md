@@ -16,3 +16,10 @@ All charts to have month over month change
 2. % of auctions with a sale
 3. Average sale price
 4. Average price to upset price ratio
+
+## SQLite data bundle
+
+- All CSV datasets are packaged into `data/nyc_data.sqlite` so the site can load them through sql.js (SQLite compiled to WebAssembly) instead of downloading multiple CSV files.
+- Regenerate the database after changing any CSV by running `python3 scripts/build_sqlite.py`. Use the `--database` flag to override the output path if needed.
+- The script performs light type inference, preserves the original column names, and creates a `transactions_combined` view that mirrors the previous client-side union of the borough and recent NYC transactions files.
+- The browser locates the accompanying `sql-wasm.wasm` from the CDN, so no additional build steps are required beyond publishing the updated database file.

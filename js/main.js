@@ -1,76 +1,88 @@
-// Function to load CSV file using PapaParse
-function loadCSV(url) {
-  return new Promise((resolve, reject) => {
-    Papa.parse(url, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      dynamicTyping: true,
-      complete: results => {
-        // Convert "SALE DATE" property to JavaScript Date objects
-        results.data = results.data.map(obj => {
-          const dateKey = "SALE DATE" in obj ? "SALE DATE" : "period"
+const SQL_JS_VERSION = "1.9.0";
+const SQL_JS_BASE_URL = `https://cdnjs.cloudflare.com/ajax/libs/sql.js/${SQL_JS_VERSION}`;
+const DATABASE_PATH = "data/nyc_data.sqlite";
 
-          // Use destructuring to get other properties if needed
-          const { [dateKey]: saleDate, ...rest } = obj;
-
-          // Convert string to Date, set to midnight (otherwise date filter doesn't work)
-          const saleDateObj = new Date(saleDate);
-          saleDateObj.setHours(24, 0, 0, 0)
-
-          // Add other properties back if needed
-          return { [dateKey]: saleDateObj, ...rest };
-        });
-
-
-        resolve(results.data);
-      },
-      error: error => {
-        reject(error.message);
-      }
-    });
-  });
-}
 let outliers = []
 let combinedData = []
 
+const databasePromise = initSqlJs({
+  locateFile: (file) => `${SQL_JS_BASE_URL}/${file}`,
+}).then(async (SQL) => {
+  const response = await fetch(DATABASE_PATH);
+  if (!response.ok) {
+    throw new Error(`Failed to load SQLite database (${DATABASE_PATH}): ${response.status} ${response.statusText}`);
+  }
+
+  const buffer = await response.arrayBuffer();
+  return new SQL.Database(new Uint8Array(buffer));
+});
+
+function runQuery(db, sql) {
+  const [result] = db.exec(sql);
+  if (!result) {
+    return [];
+  }
+
+  const { columns, values } = result;
+  return values.map((row) => {
+    const record = {};
+    columns.forEach((column, index) => {
+      record[column] = row[index];
+    });
+    return record;
+  });
+}
+
+function parseSaleDate(value) {
+  const saleDate = new Date(value);
+  saleDate.setHours(24, 0, 0, 0);
+  return saleDate;
+}
+
 const is_outlier = (obj) => !outliers.some(outlier => outlier.lot === obj.LOT && outlier.block === obj.BLOCK && outlier["SALE DATE"].getTime() === obj["SALE DATE"].getTime() && outlier.sale_price === obj["SALE PRICE"])
 
-// Function to load CSV file using PapaParse
-function loadTransactionDataCSV(url) {
-  return new Promise((resolve, reject) => {
-    Papa.parse(url, {
-      header: true,
-      download: true,
-      skipEmptyLines: true,
-      dynamicTyping: true,
-      worker: false,
-      step: row => {
-        const dateKey = "SALE DATE"
+async function loadOutliers(db) {
+  const rows = runQuery(db, 'SELECT block, lot, "SALE DATE", sale_price FROM transactions_outliers');
+  return rows.map((row) => ({
+    ...row,
+    "SALE DATE": parseSaleDate(row["SALE DATE"]),
+  }));
+}
 
-        // Use destructuring to get other properties if needed
-        const { [dateKey]: saleDate, ...rest } = row.data;
+async function loadTransactions(db) {
+  const rows = runQuery(db, 'SELECT * FROM transactions_combined');
+  return rows.map((row) => ({
+    ...row,
+    "SALE DATE": parseSaleDate(row["SALE DATE"]),
+  }));
+}
 
-        // Convert string to Date, set to midnight (otherwise date filter doesn't work)
-        const saleDateObj = new Date(saleDate);
-        saleDateObj.setHours(24, 0, 0, 0)
+async function loadHomePriceIndex(db) {
+  return runQuery(db, "SELECT * FROM home_price_index ORDER BY period").map((row) => ({
+    ...row,
+    period: parseSaleDate(row.period),
+  }));
+}
 
-        // Add other properties back if needed
-        const cleanRow = { [dateKey]: saleDateObj, ...rest };
+async function loadHomePriceSubindex(db) {
+  return runQuery(db, "SELECT * FROM home_price_subindex ORDER BY period").map((row) => ({
+    ...row,
+    period: parseSaleDate(row.period),
+  }));
+}
 
-        // add outliers column to the data
-        cleanRow.outlier = is_outlier(cleanRow)
-        combinedData.push(cleanRow)
-      },
-      complete: () => {
-        console.log("All done")
-        resolve(true)
-      },
-      error: error => {
-        reject(error.message);
-      }
-    });
-  });
+async function loadHomePriceNeighborhoods(db) {
+  return runQuery(db, "SELECT * FROM home_price_neighborhoods ORDER BY period").map((row) => ({
+    ...row,
+    period: parseSaleDate(row.period),
+  }));
+}
+
+function applyOutlierFlag(rows) {
+  return rows.map((row) => ({
+    ...row,
+    outlier: is_outlier(row),
+  }));
 }
 
 
@@ -312,202 +324,187 @@ const gridApi = agGrid.createGrid(gridDiv, gridOptions)
 
 gridApi.setFilterModel(defaultFilter);
 
-// URLs of the CSV files you want to load
-const csvUrls = [
-  'manhattan.csv',
-  'bronx.csv',
-  'brooklyn.csv',
-  'queens.csv',
-  'statenisland.csv',
-  'nyc_2018-2022.csv',
-];
+async function bootstrap() {
+  try {
+    const db = await databasePromise;
+    outliers = await loadOutliers(db);
+    const transactions = await loadTransactions(db);
+    combinedData = applyOutlierFlag(transactions);
 
-// Array to store promises for each CSV file
-const csvPromises = csvUrls.map(url => loadTransactionDataCSV(`transactions/${url}`));
+    gridApi.setGridOption('rowData', combinedData);
+    gridApi.sizeColumnsToFit();
 
+    const [idx, idxb, idxn] = await Promise.all([
+      loadHomePriceIndex(db),
+      loadHomePriceSubindex(db),
+      loadHomePriceNeighborhoods(db)
+    ]);
 
+    renderChart(idx, idxb, idxn);
+  } catch (error) {
+    console.error('Error loading data from SQLite:', error);
+  }
+}
 
-// Use Promise.all to wait for all promises to resolve
-loadCSV('transactions/outliers.csv').then((outs) => {
-  outliers = outs
-  return true
-}).then((retValue) => {
-  Promise.all(csvPromises)
-    .then((resultsArray) => {
-      // load the full table
-      gridApi.setGridOption('rowData', combinedData)
-      gridApi.sizeColumnsToFit()
-    })
-    .catch(error => {
-      console.error('Error loading CSV files:', error);
-    });
-})
+function renderChart(idx, idxb, idxn) {
+  const boroughs = new Set(idxb.map(({ borough }) => borough));
+  const houseClasses = new Set(idxb.map(({ house_class }) => house_class));
+  const neighborhoods = new Set(idxn.map(({ neighborhood }) => neighborhood));
 
+  const seriesNames = ["NYC", "NYC - Top 10%", "NYC - Top 33%", "NYC - Middle 33%", "NYC - Bottom 33%", "NYC - Bottom 10%"];
+  const series = [];
 
-Promise.all([
-  loadCSV("home_price_index.csv"),
-  loadCSV("home_price_subindex.csv"),
-  loadCSV("home_price_neighborhoods.csv")
-])
-  .then(([idx, idxb, idxn]) => {
+  const makeSeries = (data, name) => ({
+    name: name,
+    type: 'line',
+    symbol: 'none',
+    data: data
+  });
 
-    const boroughs = new Set(idxb.map(({ borough }) => borough))
-    const houseClasses = new Set(idxb.map(({ house_class }) => house_class))
-    const neighborhoods = new Set(idxn.map(({ neighborhood }) => neighborhood))
+  for (const borough of boroughs) {
+    for (const cls of houseClasses) {
+      const data = idxb
+        .filter(({ borough: b, house_class: c }) => borough === b && cls === c)
+        .map(({ period, home_price_index }) => [period, home_price_index]);
+      const name = `${borough} ${cls}`;
+      series.push(makeSeries(data, name));
+      seriesNames.push(name);
+    }
+  }
 
-    const seriesNames = ["NYC", "NYC - Top 10%", "NYC - Top 33%", "NYC - Middle 33%", "NYC - Bottom 33%", "NYC - Bottom 10%"]
-    const series = []
-    const makeSeries = (data, name) => {
-      return {
-        name: name,
+  for (const borough of boroughs) {
+    for (const neighborhood of neighborhoods) {
+      const data = idxn
+        .filter(({ borough: b, neighborhood: n }) => borough === b && neighborhood === n)
+        .map(({ period, home_price_index }) => [period, home_price_index]);
+      const name = `${borough} ${neighborhood}`;
+
+      if (!data.length) {
+        continue;
+      }
+
+      series.push(makeSeries(data, name));
+      seriesNames.push(name);
+    }
+  }
+
+  const isSelected = seriesNames.reduce((accumulator, current) => {
+    accumulator[current] = false;
+    return accumulator;
+  }, {});
+
+  isSelected["Manhattan Condo"] = true;
+  isSelected["Brooklyn SFH"] = true;
+  isSelected["NYC"] = true;
+  isSelected["NYC - Top 10%"] = true;
+
+  const option = {
+    title: {
+      text: 'NYC Repeat Sales Home Price Index'
+    },
+    dataset: [
+      {
+        dimensions: [{ name: 'period', type: 'time' }, "top_decile", "top_third", "bottom_decile", "middle_third", "bottom_third", "all"],
+        source: idx,
+      },
+    ],
+    tooltip: {
+      trigger: 'axis'
+    },
+    legend: {
+      selected: isSelected,
+      type: 'scroll',
+      orient: 'horizontal',
+      data: seriesNames,
+      top: 20,
+      left: 20,
+      right: 20,
+      textStyle: {
+        width: 75,
+        overflow: 'break'
+
+      }
+    },
+    grid: {
+      top: 100
+    },
+    xAxis: {
+      type: 'time'
+    },
+    yAxis: {
+      min: 'dataMin',
+    },
+    series: [
+      {
+        name: 'NYC',
         type: 'line',
         symbol: 'none',
-        data: data
-      }
-    }
-    for (const borough of boroughs) {
-      for (const cls of houseClasses) {
-        const data = idxb.filter(({ borough: b, house_class: c }) => borough == b & cls == c)
-          .map(({ period, home_price_index }) => [period, home_price_index])
-        const name = `${borough} ${cls}`
-        series.push(makeSeries(data, name))
-        seriesNames.push(name)
-      }
-    }
-
-    for (const borough of boroughs) {
-      for (const neighborhood of neighborhoods) {
-        const data = idxn.filter(({ borough: b, neighborhood: n }) => borough == b & neighborhood == n)
-          .map(({ period, home_price_index }) => [period, home_price_index])
-        const name = `${borough} ${neighborhood}`
-
-        // since not every neighborhood is in every borough, eliminate the empty ones
-        if (!data.length) {
-          continue
-        }
-        series.push(makeSeries(data, name))
-        seriesNames.push(name)
-      }
-    }
-
-    const isSelected = seriesNames.reduce((accumulator, current) => {
-      accumulator[current] = false;
-      return accumulator;
-    }, {})
-
-    isSelected["Manhattan Condo"] = true
-    isSelected["Brooklyn SFH"] = true
-    isSelected["NYC"] = true
-    isSelected["NYC - Top 10%"] = true
-
-    // Specify the configuration items and data for the chart
-    const option = {
-      title: {
-        text: 'NYC Repeat Sales Home Price Index'
-      },
-      dataset: [
-        {
-          dimensions: [{ name: 'period', type: 'time' }, "top_decile", "top_third", "bottom_decile", "middle_third", "bottom_third", "all"],
-          source: idx,
-        },
-      ],
-      tooltip: {
-        trigger: 'axis'
-      },
-      legend: {
-        selected: isSelected,
-        type: 'scroll',
-        orient: 'horizontal',
-        data: seriesNames,
-        top: 20,
-        left: 20,
-        right: 20,
-        textStyle: {
-          width: 75,
-          overflow: 'break'
-
+        datasetIndex: 0,
+        encode: {
+          x: 'period',
+          y: 'all'
         }
       },
-      grid: {
-        top: 100
+      {
+        name: 'NYC - Top 10%',
+        type: 'line',
+        symbol: 'none',
+        datasetIndex: 0,
+        encode: {
+          x: 'period',
+          y: 'top_decile'
+        }
       },
-      xAxis: {
-        type: 'time'
+      {
+        name: 'NYC - Top 33%',
+        type: 'line',
+        symbol: 'none',
+        datasetIndex: 0,
+        encode: {
+          x: 'period',
+          y: 'top_third'
+        }
       },
-      yAxis: {
-        min: 'dataMin',
+      {
+        name: 'NYC - Middle 33%',
+        type: 'line',
+        symbol: 'none',
+        datasetIndex: 0,
+        encode: {
+          x: 'period',
+          y: 'middle_third'
+        }
       },
-      series: [
-        {
-          name: 'NYC',
-          type: 'line',
-          symbol: 'none',
-          datasetIndex: 0,
-          encode: {
-            x: 'period',
-            y: 'all'
-          }
-        },
-        {
-          name: 'NYC - Top 10%',
-          type: 'line',
-          symbol: 'none',
-          datasetIndex: 0,
-          encode: {
-            x: 'period',
-            y: 'top_decile'
-          }
-        },
-        {
-          name: 'NYC - Top 33%',
-          type: 'line',
-          symbol: 'none',
-          datasetIndex: 0,
-          encode: {
-            x: 'period',
-            y: 'top_third'
-          }
-        },
-        {
-          name: 'NYC - Middle 33%',
-          type: 'line',
-          symbol: 'none',
-          datasetIndex: 0,
-          encode: {
-            x: 'period',
-            y: 'middle_third'
-          }
-        },
-        {
-          name: 'NYC - Bottom 33%',
-          type: 'line',
-          symbol: 'none',
-          datasetIndex: 0,
-          encode: {
-            x: 'period',
-            y: 'bottom_third'
-          }
-        },
-        {
-          name: 'NYC - Bottom 10%',
-          type: 'line',
-          symbol: 'none',
-          datasetIndex: 0,
-          encode: {
-            x: 'period',
-            y: 'bottom_decile'
-          }
-        },
-        ...series
-      ]
-    };
+      {
+        name: 'NYC - Bottom 33%',
+        type: 'line',
+        symbol: 'none',
+        datasetIndex: 0,
+        encode: {
+          x: 'period',
+          y: 'bottom_third'
+        }
+      },
+      {
+        name: 'NYC - Bottom 10%',
+        type: 'line',
+        symbol: 'none',
+        datasetIndex: 0,
+        encode: {
+          x: 'period',
+          y: 'bottom_decile'
+        }
+      },
+      ...series
+    ]
+  };
 
-    // Display the chart using the configuration items and data just specified.
-    myChart.setOption(option);
-  })
+  myChart.setOption(option);
+}
 
 // Initialize the echarts instance based on the prepared dom
 const myChart = echarts.init(document.getElementById('main'));
+bootstrap();
 
 // splitter functionality
 const splitter = document.getElementById('splitter')
@@ -549,4 +546,3 @@ function startResize() {
     isResizing = true;
   };
 }
-
