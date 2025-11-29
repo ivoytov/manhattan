@@ -50,7 +50,21 @@ async function loadOutliers(db) {
 }
 
 async function loadTransactions(db) {
-  const rows = runQuery(db, 'SELECT * FROM transactions_combined');
+  qry = `
+    select 
+    d.id as borough_id, 
+    d.borough, 
+    block, 
+    lot, 
+    address, 
+    [APARTMENT NUMBER], 
+    [ZIP CODE], [RESIDENTIAL UNITS], [COMMERCIAL UNITS], [TOTAL UNITS], [LAND SQUARE FEET], [YEAR BUILT], [SALE PRICE], [SALE DATE], neighborhood, building_class_category
+  from transactions 
+  join neighborhoods b on neighborhood_id = b.id 
+  join building_class_categories c on building_class_category_id = c.id 
+  join boroughs d on d.id = transactions.borough  
+  order by "SALE DATE" desc`
+  const rows = runQuery(db, qry);
   return rows.map((row) => ({
     ...row,
     "SALE DATE": parseSaleDate(row["SALE DATE"]),
@@ -65,14 +79,26 @@ async function loadHomePriceIndex(db) {
 }
 
 async function loadHomePriceSubindex(db) {
-  return runQuery(db, "SELECT * FROM home_price_subindex ORDER BY period").map((row) => ({
+  qry = `
+  SELECT period, borough, house_class, home_price_index
+FROM home_price_subindex a
+ join boroughs b on b.id = a.borough_id 
+ join house_classes c on c.id = a.house_class_id
+ORDER BY period;`
+  return runQuery(db, qry).map((row) => ({
     ...row,
     period: parseSaleDate(row.period),
   }));
 }
 
 async function loadHomePriceNeighborhoods(db) {
-  return runQuery(db, "SELECT * FROM home_price_neighborhoods ORDER BY period").map((row) => ({
+  qry = `
+  SELECT period, borough, neighborhood, home_price_index
+FROM home_price_neighborhoods a
+join boroughs b on b.id = a.borough_id
+join neighborhoods c on c.id = a.neighborhood_id
+ORDER BY period;`
+  return runQuery(db, qry).map((row) => ({
     ...row,
     period: parseSaleDate(row.period),
   }));
@@ -88,7 +114,7 @@ function applyOutlierFlag(rows) {
 
 // Filter model
 const defaultFilter = {
-  "BUILDING CLASS CATEGORY": {
+  "building_class_category": {
     filterType: 'text',
     type: 'condo',
   },
@@ -160,26 +186,16 @@ const columnDefs = [
   },
   {
     headerName: "Borough",
-    field: "BOROUGH",
+    field: "borough",
     filter: 'agSetColumnFilter',
-    valueGetter: (params) => {
-      switch (params.data.BOROUGH) {
-        case 1: return "Manhattan"
-        case 2: return "Bronx"
-        case 3: return "Brooklyn"
-        case 4: return "Queens"
-        case 5: return "Staten Island"
-        default: return params.data.BOROUGH
-      }
-    }
   },
   {
-    headerName: "Neighborhood", field: "NEIGHBORHOOD",
+    headerName: "Neighborhood", field: "neighborhood",
     filter: 'agSetColumnFilter'
   },
   {
-    headerName: "Category", field: "BUILDING CLASS CATEGORY",
-    filterParams: houseClassFilterParams,
+    headerName: "Category", field: "building_class_category",
+    // filterParams: houseClassFilterParams,
   },
   {
     headerName: "BBL",
@@ -217,9 +233,9 @@ const formattedCurrency = new Intl.NumberFormat('en-US', {
 });
 
 const coopsFilter = (row) =>
-  row['BUILDING CLASS CATEGORY'].startsWith('09')
-  || row['BUILDING CLASS CATEGORY'].startsWith('10')
-  || row['BUILDING CLASS CATEGORY'].startsWith('17')
+  row['building_class_category'].startsWith('09')
+  || row['building_class_category'].startsWith('10')
+  || row['building_class_category'].startsWith('17')
 
 const formattedPercent = new Intl.NumberFormat('en-US', {
   style: 'percent',
@@ -229,7 +245,7 @@ const formattedPercent = new Intl.NumberFormat('en-US', {
 
 function getTransactions(data) {
   let repeats = coopsFilter(data) ? combinedData.filter(({ ADDRESS }) => ADDRESS == data.ADDRESS)
-  : combinedData.filter(({ BOROUGH, BLOCK, LOT }) => BOROUGH == data.BOROUGH && BLOCK == data.BLOCK && LOT == data.LOT)
+  : combinedData.filter(({ borough_id, BLOCK, LOT }) => borough_id == data.borough_id && BLOCK == data.BLOCK && LOT == data.LOT)
 
   // remove erroneous transactions
   repeats = repeats.filter((transaction) => transaction["SALE PRICE"] >= 100000)
@@ -327,7 +343,7 @@ gridApi.setFilterModel(defaultFilter);
 async function bootstrap() {
   try {
     const db = await databasePromise;
-    outliers = await loadOutliers(db);
+    // outliers = await loadOutliers(db);
     const transactions = await loadTransactions(db);
     combinedData = applyOutlierFlag(transactions);
 

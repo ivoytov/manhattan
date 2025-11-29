@@ -1,5 +1,4 @@
 *.xlsx
-data/*.sqlite
 .DS_Store
 .venv
 .env
