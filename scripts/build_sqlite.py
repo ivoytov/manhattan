@@ -48,6 +48,8 @@ def build_database():
 
     lazy_frames = []
     for csv_path in sorted(TRANSACTIONS_DIR.glob("*.csv")):
+        if csv_path.name == "outliers.csv":
+            continue
         lf = pl.scan_csv(csv_path, schema_overrides={"SALE DATE": pl.Date})
         missing = [column for column in cols if column not in lf.collect_schema().names()]
         if missing:
