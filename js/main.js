@@ -347,6 +347,12 @@ async function bootstrap() {
     const transactions = await loadTransactions(db);
     combinedData = applyOutlierFlag(transactions);
 
+    // display latest transaction date
+    if (combinedData.length) {
+      const latestDate = combinedData[0]["SALE DATE"];
+      document.getElementById("data-date").textContent = `Data as of ${latestDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}`;
+    }
+
     gridApi.setGridOption('rowData', combinedData);
     gridApi.sizeColumnsToFit();
 

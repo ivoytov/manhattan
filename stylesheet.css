@@ -22,3 +22,10 @@ body {
     width: 100%;
     height: calc(100% - 40% - 10px);
 }
+
+/* Style for data date banner */
+.data-date {
+    padding: 0.5em;
+    font-style: italic;
+    text-align: center;
+}
