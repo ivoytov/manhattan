@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 2
 
@@ -30,9 +30,9 @@ jobs:
       run: uv sync --locked
 
     - name: Set up Julia
-      uses: julia-actions/setup-julia@v1
+      uses: julia-actions/setup-julia@v3
       with:
-        version: '1.9'
+        version: '1.13'
         
     - name: Install Julia dependencies
       run: |
